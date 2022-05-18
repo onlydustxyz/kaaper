@@ -2,7 +2,7 @@
     <img src="resources/img/logo.png">
 </p>
 <div align="center">
-  <h1 align="center">ProjectName</h1>
+  <h1 align="center">Kaaper</h1>
   <p align="center">
     <a href="https://discord.gg/onlydust">
         <img src="https://img.shields.io/badge/Discord-6666FF?style=for-the-badge&logo=discord&logoColor=white">
@@ -15,7 +15,7 @@
     </a>
   </p>
   
-  <h3 align="center">Project description</h3>
+  <h3 align="center">Documentation generator for Cairo projects.</h3>
 </div>
 
 > ## ⚠️ WARNING! ⚠️
@@ -24,6 +24,8 @@
 > Expect rapid iteration.
 
 ## 🎟️ Description
+
+Kaaper is a tool to generate documentation for Cairo projects.
 
 ## 🎗️ Prerequisites
 
@@ -37,4 +39,4 @@
 
 ## 📄 License
 
-**ProjectName** is released under the [MIT](LICENSE).
+**kaaper** is released under the [MIT](LICENSE).
