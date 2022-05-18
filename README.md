@@ -41,7 +41,7 @@ Kaaper is a tool to generate documentation for Cairo projects.
 
 **kaaper** is released under the [MIT](LICENSE).
 
-##❔ Reference 
+## ❓ Reference 
 
 Kaaper, also commonly known as Sheikh el-Beled, was an ancient Egyptian scribe and priest who lived between the late 4th Dynasty and the early 5th Dynasty (around 2500 BCE).
 
