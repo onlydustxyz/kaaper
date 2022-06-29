@@ -7,3 +7,6 @@ artifacts
 env
 venv
 .idea
+
+out/
+.vscode-test/
