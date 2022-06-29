@@ -28,7 +28,7 @@
 Kaaper is a tool to generate documentation for Cairo projects.
 
 ## 🎗️ Prerequisites
-[Node JS](https://nodejs.org/)  
+[Node JS](https://nodejs.org/), preferably 16.xx  
 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
 
 
