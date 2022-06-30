@@ -65,9 +65,9 @@ suite("scope: constructor test", () => {
         const comments = constructorParser.getComments(attributeScope);
         if (comments){
             assert.equal("# Desc:", comments[0].trim(), 'failed to get comments');
-            const isInsideDescNode = constructorParser.isStartNode(comments[0], "Desc");
+            const isStartNode = constructorParser.isStartNode(comments[0], "Desc");
             const isEndNode = constructorParser.isEndNode(comments[0], "Desc");
-            assert.equal(true, isInsideDescNode, 'failed to get comments');
+            assert.equal(true, isStartNode, 'failed to get comments');
             assert.equal(false, isEndNode, 'failed to get comments');
         }
         if (comments){
@@ -84,8 +84,20 @@ suite("scope: constructor test", () => {
             assert.equal(false, isStartNode, 'failed to get comments');
             assert.equal(true, isEndNode, 'failed to get comments');
         }
+    })
 
-        
+    test("get implicit args comments", () => {
+        const pathFile = path.resolve(__dirname, "../../../test_assets/ERC20.cairo");
+        let constructorParser = new CairoParser(pathFile, "constructor");
+        const attributeScope = constructorParser.parseAttribute();
+        const comments = constructorParser.getComments(attributeScope);
+        if (comments){
+            assert.equal("# Implicit args:", comments[2].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[2], "Implicit args");
+            const isEndNode = constructorParser.isEndNode(comments[2], "Implicit args");
+            assert.equal(true, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
     })
     
     
