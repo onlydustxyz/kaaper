@@ -106,6 +106,22 @@ suite("scope: constructor test", () => {
             assert.equal(false, isStartNode, 'failed to get comments');
             assert.equal(false, isEndNode, 'failed to get comments');
         }
+
+        if (comments){
+            assert.equal("#   pedersen_ptr(HashBuiltin)", comments[4].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[4], "Implicit args");
+            const isEndNode = constructorParser.isEndNode(comments[4], "Implicit args");
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
+
+        if (comments){
+            assert.equal("#   range_check_ptr", comments[5].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[5], "Implicit args");
+            const isEndNode = constructorParser.isEndNode(comments[5], "Implicit args");
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
     })
     
     
