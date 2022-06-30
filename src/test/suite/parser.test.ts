@@ -149,7 +149,15 @@ suite("scope: constructor test", () => {
             assert.equal("#   name(felt): the address of the ERC20 sender", comments[7].trim(), 'failed to get comments');
             const isStartNode = constructorParser.isStartNode(comments[7], "Explicit args");
             const isEndNode = constructorParser.isEndNode(comments[7], "Explicit args");
-            assert.equal(true, isStartNode, 'failed to get comments');
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
+
+        if (comments){
+            assert.equal("#   symbol(felt): the address of the ERC20 recipient", comments[8].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[8], "Explicit args");
+            const isEndNode = constructorParser.isEndNode(comments[8], "Explicit args");
+            assert.equal(false, isStartNode, 'failed to get comments');
             assert.equal(false, isEndNode, 'failed to get comments');
         }
 
