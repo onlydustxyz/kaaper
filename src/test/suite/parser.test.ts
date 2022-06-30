@@ -98,6 +98,14 @@ suite("scope: constructor test", () => {
             assert.equal(true, isStartNode, 'failed to get comments');
             assert.equal(false, isEndNode, 'failed to get comments');
         }
+
+        if (comments){
+            assert.equal("#   syscall_ptr(felt*)", comments[3].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[3], "Implicit args");
+            const isEndNode = constructorParser.isEndNode(comments[3], "Implicit args");
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
     })
     
     
