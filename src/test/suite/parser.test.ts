@@ -131,6 +131,31 @@ suite("scope: constructor test", () => {
             assert.equal(true, isEndNode, 'failed to get comments');
         }
     })
+
+    test("get explicit args comments", () => {
+        const pathFile = path.resolve(__dirname, "../../../test_assets/ERC20.cairo");
+        let constructorParser = new CairoParser(pathFile, "constructor");
+        const attributeScope = constructorParser.parseAttribute();
+        const comments = constructorParser.getComments(attributeScope);
+        if (comments){
+            assert.equal("# Explicit args:", comments[6].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[6], "Explicit args");
+            const isEndNode = constructorParser.isEndNode(comments[6], "Explicit args");
+            assert.equal(true, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
+
+        if (comments){
+            assert.equal("#   name(felt): the address of the ERC20 sender", comments[7].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[7], "Explicit args");
+            const isEndNode = constructorParser.isEndNode(comments[7], "Explicit args");
+            assert.equal(true, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
+
+    })
+
+    
     
     
 })
