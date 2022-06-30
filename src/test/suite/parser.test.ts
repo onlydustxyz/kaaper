@@ -177,6 +177,17 @@ suite("scope: constructor test", () => {
             assert.equal(false, isEndNode, 'failed to get comments');
         }
 
+        if (comments){
+            assert.equal("#   recipient(felt): amount of ERC20 transfer", comments[11].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[11], "Explicit args");
+            const isEndNode = constructorParser.isEndNode(comments[11], "Explicit args");
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
+
+        
+        
+
 
 
     })
