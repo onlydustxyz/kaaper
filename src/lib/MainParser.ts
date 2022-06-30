@@ -9,6 +9,7 @@ export default class CairoParser {
   public regex: RegExp;
   public supportedComments: Array<string>;
 
+
   constructor(public filePath: string, name: string) {
     this.filePath = filePath;
     this.text = fs.readFileSync(filePath, "utf8");

@@ -77,6 +77,13 @@ suite("scope: constructor test", () => {
             assert.equal(false, isStartNode, 'failed to get comments');
             assert.equal(false, isEndNode, 'failed to get comments');
         }
+        if (comments){
+            assert.equal("# Implicit args:", comments[2].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[2], "Desc");
+            const isEndNode = constructorParser.isEndNode(comments[2], "Desc");
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(true, isEndNode, 'failed to get comments');
+        }
 
         
     })
