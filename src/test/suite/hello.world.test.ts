@@ -1,6 +1,5 @@
 import * as assert from "assert";
 import * as path from "path";
-import CairoParser from "../../lib/parser";
 import HelloWorld from "../../lib/HelloWorld"
 
 suite("hello world", () => {
