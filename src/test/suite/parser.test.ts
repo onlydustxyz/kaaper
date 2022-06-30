@@ -161,6 +161,18 @@ suite("scope: constructor test", () => {
             assert.equal(false, isEndNode, 'failed to get comments');
         }
 
+        if (comments){
+            assert.equal("#   decimals(uint256): floating point of the token", comments[9].trim(), 'failed to get comments');
+            const isStartNode = constructorParser.isStartNode(comments[9], "Explicit args");
+            const isEndNode = constructorParser.isEndNode(comments[9], "Explicit args");
+            assert.equal(false, isStartNode, 'failed to get comments');
+            assert.equal(false, isEndNode, 'failed to get comments');
+        }
+
+        
+
+
+
     })
 
     
