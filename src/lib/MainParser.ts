@@ -111,8 +111,8 @@ export default class CairoParser {
     return false;
   }
 
+  // TODO: running parser on the whole scope
 
-
-  
+  // TODO: output the parsing result into a proper data structure
 
 }
