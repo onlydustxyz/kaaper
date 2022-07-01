@@ -64,6 +64,15 @@ suite("function-comment: constructor", () => {
         assert.equal(false, isStartScope, "failed to get desc comment line 3");
         assert.equal(false, isEndScope, "failed to get desc comment line 3");
       }
+
+      if (commentText) {
+        assert.equal("#   pedersen_ptr(HashBuiltin)", commentText[4].trim(), "check line 4");
+        const isStartScope = functionCommentParser.isStartScope(commentText[4]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[4]);
+        assert.equal(false, isStartScope, "failed to get desc comment line 4");
+        assert.equal(false, isEndScope, "failed to get desc comment line 4");
+      }
+
   });
 
 //   test("get explicit args comments", () => {
