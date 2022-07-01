@@ -53,11 +53,12 @@ suite("function-comment: constructor", () => {
       const functionCommentParser = new FunctionCommentParser('Implicit args');
 
       if (commentText) {
-        assert.equal("# Implicit args:", commentText[2].trim(), "check line 2");
-        const isStartScope = functionCommentParser.isStartScope(commentText[2]);
-        const isEndScope = functionCommentParser.isEndScope(commentText[2]);
-        assert.equal(true, isStartScope, "failed to get desc comment line 2");
-        assert.equal(false, isEndScope, "failed to get desc comment line 2");
+        const line = 2;
+        assert.equal("# Implicit args:", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(true, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
       }
 
       if (commentText) {
