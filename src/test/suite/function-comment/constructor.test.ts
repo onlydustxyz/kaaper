@@ -56,7 +56,14 @@ suite("function-comment: constructor", () => {
         assert.equal(true, isStartScope, "failed to get desc comment line 2");
         assert.equal(false, isEndScope, "failed to get desc comment line 2");
       }
-    
+
+      if (commentText) {
+        assert.equal("#   syscall_ptr(felt*)", commentText[3].trim(), "check line 3");
+        const isStartScope = functionCommentParser.isStartScope(commentText[3]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[3]);
+        assert.equal(false, isStartScope, "failed to get desc comment line 3");
+        assert.equal(false, isEndScope, "failed to get desc comment line 3");
+      }
   });
 
 //   test("get explicit args comments", () => {
