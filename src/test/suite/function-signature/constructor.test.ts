@@ -1,13 +1,13 @@
 import * as assert from "assert";
 import * as path from "path";
-import FunctionSignatureParser from "../../lib/parser/functionsignature";
-import CairoParser from "../../lib/main";
+import FunctionSignatureParser from "../../../lib/parser/function-signature";
+import CairoParser from "../../../lib/main";
 
 suite("scope: constructor", () => {
   test("get attribute name", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../test_assets/ERC20.cairo"
+      "../../../../test_assets/ERC20.cairo"
     );
     const constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
@@ -18,7 +18,7 @@ suite("scope: constructor", () => {
   test("get function name", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../test_assets/ERC20.cairo"
+      "../../../../test_assets/ERC20.cairo"
     );
     let constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
@@ -30,7 +30,7 @@ suite("scope: constructor", () => {
   test("get implicit args", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../test_assets/ERC20.cairo"
+      "../../../../test_assets/ERC20.cairo"
     );
     let constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
@@ -61,7 +61,7 @@ suite("scope: constructor", () => {
   test("get explicit args", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../test_assets/ERC20.cairo"
+      "../../../../test_assets/ERC20.cairo"
     );
     let constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
