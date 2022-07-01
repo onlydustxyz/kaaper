@@ -62,11 +62,12 @@ suite("function-comment: constructor", () => {
       }
 
       if (commentText) {
-        assert.equal("#   syscall_ptr(felt*)", commentText[3].trim(), "check line 3");
-        const isStartScope = functionCommentParser.isStartScope(commentText[3]);
-        const isEndScope = functionCommentParser.isEndScope(commentText[3]);
-        assert.equal(false, isStartScope, "failed to get desc comment line 3");
-        assert.equal(false, isEndScope, "failed to get desc comment line 3");
+        const line = 3;
+        assert.equal("#   syscall_ptr(felt*)", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
       }
 
       if (commentText) {
