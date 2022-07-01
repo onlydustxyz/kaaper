@@ -71,12 +71,14 @@ suite("function-comment: constructor", () => {
       }
 
       if (commentText) {
-        assert.equal("#   pedersen_ptr(HashBuiltin)", commentText[4].trim(), "check line 4");
-        const isStartScope = functionCommentParser.isStartScope(commentText[4]);
-        const isEndScope = functionCommentParser.isEndScope(commentText[4]);
-        assert.equal(false, isStartScope, "failed to get desc comment line 4");
-        assert.equal(false, isEndScope, "failed to get desc comment line 4");
+        const line = 4;
+        assert.equal("#   pedersen_ptr(HashBuiltin)", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
       }
+
 
       if (commentText) {
         const line = 5;
