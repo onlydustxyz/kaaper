@@ -1,0 +1,28 @@
+export default class FunctionCommentParser {
+  public keyword: string;
+
+  constructor(keyword: string) {
+    this.keyword = keyword;
+  }
+
+  isStartNode(line: string): boolean {
+    const result = line.match(/#\s?(\w+\s?\w+)/);
+    if (result) {
+      if (result[1] === this.keyword) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  isEndNode(line: string, keyword: string): boolean {
+    const result = line.match(/#\s?(\w+\s?\w+)/);
+    if (result) {
+      if (result[1] !== this.keyword) {
+        return true
+      }
+    }
+    return false;
+  }
+}
