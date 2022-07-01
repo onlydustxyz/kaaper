@@ -39,26 +39,25 @@ suite("function-comment: constructor", () => {
       }
   });
 
-//   test("get implicit args comments", () => {
-//     const pathFile = path.resolve(
-//         __dirname,
-//         "../../../../test_assets/ERC20.cairo"
-//     );
-//       const constructorParser = new CairoParser(pathFile, "constructor");
-//       const functionText = constructorParser.parseFunctionScope()
-//       const commentText = constructorParser.parseComments(functionText);
-//       const functionCommentParser = new FunctionCommentParser('Implicit args');
+  test("get implicit args comments", () => {
+    const pathFile = path.resolve(
+        __dirname,
+        "../../../../test_assets/ERC20.cairo"
+    );
+      const constructorParser = new CairoParser(pathFile, "constructor");
+      const functionText = constructorParser.parseFunctionScope()
+      const commentText = constructorParser.parseComments(functionText);
+      const functionCommentParser = new FunctionCommentParser('Implicit args');
 
-//       if (commentText) {
-//         assert.equal("# Desc:", commentText[0].trim(), "failed to get comments");
-//         const isStartScope = functionCommentParser.isStartScope(commentText[0]);
-//         const isEndScope = functionCommentParser.isEndScope(commentText[0]);
-//         assert.equal(true, isStartScope, "failed to get desc comment line 0");
-//         assert.equal(false, isEndScope, "failed to get desc comment line 0");
-//       }
-
+      if (commentText) {
+        assert.equal("# Implicit args:", commentText[2].trim(), "check line 2");
+        const isStartScope = functionCommentParser.isStartScope(commentText[2]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[2]);
+        assert.equal(true, isStartScope, "failed to get desc comment line 2");
+        assert.equal(false, isEndScope, "failed to get desc comment line 2");
+      }
     
-//   });
+  });
 
 //   test("get explicit args comments", () => {
 //     const pathFile = path.resolve(
