@@ -23,12 +23,13 @@ suite("function-comment: constructor", () => {
         assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
       }
 
-    if (commentText) {
-        assert.equal("#   Initialize the contract", commentText[1].trim(), "check line 1");
-        const isStartScope = functionCommentParser.isStartScope(commentText[1]);
-        const isEndScope = functionCommentParser.isEndScope(commentText[1]);
-        assert.equal(false, isStartScope, "failed to get desc comment line 1");
-        assert.equal(false, isEndScope, "failed to get desc comment line 1");
+      if (commentText) {
+        const line = 1;
+        assert.equal("#   Initialize the contract", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
       }
 
     if (commentText) {
