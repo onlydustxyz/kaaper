@@ -30,6 +30,11 @@ export default class CairoParser {
     }
     return "";
   }
+
+  parseComments(line: string): RegExpMatchArray | null {
+    const comments = line.match(/#\s+[\w\(\)\s\:\*]+/gm);
+    return comments;
+  }
   
 
   // TODO: running parser on the whole scope

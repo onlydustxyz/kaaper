@@ -3,7 +3,7 @@ import * as path from "path";
 import FunctionSignatureParser from "../../../lib/parser/function-signature";
 import CairoParser from "../../../lib/main";
 
-suite("scope: constructor", () => {
+suite("function-signature: constructor", () => {
   test("get attribute name", () => {
     const pathFile = path.resolve(
       __dirname,

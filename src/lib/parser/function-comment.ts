@@ -5,7 +5,7 @@ export default class FunctionCommentParser {
     this.keyword = keyword;
   }
 
-  isStartNode(line: string): boolean {
+  isStartScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
     if (result) {
       if (result[1] === this.keyword) {
@@ -16,7 +16,7 @@ export default class FunctionCommentParser {
   }
 
 
-  isEndNode(line: string, keyword: string): boolean {
+  isEndScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
     if (result) {
       if (result[1] !== this.keyword) {
