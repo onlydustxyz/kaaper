@@ -18,31 +18,17 @@ suite("function-comment: constructor", () => {
       assert.equal("# Desc:", commentText[0].trim(), "failed to get comments");
       const isStartNode = functionCommentParser.isStartScope(commentText[0]);
       const isEndNode = functionCommentParser.isEndScope(commentText[0]);
-      assert.equal(true, isStartNode, "failed to get comments");
-      assert.equal(false, isEndNode, "failed to get comments");
+      assert.equal(true, isStartNode, "failed to get desc comment line 0");
+      assert.equal(false, isEndNode, "failed to get desc comment line 0");
     }
-    // if (comments) {
-    //   assert.equal(
-    //     "#   Initialize the contract",
-    //     comments[1].trim(),
-    //     "failed to get comments"
-    //   );
-    //   const isStartNode = constructorParser.isStartNode(comments[1], "Desc");
-    //   const isEndNode = constructorParser.isEndNode(comments[1], "Desc");
-    //   assert.equal(false, isStartNode, "failed to get comments");
-    //   assert.equal(false, isEndNode, "failed to get comments");
-    // }
-    // if (comments) {
-    //   assert.equal(
-    //     "# Implicit args:",
-    //     comments[2].trim(),
-    //     "failed to get comments"
-    //   );
-    //   const isStartNode = constructorParser.isStartNode(comments[2], "Desc");
-    //   const isEndNode = constructorParser.isEndNode(comments[2], "Desc");
-    //   assert.equal(false, isStartNode, "failed to get comments");
-    //   assert.equal(true, isEndNode, "failed to get comments");
-    // }
+
+    if (commentText) {
+        assert.equal("#   Initialize the contract", commentText[1].trim(), "failed to get comments");
+        const isStartNode = functionCommentParser.isStartScope(commentText[1]);
+        const isEndNode = functionCommentParser.isEndScope(commentText[1]);
+        assert.equal(false, isStartNode, "failed to get desc comment line 1");
+        assert.equal(false, isEndNode, "failed to get desc comment line 1");
+      }
   });
 
 //   test("get implicit args comments", () => {
