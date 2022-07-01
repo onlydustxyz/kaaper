@@ -75,11 +75,20 @@ suite("function-comment: constructor", () => {
 
       if (commentText) {
         const line = 5;
-        assert.equal("#   range_check_ptr", commentText[line].trim(), `check line ${5}`);
+        assert.equal("#   range_check_ptr", commentText[line].trim(), `check line ${line}`);
         const isStartScope = functionCommentParser.isStartScope(commentText[line]);
         const isEndScope = functionCommentParser.isEndScope(commentText[line]);
         assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
         assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
+      }
+
+      if (commentText) {
+        const line = 6;
+        assert.equal("# Explicit args:", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
       }
 
   });
