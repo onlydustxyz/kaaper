@@ -131,6 +131,15 @@ suite("function-comment: constructor", () => {
         assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
       }
 
+      if (commentText) {
+        const line = 9;
+        assert.equal("#   decimals(uint256): floating point of the token", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
+      }
+
     
   });
 });
