@@ -166,7 +166,36 @@ suite("function-comment: constructor", () => {
         assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
         assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
       }
+  });
 
-    
+  test("get returns comments", () => {
+    const pathFile = path.resolve(
+        __dirname,
+        "../../../../test_assets/ERC20.cairo"
+    );
+
+      const constructorParser = new CairoParser(pathFile, "constructor");
+      const functionText = constructorParser.parseFunctionScope()
+      const commentText = constructorParser.parseComments(functionText);
+      const functionCommentParser = new FunctionCommentParser('Returns');
+
+      if (commentText) {
+        const line = 12;
+        assert.equal("# Returns:", commentText[line].trim(), `check line ${line}`);
+        const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+        const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+        assert.equal(true, isStartScope, `failed to get desc comment line ${line}`);
+        assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
+      }
+
+      // if (commentText) {
+      //   const line = 7;
+      //   assert.equal("#   name(felt): the address of the ERC20 sender", commentText[line].trim(), `check line ${line}`);
+      //   const isStartScope = functionCommentParser.isStartScope(commentText[line]);
+      //   const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      //   assert.equal(false, isStartScope, `failed to get desc comment line ${line}`);
+      //   assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
+      // }
+
   });
 });
