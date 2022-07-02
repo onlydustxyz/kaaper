@@ -12,7 +12,8 @@ suite("function-signature: constructor", () => {
     const constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
     const functionSignatureParser = new FunctionSignatureParser();
-    const attributeName = functionSignatureParser.getAttributeName(constructorText)
+    const attributeName =
+      functionSignatureParser.getAttributeName(constructorText);
     assert.equal("constructor", attributeName, "failed to get attribute name");
   });
   test("get function name", () => {
@@ -23,7 +24,8 @@ suite("function-signature: constructor", () => {
     let constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
     const functionSignatureParser = new FunctionSignatureParser();
-    const functionName = functionSignatureParser.getFunctionName(constructorText)
+    const functionName =
+      functionSignatureParser.getFunctionName(constructorText);
     assert.equal("constructor", functionName, "failed to get attribute name");
   });
 
@@ -35,7 +37,8 @@ suite("function-signature: constructor", () => {
     let constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
     const functionSignatureParser = new FunctionSignatureParser();
-    const implicitArgs = functionSignatureParser.getImplicitArgs(constructorText)
+    const implicitArgs =
+      functionSignatureParser.getImplicitArgs(constructorText);
     const targetArgs = new Map();
     targetArgs.set("syscall_ptr", "felt*");
     targetArgs.set("pedersen_ptr", "HashBuiltin*");
@@ -66,7 +69,8 @@ suite("function-signature: constructor", () => {
     let constructorParser = new CairoParser(pathFile, "constructor");
     const constructorText = constructorParser.parseFunctionScope();
     const functionSignatureParser = new FunctionSignatureParser();
-    const explicitArgs = functionSignatureParser.getExplicitArgs(constructorText)
+    const explicitArgs =
+      functionSignatureParser.getExplicitArgs(constructorText);
     const targetArgs = new Map();
     targetArgs.set("name", "felt");
     targetArgs.set("symbol", "felt");

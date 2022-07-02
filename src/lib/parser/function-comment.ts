@@ -15,12 +15,11 @@ export default class FunctionCommentParser {
     return false;
   }
 
-
   isEndScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
     if (result) {
       if (result[1] !== this.keyword) {
-        return true
+        return true;
       }
     }
     return false;

@@ -9,7 +9,6 @@ export default class CairoParser {
   public regex: RegExp;
   public supportedComments: Array<string>;
 
-
   constructor(public filePath: string, name: string) {
     this.filePath = filePath;
     this.text = fs.readFileSync(filePath, "utf8");
@@ -35,10 +34,8 @@ export default class CairoParser {
     const comments = line.match(/#\s+[\w\(\)\s\:\*]+/gm);
     return comments;
   }
-  
 
   // TODO: running parser on the whole scope
 
   // TODO: output the parsing result into a proper data structure
-
 }
