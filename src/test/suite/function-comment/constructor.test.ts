@@ -4,6 +4,7 @@ import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc
 import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment/implicit-args";
 import CairoParser from "../../../lib/main";
 import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment/explicit-args";
+import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
 
 suite("function-comment: constructor", () => {
   test("get desc comments", () => {
@@ -369,57 +370,57 @@ suite("function-comment: constructor", () => {
     }
   });
 
-  // test("get returns comments", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../test_assets/ERC20.cairo"
-  //   );
+  test("get returns comments", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
 
-  //   const constructorParser = new CairoParser(pathFile, "constructor");
-  //   const functionText = constructorParser.parseFunctionScope();
-  //   const commentText = constructorParser.parseComments(functionText);
-  //   const descParser = new FunctionCommentDescParser("Returns");
+    const constructorParser = new CairoParser(pathFile, "constructor");
+    const functionText = constructorParser.parseFunctionScope();
+    const commentText = constructorParser.parseComments(functionText);
+    const descParser = new FunctionCommentReturnsParser();
 
-  //   if (commentText) {
-  //     const line = 12;
-  //     assert.equal(
-  //       "# Returns:",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       true,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 12;
+      assert.equal(
+        "# Returns:",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        true,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 13;
-  //     assert.equal("#   None", commentText[line].trim(), `check line ${line}`);
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
-  // });
+    if (commentText) {
+      const line = 13;
+      assert.equal("#   None", commentText[line].trim(), `check line ${line}`);
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
+  });
 });
