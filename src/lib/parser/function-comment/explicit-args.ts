@@ -25,7 +25,9 @@ export default class FunctionCommentExplicitArgsParser {
       
       const match = line.match(/#\s+(.+)/)
         if (match) {
-          const [left, right] = match[1].split(":")
+          const split = match[1].split(":")
+          const left = split[0]
+          const right = split[1]
           const response = new Map<string, string>();
           const result = left.split("(");
           response.set("name", result[0]);
@@ -35,9 +37,9 @@ export default class FunctionCommentExplicitArgsParser {
             response.set("type", "");
           }
           try{
-            response.set("description", right.trim())
+            response.set("desc", right.trim())
           } catch{
-            response.set("description", "")
+            response.set("desc", "")
           }
           return response
         }
