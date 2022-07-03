@@ -207,12 +207,15 @@ suite("function-comment: constructor", () => {
       );
       const isStartScope = implicitArgsParser.isStartScope(commentText[line]);
       const isEndScope = implicitArgsParser.isEndScope(commentText[line]);
+      const output = implicitArgsParser.returnOutput(commentText[line]);
+
       assert.equal(
         false,
         isStartScope,
         `failed to get desc comment line ${line}`
       );
       assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
+      assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
   });
 
