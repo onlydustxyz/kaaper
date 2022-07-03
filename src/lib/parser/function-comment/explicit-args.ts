@@ -11,16 +11,36 @@ export default class FunctionCommentExplicitArgsParser {
     return false;
   }
 
-  postProcess(line: string): Map<string, string> | null {
-    const match = line.match(/#\s+[\w]+[\s\w\(\)\:\*]+/);
-    if (match) {
-      if (line.startsWith("#")) {
-        const result = new Map<string, string>();
-        result.set("name", "name");
-        result.set("type", "type");
-        result.set("description", "description");
-        return result;
+  isInsideScope(line: string): boolean {
+    if (!this.isStartScope(line)) {
+      if (!this.isEndScope(line)) {
+        return true;
       }
+    }
+    return false;
+  }
+
+  returnOutput(line: string): Map<string,string>|null {
+    if (this.isInsideScope(line)) {
+      
+      const match = line.match(/#\s+(.+)/)
+        if (match) {
+          const [left, right] = match[1].split(":")
+          const response = new Map<string, string>();
+          const result = left.split("(");
+          response.set("name", result[0]);
+          try {
+            response.set("type", result[1].split(")")[0]);
+          } catch (e) {
+            response.set("type", "");
+          }
+          try{
+            response.set("description", right.trim())
+          } catch{
+            response.set("description", "")
+          }
+          return response
+        }
     }
     return null;
   }
