@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import FunctionCommentParser from "../../../lib/parser/function-comment";
+import FunctionCommentParser from "../../../lib/parser/function-comment/regex";
 import CairoParser from "../../../lib/main";
 
 suite("function-comment: constructor", () => {

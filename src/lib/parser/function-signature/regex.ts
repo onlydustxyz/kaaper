@@ -1,4 +1,4 @@
-export default class FunctionSignatureParser {
+export default class FunctionSignatureRegexParser {
   constructor() {}
 
   private _getMappingResult(line: string): Map<string, string> {

@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import FunctionSignatureParser from "../../../lib/parser/function-signature";
+import FunctionSignatureParser from "../../../lib/parser/function-signature/regex";
 import CairoParser from "../../../lib/main";
 
 suite("function-signature: constructor", () => {
