@@ -415,7 +415,7 @@ suite("function-comment: constructor", () => {
     const constructorParser = new CairoParser(pathFile, "constructor");
     const functionText = constructorParser.parseFunctionScope();
     const commentText = constructorParser.parseComments(functionText);
-    const descParser = new FunctionCommentReturnsParser();
+    const returnsParser = new FunctionCommentReturnsParser();
 
     if (commentText) {
       const line = 12;
@@ -424,8 +424,9 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(commentText[line]);
-      const isEndScope = descParser.isEndScope(commentText[line]);
+      const isStartScope = returnsParser.isStartScope(commentText[line]);
+      const isEndScope = returnsParser.isEndScope(commentText[line]);
+      const output = returnsParser.returnOutput(commentText[line]);
       assert.equal(
         true,
         isStartScope,
@@ -436,13 +437,15 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
+      assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
 
     if (commentText) {
       const line = 13;
       assert.equal("#   None", commentText[line].trim(), `check line ${line}`);
-      const isStartScope = descParser.isStartScope(commentText[line]);
-      const isEndScope = descParser.isEndScope(commentText[line]);
+      const isStartScope = returnsParser.isStartScope(commentText[line]);
+      const isEndScope = returnsParser.isEndScope(commentText[line]);
+      const output = returnsParser.returnOutput(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -453,6 +456,7 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
+      assert.equal("None", output, `failed to get desc comment line ${line}`);
     }
   });
 });
