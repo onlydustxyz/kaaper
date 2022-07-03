@@ -1,14 +1,12 @@
 export default class FunctionCommentDescParser {
-  public keyword: string;
-
-  constructor(keyword: string) {
-    this.keyword = keyword;
+  
+  constructor() {
   }
 
   isStartScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
     if (result) {
-      if (result[1] === this.keyword) {
+      if (result[1] === "Desc") {
         return true;
       }
     }
@@ -16,7 +14,6 @@ export default class FunctionCommentDescParser {
   }
 
   postProcess(line: string): Map<string, string> | null {
-    // initialize map
     const match = line.match(/#\s+[\w]+[\s\w\(\)\:\*]+/)
     if (match) {
       if (line.startsWith("#")) {
@@ -28,9 +25,6 @@ export default class FunctionCommentDescParser {
     }
     }
     return null;
-
-
-    
     
   }
 
@@ -38,7 +32,7 @@ export default class FunctionCommentDescParser {
   isEndScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
     if (result) {
-      if (result[1] !== this.keyword) {
+      if (result[1] !== "Desc") {
         return true;
       }
     }
