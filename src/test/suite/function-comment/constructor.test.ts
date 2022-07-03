@@ -394,13 +394,16 @@ suite("function-comment: constructor", () => {
       );
       const isStartScope = explicitArgsParser.isStartScope(commentText[line]);
       const isEndScope = explicitArgsParser.isEndScope(commentText[line]);
+      const output = explicitArgsParser.returnOutput(commentText[line]);
       assert.equal(
         false,
         isStartScope,
         `failed to get desc comment line ${line}`
       );
       assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
+      assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
+      
   });
 
   test("get returns comments", () => {
