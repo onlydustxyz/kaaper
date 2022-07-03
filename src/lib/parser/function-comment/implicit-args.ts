@@ -1,3 +1,5 @@
+import { ServerResponse } from "http";
+
 export default class FunctionCommentImplicitArgsParser {
   constructor() {}
 
@@ -11,16 +13,25 @@ export default class FunctionCommentImplicitArgsParser {
     return false;
   }
 
-  postProcess(line: string): Map<string, string> | null {
-    const match = line.match(/#\s+[\w]+[\s\w\(\)\:\*]+/);
-    if (match) {
-      if (line.startsWith("#")) {
-        const result = new Map<string, string>();
-        result.set("name", "name");
-        result.set("type", "type");
-        result.set("description", "description");
-        return result;
+  isInsideScope(line: string): boolean {
+    if (!this.isStartScope(line)) {
+      if (!this.isEndScope(line)) {
+        return true;
       }
+    }
+    return false;
+  }
+
+  returnOutput(line: string): Map<string,string>|null {
+    if (this.isInsideScope(line)) {
+      const match = line.match(/#\s+(.+)/)
+        if (match) {
+          const response = new Map<string, string>();
+          const result = match[1].split("(");
+          response.set("name", result[0]);
+          response.set("type", result[1].split(")")[0]);
+          return response
+        }
     }
     return null;
   }

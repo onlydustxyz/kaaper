@@ -131,6 +131,8 @@ suite("function-comment: constructor", () => {
       );
       const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
+      const output = descParser.returnOutput(commentText[line]);
+
       assert.equal(
         false,
         isStartScope,
@@ -141,6 +143,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
+      assert.equal('syscall_ptr', output?.get('name'), "map not equal");
+      assert.equal("felt*", output?.get('type'), "map not equal");
     }
 
     if (commentText) {
