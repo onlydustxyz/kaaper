@@ -20,9 +20,7 @@ suite("function-comment: constructor", () => {
     if (commentText) {
       const line = 0;
       assert.equal("# Desc:", commentText[line].trim(), `check line ${line}`);
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
@@ -43,9 +41,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -66,9 +62,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -96,9 +90,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
@@ -119,9 +111,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -142,9 +132,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -165,9 +153,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -188,9 +174,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -219,9 +203,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
@@ -242,9 +224,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -265,9 +245,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -288,9 +266,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -311,9 +287,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -334,9 +308,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -357,9 +329,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
@@ -388,9 +358,7 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
@@ -407,9 +375,7 @@ suite("function-comment: constructor", () => {
     if (commentText) {
       const line = 13;
       assert.equal("#   None", commentText[line].trim(), `check line ${line}`);
-      const isStartScope = descParser.isStartScope(
-        commentText[line]
-      );
+      const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
