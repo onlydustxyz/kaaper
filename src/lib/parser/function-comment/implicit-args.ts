@@ -22,21 +22,21 @@ export default class FunctionCommentImplicitArgsParser {
     return false;
   }
 
-  returnOutput(line: string): Map<string,string>|null {
+  returnOutput(line: string): Map<string, string> | null {
     if (this.isInsideScope(line)) {
-      const match = line.match(/#\s+(.+)/)
-        if (match) {
-          const response = new Map<string, string>();
-          const result = match[1].split("(");
-          response.set("name", result[0]);
-          try {
-            response.set("type", result[1].split(")")[0]);
-          } catch (e) {
-            response.set("type", "");
-          }
-          
-          return response
+      const match = line.match(/#\s+(.+)/);
+      if (match) {
+        const response = new Map<string, string>();
+        const result = match[1].split("(");
+        response.set("name", result[0]);
+        try {
+          response.set("type", result[1].split(")")[0]);
+        } catch (e) {
+          response.set("type", "");
         }
+
+        return response;
+      }
     }
     return null;
   }

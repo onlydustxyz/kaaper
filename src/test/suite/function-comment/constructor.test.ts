@@ -34,12 +34,7 @@ suite("function-comment: constructor", () => {
         `failed to get desc comment line ${line}`
       );
 
-      assert.equal(
-        null,
-        output,
-        `failed to get desc comment line ${line}`
-      )
-
+      assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
 
     if (commentText) {
@@ -68,7 +63,7 @@ suite("function-comment: constructor", () => {
         "Initialize the contract",
         output,
         `failed to get desc comment line ${line}`
-        )
+      );
     }
 
     if (commentText) {
@@ -143,8 +138,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('syscall_ptr', output?.get('name'), "map not equal");
-      assert.equal("felt*", output?.get('type'), "map not equal");
+      assert.equal("syscall_ptr", output?.get("name"), "map not equal");
+      assert.equal("felt*", output?.get("type"), "map not equal");
     }
 
     if (commentText) {
@@ -168,8 +163,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('pedersen_ptr', output?.get('name'), "map not equal");
-      assert.equal("HashBuiltin", output?.get('type'), "map not equal");
+      assert.equal("pedersen_ptr", output?.get("name"), "map not equal");
+      assert.equal("HashBuiltin", output?.get("type"), "map not equal");
     }
 
     if (commentText) {
@@ -194,8 +189,8 @@ suite("function-comment: constructor", () => {
         `failed to get desc comment line ${line}`
       );
 
-      assert.equal('range_check_ptr', output?.get('name'), "map not equal");
-      assert.equal('', output?.get('type'), "map not equal");
+      assert.equal("range_check_ptr", output?.get("name"), "map not equal");
+      assert.equal("", output?.get("type"), "map not equal");
     }
 
     if (commentText) {
@@ -275,12 +270,15 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('name', output?.get('name'), "name not equal");
-      assert.equal('felt', output?.get('type'), "type not equal");
-      console.log(output?.get('desc'))
-      assert.equal('the address of the ERC20 sender', output?.get('desc'), "desc not equal");
+      assert.equal("name", output?.get("name"), "name not equal");
+      assert.equal("felt", output?.get("type"), "type not equal");
+      console.log(output?.get("desc"));
+      assert.equal(
+        "the address of the ERC20 sender",
+        output?.get("desc"),
+        "desc not equal"
+      );
     }
-
 
     if (commentText) {
       const line = 8;
@@ -303,9 +301,13 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('symbol', output?.get('name'), "name not equal");
-      assert.equal('felt', output?.get('type'), "type not equal");
-      assert.equal('the address of the ERC20 recipient', output?.get('desc'), "desc not equal");
+      assert.equal("symbol", output?.get("name"), "name not equal");
+      assert.equal("felt", output?.get("type"), "type not equal");
+      assert.equal(
+        "the address of the ERC20 recipient",
+        output?.get("desc"),
+        "desc not equal"
+      );
     }
 
     if (commentText) {
@@ -329,9 +331,13 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('decimals', output?.get('name'), "name not equal");
-      assert.equal('uint256', output?.get('type'), "type not equal");
-      assert.equal('floating point of the token', output?.get('desc'), "desc not equal");
+      assert.equal("decimals", output?.get("name"), "name not equal");
+      assert.equal("uint256", output?.get("type"), "type not equal");
+      assert.equal(
+        "floating point of the token",
+        output?.get("desc"),
+        "desc not equal"
+      );
     }
 
     if (commentText) {
@@ -354,9 +360,13 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('initial_supply', output?.get('name'), "name not equal");
-      assert.equal('uint256', output?.get('type'), "type not equal");
-      assert.equal('amount of ERC20 transfer', output?.get('desc'), "desc not equal");
+      assert.equal("initial_supply", output?.get("name"), "name not equal");
+      assert.equal("uint256", output?.get("type"), "type not equal");
+      assert.equal(
+        "amount of ERC20 transfer",
+        output?.get("desc"),
+        "desc not equal"
+      );
     }
 
     if (commentText) {
@@ -380,9 +390,13 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal('recipient', output?.get('name'), "name not equal");
-      assert.equal('felt', output?.get('type'), "type not equal");
-      assert.equal('amount of ERC20 transfer', output?.get('desc'), "desc not equal");
+      assert.equal("recipient", output?.get("name"), "name not equal");
+      assert.equal("felt", output?.get("type"), "type not equal");
+      assert.equal(
+        "amount of ERC20 transfer",
+        output?.get("desc"),
+        "desc not equal"
+      );
     }
 
     if (commentText) {
@@ -403,7 +417,6 @@ suite("function-comment: constructor", () => {
       assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
       assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
-      
   });
 
   test("get returns comments", () => {

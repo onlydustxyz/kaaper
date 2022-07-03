@@ -18,15 +18,14 @@ export default class FunctionCommentDescParser {
       }
     }
     return false;
-
   }
 
   returnOutput(line: string): string | null {
     if (this.isInsideScope(line)) {
-      const match = line.match(/#\s+(.+)/)
-        if (match) {
-          return match[1]
-        }
+      const match = line.match(/#\s+(.+)/);
+      if (match) {
+        return match[1];
+      }
     }
     return null;
   }
