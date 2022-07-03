@@ -368,6 +368,8 @@ suite("function-comment: constructor", () => {
       );
       const isStartScope = explicitArgsParser.isStartScope(commentText[line]);
       const isEndScope = explicitArgsParser.isEndScope(commentText[line]);
+      const output = explicitArgsParser.returnOutput(commentText[line]);
+
       assert.equal(
         false,
         isStartScope,
@@ -378,6 +380,9 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
+      assert.equal('recipient', output?.get('name'), "name not equal");
+      assert.equal('felt', output?.get('type'), "type not equal");
+      assert.equal('amount of ERC20 transfer', output?.get('desc'), "desc not equal");
     }
 
     if (commentText) {
