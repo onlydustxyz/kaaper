@@ -11,18 +11,16 @@ export default class FunctionCommentDescParser {
     return false;
   }
 
-  postProcess(line: string): Map<string, string> | null {
-    const match = line.match(/#\s+[\w]+[\s\w\(\)\:\*]+/);
-    if (match) {
-      if (line.startsWith("#")) {
-        const result = new Map<string, string>();
-        result.set("name", "name");
-        result.set("type", "type");
-        result.set("description", "description");
-        return result;
+  returnOutput(line: string): string {
+    if (!this.isStartScope(line)) {
+      if (!this.isEndScope(line)) {
+        const match = line.match(/#\s+(.+)/)
+        if (match) {
+          return match[1]
+        }
       }
     }
-    return null;
+    return "";
   }
 
   isEndScope(line: string): boolean {

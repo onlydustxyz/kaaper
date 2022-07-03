@@ -22,6 +22,7 @@ suite("function-comment: constructor", () => {
       assert.equal("# Desc:", commentText[line].trim(), `check line ${line}`);
       const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
+      const output = descParser.returnOutput(commentText[line]);
       assert.equal(
         true,
         isStartScope,
@@ -32,6 +33,13 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
+
+      assert.equal(
+        "",
+        output,
+        `failed to get desc comment line ${line}`
+      )
+
     }
 
     if (commentText) {
@@ -43,6 +51,8 @@ suite("function-comment: constructor", () => {
       );
       const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
+      const output = descParser.returnOutput(commentText[line]);
+
       assert.equal(
         false,
         isStartScope,
@@ -53,6 +63,12 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
+
+      assert.equal(
+        "Initialize the contract",
+        output,
+        `failed to get desc comment line ${line}`
+        )
     }
 
     if (commentText) {
@@ -64,12 +80,14 @@ suite("function-comment: constructor", () => {
       );
       const isStartScope = descParser.isStartScope(commentText[line]);
       const isEndScope = descParser.isEndScope(commentText[line]);
+      const output = descParser.returnOutput(commentText[line]);
       assert.equal(
         false,
         isStartScope,
         `failed to get desc comment line ${line}`
       );
       assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
+      assert.equal("", output, `failed to get desc comment line ${line}`);
     }
   });
 
