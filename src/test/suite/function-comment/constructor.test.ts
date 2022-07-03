@@ -3,6 +3,7 @@ import * as path from "path";
 import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment/implicit-args";
 import CairoParser from "../../../lib/main";
+import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment/explicit-args";
 
 suite("function-comment: constructor", () => {
   test("get desc comments", () => {
@@ -199,174 +200,174 @@ suite("function-comment: constructor", () => {
     }
   });
 
-  // test("get explicit args comments", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../test_assets/ERC20.cairo"
-  //   );
+  test("get explicit args comments", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
 
-  //   const constructorParser = new CairoParser(pathFile, "constructor");
-  //   const functionText = constructorParser.parseFunctionScope();
-  //   const commentText = constructorParser.parseComments(functionText);
-  //   const descParser = new FunctionCommentDescParser("Explicit args");
+    const constructorParser = new CairoParser(pathFile, "constructor");
+    const functionText = constructorParser.parseFunctionScope();
+    const commentText = constructorParser.parseComments(functionText);
+    const descParser = new FunctionCommentExplicitArgsParser();
 
-  //   if (commentText) {
-  //     const line = 6;
-  //     assert.equal(
-  //       "# Explicit args:",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       true,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 6;
+      assert.equal(
+        "# Explicit args:",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        true,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 7;
-  //     assert.equal(
-  //       "#   name(felt): the address of the ERC20 sender",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 7;
+      assert.equal(
+        "#   name(felt): the address of the ERC20 sender",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 8;
-  //     assert.equal(
-  //       "#   symbol(felt): the address of the ERC20 recipient",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 8;
+      assert.equal(
+        "#   symbol(felt): the address of the ERC20 recipient",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 9;
-  //     assert.equal(
-  //       "#   decimals(uint256): floating point of the token",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 9;
+      assert.equal(
+        "#   decimals(uint256): floating point of the token",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 10;
-  //     assert.equal(
-  //       "#   initial_supply(uint256): amount of ERC20 transfer",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 10;
+      assert.equal(
+        "#   initial_supply(uint256): amount of ERC20 transfer",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 11;
-  //     assert.equal(
-  //       "#   recipient(felt): amount of ERC20 transfer",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(
-  //       false,
-  //       isEndScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //   }
+    if (commentText) {
+      const line = 11;
+      assert.equal(
+        "#   recipient(felt): amount of ERC20 transfer",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
-  //   if (commentText) {
-  //     const line = 12;
-  //     assert.equal(
-  //       "# Returns:",
-  //       commentText[line].trim(),
-  //       `check line ${line}`
-  //     );
-  //     const isStartScope = descParser.isStartScope(
-  //       commentText[line]
-  //     );
-  //     const isEndScope = descParser.isEndScope(commentText[line]);
-  //     assert.equal(
-  //       false,
-  //       isStartScope,
-  //       `failed to get desc comment line ${line}`
-  //     );
-  //     assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
-  //   }
-  // });
+    if (commentText) {
+      const line = 12;
+      assert.equal(
+        "# Returns:",
+        commentText[line].trim(),
+        `check line ${line}`
+      );
+      const isStartScope = descParser.isStartScope(
+        commentText[line]
+      );
+      const isEndScope = descParser.isEndScope(commentText[line]);
+      assert.equal(
+        false,
+        isStartScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
+    }
+  });
 
   // test("get returns comments", () => {
   //   const pathFile = path.resolve(
