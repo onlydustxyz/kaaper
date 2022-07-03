@@ -1,4 +1,4 @@
-export default class FunctionCommentRegexParser {
+export default class FunctionCommentDescParser {
   public keyword: string;
 
   constructor(keyword: string) {

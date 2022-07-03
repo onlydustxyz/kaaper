@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import FunctionCommentParser from "../../../lib/parser/function-comment/regex";
+import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import CairoParser from "../../../lib/main";
 
 suite("function-comment: constructor", () => {
@@ -12,15 +12,15 @@ suite("function-comment: constructor", () => {
     const constructorParser = new CairoParser(pathFile, "constructor");
     const functionText = constructorParser.parseFunctionScope();
     const commentText = constructorParser.parseComments(functionText);
-    const functionCommentParser = new FunctionCommentParser("Desc");
+    const descParser = new FunctionCommentDescParser("Desc");
 
     if (commentText) {
       const line = 0;
       assert.equal("# Desc:", commentText[line].trim(), `check line ${line}`);
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
         isStartScope,
@@ -40,10 +40,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -63,10 +63,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -84,7 +84,7 @@ suite("function-comment: constructor", () => {
     const constructorParser = new CairoParser(pathFile, "constructor");
     const functionText = constructorParser.parseFunctionScope();
     const commentText = constructorParser.parseComments(functionText);
-    const functionCommentParser = new FunctionCommentParser("Implicit args");
+    const descParser = new FunctionCommentDescParser("Implicit args");
 
     if (commentText) {
       const line = 2;
@@ -93,10 +93,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
         isStartScope,
@@ -116,10 +116,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -139,10 +139,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -162,10 +162,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -185,10 +185,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -207,7 +207,7 @@ suite("function-comment: constructor", () => {
     const constructorParser = new CairoParser(pathFile, "constructor");
     const functionText = constructorParser.parseFunctionScope();
     const commentText = constructorParser.parseComments(functionText);
-    const functionCommentParser = new FunctionCommentParser("Explicit args");
+    const descParser = new FunctionCommentDescParser("Explicit args");
 
     if (commentText) {
       const line = 6;
@@ -216,10 +216,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
         isStartScope,
@@ -239,10 +239,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -262,10 +262,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -285,10 +285,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -308,10 +308,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -331,10 +331,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -354,10 +354,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
@@ -376,7 +376,7 @@ suite("function-comment: constructor", () => {
     const constructorParser = new CairoParser(pathFile, "constructor");
     const functionText = constructorParser.parseFunctionScope();
     const commentText = constructorParser.parseComments(functionText);
-    const functionCommentParser = new FunctionCommentParser("Returns");
+    const descParser = new FunctionCommentDescParser("Returns");
 
     if (commentText) {
       const line = 12;
@@ -385,10 +385,10 @@ suite("function-comment: constructor", () => {
         commentText[line].trim(),
         `check line ${line}`
       );
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         true,
         isStartScope,
@@ -404,10 +404,10 @@ suite("function-comment: constructor", () => {
     if (commentText) {
       const line = 13;
       assert.equal("#   None", commentText[line].trim(), `check line ${line}`);
-      const isStartScope = functionCommentParser.isStartScope(
+      const isStartScope = descParser.isStartScope(
         commentText[line]
       );
-      const isEndScope = functionCommentParser.isEndScope(commentText[line]);
+      const isEndScope = descParser.isEndScope(commentText[line]);
       assert.equal(
         false,
         isStartScope,
