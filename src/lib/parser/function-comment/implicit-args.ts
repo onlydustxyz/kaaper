@@ -29,7 +29,12 @@ export default class FunctionCommentImplicitArgsParser {
           const response = new Map<string, string>();
           const result = match[1].split("(");
           response.set("name", result[0]);
-          response.set("type", result[1].split(")")[0]);
+          try {
+            response.set("type", result[1].split(")")[0]);
+          } catch (e) {
+            response.set("type", "");
+          }
+          
           return response
         }
     }
