@@ -11,14 +11,22 @@ export default class FunctionCommentDescParser {
     return false;
   }
 
-  returnOutput(line: string): string {
+  isInsideScope(line: string): boolean {
     if (!this.isStartScope(line)) {
       if (!this.isEndScope(line)) {
-        const match = line.match(/#\s+(.+)/)
+        return true;
+      }
+    }
+    return false;
+
+  }
+
+  returnOutput(line: string): string {
+    if (this.isInsideScope(line)) {
+      const match = line.match(/#\s+(.+)/)
         if (match) {
           return match[1]
         }
-      }
     }
     return "";
   }
