@@ -35,7 +35,7 @@ suite("function-comment: constructor", () => {
       );
 
       assert.equal(
-        "",
+        null,
         output,
         `failed to get desc comment line ${line}`
       )
@@ -87,7 +87,7 @@ suite("function-comment: constructor", () => {
         `failed to get desc comment line ${line}`
       );
       assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
-      assert.equal("", output, `failed to get desc comment line ${line}`);
+      assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
   });
 
