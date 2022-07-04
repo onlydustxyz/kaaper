@@ -469,7 +469,11 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("None", output?.get('desc'), `failed to get desc comment line ${line}`);
+      assert.equal(
+        "None",
+        output?.get("desc"),
+        `failed to get desc comment line ${line}`
+      );
     }
   });
 });

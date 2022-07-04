@@ -1,6 +1,6 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
 
-export default class FunctionCommentDescParser extends BaseCommentParser{
+export default class FunctionCommentDescParser extends BaseCommentParser {
   constructor() {
     super();
   }
@@ -20,7 +20,7 @@ export default class FunctionCommentDescParser extends BaseCommentParser{
       const match = line.match(/#\s+(.+)/);
       if (match) {
         const response = new Map<string, string>();
-        response.set('desc', match[1].trim());
+        response.set("desc", match[1].trim());
         return response;
       }
     }

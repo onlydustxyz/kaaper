@@ -1,6 +1,6 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
 
-export default class FunctionCommentImplicitArgsParser extends BaseCommentParser{
+export default class FunctionCommentImplicitArgsParser extends BaseCommentParser {
   constructor() {
     super();
   }
@@ -14,7 +14,6 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
     }
     return false;
   }
-
 
   returnOutput(line: string): Map<string, string> | null {
     if (this.isInsideScope(line)) {

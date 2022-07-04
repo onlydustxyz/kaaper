@@ -1,6 +1,6 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
 
-export default class FunctionCommentReturnsParser  extends BaseCommentParser{
+export default class FunctionCommentReturnsParser extends BaseCommentParser {
   constructor() {
     super();
   }
@@ -15,7 +15,7 @@ export default class FunctionCommentReturnsParser  extends BaseCommentParser{
     return false;
   }
 
-  returnOutput(line: string): Map<string, string> | null  {
+  returnOutput(line: string): Map<string, string> | null {
     if (this.isInsideScope(line)) {
       const match = line.match(/#\s+(.+)/);
       const response = new Map<string, string>();
@@ -23,12 +23,12 @@ export default class FunctionCommentReturnsParser  extends BaseCommentParser{
       if (match) {
         if (match[1] === "None") {
           response.set("desc", "None");
-          return response
+          return response;
         }
         const split = match[1].split(":");
         const left = split[0];
         const right = split[1];
-        
+
         const result = left.split("(");
         response.set("name", result[0]);
         try {
