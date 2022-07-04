@@ -1,19 +1,14 @@
-export default class FunctionCommentExplicitArgsParser {
-  constructor() {}
+import { BaseCommentParser } from "../interfaces/function-comment";
+
+export default class FunctionCommentExplicitArgsParser extends BaseCommentParser {
+  constructor() {
+    super();
+  }
 
   isStartScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
     if (result) {
       if (result[1] === "Explicit args") {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isInsideScope(line: string): boolean {
-    if (!this.isStartScope(line)) {
-      if (!this.isEndScope(line)) {
         return true;
       }
     }

@@ -1,5 +1,9 @@
-export default class FunctionCommentDescParser {
-  constructor() {}
+import { BaseCommentParser } from "../interfaces/function-comment";
+
+export default class FunctionCommentDescParser extends BaseCommentParser{
+  constructor() {
+    super();
+  }
 
   isStartScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
@@ -11,20 +15,13 @@ export default class FunctionCommentDescParser {
     return false;
   }
 
-  isInsideScope(line: string): boolean {
-    if (!this.isStartScope(line)) {
-      if (!this.isEndScope(line)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  returnOutput(line: string): string | null {
+  returnOutput(line: string): Map<string, string> | null {
     if (this.isInsideScope(line)) {
       const match = line.match(/#\s+(.+)/);
       if (match) {
-        return match[1];
+        const response = new Map<string, string>();
+        response.set('desc', match[1].trim());
+        return response;
       }
     }
     return null;
