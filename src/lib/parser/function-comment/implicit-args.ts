@@ -1,5 +1,9 @@
-export default class FunctionCommentImplicitArgsParser {
-  constructor() {}
+import { BaseCommentParser } from "../interfaces/function-comment";
+
+export default class FunctionCommentImplicitArgsParser extends BaseCommentParser{
+  constructor() {
+    super();
+  }
 
   isStartScope(line: string): boolean {
     const result = line.match(/#\s?(\w+\s?\w+)/);
@@ -11,14 +15,6 @@ export default class FunctionCommentImplicitArgsParser {
     return false;
   }
 
-  isInsideScope(line: string): boolean {
-    if (!this.isStartScope(line)) {
-      if (!this.isEndScope(line)) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   returnOutput(line: string): Map<string, string> | null {
     if (this.isInsideScope(line)) {

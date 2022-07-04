@@ -61,7 +61,7 @@ suite("function-comment: constructor", () => {
 
       assert.equal(
         "Initialize the contract",
-        output,
+        output?.get("desc"),
         `failed to get desc comment line ${line}`
       );
     }
@@ -469,7 +469,7 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("None", output, `failed to get desc comment line ${line}`);
+      assert.equal("None", output?.get('desc'), `failed to get desc comment line ${line}`);
     }
   });
 });
