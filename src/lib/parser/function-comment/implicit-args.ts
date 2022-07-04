@@ -1,5 +1,3 @@
-import { ServerResponse } from "http";
-
 export default class FunctionCommentImplicitArgsParser {
   constructor() {}
 
