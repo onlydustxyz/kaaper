@@ -31,11 +31,12 @@ export default class CairoParser {
   }
 
   parseComments(line: string): RegExpMatchArray | null {
-    const comments = line.match(/#\s+[\w\(\)\s\:\*]+/gm);
+    const comments = line.match(/#\s+(.+)/gm);
     return comments;
   }
 
   // TODO: running parser on the whole scope
+
 
   // TODO: output the parsing result into a proper data structure
 }
