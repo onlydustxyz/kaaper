@@ -17,7 +17,6 @@ suite("function-comment: constructor", () => {
     const commentText = constructorParser.parseComments(functionText);
     const descParser = new FunctionCommentDescParser();
 
-
     {
       const line = 0;
       assert.equal("# Desc:", commentText![line].trim(), `check line ${line}`);
@@ -67,7 +66,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 2;
       assert.equal(
         "# Implicit args:",
@@ -97,7 +96,7 @@ suite("function-comment: constructor", () => {
     const commentText = constructorParser.parseComments(functionText);
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
 
-     {
+    {
       const line = 2;
       assert.equal(
         "# Implicit args:",
@@ -118,7 +117,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 3;
       assert.equal(
         "#   syscall_ptr(felt*)",
@@ -143,7 +142,7 @@ suite("function-comment: constructor", () => {
       assert.equal("felt*", output?.get("type"), "map not equal");
     }
 
-     {
+    {
       const line = 4;
       assert.equal(
         "#   pedersen_ptr(HashBuiltin)",
@@ -168,7 +167,7 @@ suite("function-comment: constructor", () => {
       assert.equal("HashBuiltin", output?.get("type"), "map not equal");
     }
 
-     {
+    {
       const line = 5;
       assert.equal(
         "#   range_check_ptr",
@@ -194,7 +193,7 @@ suite("function-comment: constructor", () => {
       assert.equal("", output?.get("type"), "map not equal");
     }
 
-     {
+    {
       const line = 6;
       assert.equal(
         "# Explicit args:",
@@ -226,7 +225,7 @@ suite("function-comment: constructor", () => {
     const commentText = constructorParser.parseComments(functionText);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
-     {
+    {
       const line = 6;
       assert.equal(
         "# Explicit args:",
@@ -250,7 +249,7 @@ suite("function-comment: constructor", () => {
       assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
 
-     {
+    {
       const line = 7;
       assert.equal(
         "#   name(felt): the address of the ERC20 sender",
@@ -281,7 +280,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 8;
       assert.equal(
         "#   symbol(felt): the address of the ERC20 recipient",
@@ -311,7 +310,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 9;
       assert.equal(
         "#   decimals(uint256): floating point of the token",
@@ -341,7 +340,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 10;
       assert.equal(
         "#   initial_supply(uint256): amount of ERC20 transfer",
@@ -370,7 +369,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 11;
       assert.equal(
         "#   recipient(felt): amount of ERC20 transfer",
@@ -400,7 +399,7 @@ suite("function-comment: constructor", () => {
       );
     }
 
-     {
+    {
       const line = 12;
       assert.equal(
         "# Returns:",
@@ -431,7 +430,7 @@ suite("function-comment: constructor", () => {
     const commentText = constructorParser.parseComments(functionText);
     const returnsParser = new FunctionCommentReturnsParser();
 
-     {
+    {
       const line = 12;
       assert.equal(
         "# Returns:",
@@ -454,7 +453,7 @@ suite("function-comment: constructor", () => {
       assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
 
-     {
+    {
       const line = 13;
       assert.equal("#   None", commentText![line].trim(), `check line ${line}`);
       const isStartScope = returnsParser.isStartScope(commentText![line]);
