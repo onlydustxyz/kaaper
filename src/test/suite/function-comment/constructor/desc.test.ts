@@ -140,8 +140,14 @@ suite("function-comment: constructor: desc", () => {
 
     const resultLineParsing = descParser.parseCommentLines(commentText!);
 
-    const targetLineParsing = [{name: "", type: "", desc: "Initialize the contract"}];
-    
-    assert.deepEqual(targetLineParsing, resultLineParsing, "failed to get resultLineParsing");
+    const targetLineParsing = [
+      { name: "", type: "", desc: "Initialize the contract" },
+    ];
+
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      "failed to get resultLineParsing"
+    );
   });
 });

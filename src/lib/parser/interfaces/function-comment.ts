@@ -10,21 +10,21 @@ export abstract class BaseCommentParser {
     this.runningScope = false;
     this.endScope = false;
     this.startEndScopeRegexp = /#\s?(\w+\s?\w+)/;
-    this.name = ""
+    this.name = "";
   }
 
   isStartScope(line: string): boolean {
     const result = line.match(this.startEndScopeRegexp);
     if (result) {
       if (result[1] === this.name) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
 
   setStartScope(line: string) {
-    if (this.isStartScope(line)===true) {
+    if (this.isStartScope(line) === true) {
       this.runningScope = true;
       this.startLine = line;
     }
@@ -34,10 +34,10 @@ export abstract class BaseCommentParser {
     const result = line.match(this.startEndScopeRegexp);
     if (result) {
       if (result[1] !== this.name) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
 
   setEndScope(line: string) {
@@ -52,20 +52,19 @@ export abstract class BaseCommentParser {
   }
 
   parseCommentLines(lines: RegExpMatchArray): Array<FunctionComment> | null {
-    var result : Array<FunctionComment> = [];
+    var result: Array<FunctionComment> = [];
 
     for (const line of lines) {
       this.setStartScope(line);
-      this.setEndScope(line)
-      const functionComment = this.parseCommentLine(line)
+      this.setEndScope(line);
+      const functionComment = this.parseCommentLine(line);
       if (functionComment) {
-        result.push(functionComment)
+        result.push(functionComment);
       }
     }
     if (result.length > 0) {
-      return result
+      return result;
     }
-    return null
+    return null;
   }
-
 }

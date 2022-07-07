@@ -26,5 +26,4 @@ export default class FunctionCommentReturnsParser extends BaseCommentParser {
     }
     return null;
   }
-
 }

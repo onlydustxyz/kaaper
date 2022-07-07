@@ -14,7 +14,6 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
         if (matchInterface) {
           if (matchInterface[3]) {
             return {
-
               name: matchInterface[1],
               type: matchInterface[3],
               desc: "",

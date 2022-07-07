@@ -26,5 +26,4 @@ export default class FunctionCommentRaisesParser extends BaseCommentParser {
     }
     return null;
   }
-
 }
