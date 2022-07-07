@@ -36,5 +36,11 @@ export default class CairoParser {
     return comments;
   }
 
-  // TODO: parse whole file and return parsed outputs
+  // TODO: parse whole scope from a file
+
+  // TODO: parse available scopes from a file
+
+  // TODO: parse all files under a directory
+
+  // TODO: dump all parsed data to a file
 }
