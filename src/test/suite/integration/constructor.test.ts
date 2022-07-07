@@ -14,20 +14,20 @@ suite("integration-test:", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-  
+
     // parse whole scope
     const functionScopeLines = CairoParser.parseFunctionScope(
       pathFile,
       "constructor"
     );
-  
+
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
-  
+
     // Comment parsing
-      // parse comment lines
+    // parse comment lines
     const commentLines = CairoParser.parseCommentLines(functionScopeLines);
-  
+
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -35,8 +35,7 @@ suite("integration-test:", () => {
       new FunctionCommentExplicitArgsParser();
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-  
-  
+
     const parsingTarget = {
       attributeName: "constructor",
       functionName: "constructor",
@@ -52,7 +51,7 @@ suite("integration-test:", () => {
           { name: "decimals", type: "Uint256" },
           { name: "initial_supply", type: "Uint256" },
           { name: "recipient", type: "felt" },
-        ]
+        ],
       },
       functionComment: {
         desc: [{ name: "", type: "", desc: "Initialize the contract" }],
@@ -64,7 +63,11 @@ suite("integration-test:", () => {
         explicitArgs: [
           { name: "name", type: "felt", desc: "name of the token" },
           { name: "symbol", type: "felt", desc: "symbol of the token" },
-          { name: "decimals", type: "Uint256", desc: "floating point of the token" },
+          {
+            name: "decimals",
+            type: "Uint256",
+            desc: "floating point of the token",
+          },
           {
             name: "initial_supply",
             type: "Uint256",
@@ -79,33 +82,40 @@ suite("integration-test:", () => {
         returns: [{ name: "", type: "", desc: "None" }],
         raises: [
           { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-          { name: "recipient", type: "", desc: "cannot mint to the zero address" },
+          {
+            name: "recipient",
+            type: "",
+            desc: "cannot mint to the zero address",
+          },
           { name: "initial_supply", type: "", desc: "not valid Uint256" },
           { name: "initial_supply", type: "", desc: "mint overflow" },
-        ]
-      }
-    }
-  
+        ],
+      },
+    };
+
     var parsingOutput = {
-      attributeName: functionSignatureParser.getAttributeName(functionScopeLines),
+      attributeName:
+        functionSignatureParser.getAttributeName(functionScopeLines),
       functionName: functionSignatureParser.getFunctionName(functionScopeLines),
       functionSignature: {
-        implicitArgs: functionSignatureParser.getImplicitArgs(functionScopeLines),
-        explicitArgs: functionSignatureParser.getExplicitArgs(functionScopeLines),
+        implicitArgs:
+          functionSignatureParser.getImplicitArgs(functionScopeLines),
+        explicitArgs:
+          functionSignatureParser.getExplicitArgs(functionScopeLines),
       },
       functionComment: {
         desc: functionCommentDescParser.parseCommentLines(commentLines!),
         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-          commentLines!),
-        explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(commentLines!),
+          commentLines!
+        ),
+        explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+          commentLines!
+        ),
         returns: functionCommentReturnsParser.parseCommentLines(commentLines!),
         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
-      }
-    }
-  
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  
-  
-  });
+      },
+    };
 
-})
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
+});
