@@ -1,8 +1,22 @@
-import { BaseFunctionSignatureParser } from "../interfaces/function-signature";
+export abstract class BaseFunctionSignatureParser {
+  constructor() {}
 
-export default class FunctionSignatureRegexParser extends BaseFunctionSignatureParser {
-  constructor() {
-    super();
+  getMappingResult(line: string): Array<FunctionSignature> {
+    // create new array
+    var outputResult: Array<FunctionSignature> = [];
+    const mappingResult = line.split(",");
+
+    mappingResult.forEach((element) => {
+      const [key, value] = element.split(":");
+      try {
+        const map = { name: key.trim(), type: value.trim() };
+        outputResult.push(map);
+      } catch (e: any) {
+        const map = { name: key.trim(), type: "" };
+        outputResult.push(map);
+      }
+    }, this);
+    return outputResult;
   }
 
   getAttributeName(line: string): string {

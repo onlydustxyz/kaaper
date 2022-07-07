@@ -1,42 +1,40 @@
 import * as fs from "fs";
+import FunctionSignatureRegexParser from "../lib/parser/function-signature/regex";
+import FunctionCommentDescParser from "../lib/parser/function-comment/desc";
+import FunctionCommentImplicitArgsParser from "./parser/function-comment/implicit-args";
+import { BaseCommentParser } from "./parser/interfaces/function-comment";
+import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
 
 // TODO: refactor this
 let map = new Map();
-map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#]+\s/gm);
+map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 
 export default class CairoParser {
-  public text: string;
-  public regex: RegExp;
-  public supportedComments: Array<string>;
+  // public supportedComments: Map<string, BaseCommentParser>;
+  public supportedScopes: Array<string>;
+  public supportedComments: Array<BaseCommentParser>;
 
-  constructor(public filePath: string, name: string) {
-    this.filePath = filePath;
-    this.text = fs.readFileSync(filePath, "utf8");
-    this.regex = map.get(name);
-    this.supportedComments = [
-      "Desc",
-      "Implicit args",
-      "Explicit args",
-      "Returns",
-      "Raises",
-    ];
+  constructor() {
+    this.supportedScopes = ["constructor"];
+    this.supportedComments = [new FunctionCommentDescParser()];
+  }
+  static getRegex(name: string): RegExp {
+    return map.get(name);
   }
 
-  parseFunctionScope(): string {
-    const result = this.text.match(this.regex);
+  static parseFunctionScope(filePath: string, name: string): string {
+    const text = fs.readFileSync(filePath, "utf8");
+    const result = text.match(this.getRegex(name));
     if (result) {
       return result[0];
     }
     return "";
   }
 
-  parseComments(line: string): RegExpMatchArray | null {
+  static parseCommentLines(line: string): RegExpMatchArray | null {
     const comments = line.match(/#\s+(.+)/gm);
     return comments;
   }
 
-  // TODO: running parser on the whole scope
-
-
-  // TODO: output the parsing result into a proper data structure
+  // TODO: parse whole file and return parsed outputs
 }

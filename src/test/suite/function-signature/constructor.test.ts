@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import FunctionSignatureParser from "../../../lib/parser/function-signature/regex";
+import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
 import CairoParser from "../../../lib/main";
 
 suite("function-signature: constructor", () => {
@@ -9,9 +9,12 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    const constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
-    const functionSignatureParser = new FunctionSignatureParser();
+    const constructorText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
+    const functionSignatureParser = new FunctionSignatureRegexParser();
     const attributeName =
       functionSignatureParser.getAttributeName(constructorText);
     assert.equal("constructor", attributeName, "failed to get attribute name");
@@ -21,9 +24,12 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    let constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
-    const functionSignatureParser = new FunctionSignatureParser();
+    const constructorText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
+    const functionSignatureParser = new FunctionSignatureRegexParser();
     const functionName =
       functionSignatureParser.getFunctionName(constructorText);
     assert.equal("constructor", functionName, "failed to get attribute name");
@@ -34,31 +40,24 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    let constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
-    const functionSignatureParser = new FunctionSignatureParser();
+    const constructorText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
+    const functionSignatureParser = new FunctionSignatureRegexParser();
     const implicitArgs =
       functionSignatureParser.getImplicitArgs(constructorText);
-    const targetArgs = new Map();
-    targetArgs.set("syscall_ptr", "felt*");
-    targetArgs.set("pedersen_ptr", "HashBuiltin*");
-    targetArgs.set("range_check_ptr", "");
-
-    // TODO: refactor this, somehow the two Maps are not equal but if we unpack it they are equal
-    const targetArgsIter = targetArgs.values();
-    const implicitArgsIter = implicitArgs.values();
-    assert.equal(
-      targetArgs.size,
-      implicitArgs.size,
+    const targetImplicitArgs = [
+      { name: "syscall_ptr", type: "felt*" },
+      { name: "pedersen_ptr", type: "HashBuiltin*" },
+      { name: "range_check_ptr", type: "" },
+    ];
+    assert.deepEqual(
+      targetImplicitArgs,
+      implicitArgs,
       "failed to get implicit args"
     );
-    for (let i = 0; i < targetArgs.size; i++) {
-      assert.equal(
-        targetArgsIter.next().value,
-        implicitArgsIter.next().value,
-        "failed to get explicit args"
-      );
-    }
   });
 
   test("get explicit args", () => {
@@ -66,31 +65,25 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    let constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
-    const functionSignatureParser = new FunctionSignatureParser();
+    const constructorText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
+    const functionSignatureParser = new FunctionSignatureRegexParser();
     const explicitArgs =
       functionSignatureParser.getExplicitArgs(constructorText);
-    const targetArgs = new Map();
-    targetArgs.set("name", "felt");
-    targetArgs.set("symbol", "felt");
-    targetArgs.set("decimals", "Uint256");
-    targetArgs.set("initial_supply", "Uint256");
-    targetArgs.set("recipient", "felt");
-    // TODO: refactor this, somehow the two Maps are not equal but if we unpack it they are equal
-    const targetArgsIter = targetArgs.values();
-    const explicitArgsIter = explicitArgs.values();
-    assert.equal(
-      targetArgs.size,
-      explicitArgs.size,
-      "failed to get implicit args"
+    const targetExplicitArgs = [
+      { name: "name", type: "felt" },
+      { name: "symbol", type: "felt" },
+      { name: "decimals", type: "Uint256" },
+      { name: "initial_supply", type: "Uint256" },
+      { name: "recipient", type: "felt" },
+    ];
+    assert.deepEqual(
+      targetExplicitArgs,
+      explicitArgs,
+      "failed to get explicit args"
     );
-    for (let i = 0; i < targetArgs.size; i++) {
-      assert.equal(
-        targetArgsIter.next().value,
-        explicitArgsIter.next().value,
-        "failed to get explicit args"
-      );
-    }
   });
 });

@@ -20,13 +20,18 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     #   pedersen_ptr(HashBuiltin)
     #   range_check_ptr
     # Explicit args:
-    #   name(felt): the address of the ERC20 sender
-    #   symbol(felt): the address of the ERC20 recipient
-    #   decimals(uint256): floating point of the token
-    #   initial_supply(uint256): amount of ERC20 transfer
-    #   recipient(felt): amount of ERC20 transfer
+    #   name(felt): name of the token
+    #   symbol(felt): symbol of the token
+    #   decimals(Uint256): floating point of the token
+    #   initial_supply(Uint256): amount of initial supply of the token
+    #   recipient(felt): the address of recipient of the initial supply
     # Returns:
     #   None
+    # Raises:
+    #   decimals: decimals exceed 2^8
+    #   recipient: cannot mint to the zero address
+    #   initial_supply: not valid Uint256
+    #   initial_supply: mint overflow
     ERC20.constructor(name, symbol, decimals)
     ERC20._mint(recipient, initial_supply)
     return ()

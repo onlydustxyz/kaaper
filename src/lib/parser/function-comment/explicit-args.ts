@@ -3,51 +3,24 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 export default class FunctionCommentExplicitArgsParser extends BaseCommentParser {
   constructor() {
     super();
+    this.name = "Explicit args";
   }
 
-  isStartScope(line: string): boolean {
-    const result = line.match(/#\s?(\w+\s?\w+)/);
-    if (result) {
-      if (result[1] === "Explicit args") {
-        return true;
-      }
-    }
-    return false;
-  }
+  parseCommentLine(line: string): FunctionComment | null {
+    if (this.runningScope === true && this.startLine !== line) {
+      const matchCommentLines = line.match(/#\s+(.+)/);
 
-  returnOutput(line: string): Map<string, string> | null {
-    if (this.isInsideScope(line)) {
-      const match = line.match(/#\s+(.+)/);
-      if (match) {
-        const split = match[1].split(":");
-        const left = split[0];
-        const right = split[1];
-        const response = new Map<string, string>();
-        const result = left.split("(");
-        response.set("name", result[0]);
-        try {
-          response.set("type", result[1].split(")")[0]);
-        } catch (e) {
-          response.set("type", "");
+      if (matchCommentLines) {
+        const matchInterface = line.match(/(\w+)(\((\w+)\)):(.*)/);
+        if (matchInterface) {
+          return {
+            name: matchInterface[1],
+            type: matchInterface[3],
+            desc: matchInterface[4].trim(),
+          };
         }
-        try {
-          response.set("desc", right.trim());
-        } catch {
-          response.set("desc", "");
-        }
-        return response;
       }
     }
     return null;
-  }
-
-  isEndScope(line: string): boolean {
-    const result = line.match(/#\s?(\w+\s?\w+)/);
-    if (result) {
-      if (result[1] !== "Explicit args") {
-        return true;
-      }
-    }
-    return false;
   }
 }
