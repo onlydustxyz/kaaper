@@ -117,5 +117,20 @@ suite("integration-test:", () => {
     };
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    const raises = [
+      { name: "decimals", type: "", desc: "decimals exceed 2^8" },
+      {
+        name: "recipient",
+        type: "",
+        desc: "cannot mint to the zero address",
+      },
+      { name: "initial_supply", type: "", desc: "not valid Uint256" },
+      { name: "initial_supply", type: "", desc: "mint overflow" },
+    ]
+
+
   });
+
+
 });

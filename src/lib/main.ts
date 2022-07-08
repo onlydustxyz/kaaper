@@ -1,9 +1,11 @@
 import * as fs from "fs";
+import { BaseCommentParser } from "./parser/interfaces/function-comment";
 import FunctionSignatureRegexParser from "../lib/parser/function-signature/regex";
 import FunctionCommentDescParser from "../lib/parser/function-comment/desc";
 import FunctionCommentImplicitArgsParser from "./parser/function-comment/implicit-args";
-import { BaseCommentParser } from "./parser/interfaces/function-comment";
 import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
+import FunctionCommentReturnsParser from "./parser/function-comment/returns";
+import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // TODO: refactor this
 let map = new Map();
@@ -22,6 +24,7 @@ export default class CairoParser {
     return map.get(name);
   }
 
+  // parse whole scope
   static parseFunctionScope(filePath: string, name: string): string {
     const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
@@ -36,7 +39,55 @@ export default class CairoParser {
     return comments;
   }
 
-  // TODO: parse whole scope from a file
+  // parse whole scope and return appropiate data structure
+  static getScopeParsingResult(filePath: string, name: string): parsingResult {
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      filePath,
+      name,
+    );
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    // parse comment lines
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines);
+
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    
+    var parsingOutput = {
+      attributeName:
+        functionSignatureParser.getAttributeName(functionScopeLines),
+      functionName: functionSignatureParser.getFunctionName(functionScopeLines),
+      functionSignature: {
+        implicitArgs:
+          functionSignatureParser.getImplicitArgs(functionScopeLines),
+        explicitArgs:
+          functionSignatureParser.getExplicitArgs(functionScopeLines),
+      },
+      functionComment: {
+        desc: functionCommentDescParser.parseCommentLines(commentLines!),
+        implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+          commentLines!
+        ),
+        explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+          commentLines!
+        ),
+        returns: functionCommentReturnsParser.parseCommentLines(commentLines!),
+        raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+      },
+    }
+    return parsingOutput;
+  }
+
+
+
+
 
   // TODO: parse available scopes from a file
 
