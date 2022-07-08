@@ -43,16 +43,14 @@ end
 
 @view
 func name{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (name : felt):
-    # Docs
+    # Desc:
     #   Returns the name of the token
-    # Implicit args
+    # Implicit args:
     #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin)
+    #   pedersen_ptr(HashBuiltin*)
     #   range_check_ptr
-    # Explicit args
-    #   name(felt): the address of the ERC20 sender
-    # Returns
-    #   name of the token
+    # Returns:
+    #   name(felt): name of the token
     let (name) = ERC20.name()
     return (name)
 end
