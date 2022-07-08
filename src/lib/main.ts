@@ -19,7 +19,10 @@ export default class CairoParser {
   }
 
   // parse whole scope
-  static parseFunctionScope(filePath: string, name: string): RegExpMatchArray | null {
+  static parseFunctionScope(
+    filePath: string,
+    name: string
+  ): RegExpMatchArray | null {
     const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
     if (result) {
@@ -39,7 +42,7 @@ export default class CairoParser {
   static getScopeParsingResult(
     filePath: string,
     name: string
-  ): parsingResult[] | null {
+  ): ParsingResult[] | null {
     const functionScopeLines = CairoParser.parseFunctionScope(filePath, name);
 
     // Function signature parsing
@@ -49,52 +52,50 @@ export default class CairoParser {
 
     // parse comment lines
     if (functionScopeLines) {
-      for (var functionScope of functionScopeLines){
+      for (var functionScope of functionScopeLines) {
+        const commentLines = CairoParser.parseCommentLines(functionScope);
 
-      const commentLines = CairoParser.parseCommentLines(functionScope);
+        const functionCommentDescParser = new FunctionCommentDescParser();
+        const functionCommentImplicitArgsParser =
+          new FunctionCommentImplicitArgsParser();
+        const functionCommentExplicitArgsParser =
+          new FunctionCommentExplicitArgsParser();
+        const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+        const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-      const functionCommentDescParser = new FunctionCommentDescParser();
-      const functionCommentImplicitArgsParser =
-        new FunctionCommentImplicitArgsParser();
-      const functionCommentExplicitArgsParser =
-        new FunctionCommentExplicitArgsParser();
-      const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-      const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-
-      const parsingOutput = {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScope!
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScope!
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
+        const parsingOutput = {
+          attributeName: functionSignatureParser.getAttributeName(
             functionScope!
           ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScope!
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(commentLines!),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            commentLines!
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            commentLines!
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            commentLines!
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
-        },
-      };
+          functionName: functionSignatureParser.getFunctionName(functionScope!),
+          functionSignature: {
+            implicitArgs: functionSignatureParser.getImplicitArgs(
+              functionScope!
+            ),
+            explicitArgs: functionSignatureParser.getExplicitArgs(
+              functionScope!
+            ),
+          },
+          functionComment: {
+            desc: functionCommentDescParser.parseCommentLines(commentLines!),
+            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+              commentLines!
+            ),
+            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+              commentLines!
+            ),
+            returns: functionCommentReturnsParser.parseCommentLines(
+              commentLines!
+            ),
+            raises: functionCommentRaisesParser.parseCommentLines(
+              commentLines!
+            ),
+          },
+        };
 
-      parsingOutputs.push(parsingOutput);
-
+        parsingOutputs.push(parsingOutput);
       }
-      
+
       return parsingOutputs;
     }
     return null;

@@ -9,7 +9,7 @@ interface FunctionComment {
   desc: string;
 }
 
-interface parsingResult {
+interface ParsingResult {
   attributeName: string;
   functionName: string;
   functionSignature: {
