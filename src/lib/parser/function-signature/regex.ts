@@ -1,0 +1,43 @@
+import { BaseFunctionSignatureParser } from "../interfaces/function-signature";
+
+export default class FunctionSignatureRegexParser extends BaseFunctionSignatureParser {
+  constructor() {
+    super();
+  }
+
+  getAttributeName(line: string): string {
+    const result = line.match(/@(\w+)/);
+    if (result) {
+      return result[1];
+    }
+    return "";
+  }
+
+  getFunctionName(line: string): string {
+    const result = line.match(/func (\w+)/);
+    if (result) {
+      return result[1];
+    }
+    return "";
+  }
+
+  getImplicitArgs(line: string): Array<FunctionSignature> | null {
+    const matchResult = line.match(/{([\w\s\:\*\,]+)}/);
+
+    if (matchResult) {
+      const result = this.getMappingResult(matchResult[1]);
+      return result;
+    }
+    return null;
+  }
+
+  getExplicitArgs(line: string): Array<FunctionSignature> | null {
+    const matchResult = line.match(/\(\s+([\w\s\:\,]+)\):/);
+
+    if (matchResult) {
+      const result = this.getMappingResult(matchResult[1]);
+      return result;
+    }
+    return null;
+  }
+}
