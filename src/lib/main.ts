@@ -67,7 +67,7 @@ export default class CairoParser {
 
         const parsingOutput = {
           attributeName: functionSignatureParser.getAttributeName(
-            functionScope
+            functionScope!
           ),
           functionName: functionSignatureParser.getFunctionName(functionScope),
           functionSignature: {
