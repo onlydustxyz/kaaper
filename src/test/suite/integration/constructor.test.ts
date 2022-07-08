@@ -26,7 +26,7 @@ suite("integration-test:", () => {
 
     // Comment parsing
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines);
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines!);
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -94,14 +94,19 @@ suite("integration-test:", () => {
     };
 
     var parsingOutput = {
-      attributeName:
-        functionSignatureParser.getAttributeName(functionScopeLines),
-      functionName: functionSignatureParser.getFunctionName(functionScopeLines),
+      attributeName: functionSignatureParser.getAttributeName(
+        functionScopeLines!
+      ),
+      functionName: functionSignatureParser.getFunctionName(
+        functionScopeLines!
+      ),
       functionSignature: {
-        implicitArgs:
-          functionSignatureParser.getImplicitArgs(functionScopeLines),
-        explicitArgs:
-          functionSignatureParser.getExplicitArgs(functionScopeLines),
+        implicitArgs: functionSignatureParser.getImplicitArgs(
+          functionScopeLines!
+        ),
+        explicitArgs: functionSignatureParser.getExplicitArgs(
+          functionScopeLines!
+        ),
       },
       functionComment: {
         desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -117,16 +122,5 @@ suite("integration-test:", () => {
     };
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
-    const raises = [
-      { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-      {
-        name: "recipient",
-        type: "",
-        desc: "cannot mint to the zero address",
-      },
-      { name: "initial_supply", type: "", desc: "not valid Uint256" },
-      { name: "initial_supply", type: "", desc: "mint overflow" },
-    ];
   });
 });

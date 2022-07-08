@@ -14,7 +14,7 @@ suite("function-comment: constructor: returns", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText!);
 
     const returnsParser = new FunctionCommentReturnsParser();
 
@@ -54,7 +54,7 @@ suite("function-comment: constructor: returns", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText!);
     const returnsParser = new FunctionCommentReturnsParser();
     returnsParser.setStartScope(commentText![12]);
 
@@ -90,7 +90,7 @@ suite("function-comment: constructor: returns", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText!);
     const returnsParser = new FunctionCommentReturnsParser();
     returnsParser.setStartScope(commentText![12]);
 
@@ -129,7 +129,7 @@ suite("function-comment: constructor: returns", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText!);
     const returnsParser = new FunctionCommentReturnsParser();
 
     const targetLineParsing = [{ name: "", type: "", desc: "None" }];

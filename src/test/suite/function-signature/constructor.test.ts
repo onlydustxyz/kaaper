@@ -15,8 +15,9 @@ suite("function-signature: constructor", () => {
     );
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
-    const attributeName =
-      functionSignatureParser.getAttributeName(constructorText);
+    const attributeName = functionSignatureParser.getAttributeName(
+      constructorText!
+    );
     assert.equal("constructor", attributeName, "failed to get attribute name");
   });
   test("get function name", () => {
@@ -30,8 +31,9 @@ suite("function-signature: constructor", () => {
     );
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
-    const functionName =
-      functionSignatureParser.getFunctionName(constructorText);
+    const functionName = functionSignatureParser.getFunctionName(
+      constructorText!
+    );
     assert.equal("constructor", functionName, "failed to get attribute name");
   });
 
@@ -46,8 +48,9 @@ suite("function-signature: constructor", () => {
     );
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
-    const implicitArgs =
-      functionSignatureParser.getImplicitArgs(constructorText);
+    const implicitArgs = functionSignatureParser.getImplicitArgs(
+      constructorText!
+    );
     const targetImplicitArgs = [
       { name: "syscall_ptr", type: "felt*" },
       { name: "pedersen_ptr", type: "HashBuiltin*" },
@@ -71,8 +74,9 @@ suite("function-signature: constructor", () => {
     );
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
-    const explicitArgs =
-      functionSignatureParser.getExplicitArgs(constructorText);
+    const explicitArgs = functionSignatureParser.getExplicitArgs(
+      constructorText!
+    );
     const targetExplicitArgs = [
       { name: "name", type: "felt" },
       { name: "symbol", type: "felt" },
