@@ -19,13 +19,13 @@ export default class CairoParser {
   }
 
   // parse whole scope
-  static parseFunctionScope(filePath: string, name: string): string {
+  static parseFunctionScope(filePath: string, name: string): string | null {
     const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
     if (result) {
       return result[0];
     }
-    return "";
+    return null;
   }
 
   // parse only commented lines
@@ -36,46 +36,59 @@ export default class CairoParser {
   }
 
   // parse whole scope and return appropiate data structure
-  static getScopeParsingResult(filePath: string, name: string): parsingResult {
+  static getScopeParsingResult(
+    filePath: string,
+    name: string
+  ): parsingResult | null {
     const functionScopeLines = CairoParser.parseFunctionScope(filePath, name);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines);
+    if (functionScopeLines) {
+      const commentLines = CairoParser.parseCommentLines(functionScopeLines);
 
-    const functionCommentDescParser = new FunctionCommentDescParser();
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser();
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser();
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+      const functionCommentDescParser = new FunctionCommentDescParser();
+      const functionCommentImplicitArgsParser =
+        new FunctionCommentImplicitArgsParser();
+      const functionCommentExplicitArgsParser =
+        new FunctionCommentExplicitArgsParser();
+      const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+      const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    var parsingOutput = {
-      attributeName:
-        functionSignatureParser.getAttributeName(functionScopeLines),
-      functionName: functionSignatureParser.getFunctionName(functionScopeLines),
-      functionSignature: {
-        implicitArgs:
-          functionSignatureParser.getImplicitArgs(functionScopeLines),
-        explicitArgs:
-          functionSignatureParser.getExplicitArgs(functionScopeLines),
-      },
-      functionComment: {
-        desc: functionCommentDescParser.parseCommentLines(commentLines!),
-        implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-          commentLines!
+      var parsingOutput = {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines!
         ),
-        explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-          commentLines!
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines!
         ),
-        returns: functionCommentReturnsParser.parseCommentLines(commentLines!),
-        raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
-      },
-    };
-    return parsingOutput;
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines!
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines!
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      };
+      return parsingOutput;
+    }
+    return null;
   }
 
   // TODO: dump all parsed data to a file
@@ -84,8 +97,5 @@ export default class CairoParser {
   // TODO: check if there's mismatch between function signature and comment
   // https://github.com/onlydustxyz/kaaper/issues/7
 
-
   // TODO: parse all files under a directory
-
-  
 }
