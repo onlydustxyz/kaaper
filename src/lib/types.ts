@@ -22,5 +22,5 @@ interface parsingResult {
     explicitArgs: FunctionComment[] | null;
     returns: FunctionComment[] | null;
     raises: FunctionComment[] | null;
-  }
+  };
 }

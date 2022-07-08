@@ -127,10 +127,6 @@ suite("integration-test:", () => {
       },
       { name: "initial_supply", type: "", desc: "not valid Uint256" },
       { name: "initial_supply", type: "", desc: "mint overflow" },
-    ]
-
-
+    ];
   });
-
-
 });

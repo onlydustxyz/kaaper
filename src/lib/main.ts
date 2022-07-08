@@ -41,10 +41,7 @@ export default class CairoParser {
 
   // parse whole scope and return appropiate data structure
   static getScopeParsingResult(filePath: string, name: string): parsingResult {
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      filePath,
-      name,
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(filePath, name);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -59,7 +56,7 @@ export default class CairoParser {
       new FunctionCommentExplicitArgsParser();
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-    
+
     var parsingOutput = {
       attributeName:
         functionSignatureParser.getAttributeName(functionScopeLines),
@@ -81,13 +78,9 @@ export default class CairoParser {
         returns: functionCommentReturnsParser.parseCommentLines(commentLines!),
         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
       },
-    }
+    };
     return parsingOutput;
   }
-
-
-
-
 
   // TODO: parse available scopes from a file
 
