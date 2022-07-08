@@ -28,6 +28,8 @@ export default class CairoParser {
     return "";
   }
 
+  // parse only commented lines
+  // run this after parsing the whole scope using parseFunctionScope
   static parseCommentLines(line: string): RegExpMatchArray | null {
     const comments = line.match(/#\s+(.+)/gm);
     return comments;
@@ -76,9 +78,14 @@ export default class CairoParser {
     return parsingOutput;
   }
 
-  // TODO: parse available scopes from a file
+  // TODO: dump all parsed data to a file
+  // https://github.com/onlydustxyz/kaaper/issues/6
+
+  // TODO: check if there's mismatch between function signature and comment
+  // https://github.com/onlydustxyz/kaaper/issues/7
+
 
   // TODO: parse all files under a directory
 
-  // TODO: dump all parsed data to a file
+  
 }
