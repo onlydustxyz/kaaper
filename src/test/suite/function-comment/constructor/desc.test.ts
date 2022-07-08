@@ -13,7 +13,7 @@ suite("function-comment: constructor: desc", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
 
     const descParser = new FunctionCommentDescParser();
 
@@ -46,7 +46,7 @@ suite("function-comment: constructor: desc", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const descParser = new FunctionCommentDescParser();
     descParser.setStartScope(commentText![0]);
 
@@ -92,7 +92,7 @@ suite("function-comment: constructor: desc", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const descParser = new FunctionCommentDescParser();
     descParser.setStartScope(commentText![0]);
 
@@ -134,7 +134,7 @@ suite("function-comment: constructor: desc", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
 
     const descParser = new FunctionCommentDescParser();
 

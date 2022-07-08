@@ -15,7 +15,7 @@ suite("integration-test:", () => {
       "constructor"
     );
 
-    const parsingTarget = {
+    const parsingTarget = [{
       attributeName: "constructor",
       functionName: "constructor",
       functionSignature: {
@@ -70,7 +70,7 @@ suite("integration-test:", () => {
           { name: "initial_supply", type: "", desc: "mint overflow" },
         ],
       },
-    };
+    }];
 
     assert.deepEqual(
       parsingTarget,

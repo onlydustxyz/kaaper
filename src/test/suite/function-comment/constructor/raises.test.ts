@@ -14,7 +14,7 @@ suite("function-comment: constructor: raises", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
 
     const raisesParser = new FunctionCommentRaisesParser();
 
@@ -52,7 +52,7 @@ suite("function-comment: constructor: raises", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -94,7 +94,7 @@ suite("function-comment: constructor: raises", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -136,7 +136,7 @@ suite("function-comment: constructor: raises", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -178,7 +178,7 @@ suite("function-comment: constructor: raises", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -220,7 +220,7 @@ suite("function-comment: constructor: raises", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const raisesParser = new FunctionCommentRaisesParser();
 
     const targetLineParsing = [
