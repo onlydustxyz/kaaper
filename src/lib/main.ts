@@ -19,11 +19,11 @@ export default class CairoParser {
   }
 
   // parse whole scope
-  static parseFunctionScope(filePath: string, name: string): string | null {
+  static parseFunctionScope(filePath: string, name: string): RegExpMatchArray | null {
     const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
     if (result) {
-      return result[0];
+      return result;
     }
     return null;
   }
@@ -39,15 +39,19 @@ export default class CairoParser {
   static getScopeParsingResult(
     filePath: string,
     name: string
-  ): parsingResult | null {
+  ): parsingResult[] | null {
     const functionScopeLines = CairoParser.parseFunctionScope(filePath, name);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
+    var parsingOutputs = [];
+
     // parse comment lines
     if (functionScopeLines) {
-      const commentLines = CairoParser.parseCommentLines(functionScopeLines);
+      for (var functionScope of functionScopeLines){
+
+      const commentLines = CairoParser.parseCommentLines(functionScope);
 
       const functionCommentDescParser = new FunctionCommentDescParser();
       const functionCommentImplicitArgsParser =
@@ -57,19 +61,19 @@ export default class CairoParser {
       const functionCommentReturnsParser = new FunctionCommentReturnsParser();
       const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-      var parsingOutput = {
+      const parsingOutput = {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines!
+          functionScope!
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines!
+          functionScope!
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines!
+            functionScope!
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines!
+            functionScope!
           ),
         },
         functionComment: {
@@ -86,7 +90,12 @@ export default class CairoParser {
           raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
         },
       };
-      return parsingOutput;
+
+      parsingOutputs.push(parsingOutput);
+
+      }
+      
+      return parsingOutputs;
     }
     return null;
   }

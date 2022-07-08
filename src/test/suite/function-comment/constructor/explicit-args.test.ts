@@ -13,7 +13,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
@@ -57,7 +57,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
 
@@ -101,7 +101,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
 
@@ -148,7 +148,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
 
@@ -195,7 +195,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
 
@@ -242,7 +242,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
 
@@ -289,7 +289,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
 
@@ -328,7 +328,7 @@ suite("function-comment: constructor: explicit-args", () => {
       pathFile,
       "constructor"
     );
-    const commentText = CairoParser.parseCommentLines(functionText!);
+    const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
     const targetLineParsing = [

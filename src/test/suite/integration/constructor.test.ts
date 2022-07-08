@@ -26,7 +26,7 @@ suite("integration-test:", () => {
 
     // Comment parsing
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines!);
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![0]);
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -36,7 +36,7 @@ suite("integration-test:", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = {
+    const parsingTarget = [{
       attributeName: "constructor",
       functionName: "constructor",
       functionSignature: {
@@ -91,21 +91,21 @@ suite("integration-test:", () => {
           { name: "initial_supply", type: "", desc: "mint overflow" },
         ],
       },
-    };
+    }];
 
-    var parsingOutput = {
+    var parsingOutput = [{
       attributeName: functionSignatureParser.getAttributeName(
-        functionScopeLines!
+        functionScopeLines![0]
       ),
       functionName: functionSignatureParser.getFunctionName(
-        functionScopeLines!
+        functionScopeLines![0]
       ),
       functionSignature: {
         implicitArgs: functionSignatureParser.getImplicitArgs(
-          functionScopeLines!
+          functionScopeLines![0]
         ),
         explicitArgs: functionSignatureParser.getExplicitArgs(
-          functionScopeLines!
+          functionScopeLines![0]
         ),
       },
       functionComment: {
@@ -119,7 +119,7 @@ suite("integration-test:", () => {
         returns: functionCommentReturnsParser.parseCommentLines(commentLines!),
         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
       },
-    };
+    }];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
