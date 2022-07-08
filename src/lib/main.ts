@@ -12,14 +12,8 @@ let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 
 export default class CairoParser {
-  // public supportedComments: Map<string, BaseCommentParser>;
-  public supportedScopes: Array<string>;
-  public supportedComments: Array<BaseCommentParser>;
+  constructor() {}
 
-  constructor() {
-    this.supportedScopes = ["constructor"];
-    this.supportedComments = [new FunctionCommentDescParser()];
-  }
   static getRegex(name: string): RegExp {
     return map.get(name);
   }
