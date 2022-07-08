@@ -10,6 +10,7 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 // TODO: refactor this
 let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
+map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 
 export default class CairoParser {
   constructor() {}
@@ -67,7 +68,7 @@ export default class CairoParser {
           attributeName: functionSignatureParser.getAttributeName(
             functionScope
           ),
-          functionName: functionSignatureParser.getFunctionName(functionScope!),
+          functionName: functionSignatureParser.getFunctionName(functionScope),
           functionSignature: {
             implicitArgs: functionSignatureParser.getImplicitArgs(
               functionScope
