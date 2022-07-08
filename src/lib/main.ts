@@ -66,8 +66,9 @@ export default class CairoParser {
         const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
         const parsingOutput = {
-          attributeName:
-            functionSignatureParser.getAttributeName(functionScope),
+          attributeName: functionSignatureParser.getAttributeName(
+            functionScope
+          ),
           functionName: functionSignatureParser.getFunctionName(functionScope),
           functionSignature: {
             implicitArgs:
