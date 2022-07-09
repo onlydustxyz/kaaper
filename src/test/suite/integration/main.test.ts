@@ -2,7 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import CairoParser from "../../../lib/main";
 
-suite("integration-test:", () => {
+suite("integration-test: main", () => {
   test("constructor", () => {
     const pathFile = path.resolve(
       __dirname,
