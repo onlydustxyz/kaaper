@@ -298,4 +298,197 @@ suite("integration-test: main", () => {
       "failed parsing whole scope"
     );
   });
+
+  test("external", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
+
+    // parse whole scope
+    const parsingOutput = CairoParser.getScopeParsingResult(pathFile, "external");
+
+    const parsingTarget = [
+      {
+        attributeName: "external",
+        functionName: "transfer",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "recipient", type: "felt"},
+            {name: "amount", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Perform transfer to recipient" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "recipient", type: "felt", desc: "the address of ERC20 recipient"},
+            {name: "amount", type: "Uint256", desc: "the amount of ERC20 transfer"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if transfer was successful, 0 otherwise" }],
+          raises: [
+            {name: 'amount', "type": "", desc: "amount is not a valid Uint256"},
+            {name: 'recipient', "type": "", desc: "cannot transfer to the zero address"},
+            {name: 'amount', "type": "", desc: "transfer amount exceeds balance"},
+          ]
+        },
+      },
+      {
+        attributeName: "external",
+        functionName: "transferFrom",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "sender", type: "felt"},
+            {name: "recipient", type: "felt"},
+            {name: "amount", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Perform transfer from sender to recipient with allowance" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "sender", type: "felt", desc: "the address of ERC20 sender"},
+            {name: "recipient", type: "felt", desc: "the address of ERC20 recipient"},
+            {name: "amount", type: "Uint256", desc: "the amount of ERC20 transfer"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if transfer was successful, 0 otherwise" }],
+          raises: [
+            {name: 'amount', "type": "", desc: "amount is not a valid Uint256"},
+            {name: 'sender', "type": "", desc: "cannot transfer from the zero address"},
+            {name: 'amount', "type": "", desc: "transfer amount exceeds balance"},
+          ]
+        },
+      },
+      {
+        attributeName: "external",
+        functionName: "approve",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt"},
+            {name: "amount", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Approve spender to spend amount of tokens" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt", desc: "the address of ERC20 spender"},
+            {name: "amount", type: "Uint256", desc: "the amount of ERC20 token to approve"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if approve was successful, 0 otherwise" }],
+          raises: [
+            {name: 'amount', "type": "", desc: "amount is not a valid Uint256"},
+            {name: 'spender', "type": "", desc: "cannot approve to the zero address"},
+          ]
+        },
+      },
+      {
+        attributeName: "external",
+        functionName: "increaseAllowance",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt"},
+            {name: "added_value", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Increase allowance of spender by added_value" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt", desc: "the address of ERC20 spender"},
+            {name: "added_value", type: "Uint256", desc: "the amount of ERC20 token to increase allowance"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if increase allowance was successful, 0 otherwise" }],
+          raises: [
+            {name: 'added_value', "type": "", desc: "added_value is not a valid Uint256"},
+            {name: 'spender', "type": "", desc: "cannot increase allowance to the zero address"},
+          ]
+        },
+      },
+      {
+        attributeName: "external",
+        functionName: "decreaseAllowance",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt"},
+            {name: "subtracted_value", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Decrease allowance of spender by subtracted_value" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt", desc: "the address of ERC20 spender"},
+            {name: "subtracted_value", type: "Uint256", desc: "the amount of ERC20 token to decrease allowance"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if decrease allowance was successful, 0 otherwise" }],
+          raises: [
+            {name: 'subtracted_value', "type": "", desc: "subtracted_value is not a valid Uint256"},
+            {name: 'spender', "type": "", desc: "cannot decrease allowance to the zero address"},
+          ]
+        },
+      } 
+    ];
+
+    assert.deepEqual(
+      parsingTarget,
+      parsingOutput,
+      "failed parsing whole scope"
+    );
+  });
 });
