@@ -32,20 +32,23 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
   }
 
   getExplicitArgs(line: string): Array<FunctionSignature> | null {
-    const matchResult = line.match(/\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/);
+    const matchResult = line.match(
+      /\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/
+    );
 
     const result = this.getMappingResult(matchResult![1]);
     return result;
   }
 
   getReturns(line: string): Array<FunctionSignature> | null {
-    const matchResult = line.match(/\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/);
+    const matchResult = line.match(
+      /\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/
+    );
 
     if (matchResult) {
       const result = this.getMappingResult(matchResult[2]);
       return result;
     }
     return null;
-
   }
 }

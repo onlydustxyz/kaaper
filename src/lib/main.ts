@@ -54,7 +54,7 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
-        console.log(functionScope)
+        console.log(functionScope);
         const commentLines = CairoParser.parseCommentLines(functionScope);
 
         const functionCommentDescParser = new FunctionCommentDescParser();
@@ -66,17 +66,14 @@ export default class CairoParser {
         const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
         const parsingOutput = {
-          attributeName: functionSignatureParser.getAttributeName(
-            functionScope
-          ),
+          attributeName:
+            functionSignatureParser.getAttributeName(functionScope),
           functionName: functionSignatureParser.getFunctionName(functionScope),
           functionSignature: {
-            implicitArgs: functionSignatureParser.getImplicitArgs(
-              functionScope
-            ),
-            explicitArgs: functionSignatureParser.getExplicitArgs(
-              functionScope
-            ),
+            implicitArgs:
+              functionSignatureParser.getImplicitArgs(functionScope),
+            explicitArgs:
+              functionSignatureParser.getExplicitArgs(functionScope),
             returns: functionSignatureParser.getReturns(functionScope),
           },
           functionComment: {
