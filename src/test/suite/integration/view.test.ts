@@ -46,6 +46,9 @@ suite("integration-test: view", () => {
           {name: "range_check_ptr", type: ""},
         ],
         explicitArgs: null,
+        returns: [
+          {name: "name", type: "felt"},
+        ]
       },
       functionComment: {
         desc: [{name: "", type: "", desc: "Returns the name of the token"}],
@@ -78,6 +81,7 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![0]
           ),
+          returns: functionSignatureParser.getReturns(functionScopeLines![0]),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -136,6 +140,9 @@ suite("integration-test: view", () => {
           {name: "range_check_ptr", type: ""},
         ],
         explicitArgs: null,
+        returns: [
+          {name: "symbol", type: "felt"},
+        ]
       },
       functionComment: {
         desc: [{name: "", type: "", desc: "Returns the symbol of the token"}],
@@ -168,6 +175,7 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
+          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
