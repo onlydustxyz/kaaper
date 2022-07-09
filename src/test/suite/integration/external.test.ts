@@ -404,5 +404,103 @@ suite("integration-test: external", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
+  test("4", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "external");
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    // Comment parsing
+    // parse comment lines
+    const line = 4;
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
+
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+    const parsingTarget = [
+      {
+        attributeName: "external",
+        functionName: "decreaseAllowance",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt"},
+            {name: "subtracted_value", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Decrease allowance of spender by subtracted_value" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "spender", type: "felt", desc: "the address of ERC20 spender"},
+            {name: "subtracted_value", type: "Uint256", desc: "the amount of ERC20 token to decrease allowance"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if decrease allowance was successful, 0 otherwise" }],
+          raises: [
+            {name: 'subtracted_value', "type": "", desc: "subtracted_value is not a valid Uint256"},
+            {name: 'spender', "type": "", desc: "cannot decrease allowance to the zero address"},
+          ]
+        },
+      },
+    ];
+
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![line]
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      },
+    ];
+
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
+
   
 });
