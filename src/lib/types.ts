@@ -15,6 +15,7 @@ interface ParsingResult {
   functionSignature: {
     implicitArgs: FunctionSignature[] | null;
     explicitArgs: FunctionSignature[] | null;
+    returns: FunctionSignature[] | null;
   };
   functionComment: {
     desc: FunctionComment[] | null;
