@@ -218,6 +218,21 @@ end
 func increaseAllowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     spender : felt, added_value : Uint256
 ) -> (success : felt):
+    # Desc:
+    #   Increase allowance of spender by added_value
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   spender(felt): the address of ERC20 spender
+    #   added_value(Uint256): the amount of ERC20 token to increase allowance
+    # Returns:
+    #   success(felt): 1 if increase allowance was successful, 0 otherwise
+    # Raises:
+    #   added_value: added_value is not a valid Uint256
+    #   spender: cannot increase allowance to the zero address
+
     ERC20.increase_allowance(spender, added_value)
     return (TRUE)
 end
