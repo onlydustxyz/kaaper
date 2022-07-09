@@ -39,7 +39,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
   }
 
   getReturns(line: string): Array<FunctionSignature> | null {
-    const matchResult = line.match(/\(([\w\s\:\,]*)\)\s?->\s+\(([\w\s\:\,]+)\)/);
+    const matchResult = line.match(/\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/);
 
     if (matchResult) {
       const result = this.getMappingResult(matchResult[2]);
