@@ -102,6 +102,24 @@ export default class CairoParser {
     return null;
   }
 
+  // TODO: refactor this
+  static getFileParsingResult(filePath: string): ParsingResult[] | null {
+    const constructorParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "constructor"
+    )
+    const viewParsingResult = CairoParser.getScopeParsingResult(filePath, "view");
+    const externalParsingResult = CairoParser.getScopeParsingResult(filePath, "external");
+    
+    // combine 3 results
+    if (constructorParsingResult && viewParsingResult && externalParsingResult) {
+      return constructorParsingResult.concat(viewParsingResult).concat(externalParsingResult);
+    }
+    return null;
+  }
+
+
+
   // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
 
