@@ -241,6 +241,20 @@ end
 func decreaseAllowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     spender : felt, subtracted_value : Uint256
 ) -> (success : felt):
+    # Desc:
+    #   Decrease allowance of spender by subtracted_value
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   spender(felt): the address of ERC20 spender
+    #   subtracted_value(Uint256): the amount of ERC20 token to decrease allowance
+    # Returns:
+    #   success(felt): 1 if decrease allowance was successful, 0 otherwise
+    # Raises:
+    #   subtracted_value: subtracted_value is not a valid Uint256
+    #   spender: cannot decrease allowance to the zero address
     ERC20.decrease_allowance(spender, subtracted_value)
     return (TRUE)
 end
