@@ -194,6 +194,22 @@ end
 func approve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     spender : felt, amount : Uint256
 ) -> (success : felt):
+    # Desc:
+    #   Approve spender to spend amount of tokens
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   spender(felt): the address of ERC20 spender
+    #   amount(Uint256): the amount of ERC20 token to approve
+    # Returns:
+    #   success(felt): 1 if approve was successful, 0 otherwise
+    # Raises:
+    #   amount: amount is not a valid Uint256
+    #   spender: cannot approve to the zero address
+
+
     ERC20.approve(spender, amount)
     return (TRUE)
 end
