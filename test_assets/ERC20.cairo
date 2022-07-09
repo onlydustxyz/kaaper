@@ -106,6 +106,16 @@ end
 func balanceOf{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     account : felt
 ) -> (balance : Uint256):
+    # Desc:
+    #   Returns the balance of the account
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   account(felt): account to query balance for
+    # Returns:
+    #   balance(Uint256): the balance of the account
     let (balance : Uint256) = ERC20.balance_of(account)
     return (balance)
 end
