@@ -107,5 +107,106 @@ suite("integration-test: external", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
+  test("1", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "external");
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    // Comment parsing
+    // parse comment lines
+    const line = 1;
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
+
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+    const parsingTarget = [
+      {
+        attributeName: "external",
+        functionName: "transferFrom",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            {name: "sender", type: "felt"},
+            {name: "recipient", type: "felt"},
+            {name: "amount", type: "Uint256"},
+          ],
+          returns: [{ name: "success", type: "felt" }],
+          
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Perform transfer from sender to recipient with allowance" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {name: "sender", type: "felt", desc: "the address of ERC20 sender"},
+            {name: "recipient", type: "felt", desc: "the address of ERC20 recipient"},
+            {name: "amount", type: "Uint256", desc: "the amount of ERC20 transfer"},
+          ],
+          returns: [{ name: "success", type: "felt", desc: "1 if transfer was successful, 0 otherwise" }],
+          raises: [
+            {name: 'amount', "type": "", desc: "amount is not a valid Uint256"},
+            {name: 'sender', "type": "", desc: "cannot transfer from the zero address"},
+            {name: 'amount', "type": "", desc: "transfer amount exceeds balance"},
+          ]
+        },
+      },
+    ];
+
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![line]
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      },
+    ];
+
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
+
   
 });
