@@ -566,7 +566,13 @@ suite("integration-test: view", () => {
               desc: "the address of spender (delegated account) of the tokens",
             },
           ],
-          returns: [{ name: "remaining", type: "Uint256", desc: "the amount of remaining tokens allowed to be spent by the spender" }],
+          returns: [
+            {
+              name: "remaining",
+              type: "Uint256",
+              desc: "the amount of remaining tokens allowed to be spent by the spender",
+            },
+          ],
           raises: null,
         },
       },
