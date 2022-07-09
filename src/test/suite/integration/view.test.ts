@@ -481,4 +481,104 @@ suite("integration-test: view", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
+
+  test("5", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "view"
+    );
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    // Comment parsing
+    // parse comment lines
+    const line = 5
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
+    console.log(commentLines)
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+    const parsingTarget = [{
+      attributeName: "view",
+      functionName: "allowance",
+      functionSignature: {
+        implicitArgs: [
+          {name: "syscall_ptr", type: "felt*"},
+          {name: "pedersen_ptr", type: "HashBuiltin*"},
+          {name: "range_check_ptr", type: ""},
+        ],
+        explicitArgs: [
+          {name: "owner", type: "felt"},
+          {name: "spender", type: "felt"},
+        ],
+        returns: [
+          {name: "remaining", type: "Uint256"},
+        ]
+      },
+      functionComment: {
+        desc: [{name: "", type: "", desc: "Returns the amount of remaining tokens allowed to be spent by the spender"}],
+        implicitArgs: [
+          {name: "syscall_ptr", type: "felt*", desc: ""},
+          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
+          {name: "range_check_ptr", type: "", desc: ""},
+        ],
+        explicitArgs: [
+          {name: "owner", type: "felt", desc: "the address of owner of the tokens"},
+          {name: "spender", type: "felt", desc: "the address of spender (delegated account) of the tokens"},
+        ],
+        returns: [
+          {name: "", type: "", desc: "None"}
+        ],
+        raises: null
+      }
+    }]
+    
+
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![line]
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      },
+    ];
+
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
 });
