@@ -170,6 +170,22 @@ end
 func transferFrom{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     sender : felt, recipient : felt, amount : Uint256
 ) -> (success : felt):
+    # Desc:
+    #   Perform transfer from sender to recipient with allowance
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   sender(felt): the address of ERC20 sender
+    #   recipient(felt): the address of ERC20 recipient
+    #   amount(Uint256): the amount of ERC20 transfer
+    # Returns:
+    #   success(felt): 1 if transfer was successful, 0 otherwise
+    # Raises:
+    #   amount: amount is not a valid Uint256
+    #   sender: cannot transfer from the zero address
+    #   amount: transfer amount exceeds balance
     ERC20.transfer_from(sender, recipient, amount)
     return (TRUE)
 end
