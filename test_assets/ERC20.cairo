@@ -73,6 +73,14 @@ end
 func totalSupply{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
     totalSupply : Uint256
 ):
+    # Desc:
+    #   Returns the total supply of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   totalSupply(Uint256): total supply of the token
     let (totalSupply : Uint256) = ERC20.total_supply()
     return (totalSupply)
 end
@@ -81,6 +89,15 @@ end
 func decimals{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
     decimals : felt
 ):
+    # Desc:
+    #   Returns the decimals of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   decimals(felt): decimals of the token
+
     let (decimals) = ERC20.decimals()
     return (decimals)
 end
