@@ -57,6 +57,14 @@ end
 
 @view
 func symbol{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (symbol : felt):
+    # Desc:
+    #   Returns the symbol of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   symbol(felt): symbol of the token
     let (symbol) = ERC20.symbol()
     return (symbol)
 end
