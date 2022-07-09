@@ -11,6 +11,7 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
+map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 
 export default class CairoParser {
   constructor() {}
@@ -54,7 +55,6 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
-        console.log(functionScope);
         const commentLines = CairoParser.parseCommentLines(functionScope);
 
         const functionCommentDescParser = new FunctionCommentDescParser();
