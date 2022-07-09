@@ -54,6 +54,7 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
+        console.log(functionScope)
         const commentLines = CairoParser.parseCommentLines(functionScope);
 
         const functionCommentDescParser = new FunctionCommentDescParser();
@@ -76,6 +77,7 @@ export default class CairoParser {
             explicitArgs: functionSignatureParser.getExplicitArgs(
               functionScope
             ),
+            returns: functionSignatureParser.getReturns(functionScope),
           },
           functionComment: {
             desc: functionCommentDescParser.parseCommentLines(commentLines!),
