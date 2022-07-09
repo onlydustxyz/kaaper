@@ -196,99 +196,97 @@ suite("integration-test: view", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
-  // test("2", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../test_assets/ERC20.cairo"
-  //   );
+  test("2", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../test_assets/ERC20.cairo"
+    );
 
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "view"
-  //   );
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "view"
+    );
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const line = 2
-  //   const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
-  //   console.log(commentLines)
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    // Comment parsing
+    // parse comment lines
+    const line = 2
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
+    console.log(commentLines)
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-  //   const parsingTarget = [{
-  //     attributeName: "view",
-  //     functionName: "totalSupply",
-  //     functionSignature: {
-  //       implicitArgs: [
-  //         {name: "syscall_ptr", type: "felt*"},
-  //         {name: "pedersen_ptr", type: "HashBuiltin*"},
-  //         {name: "range_check_ptr", type: ""},
-  //       ],
-  //       explicitArgs: null,
-  //       returns: [
-  //         {name: "totalSupply", type: "Uint256"},
-  //       ]
-  //     },
-  //     functionComment: {
-  //       desc: [{name: "", type: "", desc: "Returns the total supply of the token"}],
-  //       implicitArgs: [
-  //         {name: "syscall_ptr", type: "felt*", desc: ""},
-  //         {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-  //         {name: "range_check_ptr", type: "", desc: ""},
-  //       ],
-  //       explicitArgs: [
-  //         {name: "totalSupply", type: "Uint256", desc: "total supply of the token"}
-  //       ],
-  //       returns: [
-  //         {name: "totalSupply", type: "Uint256", desc: "total supply of the token"}
-  //       ],
-  //       raises: null,
-  //     }
-  //   }]
+    const parsingTarget = [{
+      attributeName: "view",
+      functionName: "totalSupply",
+      functionSignature: {
+        implicitArgs: [
+          {name: "syscall_ptr", type: "felt*"},
+          {name: "pedersen_ptr", type: "HashBuiltin*"},
+          {name: "range_check_ptr", type: ""},
+        ],
+        explicitArgs: null,
+        returns: [
+          {name: "totalSupply", type: "Uint256"},
+        ]
+      },
+      functionComment: {
+        desc: [{name: "", type: "", desc: "Returns the total supply of the token"}],
+        implicitArgs: [
+          {name: "syscall_ptr", type: "felt*", desc: ""},
+          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
+          {name: "range_check_ptr", type: "", desc: ""},
+        ],
+        explicitArgs: null,
+        returns: [
+          {name: "totalSupply", type: "Uint256", desc: "total supply of the token"}
+        ],
+        raises: null,
+      }
+    }]
     
 
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![line]
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![line]
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![line]
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![line]
-  //         ),
-  //         returns: functionSignatureParser.getReturns(functionScopeLines![line]),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(commentLines!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           commentLines!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           commentLines!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           commentLines!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
-  //       },
-  //     },
-  //   ];
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![line]
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      },
+    ];
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
 });
