@@ -8,8 +8,8 @@ import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment/raises";
 
-suite("integration-test:", () => {
-  test("constructor", () => {
+suite("integration-test: constructor", () => {
+  test("0", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../test_assets/ERC20.cairo"
