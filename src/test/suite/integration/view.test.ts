@@ -16,10 +16,7 @@ suite("integration-test: view", () => {
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      pathFile,
-      "view"
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -36,35 +33,32 @@ suite("integration-test: view", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = [{
-      attributeName: "view",
-      functionName: "name",
-      functionSignature: {
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*"},
-          {name: "pedersen_ptr", type: "HashBuiltin*"},
-          {name: "range_check_ptr", type: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "name", type: "felt"},
-        ]
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "name",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: null,
+          returns: [{ name: "name", type: "felt" }],
+        },
+        functionComment: {
+          desc: [{ name: "", type: "", desc: "Returns the name of the token" }],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: null,
+          returns: [{ name: "name", type: "felt", desc: "name of the token" }],
+          raises: null,
+        },
       },
-      functionComment: {
-        desc: [{name: "", type: "", desc: "Returns the name of the token"}],
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*", desc: ""},
-          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-          {name: "range_check_ptr", type: "", desc: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "name", type: "felt", desc: "name of the token"}
-        ],
-        raises: null,
-      }
-    }]
-    
+    ];
 
     var parsingOutput = [
       {
@@ -109,18 +103,17 @@ suite("integration-test: view", () => {
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      pathFile,
-      "view"
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const line = 1
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
+    const line = 1;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -130,35 +123,36 @@ suite("integration-test: view", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = [{
-      attributeName: "view",
-      functionName: "symbol",
-      functionSignature: {
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*"},
-          {name: "pedersen_ptr", type: "HashBuiltin*"},
-          {name: "range_check_ptr", type: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "symbol", type: "felt"},
-        ]
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "symbol",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: null,
+          returns: [{ name: "symbol", type: "felt" }],
+        },
+        functionComment: {
+          desc: [
+            { name: "", type: "", desc: "Returns the symbol of the token" },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: null,
+          returns: [
+            { name: "symbol", type: "felt", desc: "symbol of the token" },
+          ],
+          raises: null,
+        },
       },
-      functionComment: {
-        desc: [{name: "", type: "", desc: "Returns the symbol of the token"}],
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*", desc: ""},
-          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-          {name: "range_check_ptr", type: "", desc: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "symbol", type: "felt", desc: "symbol of the token"}
-        ],
-        raises: null,
-      }
-    }]
-    
+    ];
 
     var parsingOutput = [
       {
@@ -175,7 +169,9 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -203,19 +199,18 @@ suite("integration-test: view", () => {
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      pathFile,
-      "view"
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const line = 2
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
-    console.log(commentLines)
+    const line = 2;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
+    console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -224,35 +219,44 @@ suite("integration-test: view", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = [{
-      attributeName: "view",
-      functionName: "totalSupply",
-      functionSignature: {
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*"},
-          {name: "pedersen_ptr", type: "HashBuiltin*"},
-          {name: "range_check_ptr", type: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "totalSupply", type: "Uint256"},
-        ]
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "totalSupply",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: null,
+          returns: [{ name: "totalSupply", type: "Uint256" }],
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the total supply of the token",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: null,
+          returns: [
+            {
+              name: "totalSupply",
+              type: "Uint256",
+              desc: "total supply of the token",
+            },
+          ],
+          raises: null,
+        },
       },
-      functionComment: {
-        desc: [{name: "", type: "", desc: "Returns the total supply of the token"}],
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*", desc: ""},
-          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-          {name: "range_check_ptr", type: "", desc: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "totalSupply", type: "Uint256", desc: "total supply of the token"}
-        ],
-        raises: null,
-      }
-    }]
-    
+    ];
 
     var parsingOutput = [
       {
@@ -269,7 +273,9 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -297,19 +303,18 @@ suite("integration-test: view", () => {
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      pathFile,
-      "view"
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const line = 3
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
-    console.log(commentLines)
+    const line = 3;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
+    console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -318,35 +323,36 @@ suite("integration-test: view", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = [{
-      attributeName: "view",
-      functionName: "decimals",
-      functionSignature: {
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*"},
-          {name: "pedersen_ptr", type: "HashBuiltin*"},
-          {name: "range_check_ptr", type: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "decimals", type: "felt"},
-        ]
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "decimals",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: null,
+          returns: [{ name: "decimals", type: "felt" }],
+        },
+        functionComment: {
+          desc: [
+            { name: "", type: "", desc: "Returns the decimals of the token" },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: null,
+          returns: [
+            { name: "decimals", type: "felt", desc: "decimals of the token" },
+          ],
+          raises: null,
+        },
       },
-      functionComment: {
-        desc: [{name: "", type: "", desc: "Returns the decimals of the token"}],
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*", desc: ""},
-          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-          {name: "range_check_ptr", type: "", desc: ""},
-        ],
-        explicitArgs: null,
-        returns: [
-          {name: "decimals", type: "felt", desc: "decimals of the token"}
-        ],
-        raises: null,
-      }
-    }]
-    
+    ];
 
     var parsingOutput = [
       {
@@ -363,7 +369,9 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -391,19 +399,18 @@ suite("integration-test: view", () => {
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      pathFile,
-      "view"
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const line = 4
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
-    console.log(commentLines)
+    const line = 4;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
+    console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -412,39 +419,46 @@ suite("integration-test: view", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = [{
-      attributeName: "view",
-      functionName: "balanceOf",
-      functionSignature: {
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*"},
-          {name: "pedersen_ptr", type: "HashBuiltin*"},
-          {name: "range_check_ptr", type: ""},
-        ],
-        explicitArgs: [
-          {name: "account", type: "felt"},
-        ],
-        returns: [
-          {name: "balance", type: "Uint256"},
-        ]
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "balanceOf",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [{ name: "account", type: "felt" }],
+          returns: [{ name: "balance", type: "Uint256" }],
+        },
+        functionComment: {
+          desc: [
+            { name: "", type: "", desc: "Returns the balance of the account" },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "account",
+              type: "felt",
+              desc: "account to query balance for",
+            },
+          ],
+          returns: [
+            {
+              name: "balance",
+              type: "Uint256",
+              desc: "the balance of the account",
+            },
+          ],
+          raises: null,
+        },
       },
-      functionComment: {
-        desc: [{name: "", type: "", desc: "Returns the balance of the account"}],
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*", desc: ""},
-          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-          {name: "range_check_ptr", type: "", desc: ""},
-        ],
-        explicitArgs: [
-          {name: "account", type: "felt", desc: "account to query balance for"},
-        ],
-        returns: [
-          {name: "balance", type: "Uint256", desc: "the balance of the account"}
-        ],
-        raises: null,
-      }
-    }]
-    
+    ];
 
     var parsingOutput = [
       {
@@ -461,7 +475,9 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -489,19 +505,18 @@ suite("integration-test: view", () => {
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      pathFile,
-      "view"
-    );
+    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const line = 5
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
-    console.log(commentLines)
+    const line = 5;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
+    console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -510,41 +525,52 @@ suite("integration-test: view", () => {
     const functionCommentReturnsParser = new FunctionCommentReturnsParser();
     const functionCommentRaisesParser = new FunctionCommentRaisesParser();
 
-    const parsingTarget = [{
-      attributeName: "view",
-      functionName: "allowance",
-      functionSignature: {
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*"},
-          {name: "pedersen_ptr", type: "HashBuiltin*"},
-          {name: "range_check_ptr", type: ""},
-        ],
-        explicitArgs: [
-          {name: "owner", type: "felt"},
-          {name: "spender", type: "felt"},
-        ],
-        returns: [
-          {name: "remaining", type: "Uint256"},
-        ]
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "allowance",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "owner", type: "felt" },
+            { name: "spender", type: "felt" },
+          ],
+          returns: [{ name: "remaining", type: "Uint256" }],
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "owner",
+              type: "felt",
+              desc: "the address of owner of the tokens",
+            },
+            {
+              name: "spender",
+              type: "felt",
+              desc: "the address of spender (delegated account) of the tokens",
+            },
+          ],
+          returns: [{ name: "", type: "", desc: "None" }],
+          raises: null,
+        },
       },
-      functionComment: {
-        desc: [{name: "", type: "", desc: "Returns the amount of remaining tokens allowed to be spent by the spender"}],
-        implicitArgs: [
-          {name: "syscall_ptr", type: "felt*", desc: ""},
-          {name: "pedersen_ptr", type: "HashBuiltin*", desc: ""},
-          {name: "range_check_ptr", type: "", desc: ""},
-        ],
-        explicitArgs: [
-          {name: "owner", type: "felt", desc: "the address of owner of the tokens"},
-          {name: "spender", type: "felt", desc: "the address of spender (delegated account) of the tokens"},
-        ],
-        returns: [
-          {name: "", type: "", desc: "None"}
-        ],
-        raises: null
-      }
-    }]
-    
+    ];
 
     var parsingOutput = [
       {
@@ -561,7 +587,9 @@ suite("integration-test: view", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
