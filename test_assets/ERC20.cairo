@@ -134,7 +134,7 @@ func allowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr
     #   owner(felt): the address of owner of the tokens
     #   spender(felt): the address of spender (delegated account) of the tokens
     # Returns
-    #   None
+    #   remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender
     let (remaining : Uint256) = ERC20.allowance(owner, spender)
     return (remaining)
 end
@@ -159,10 +159,9 @@ func transfer{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}
         # Returns
         #   None
         # Raises
-        #   ERC20: amount is not a valid Uint256
-        #   ERC20: cannot transfer from the zero address
-        #   ERC20: cannot transfer to the zero address
-        #   ERC20: transfer amount exceeds balance
+        #   amount: amount is not a valid Uint256
+        #   recipient: cannot transfer to the zero address
+        #   amount: transfer amount exceeds balance
     ERC20.transfer(recipient, amount)
     return (TRUE)
 end
