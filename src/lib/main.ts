@@ -195,8 +195,6 @@ export default class CairoParser {
   // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
 
-  // TODO: check if there's mismatch between function signature and comment
-  // https://github.com/onlydustxyz/kaaper/issues/7
-
+  
   // TODO: parse all files under a directory
 }
