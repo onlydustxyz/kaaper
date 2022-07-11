@@ -135,15 +135,34 @@ export default class CairoParser {
     return null;
   }
 
+  // static isObjectEqual(functionSignature: FunctionSignature[] | null, functionComment: FunctionComment | null): boolean {
+    
+  //   // if one of them is null
+  //   if (functionSignature === null || functionComment === null) {
+  //     const isEqual = lodash.isEqual(functionSignature, functionComment);
+  //     if (isEqual === false) {
+  //       return false
+  //     }
+  //   }
+  //   // if one of them is not null
+  //   const isEqual = lodash.isEqual(functionSignature, functionComment)
+  //   if (isEqual === false) {
+  //     return false
+  //   }
+
+  //   return true
+  // }
+
   static isCommentFunctionSameWithFunctionSignature(parsingResult: ParsingResult): boolean {
     const functionSignature = parsingResult.functionSignature;
     const functionComment = parsingResult.functionComment;
 
-    // const functionCommentImplicitArgs = functionComment.implicitArgs!.map(obj => ({name: obj.name, type: obj.type}));
-
-    const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
-    if (isImplicitArgsEqual === false) {
-      return false;
+    // if one of them is null
+    if (functionSignature.explicitArgs === null || functionComment.explicitArgs === null) {
+      const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionComment.explicitArgs);
+      if (isExplicitArgsEqual === false) {
+        return false
+      }
     }
 
     const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionComment.explicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
@@ -151,54 +170,27 @@ export default class CairoParser {
       return false;
     }
 
-    const isReturnsEqual = lodash.isEqual(functionSignature.returns, functionComment.returns?.map(obj => ({name: obj.name, type: obj.type})));
-    if (isReturnsEqual === false) {
+    // if one of them is null
+    if (functionSignature.implicitArgs === null || functionComment.implicitArgs === null) {
+      const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs);
+      if (isImplicitArgsEqual === false) {
+        return false
+      }
+    }
+
+    const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
+    if (isImplicitArgsEqual === false) {
       return false;
     }
 
-  
-
-    // const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
-    // if (isImplicitArgsEqual === false) {
-    //   return false;
-    // }
-
-
-    // if (functionSignature.implicitArgs && functionCommentImplicitArgs) {
-    //   const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionCommentImplicitArgs);
-    //   if (isImplicitArgsEqual === false) {
-    //     return false
-    //   }
-    // }
-    
-    // const functionCommentExplicitArgs = functionComment.explicitArgs?.map(obj => ({name: obj.name, type: obj.type}));
-    // if (functionSignature.explicitArgs && functionCommentExplicitArgs) {
-    //   const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionCommentExplicitArgs);
-    //   if (isExplicitArgsEqual === false) {
-    //     return false
-    //   }
-    // }
-
-    // const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs,  functionComment.implicitArgs!.map(obj => ({name: obj.name, type: obj.type})));
-
-    // if (isImplicitArgsEqual === false) {
-    //   return false;
-    // }
-
-    // if (functionSignature.explicitArgs === null){
-    //   if (functionComment.explicitArgs !== null) {
-    //     return false;
-    //   }
-    // }
-
-    // const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs,  functionComment.explicitArgs!.map(obj => ({name: obj.name, type: obj.type})));
-
-    // if (isExplicitArgsEqual === false) {
-    //   return false;
-    // }
-
-
-    
+    // if one of them is null
+    if (functionSignature.returns === null || functionComment.returns === null) {
+      const isReturnsEqual = lodash.isEqual(functionSignature.returns, functionComment.returns);
+      if (isReturnsEqual === false) {
+        return false
+      }
+    }
+        
     return true
 
 }
