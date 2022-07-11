@@ -10,7 +10,10 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
+<<<<<<< HEAD
 const yaml = require('js-yaml');
+=======
+>>>>>>> aea1dbb (refactor: isCommentFunctionEqualToFunctionSignature)
 
 // TODO: refactor this
 let map = new Map();
@@ -135,7 +138,11 @@ export default class CairoParser {
     return null;
   }
 
+<<<<<<< HEAD
   private static _isValidFunctionComment(
+=======
+  private static _isCommentFunctionEqualToFunctionSignature(
+>>>>>>> aea1dbb (refactor: isCommentFunctionEqualToFunctionSignature)
     functionSignature: FunctionSignature[] | null,
     functionComment: FunctionComment[] | null
   ): boolean {
@@ -200,5 +207,4 @@ export default class CairoParser {
 
 
   // TODO: parse all files under a directory
-
 }
