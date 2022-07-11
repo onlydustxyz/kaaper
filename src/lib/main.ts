@@ -9,8 +9,7 @@ import FunctionCommentReturnsParser from "./parser/function-comment/returns";
 import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // const isEqual = require('lodash.isequal');
-const lodash = require('lodash'); 
-
+const lodash = require("lodash");
 
 // TODO: refactor this
 let map = new Map();
@@ -135,72 +134,63 @@ export default class CairoParser {
     return null;
   }
 
-  // static isObjectEqual(functionSignature: FunctionSignature[] | null, functionComment: FunctionComment | null): boolean {
-    
-  //   // if one of them is null
-  //   if (functionSignature === null || functionComment === null) {
-  //     const isEqual = lodash.isEqual(functionSignature, functionComment);
-  //     if (isEqual === false) {
-  //       return false
-  //     }
-  //   }
-  //   // if one of them is not null
-  //   const isEqual = lodash.isEqual(functionSignature, functionComment)
-  //   if (isEqual === false) {
-  //     return false
-  //   }
-
-  //   return true
-  // }
-
-  static isCommentFunctionSameWithFunctionSignature(parsingResult: ParsingResult): boolean {
-    const functionSignature = parsingResult.functionSignature;
-    const functionComment = parsingResult.functionComment;
-
-
-    // if one of them is null
-    if (functionSignature.implicitArgs === null || functionComment.implicitArgs === null) {
-      const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs);
+  private static _isCommentFunctionEqualToFunctionSignature(
+    functionSignature: FunctionSignature[] | null,
+    functionComment: FunctionComment[] | null
+  ): boolean {
+    if (functionSignature === null || functionComment === null) {
+      const isImplicitArgsEqual = lodash.isEqual(
+        functionSignature,
+        functionComment
+      );
       if (isImplicitArgsEqual === false) {
-        return false
+        return false;
       }
     } else {
-      const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
-    if (isImplicitArgsEqual === false) {
-      return false;
-    }
-    }
-
-    // if one of them is null
-    if (functionSignature.explicitArgs === null || functionComment.explicitArgs === null) {
-      const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionComment.explicitArgs);
-      if (isExplicitArgsEqual === false) {
-        return false
-      }
-    } else {
-      const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionComment.explicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
-    if (isExplicitArgsEqual === false) {
-      return false;
-    }
-
-    }
-    
-    // if one of them is null
-    if (functionSignature.returns === null || functionComment.returns === null) {
-      const isReturnsEqual = lodash.isEqual(functionSignature.returns, functionComment.returns);
-      if (isReturnsEqual === false) {
-        return false
-      }
-    } else {
-      const isReturnsEqual = lodash.isEqual(functionSignature.returns, functionComment.returns?.map(obj => ({name: obj.name, type: obj.type})));
-      if (isReturnsEqual === false) {
+      const isImplicitArgsEqual = lodash.isEqual(
+        functionSignature,
+        functionComment?.map((obj) => ({ name: obj.name, type: obj.type }))
+      );
+      if (isImplicitArgsEqual === false) {
         return false;
       }
     }
 
-    return true
+    return true;
+  }
 
-}
+  static isCommentFunctionEqualToFunctionSignature(
+    parsingResult: ParsingResult
+  ): boolean {
+    const functionSignature = parsingResult.functionSignature;
+    const functionComment = parsingResult.functionComment;
+
+    const isImplicitArgsEqual = this._isCommentFunctionEqualToFunctionSignature(
+      functionSignature.implicitArgs,
+      functionComment.implicitArgs
+    );
+    if (isImplicitArgsEqual === false) {
+      return false;
+    }
+
+    const isExplicitArgsEqual = this._isCommentFunctionEqualToFunctionSignature(
+      functionSignature.explicitArgs,
+      functionComment.explicitArgs
+    );
+    if (isExplicitArgsEqual === false) {
+      return false;
+    }
+
+    const isReturnsEqual = this._isCommentFunctionEqualToFunctionSignature(
+      functionSignature.returns,
+      functionComment.returns
+    );
+    if (isReturnsEqual === false) {
+      return false;
+    }
+
+    return true;
+  }
 
   // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
@@ -209,5 +199,4 @@ export default class CairoParser {
   // https://github.com/onlydustxyz/kaaper/issues/7
 
   // TODO: parse all files under a directory
-
 }
