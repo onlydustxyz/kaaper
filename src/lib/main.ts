@@ -182,7 +182,6 @@ export default class CairoParser {
       return { isValid: false, errorSource: "explicitArgs" };
     }
 
-<<<<<<< HEAD
     const isReturnsEqual = this._isValidFunctionComment(
       functionSignature.returns,
       functionComment.returns
@@ -194,34 +193,6 @@ export default class CairoParser {
     return { isValid: true, errorSource: null };
   }
 
-=======
-    // if one of them is null
-    if (functionSignature.implicitArgs === null || functionComment.implicitArgs === null) {
-      const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs);
-      if (isImplicitArgsEqual === false) {
-        return false
-      }
-    }
-
-    const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
-    if (isImplicitArgsEqual === false) {
-      return false;
-    }
-
-    // if one of them is null
-    if (functionSignature.returns === null || functionComment.returns === null) {
-      const isReturnsEqual = lodash.isEqual(functionSignature.returns, functionComment.returns);
-      if (isReturnsEqual === false) {
-        return false
-      }
-    }
-        
-    return true
-
-}
-
-  // TODO: dump all parsed data to a file
->>>>>>> 1a84404 (test(implicit-args): same)
   // https://github.com/onlydustxyz/kaaper/issues/6
   static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
     fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
