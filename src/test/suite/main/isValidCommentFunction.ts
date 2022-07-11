@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import CairoParser from "../../../lib/main";
 
-suite("isCommentFunctionEqualToFunctionSignature", () => {
+suite("isValidFunctionComment", () => {
   test("implicitArgs(functionSignature) is the same", () => {
     const scopeLines = {
       attributeName: "view",
@@ -41,7 +41,7 @@ suite("isCommentFunctionEqualToFunctionSignature", () => {
     };
 
     const isValid =
-      CairoParser.isCommentFunctionEqualToFunctionSignature(scopeLines);
+      CairoParser.isValidFunctionComment(scopeLines);
     assert.equal(true, isValid);
   });
 
@@ -83,7 +83,7 @@ suite("isCommentFunctionEqualToFunctionSignature", () => {
     };
 
     const isValid =
-      CairoParser.isCommentFunctionEqualToFunctionSignature(scopeLines);
+      CairoParser.isValidFunctionComment(scopeLines);
     assert.equal(false, isValid);
   });
 
@@ -121,7 +121,7 @@ suite("isCommentFunctionEqualToFunctionSignature", () => {
     };
 
     const isValid =
-      CairoParser.isCommentFunctionEqualToFunctionSignature(scopeLines);
+      CairoParser.isValidFunctionComment(scopeLines);
     assert.equal(false, isValid);
   });
 
@@ -156,7 +156,7 @@ suite("isCommentFunctionEqualToFunctionSignature", () => {
     };
 
     const isValid =
-      CairoParser.isCommentFunctionEqualToFunctionSignature(scopeLines);
+      CairoParser.isValidFunctionComment(scopeLines);
     assert.equal(false, isValid);
   });
 
@@ -191,7 +191,7 @@ suite("isCommentFunctionEqualToFunctionSignature", () => {
     };
 
     const isValid =
-      CairoParser.isCommentFunctionEqualToFunctionSignature(scopeLines);
+      CairoParser.isValidFunctionComment(scopeLines);
     assert.equal(true, isValid);
   });
 });

@@ -10,10 +10,7 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
-<<<<<<< HEAD
 const yaml = require('js-yaml');
-=======
->>>>>>> aea1dbb (refactor: isCommentFunctionEqualToFunctionSignature)
 
 // TODO: refactor this
 let map = new Map();
@@ -200,11 +197,5 @@ export default class CairoParser {
   static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
     fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
   }
-
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 0641976 (docs(cairo-parser): remove todo)
   // TODO: parse all files under a directory
 }
