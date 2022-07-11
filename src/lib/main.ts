@@ -161,7 +161,11 @@ export default class CairoParser {
     return null;
   }
 
+<<<<<<< HEAD
   private static _isValidFunctionComment(
+=======
+  private static _isCommentFunctionEqualToFunctionSignature(
+>>>>>>> aea1dbb (refactor: isCommentFunctionEqualToFunctionSignature)
     functionSignature: FunctionSignature[] | null,
     functionComment: FunctionComment[] | null
   ): boolean {
@@ -237,5 +241,4 @@ export default class CairoParser {
     }
   }
   // TODO: parse all files under a directory
-
 }
