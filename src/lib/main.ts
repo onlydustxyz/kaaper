@@ -134,7 +134,7 @@ export default class CairoParser {
     return null;
   }
 
-  private static _isCommentFunctionEqualToFunctionSignature(
+  private static _isValidFunctionComment(
     functionSignature: FunctionSignature[] | null,
     functionComment: FunctionComment[] | null
   ): boolean {
@@ -159,13 +159,13 @@ export default class CairoParser {
     return true;
   }
 
-  static isCommentFunctionEqualToFunctionSignature(
+  static isValidFunctionComment(
     parsingResult: ParsingResult
   ): boolean {
     const functionSignature = parsingResult.functionSignature;
     const functionComment = parsingResult.functionComment;
 
-    const isImplicitArgsEqual = this._isCommentFunctionEqualToFunctionSignature(
+    const isImplicitArgsEqual = this._isValidFunctionComment(
       functionSignature.implicitArgs,
       functionComment.implicitArgs
     );
@@ -173,7 +173,7 @@ export default class CairoParser {
       return false;
     }
 
-    const isExplicitArgsEqual = this._isCommentFunctionEqualToFunctionSignature(
+    const isExplicitArgsEqual = this._isValidFunctionComment(
       functionSignature.explicitArgs,
       functionComment.explicitArgs
     );
@@ -181,7 +181,7 @@ export default class CairoParser {
       return false;
     }
 
-    const isReturnsEqual = this._isCommentFunctionEqualToFunctionSignature(
+    const isReturnsEqual = this._isValidFunctionComment(
       functionSignature.returns,
       functionComment.returns
     );
@@ -195,6 +195,6 @@ export default class CairoParser {
   // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
 
-  
+
   // TODO: parse all files under a directory
 }
