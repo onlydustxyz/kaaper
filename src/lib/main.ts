@@ -1,4 +1,5 @@
 import * as fs from "fs";
+
 import { BaseCommentParser } from "./parser/interfaces/function-comment";
 import FunctionSignatureRegexParser from "../lib/parser/function-signature/regex";
 import FunctionCommentDescParser from "../lib/parser/function-comment/desc";
@@ -6,6 +7,10 @@ import FunctionCommentImplicitArgsParser from "./parser/function-comment/implici
 import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "./parser/function-comment/returns";
 import FunctionCommentRaisesParser from "./parser/function-comment/raises";
+
+// const isEqual = require('lodash.isequal');
+const lodash = require('lodash'); 
+
 
 // TODO: refactor this
 let map = new Map();
@@ -130,6 +135,74 @@ export default class CairoParser {
     return null;
   }
 
+  static isCommentFunctionSameWithFunctionSignature(parsingResult: ParsingResult): boolean {
+    const functionSignature = parsingResult.functionSignature;
+    const functionComment = parsingResult.functionComment;
+
+    // const functionCommentImplicitArgs = functionComment.implicitArgs!.map(obj => ({name: obj.name, type: obj.type}));
+
+    const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
+    if (isImplicitArgsEqual === false) {
+      return false;
+    }
+
+    const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionComment.explicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
+    if (isExplicitArgsEqual === false) {
+      return false;
+    }
+
+    const isReturnsEqual = lodash.isEqual(functionSignature.returns, functionComment.returns?.map(obj => ({name: obj.name, type: obj.type})));
+    if (isReturnsEqual === false) {
+      return false;
+    }
+
+  
+
+    // const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionComment.implicitArgs?.map(obj => ({name: obj.name, type: obj.type})));
+    // if (isImplicitArgsEqual === false) {
+    //   return false;
+    // }
+
+
+    // if (functionSignature.implicitArgs && functionCommentImplicitArgs) {
+    //   const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs, functionCommentImplicitArgs);
+    //   if (isImplicitArgsEqual === false) {
+    //     return false
+    //   }
+    // }
+    
+    // const functionCommentExplicitArgs = functionComment.explicitArgs?.map(obj => ({name: obj.name, type: obj.type}));
+    // if (functionSignature.explicitArgs && functionCommentExplicitArgs) {
+    //   const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs, functionCommentExplicitArgs);
+    //   if (isExplicitArgsEqual === false) {
+    //     return false
+    //   }
+    // }
+
+    // const isImplicitArgsEqual = lodash.isEqual(functionSignature.implicitArgs,  functionComment.implicitArgs!.map(obj => ({name: obj.name, type: obj.type})));
+
+    // if (isImplicitArgsEqual === false) {
+    //   return false;
+    // }
+
+    // if (functionSignature.explicitArgs === null){
+    //   if (functionComment.explicitArgs !== null) {
+    //     return false;
+    //   }
+    // }
+
+    // const isExplicitArgsEqual = lodash.isEqual(functionSignature.explicitArgs,  functionComment.explicitArgs!.map(obj => ({name: obj.name, type: obj.type})));
+
+    // if (isExplicitArgsEqual === false) {
+    //   return false;
+    // }
+
+
+    
+    return true
+
+}
+
   // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
 
@@ -137,4 +210,5 @@ export default class CairoParser {
   // https://github.com/onlydustxyz/kaaper/issues/7
 
   // TODO: parse all files under a directory
+
 }
