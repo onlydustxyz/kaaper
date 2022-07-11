@@ -1,8 +1,8 @@
 import * as assert from "assert";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../../lib/main";
 
-suite("isValidFunctionComment", () => {
-  test("implicitArgs(functionSignature) is the same", () => {
+suite("isValidFunctionComment: implicit args", () => {
+  test("valid (both are not none)", () => {
     const scopeLines = {
       attributeName: "view",
       functionName: "totalSupply",
@@ -45,7 +45,7 @@ suite("isValidFunctionComment", () => {
     assert.equal(true, isValid);
   });
 
-  test("implicitArgs(functionComment) is different", () => {
+  test("invalid commentFunction", () => {
     const scopeLines = {
       attributeName: "view",
       functionName: "totalSupply",
@@ -87,7 +87,7 @@ suite("isValidFunctionComment", () => {
     assert.equal(false, isValid);
   });
 
-  test("implicitArgs(functionSignature) is null", () => {
+  test("functionSignature is null", () => {
     const scopeLines = {
       attributeName: "view",
       functionName: "totalSupply",
@@ -125,7 +125,7 @@ suite("isValidFunctionComment", () => {
     assert.equal(false, isValid);
   });
 
-  test("implicitArgs(functionComment) is null", () => {
+  test("functionComment is null", () => {
     const scopeLines = {
       attributeName: "view",
       functionName: "totalSupply",
@@ -160,7 +160,7 @@ suite("isValidFunctionComment", () => {
     assert.equal(false, isValid);
   });
 
-  test("implicitArgs both are null", () => {
+  test("both are null", () => {
     const scopeLines = {
       attributeName: "view",
       functionName: "totalSupply",
