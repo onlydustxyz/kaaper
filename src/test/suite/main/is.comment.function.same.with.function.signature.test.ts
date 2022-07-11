@@ -3,7 +3,7 @@ import CairoParser from "../../../lib/main";
 
 
 suite("isCommentFunctionSameWithFunctionSignature", () => {
-  test("implicitArgs is the same", () => {
+  test("implicitArgs(functionSignature) is the same", () => {
 
     const scopeLines = {
         attributeName: "view",
@@ -46,13 +46,14 @@ suite("isCommentFunctionSameWithFunctionSignature", () => {
     assert.equal(true, isValid)
 });
 
-test("implicitArgs is different", () => {
+test("implicitArgs(functionComment) is different", () => {
 
   const scopeLines = {
       attributeName: "view",
       functionName: "totalSupply",
       functionSignature: {
         implicitArgs: [
+          { name: "syscall_ptr", type: "felt*" , desc: ""},
           { name: "pedersen_ptr", type: "HashBuiltin*" },
           { name: "range_check_ptr", type: "" },
         ],
@@ -69,7 +70,6 @@ test("implicitArgs is different", () => {
         ],
         implicitArgs: [
           { name: "syscall_ptr", type: "felt*" , desc: ""},
-          { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
           { name: "range_check_ptr", type: "", desc: "" },
         ],
         explicitArgs: null,
