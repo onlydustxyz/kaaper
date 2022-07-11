@@ -159,9 +159,7 @@ export default class CairoParser {
     return true;
   }
 
-  static isValidFunctionComment(
-    parsingResult: ParsingResult
-  ): boolean {
+  static isValidFunctionComment(parsingResult: ParsingResult): boolean {
     const functionSignature = parsingResult.functionSignature;
     const functionComment = parsingResult.functionComment;
 
@@ -194,7 +192,6 @@ export default class CairoParser {
 
   // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
-
 
   // TODO: parse all files under a directory
 }
