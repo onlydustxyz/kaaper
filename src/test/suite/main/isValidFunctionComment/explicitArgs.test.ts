@@ -62,7 +62,7 @@ suite("isValidFunctionComment: explicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.equal(true, isValid);
+    assert.deepEqual({isValid: true, errorSource: null}, isValid);
   });
 
   test("commentFunction has less element", () => {
@@ -120,7 +120,7 @@ suite("isValidFunctionComment: explicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.equal(false, isValid);
+    assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
   });
 
   test("commentFunction has more element", () => {
@@ -181,7 +181,7 @@ suite("isValidFunctionComment: explicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.equal(false, isValid);
+    assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
   });
 
   // test("functionSignature is null", () => {
@@ -218,7 +218,7 @@ suite("isValidFunctionComment: explicit args", () => {
   //   };
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.equal(false, isValid);
+  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
   // });
 
   // test("functionComment is null", () => {
@@ -252,7 +252,7 @@ suite("isValidFunctionComment: explicit args", () => {
   //   };
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.equal(false, isValid);
+  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
   // });
 
   // test("both are null", () => {
@@ -286,6 +286,6 @@ suite("isValidFunctionComment: explicit args", () => {
   //   };
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.equal(true, isValid);
+  //   assert.deepEqual({isValid: true, errorSource: null}, isValid);
   // });
 });
