@@ -160,13 +160,9 @@ export default class CairoParser {
     return true;
   }
 
-<<<<<<< HEAD
   static isValidFunctionComment(
     parsingResult: ParsingResult
   ): FunctionCommentValidity {
-=======
-  static isValidFunctionComment(parsingResult: ParsingResult): boolean {
->>>>>>> 40d8351 (test(implicit-args): add)
     const functionSignature = parsingResult.functionSignature;
     const functionComment = parsingResult.functionComment;
 
