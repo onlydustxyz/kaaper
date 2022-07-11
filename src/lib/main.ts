@@ -138,11 +138,7 @@ export default class CairoParser {
     return null;
   }
 
-<<<<<<< HEAD
   private static _isValidFunctionComment(
-=======
-  private static _isCommentFunctionEqualToFunctionSignature(
->>>>>>> aea1dbb (refactor: isCommentFunctionEqualToFunctionSignature)
     functionSignature: FunctionSignature[] | null,
     functionComment: FunctionComment[] | null
   ): boolean {
@@ -205,6 +201,10 @@ export default class CairoParser {
     fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
   }
 
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 0641976 (docs(cairo-parser): remove todo)
   // TODO: parse all files under a directory
 }
