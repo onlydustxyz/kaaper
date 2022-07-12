@@ -585,4 +585,24 @@ suite("get-file-parsing-result", () => {
       "failed parsing whole scope"
     );
   });
+
+  test("constructor-view-external", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testAssets/library.cairo"
+    );
+
+    // parse whole scope
+    const parsingOutput = CairoParser.getFileParsingResult(pathFile);
+
+    // const parsingTarget = [
+      
+    // ];
+
+    // assert.deepEqual(
+    //   parsingTarget,
+    //   parsingOutput,
+    //   "failed parsing whole scope"
+    // );
+  });
 });

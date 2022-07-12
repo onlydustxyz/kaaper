@@ -124,16 +124,40 @@ export default class CairoParser {
       "external"
     );
 
-    // combine 3 results
-    if (
-      constructorParsingResult &&
-      viewParsingResult &&
-      externalParsingResult
-    ) {
-      return constructorParsingResult
-        .concat(viewParsingResult)
-        .concat(externalParsingResult);
+    const eventParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "event"
+    );
+
+    const storageVarParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "storage_var"
+    );
+
+    var allParsingResult: ParsingResult[] = [];
+    // combine all scopes
+   
+    // TODO: refactor this
+    if (constructorParsingResult) {
+      allParsingResult = allParsingResult.concat(constructorParsingResult);
     }
+    if (viewParsingResult) {
+      allParsingResult = allParsingResult.concat(viewParsingResult);
+    }
+    if (externalParsingResult) {
+      allParsingResult = allParsingResult.concat(externalParsingResult);
+    }
+    if (eventParsingResult) {
+      allParsingResult = allParsingResult.concat(eventParsingResult);
+    }
+    if (storageVarParsingResult) {
+      allParsingResult = allParsingResult.concat(storageVarParsingResult);
+    }
+
+    if (allParsingResult.length > 0) {
+      return allParsingResult;
+    }
+
     return null;
   }
 
