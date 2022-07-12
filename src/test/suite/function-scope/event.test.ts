@@ -214,5 +214,24 @@ suite("integration-test: event", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
+  test("2", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testAssets/library.cairo"
+    );
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "event"
+    );
+
+    // Comment parsing
+    // parse comment lines
+    const line = 2
+
+    assert.equal(functionScopeLines![line], null)
+  });
+
 
 });
