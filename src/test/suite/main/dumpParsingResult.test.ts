@@ -28,4 +28,16 @@ suite("dumpParsingResult", () => {
     CairoParser.dumpParsingResult(parsingOutput, "docs/library");
     CairoParser.dumpParsingResult(parsingOutput, "docs/library_comment_only", true);
   });
+
+  test("library", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testAssets/library.cairo"
+    );
+
+    // parse whole scope
+    const parsingOutput = CairoParser.getFileParsingResult(pathFile);
+
+    const yaml = CairoParser.dumpParsingResult(parsingOutput, "docs/library");
+  });
 });
