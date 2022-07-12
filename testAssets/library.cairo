@@ -77,7 +77,9 @@ end
 @storage_var
 func ERC20_balances(account : felt) -> (balance : Uint256):
     # Desc: 
-    #   The amount of tokens owned by an account
+    #   Returns the amount of tokens owned by an account
+    # Explicit args:
+    #   account(felt): The address of the account
     # Returns:
     #   balance(Uint256): The amount of tokens owned by an account
 end
