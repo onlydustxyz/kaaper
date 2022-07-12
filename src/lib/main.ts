@@ -136,7 +136,6 @@ export default class CairoParser {
 
     var allParsingResult: ParsingResult[] = [];
     // combine all scopes
-
     // TODO: refactor this
     if (constructorParsingResult) {
       allParsingResult = allParsingResult.concat(constructorParsingResult);
