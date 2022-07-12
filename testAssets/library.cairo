@@ -43,6 +43,10 @@ end
 
 @storage_var
 func ERC20_name() -> (name : felt):
+    # Desc: 
+    #   The name of the token
+    # Returns:
+    #   name(felt): The name of the token
 end
 
 @storage_var
