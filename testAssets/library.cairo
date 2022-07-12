@@ -87,7 +87,10 @@ end
 @storage_var
 func ERC20_allowances(owner : felt, spender : felt) -> (allowance : Uint256):
     # Desc: 
-    #   The amount of tokens that an owner is allowed to delegate to a spender
+    #   Store the amount of tokens that an owner is allowed to delegate to a spender
+    # Explicit args:
+    #   owner(felt): The address of the owner
+    #   spender(felt): The address of the spender
     # Returns:
     #   allowance(Uint256): The amount of tokens that an owner is allowed to delegate to a spender
 end
