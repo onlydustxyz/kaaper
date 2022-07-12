@@ -197,7 +197,7 @@ export default class CairoParser {
 
   // https://github.com/onlydustxyz/kaaper/issues/6
   static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
-    fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
+    fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
   }
   // TODO: parse all files under a directory
 }
