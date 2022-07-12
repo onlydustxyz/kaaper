@@ -38,6 +38,7 @@ suite("dumpParsingResult", () => {
     // parse whole scope
     const parsingOutput = CairoParser.getFileParsingResult(pathFile);
 
-    const yaml = CairoParser.dumpParsingResult(parsingOutput, "docs/library");
+    CairoParser.dumpParsingResult(parsingOutput, "docs/library");
+    CairoParser.dumpParsingResult(parsingOutput, "docs/library_comment_only", true);
   });
 });
