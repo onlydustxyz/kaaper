@@ -46,12 +46,21 @@ suite("integration-test: event", () => {
           returns: [{ name: "name", type: "felt" }],
         },
         functionComment: {
+<<<<<<< HEAD
           desc: [{ name: "", type: "", desc: "Returns the name of the token" }],
           implicitArgs: null,
           explicitArgs: null,
           returns: [
             { name: "name", type: "felt", desc: "The name of the token" },
           ],
+=======
+          desc: [
+            { name: "", type: "", desc: "Returns the name of the token" },
+          ],
+          implicitArgs: null,
+          explicitArgs: null,
+          returns: [{ name: "name", type: "felt", desc: "The name of the token" }],
+>>>>>>> f6aed82 (test(storage_var): #0)
           raises: null,
         },
       },
@@ -93,6 +102,7 @@ suite("integration-test: event", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
+<<<<<<< HEAD
   test("1", () => {
     const pathFile = path.resolve(
       __dirname,
@@ -612,4 +622,135 @@ suite("integration-test: event", () => {
 
     assert.equal(functionScopeLines![line], null);
   });
+=======
+  // test("1", () => {
+  //   const pathFile = path.resolve(
+  //     __dirname,
+  //     "../../../../testAssets/library.cairo"
+  //   );
+
+  //   // parse whole scope
+  //   const functionScopeLines = CairoParser.parseFunctionScope(
+  //     pathFile,
+  //     "event"
+  //   );
+
+  //   // Function signature parsing
+  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+
+  //   // Comment parsing
+  //   // parse comment lines
+  //   const line = 1;
+  //   const commentLines = CairoParser.parseCommentLines(
+  //     functionScopeLines![line]
+  //   );
+
+  //   const functionCommentDescParser = new FunctionCommentDescParser();
+  //   const functionCommentImplicitArgsParser =
+  //     new FunctionCommentImplicitArgsParser();
+  //   const functionCommentExplicitArgsParser =
+  //     new FunctionCommentExplicitArgsParser();
+  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+  //   const parsingTarget = [
+  //     {
+  //       attributeName: "event",
+  //       functionName: "Approval",
+  //       functionSignature: {
+  //         implicitArgs: null,
+  //         explicitArgs: [
+  //           { name: "owner", type: "felt" },
+  //           { name: "spender", type: "felt" },
+  //           { name: "value", type: "Uint256" },
+  //         ],
+  //         returns: null,
+  //       },
+  //       functionComment: {
+  //         desc: [
+  //           {
+  //             name: "",
+  //             type: "",
+  //             desc: "Emit event when a delegation is made",
+  //           },
+  //         ],
+  //         implicitArgs: null,
+  //         explicitArgs: [
+  //           {
+  //             name: "owner",
+  //             type: "felt",
+  //             desc: "the address of the owner",
+  //           },
+  //           {
+  //             name: "spender",
+  //             type: "felt",
+  //             desc: "the address of the spender",
+  //           },
+  //           {
+  //             name: "value",
+  //             type: "Uint256",
+  //             desc: "the amount of tokens approved for the spender",
+  //           },
+  //         ],
+  //         returns: null,
+  //         raises: null,
+  //       },
+  //     },
+  //   ];
+
+  //   var parsingOutput = [
+  //     {
+  //       attributeName: functionSignatureParser.getAttributeName(
+  //         functionScopeLines![line]
+  //       ),
+  //       functionName: functionSignatureParser.getFunctionName(
+  //         functionScopeLines![line]
+  //       ),
+  //       functionSignature: {
+  //         implicitArgs: functionSignatureParser.getImplicitArgs(
+  //           functionScopeLines![line]
+  //         ),
+  //         explicitArgs: functionSignatureParser.getExplicitArgs(
+  //           functionScopeLines![line]
+  //         ),
+  //         returns: functionSignatureParser.getReturns(
+  //           functionScopeLines![line]
+  //         ),
+  //       },
+  //       functionComment: {
+  //         desc: functionCommentDescParser.parseCommentLines(commentLines!),
+  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+  //           commentLines!
+  //         ),
+  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+  //           commentLines!
+  //         ),
+  //         returns: functionCommentReturnsParser.parseCommentLines(
+  //           commentLines!
+  //         ),
+  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+  //       },
+  //     },
+  //   ];
+
+  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  // });
+
+  // test("2", () => {
+  //   const pathFile = path.resolve(
+  //     __dirname,
+  //     "../../../../testAssets/library.cairo"
+  //   );
+
+  //   // parse whole scope
+  //   const functionScopeLines = CairoParser.parseFunctionScope(
+  //     pathFile,
+  //     "event"
+  //   );
+
+  //   const line = 2;
+
+  //   assert.equal(functionScopeLines![line], null);
+  // });
+>>>>>>> f6aed82 (test(storage_var): #0)
 });
