@@ -64,63 +64,67 @@ suite("isValidFunctionComment: returns", () => {
     assert.deepEqual({isValid: true, errorSource: null}, isValid);
   });
 
-  // test("commentFunction has less element", () => {
-  //   const scopeLines = {
-  //     attributeName: "constructor",
-  //     functionName: "constructor",
-  //     functionSignature: {
-  //       implicitArgs: [
-  //         { name: "syscall_ptr", type: "felt*" },
-  //         { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //         { name: "range_check_ptr", type: "" },
-  //       ],
-  //       explicitArgs: [
-  //         { name: "name", type: "felt" },
-  //         { name: "symbol", type: "felt" },
-  //         { name: "decimals", type: "Uint256" },
-  //         { name: "initial_supply", type: "Uint256" },
-  //         { name: "recipient", type: "felt" },
-  //       ],
-  //       returns: null,
-  //     },
-  //     functionComment: {
-  //       desc: [{ name: "", type: "", desc: "Initialize the contract" }],
-  //       implicitArgs: [
-  //         { name: "syscall_ptr", type: "felt*", desc: "" },
-  //         { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //         { name: "range_check_ptr", type: "", desc: "" },
-  //       ],
-  //       explicitArgs: [
-  //         { name: "name", type: "felt", desc: "name of the token" },
-  //         { name: "symbol", type: "felt", desc: "symbol of the token" },
-  //         {
-  //           name: "decimals",
-  //           type: "Uint256",
-  //           desc: "floating point of the token",
-  //         },
-  //         {
-  //           name: "recipient",
-  //           type: "felt",
-  //           desc: "the address of recipient of the initial supply",
-  //         },
-  //       ],
-  //       returns: null,
-  //       raises: [
-  //         { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-  //         {
-  //           name: "recipient",
-  //           type: "",
-  //           desc: "cannot mint to the zero address",
-  //         },
-  //         { name: "initial_supply", type: "", desc: "not valid Uint256" },
-  //         { name: "initial_supply", type: "", desc: "mint overflow" },
-  //       ],
-  //     },
-  //   };
+  test("commentFunction has less element", () => {
+    const scopeLines = {
+      attributeName: "external",
+      functionName: "transfer",
+      functionSignature: {
+        implicitArgs: [
+          { name: "syscall_ptr", type: "felt*" },
+          { name: "pedersen_ptr", type: "HashBuiltin*" },
+          { name: "range_check_ptr", type: "" },
+        ],
+        explicitArgs: [
+          { name: "recipient", type: "felt" },
+          { name: "amount", type: "Uint256" },
+        ],
+        returns: [{ name: "success", type: "felt" }, { name: "success", type: "felt" }],
+      },
+      functionComment: {
+        desc: [{ name: "", type: "", desc: "Perform transfer to recipient" }],
+        implicitArgs: [
+          { name: "syscall_ptr", type: "felt*", desc: "" },
+          { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+          { name: "range_check_ptr", type: "", desc: "" },
+        ],
+        explicitArgs: [
+          {
+            name: "recipient",
+            type: "felt",
+            desc: "the address of ERC20 recipient",
+          },
+          {
+            name: "amount",
+            type: "Uint256",
+            desc: "the amount of ERC20 transfer",
+          },
+        ],
+        returns: [
+          {
+            name: "success",
+            type: "felt",
+            desc: "1 if transfer was successful, 0 otherwise",
+          },
+        ],
+        raises: [
+          { name: "amount", type: "", desc: "amount is not a valid Uint256" },
+          {
+            name: "recipient",
+            type: "",
+            desc: "cannot transfer to the zero address",
+          },
+          {
+            name: "amount",
+            type: "",
+            desc: "transfer amount exceeds balance",
+          },
+        ],
+      },
+    };
 
-  //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
-  // });
+    const isValid = CairoParser.isValidFunctionComment(scopeLines);
+    assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
+  });
 
   // test("commentFunction has more element", () => {
   //   const scopeLines = {
@@ -180,7 +184,7 @@ suite("isValidFunctionComment: returns", () => {
   //   };
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
+  //   assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
   // });
 
   // test("functionSignature is null", () => {
@@ -225,7 +229,7 @@ suite("isValidFunctionComment: returns", () => {
   //   };
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
+  //   assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
   // });
 
   // test("functionComment is null", () => {
@@ -270,7 +274,7 @@ suite("isValidFunctionComment: returns", () => {
   //   };
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
+  //   assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
   // });
 
   
