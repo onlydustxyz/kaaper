@@ -175,11 +175,6 @@ suite("isValidFunctionComment: returns", () => {
             type: "felt",
             desc: "1 if transfer was successful, 0 otherwise",
           },
-<<<<<<< HEAD
-=======
-           
-          
->>>>>>> 8a5e16c (test(returns): functionSignature is null)
         ],
         raises: [
           { name: "amount", type: "", desc: "amount is not a valid Uint256" },
