@@ -7,7 +7,7 @@ suite("function-comment: constructor: raises", () => {
   test("parse line 14", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../test_assets/ERC20.cairo"
+      "../../../../../testAssets/ERC20.cairo"
     );
 
     const functionText = CairoParser.parseFunctionScope(
@@ -46,7 +46,7 @@ suite("function-comment: constructor: raises", () => {
   test("parse line 15", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../test_assets/ERC20.cairo"
+      "../../../../../testAssets/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -88,7 +88,7 @@ suite("function-comment: constructor: raises", () => {
   test("parse line 16", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../test_assets/ERC20.cairo"
+      "../../../../../testAssets/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -130,7 +130,7 @@ suite("function-comment: constructor: raises", () => {
   test("parse line 17", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../test_assets/ERC20.cairo"
+      "../../../../../testAssets/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -172,7 +172,7 @@ suite("function-comment: constructor: raises", () => {
   test("parse line 18", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../test_assets/ERC20.cairo"
+      "../../../../../testAssets/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -214,7 +214,7 @@ suite("function-comment: constructor: raises", () => {
   test("parse whole scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../test_assets/ERC20.cairo"
+      "../../../../../testAssets/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,

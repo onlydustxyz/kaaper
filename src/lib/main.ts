@@ -17,6 +17,8 @@ let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
+map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
+
 
 export default class CairoParser {
   constructor() {}

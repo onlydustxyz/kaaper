@@ -6,7 +6,7 @@ suite("get-file-parsing-result", () => {
   test("constructor-view-external", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../test_assets/ERC20.cairo"
+      "../../../../testAssets/ERC20.cairo"
     );
 
     // parse whole scope
