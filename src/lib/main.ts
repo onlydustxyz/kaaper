@@ -10,6 +10,7 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
+const yaml = require('js-yaml');
 
 // TODO: refactor this
 let map = new Map();
@@ -192,8 +193,11 @@ export default class CairoParser {
     return { isValid: true, errorSource: null };
   }
 
-  // TODO: dump all parsed data to a file
   // https://github.com/onlydustxyz/kaaper/issues/6
+  static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
+    fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
+  }
+
 
   // TODO: parse all files under a directory
 }
