@@ -10,7 +10,7 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
-const yaml = require('js-yaml');
+const yaml = require("js-yaml");
 
 // TODO: refactor this
 let map = new Map();
@@ -18,7 +18,6 @@ map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
-
 
 export default class CairoParser {
   constructor() {}
@@ -196,7 +195,10 @@ export default class CairoParser {
   }
 
   // https://github.com/onlydustxyz/kaaper/issues/6
-  static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
+  static dumpParsingResult(
+    parsingResult: ParsingResult[] | null,
+    outPath: string
+  ): void {
     fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
   }
   // TODO: parse all files under a directory
