@@ -44,29 +44,50 @@ end
 @storage_var
 func ERC20_name() -> (name : felt):
     # Desc: 
-    #   The name of the token
+    #   Returns the name of the token
     # Returns:
     #   name(felt): The name of the token
 end
 
 @storage_var
 func ERC20_symbol() -> (symbol : felt):
+    # Desc: 
+    #   The symbol of the token
+    # Returns:
+    #   symbol(felt): The symbol of the token
 end
 
 @storage_var
+func ERC20_decimals() -> (decimals : Uint256):
+    # Desc: 
+    #   The number of decimals of the token
+    # Returns:
+    #   decimals(Uint256): The number of decimals of the token
 func ERC20_decimals() -> (multiplier : felt):
 end
 
 @storage_var
 func ERC20_total_supply() -> (total_supply : Uint256):
+    # Desc: 
+    #   The total amount of tokens in existence
+    # Returns:
+    #   total_supply(Uint256): The total amount of tokens in existence
 end
 
 @storage_var
 func ERC20_balances(account : felt) -> (balance : Uint256):
+    # Desc: 
+    #   The amount of tokens owned by an account
+    # Returns:
+    #   balance(Uint256): The amount of tokens owned by an account
 end
 
 @storage_var
 func ERC20_allowances(owner : felt, spender : felt) -> (allowance : Uint256):
+    # Desc: 
+    #   The amount of tokens that an owner is allowed to delegate to a spender
+    # Returns:
+    #   allowance(Uint256): The amount of tokens that an owner is allowed to delegate to a spender
 end
 
 namespace ERC20:
