@@ -180,46 +180,54 @@ suite("isValidFunctionComment: explicit args", () => {
       },
     };
 
-  //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
-  // });
+    const isValid = CairoParser.isValidFunctionComment(scopeLines);
+    assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
+  });
 
-  // test("functionSignature is null", () => {
-  //   const scopeLines = {
-  //     attributeName: "view",
-  //     functionName: "totalSupply",
-  //     functionSignature: {
-  //       implicitArgs: null,
-  //       explicitArgs: null,
-  //       returns: [{ name: "totalSupply", type: "Uint256" }],
-  //     },
-  //     functionComment: {
-  //       desc: [
-  //         {
-  //           name: "",
-  //           type: "",
-  //           desc: "Returns the total supply of the token",
-  //         },
-  //       ],
-  //       implicitArgs: [
-  //         { name: "syscall_ptr", type: "felt*", desc: "" },
-  //         { name: "range_check_ptr", type: "", desc: "" },
-  //       ],
-  //       explicitArgs: null,
-  //       returns: [
-  //         {
-  //           name: "totalSupply",
-  //           type: "Uint256",
-  //           desc: "total supply of the token",
-  //         },
-  //       ],
-  //       raises: null,
-  //     },
-  //   };
+  test("functionSignature is null", () => {
+    const scopeLines = {
+      attributeName: "constructor",
+      functionName: "constructor",
+      functionSignature: {
+        implicitArgs: [
+          { name: "syscall_ptr", type: "felt*" },
+          { name: "pedersen_ptr", type: "HashBuiltin*" },
+          { name: "range_check_ptr", type: "" },
+        ],
+        explicitArgs: [
+          { name: "name", type: "felt" },
+          { name: "symbol", type: "felt" },
+          { name: "decimals", type: "Uint256" },
+          { name: "initial_supply", type: "Uint256" },
+          { name: "recipient", type: "felt" },
+        ],
+        returns: null,
+      },
+      functionComment: {
+        desc: [{ name: "", type: "", desc: "Initialize the contract" }],
+        implicitArgs: [
+          { name: "syscall_ptr", type: "felt*", desc: "" },
+          { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+          { name: "range_check_ptr", type: "", desc: "" },
+        ],
+        explicitArgs: null,
+        returns: null,
+        raises: [
+          { name: "decimals", type: "", desc: "decimals exceed 2^8" },
+          {
+            name: "recipient",
+            type: "",
+            desc: "cannot mint to the zero address",
+          },
+          { name: "initial_supply", type: "", desc: "not valid Uint256" },
+          { name: "initial_supply", type: "", desc: "mint overflow" },
+        ],
+      },
+    };
 
-  //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
-  // });
+    const isValid = CairoParser.isValidFunctionComment(scopeLines);
+    assert.deepEqual({isValid: false, errorSource: "explicitArgs"}, isValid);
+  });
 
   // test("functionComment is null", () => {
   //   const scopeLines = {
@@ -287,5 +295,5 @@ suite("isValidFunctionComment: explicit args", () => {
 
   //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
   //   assert.deepEqual({isValid: true, errorSource: null}, isValid);
-  });
+  // });
 });
