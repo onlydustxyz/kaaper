@@ -159,17 +159,18 @@ export default class CairoParser {
     return true;
   }
 
-  static isValidFunctionComment(parsingResult: ParsingResult): FunctionCommentValidity {
+  static isValidFunctionComment(
+    parsingResult: ParsingResult
+  ): FunctionCommentValidity {
     const functionSignature = parsingResult.functionSignature;
     const functionComment = parsingResult.functionComment;
 
-    
     const isImplicitArgsEqual = this._isValidFunctionComment(
       functionSignature.implicitArgs,
       functionComment.implicitArgs
     );
     if (isImplicitArgsEqual === false) {
-      return {isValid: false, errorSource: "implicitArgs"};
+      return { isValid: false, errorSource: "implicitArgs" };
     }
 
     const isExplicitArgsEqual = this._isValidFunctionComment(
@@ -177,7 +178,7 @@ export default class CairoParser {
       functionComment.explicitArgs
     );
     if (isExplicitArgsEqual === false) {
-      return {isValid: false, errorSource: "explicitArgs"};
+      return { isValid: false, errorSource: "explicitArgs" };
     }
 
     const isReturnsEqual = this._isValidFunctionComment(
@@ -185,10 +186,10 @@ export default class CairoParser {
       functionComment.returns
     );
     if (isReturnsEqual === false) {
-      return {isValid: false, errorSource: "returns"};
+      return { isValid: false, errorSource: "returns" };
     }
 
-    return {isValid: true, errorSource: null};
+    return { isValid: true, errorSource: null };
   }
 
   // TODO: dump all parsed data to a file

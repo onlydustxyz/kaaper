@@ -41,7 +41,7 @@ suite("isValidFunctionComment: implicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: true, errorSource:null}, isValid);
+    assert.deepEqual({ isValid: true, errorSource: null }, isValid);
   });
 
   test("commentFunction has less element", () => {
@@ -82,7 +82,7 @@ suite("isValidFunctionComment: implicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource:"implicitArgs"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "implicitArgs" }, isValid);
   });
 
   test("commentFunction has more element", () => {
@@ -123,7 +123,7 @@ suite("isValidFunctionComment: implicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource:"implicitArgs"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "implicitArgs" }, isValid);
   });
 
   test("functionSignature is null", () => {
@@ -160,7 +160,7 @@ suite("isValidFunctionComment: implicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource:"implicitArgs"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "implicitArgs" }, isValid);
   });
 
   test("functionComment is null", () => {
@@ -194,7 +194,7 @@ suite("isValidFunctionComment: implicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource:"implicitArgs"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "implicitArgs" }, isValid);
   });
 
   test("both are null", () => {
@@ -228,6 +228,6 @@ suite("isValidFunctionComment: implicit args", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: true, errorSource:null}, isValid);
+    assert.deepEqual({ isValid: true, errorSource: null }, isValid);
   });
 });

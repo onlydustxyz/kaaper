@@ -61,7 +61,7 @@ suite("isValidFunctionComment: returns", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: true, errorSource: null}, isValid);
+    assert.deepEqual({ isValid: true, errorSource: null }, isValid);
   });
 
   test("commentFunction has less element", () => {
@@ -78,7 +78,10 @@ suite("isValidFunctionComment: returns", () => {
           { name: "recipient", type: "felt" },
           { name: "amount", type: "Uint256" },
         ],
-        returns: [{ name: "success", type: "felt" }, { name: "success", type: "felt" }],
+        returns: [
+          { name: "success", type: "felt" },
+          { name: "success", type: "felt" },
+        ],
       },
       functionComment: {
         desc: [{ name: "", type: "", desc: "Perform transfer to recipient" }],
@@ -123,7 +126,7 @@ suite("isValidFunctionComment: returns", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "returns" }, isValid);
   });
 
   test("commentFunction has more element", () => {
@@ -172,8 +175,6 @@ suite("isValidFunctionComment: returns", () => {
             type: "felt",
             desc: "1 if transfer was successful, 0 otherwise",
           },
-           
-          
         ],
         raises: [
           { name: "amount", type: "", desc: "amount is not a valid Uint256" },
@@ -192,7 +193,7 @@ suite("isValidFunctionComment: returns", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "returns" }, isValid);
   });
 
   test("functionSignature is null", () => {
@@ -254,7 +255,7 @@ suite("isValidFunctionComment: returns", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "returns" }, isValid);
   });
 
   test("functionComment is null", () => {
@@ -310,10 +311,8 @@ suite("isValidFunctionComment: returns", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: false, errorSource: "returns"}, isValid);
+    assert.deepEqual({ isValid: false, errorSource: "returns" }, isValid);
   });
-
-  
 
   test("both are null", () => {
     const scopeLines = {
@@ -368,6 +367,6 @@ suite("isValidFunctionComment: returns", () => {
     };
 
     const isValid = CairoParser.isValidFunctionComment(scopeLines);
-    assert.deepEqual({isValid: true, errorSource: null}, isValid);
+    assert.deepEqual({ isValid: true, errorSource: null }, isValid);
   });
 });
