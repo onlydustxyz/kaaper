@@ -30,7 +30,7 @@ end
 @event
 func Approval(owner : felt, spender : felt, value : Uint256):
     # Desc: 
-    #   
+    #  Emit event when a delegation is made
     # Explicit args:
     #   owner(felt): the address of the owner
     #   spender(felt): the address of the spender
