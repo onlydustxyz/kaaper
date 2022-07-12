@@ -596,20 +596,20 @@ suite("integration-test: event", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
-  // test("2", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testAssets/library.cairo"
-  //   );
+  test("6", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testAssets/library.cairo"
+    );
 
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "event"
-  //   );
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "event"
+    );
 
-  //   const line = 2;
+    const line = 6;
 
-  //   assert.equal(functionScopeLines![line], null);
-  // });
+    assert.equal(functionScopeLines![line], null);
+  });
 });
