@@ -52,7 +52,7 @@ end
 @storage_var
 func ERC20_symbol() -> (symbol : felt):
     # Desc: 
-    #   The symbol of the token
+    #   Returns the symbol of the token
     # Returns:
     #   symbol(felt): The symbol of the token
 end
@@ -60,7 +60,7 @@ end
 @storage_var
 func ERC20_decimals() -> (decimals : Uint256):
     # Desc: 
-    #   The number of decimals of the token
+    #   Returns the number of decimals of the token
     # Returns:
     #   decimals(Uint256): The number of decimals of the token
 func ERC20_decimals() -> (multiplier : felt):
