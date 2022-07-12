@@ -222,9 +222,19 @@ export default class CairoParser {
   // https://github.com/onlydustxyz/kaaper/issues/6
   static dumpParsingResult(
     parsingResult: ParsingResult[] | null,
-    outPath: string
+    outPath: string,
+    dumpCommentOnly: boolean = false
   ): void {
-    fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
+    if (dumpCommentOnly === true) {
+      const commentOnlyParsingResult = parsingResult?.map((obj) => ({
+        attributeName: obj.attributeName,
+        functionName: obj.functionName,
+        functionComment: obj.functionComment,
+      }));
+      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
+    } else {
+      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
+    }
   }
   // TODO: parse all files under a directory
 }
