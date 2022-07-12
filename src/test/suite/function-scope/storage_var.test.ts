@@ -970,6 +970,95 @@ suite("integration-test: event", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
+  test("5", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testAssets/library.cairo"
+    );
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    // Comment parsing
+    // parse comment lines
+    const line = 5;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
+
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+    const parsingTarget = [
+      {
+        attributeName: "storage_var",
+        functionName: "ERC20_allowances",
+        functionSignature: {
+          implicitArgs: null,
+          explicitArgs: [{ name: "owner", type: "felt" }, { name: "spender", type: "felt" }],
+          returns: [{ name: "allowance", type: "Uint256" }],
+        },
+        functionComment: {
+          desc: [
+            { name: "", type: "", desc: "Store the amount of tokens that an owner is allowed to delegate to a spender" },
+          ],
+          implicitArgs: null,
+          explicitArgs: [{ name: "owner", type: "felt", desc: "The address of the owner" }, { name: "spender", type: "felt", desc: "The address of the spender" }],
+          returns: [{ name: "allowance", type: "Uint256", desc: "The amount of tokens that an owner is allowed to delegate to a spender" }],
+          raises: null,
+        },
+      },
+    ]
+
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![line]
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      },
+    ];
+
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
+
   // test("2", () => {
   //   const pathFile = path.resolve(
   //     __dirname,
