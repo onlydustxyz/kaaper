@@ -130,10 +130,15 @@ suite("integration-test: event", () => {
 
     // Comment parsing
     // parse comment lines
+<<<<<<< HEAD
     const line = 1;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
     );
+=======
+    const line = 1
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![line]);
+>>>>>>> 883f21d (test(event): #1)
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -157,6 +162,7 @@ suite("integration-test: event", () => {
           returns: null,
         },
         functionComment: {
+<<<<<<< HEAD
           desc: [
             {
               name: "",
@@ -164,6 +170,9 @@ suite("integration-test: event", () => {
               desc: "Emit event when a delegation is made",
             },
           ],
+=======
+          desc: [{ name: "", type: "", desc: "Emit event when a delegation is made" }],
+>>>>>>> 883f21d (test(event): #1)
           implicitArgs: null,
           explicitArgs: [
             {
@@ -203,9 +212,13 @@ suite("integration-test: event", () => {
           explicitArgs: functionSignatureParser.getExplicitArgs(
             functionScopeLines![line]
           ),
+<<<<<<< HEAD
           returns: functionSignatureParser.getReturns(
             functionScopeLines![line]
           ),
+=======
+          returns: functionSignatureParser.getReturns(functionScopeLines![line]),
+>>>>>>> 883f21d (test(event): #1)
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
