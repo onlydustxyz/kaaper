@@ -69,7 +69,7 @@ end
 @storage_var
 func ERC20_total_supply() -> (total_supply : Uint256):
     # Desc: 
-    #   The total amount of tokens in existence
+    #   Returns total amount of tokens in existence
     # Returns:
     #   total_supply(Uint256): The total amount of tokens in existence
 end
