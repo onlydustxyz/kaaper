@@ -276,37 +276,37 @@ suite("isValidFunctionComment: explicit args", () => {
 
   
 
-  // test("both are null", () => {
-  //   const scopeLines = {
-  //     attributeName: "view",
-  //     functionName: "totalSupply",
-  //     functionSignature: {
-  //       implicitArgs: null,
-  //       explicitArgs: null,
-  //       returns: [{ name: "totalSupply", type: "Uint256" }],
-  //     },
-  //     functionComment: {
-  //       desc: [
-  //         {
-  //           name: "",
-  //           type: "",
-  //           desc: "Returns the total supply of the token",
-  //         },
-  //       ],
-  //       implicitArgs: null,
-  //       explicitArgs: null,
-  //       returns: [
-  //         {
-  //           name: "totalSupply",
-  //           type: "Uint256",
-  //           desc: "total supply of the token",
-  //         },
-  //       ],
-  //       raises: null,
-  //     },
-  //   };
+  test("both are null", () => {
+    const scopeLines = {
+      attributeName: "view",
+      functionName: "totalSupply",
+      functionSignature: {
+        implicitArgs: null,
+        explicitArgs: null,
+        returns: [{ name: "totalSupply", type: "Uint256" }],
+      },
+      functionComment: {
+        desc: [
+          {
+            name: "",
+            type: "",
+            desc: "Returns the total supply of the token",
+          },
+        ],
+        implicitArgs: null,
+        explicitArgs: null,
+        returns: [
+          {
+            name: "totalSupply",
+            type: "Uint256",
+            desc: "total supply of the token",
+          },
+        ],
+        raises: null,
+      },
+    };
 
-  //   const isValid = CairoParser.isValidFunctionComment(scopeLines);
-  //   assert.deepEqual({isValid: true, errorSource: null}, isValid);
-  // });
+    const isValid = CairoParser.isValidFunctionComment(scopeLines);
+    assert.deepEqual({isValid: true, errorSource: null}, isValid);
+  });
 });
