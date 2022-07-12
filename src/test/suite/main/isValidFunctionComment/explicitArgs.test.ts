@@ -194,7 +194,13 @@ suite("isValidFunctionComment: explicit args", () => {
           { name: "pedersen_ptr", type: "HashBuiltin*" },
           { name: "range_check_ptr", type: "" },
         ],
-        explicitArgs: null,
+        explicitArgs: [
+          { name: "name", type: "felt" },
+          { name: "symbol", type: "felt" },
+          { name: "decimals", type: "Uint256" },
+          { name: "initial_supply", type: "Uint256" },
+          { name: "recipient", type: "felt" },
+        ],
         returns: null,
       },
       functionComment: {
