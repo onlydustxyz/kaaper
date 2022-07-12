@@ -2,7 +2,7 @@ import * as assert from "assert";
 import CairoParser from "../../../../lib/main";
 
 suite("isValidFunctionComment: returns", () => {
-  test("valid (both are not none)", () => {
+  test("valid (both are not null)", () => {
     const scopeLines = {
       attributeName: "external",
       functionName: "transfer",
