@@ -90,4 +90,5 @@ suite("function-signature: constructor", () => {
       "failed to get explicit args"
     );
   });
+
 });
