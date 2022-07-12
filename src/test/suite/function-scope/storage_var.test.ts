@@ -46,12 +46,12 @@ suite("integration-test: event", () => {
           returns: [{ name: "name", type: "felt" }],
         },
         functionComment: {
-          desc: [
-            { name: "", type: "", desc: "Returns the name of the token" },
-          ],
+          desc: [{ name: "", type: "", desc: "Returns the name of the token" }],
           implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "name", type: "felt", desc: "The name of the token" }],
+          returns: [
+            { name: "name", type: "felt", desc: "The name of the token" },
+          ],
           raises: null,
         },
       },
@@ -138,11 +138,13 @@ suite("integration-test: event", () => {
           ],
           implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "symbol", type: "felt", desc: "The symbol of the token" }],
+          returns: [
+            { name: "symbol", type: "felt", desc: "The symbol of the token" },
+          ],
           raises: null,
         },
       },
-    ]
+    ];
 
     var parsingOutput = [
       {
@@ -223,15 +225,25 @@ suite("integration-test: event", () => {
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the number of decimals of the token" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns the number of decimals of the token",
+            },
           ],
           implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "decimals", type: "Uint256", desc: "The number of decimals of the token" }],
+          returns: [
+            {
+              name: "decimals",
+              type: "Uint256",
+              desc: "The number of decimals of the token",
+            },
+          ],
           raises: null,
         },
       },
-    ]
+    ];
 
     var parsingOutput = [
       {
@@ -312,15 +324,25 @@ suite("integration-test: event", () => {
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns total amount of tokens in existence" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns total amount of tokens in existence",
+            },
           ],
           implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "total_supply", type: "Uint256", desc: "The total amount of tokens in existence" }],
+          returns: [
+            {
+              name: "total_supply",
+              type: "Uint256",
+              desc: "The total amount of tokens in existence",
+            },
+          ],
           raises: null,
         },
       },
-    ]
+    ];
 
     var parsingOutput = [
       {
@@ -401,15 +423,31 @@ suite("integration-test: event", () => {
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the amount of tokens owned by an account" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns the amount of tokens owned by an account",
+            },
           ],
           implicitArgs: null,
-          explicitArgs: [{ name: "account", type: "felt", desc: "The address of the account" }],
-          returns: [{ name: "balance", type: "Uint256", desc: "The amount of tokens owned by an account" }],
+          explicitArgs: [
+            {
+              name: "account",
+              type: "felt",
+              desc: "The address of the account",
+            },
+          ],
+          returns: [
+            {
+              name: "balance",
+              type: "Uint256",
+              desc: "The amount of tokens owned by an account",
+            },
+          ],
           raises: null,
         },
       },
-    ]
+    ];
 
     var parsingOutput = [
       {
@@ -485,20 +523,40 @@ suite("integration-test: event", () => {
         functionName: "ERC20_allowances",
         functionSignature: {
           implicitArgs: null,
-          explicitArgs: [{ name: "owner", type: "felt" }, { name: "spender", type: "felt" }],
+          explicitArgs: [
+            { name: "owner", type: "felt" },
+            { name: "spender", type: "felt" },
+          ],
           returns: [{ name: "allowance", type: "Uint256" }],
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Store the amount of tokens that an owner is allowed to delegate to a spender" },
+            {
+              name: "",
+              type: "",
+              desc: "Store the amount of tokens that an owner is allowed to delegate to a spender",
+            },
           ],
           implicitArgs: null,
-          explicitArgs: [{ name: "owner", type: "felt", desc: "The address of the owner" }, { name: "spender", type: "felt", desc: "The address of the spender" }],
-          returns: [{ name: "allowance", type: "Uint256", desc: "The amount of tokens that an owner is allowed to delegate to a spender" }],
+          explicitArgs: [
+            { name: "owner", type: "felt", desc: "The address of the owner" },
+            {
+              name: "spender",
+              type: "felt",
+              desc: "The address of the spender",
+            },
+          ],
+          returns: [
+            {
+              name: "allowance",
+              type: "Uint256",
+              desc: "The amount of tokens that an owner is allowed to delegate to a spender",
+            },
+          ],
           raises: null,
         },
       },
-    ]
+    ];
 
     var parsingOutput = [
       {
