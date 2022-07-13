@@ -13,6 +13,9 @@ export default class CLI {
     dumpCommentOnly: boolean = false
   ): void {
     const contractPaths = fs.readdirSync(this.contractRootDir);
+    if (!fs.existsSync(outDir)) {
+        fs.mkdirSync(outDir);
+    }
     for (const contractFile of contractPaths) {
       const filePath = path.join(this.contractRootDir, contractFile);
       const parsingResults = CairoParser.getFileParsingResult(filePath);
