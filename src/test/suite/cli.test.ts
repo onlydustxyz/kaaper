@@ -3,12 +3,16 @@ import * as path from "path";
 import CLI from "../../lib/cli";
 
 suite("generateContractsDocs", () => {
-  test("without comment", () => {
+  test("dump all", () => {
     const cli = new CLI("testAssets")
 
     cli.generateContractsDocs("docs/ERC20/", false);
   });
 
-  test("library", () => {})
+  test("only comment", () => {
+    const cli = new CLI("testAssets")
+
+    cli.generateContractsDocs("docs/ERC20_comment_only/", true);
+  });
     
 });
