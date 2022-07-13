@@ -1,7 +1,5 @@
 import * as fs from "fs";
-import * as path from "path";
 
-import { BaseCommentParser } from "./parser/interfaces/function-comment";
 import FunctionSignatureRegexParser from "./parser/function-signature/regex";
 import FunctionCommentDescParser from "./parser/function-comment/desc";
 import FunctionCommentImplicitArgsParser from "./parser/function-comment/implicit-args";
@@ -218,41 +216,5 @@ export default class CairoParser {
 
     return { isValid: true, errorSource: null };
   }
-
-  // https://github.com/onlydustxyz/kaaper/issues/6
-  static dumpParsingResult(
-    parsingResult: ParsingResult[] | null,
-    outPath: string,
-    dumpCommentOnly: boolean = false
-  ): void {
-    if (dumpCommentOnly === true) {
-      const commentOnlyParsingResult = parsingResult?.map((obj) => ({
-        attributeName: obj.attributeName,
-        functionName: obj.functionName,
-        functionComment: obj.functionComment,
-      }));
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
-    } else {
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
-    }
-  }
-
-  static checkContractsCommentCompliance(
-    contractRootDir: string,
-  ): CommentComplicance {
-    const contractPaths = fs.readdirSync(contractRootDir);
-    for (const contractFile of contractPaths) {
-      const filePath = path.join(contractRootDir, contractFile);
-      const parsingResults = CairoParser.getFileParsingResult(filePath);
-      if (parsingResults) {
-        for (const parsingResult of parsingResults) {
-          const isValid = CairoParser.isValidFunctionComment(parsingResult);
-          if (isValid.isValid === false) {
-            return {isCompliant: false, filePath: filePath, errorSource: isValid.errorSource};
-          }
-        }
-      }
-    }
-    return {isCompliant: true, filePath: null, errorSource: null};
-  }
 }
+  
