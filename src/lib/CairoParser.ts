@@ -216,5 +216,22 @@ export default class CairoParser {
 
     return { isValid: true, errorSource: null };
   }
+
+  static dumpParsingResult(
+    parsingResult: ParsingResult[] | null,
+    outPath: string,
+    dumpCommentOnly: boolean = false
+  ): void {
+    if (dumpCommentOnly === true) {
+      const commentOnlyParsingResult = parsingResult?.map((obj) => ({
+        attributeName: obj.attributeName,
+        functionName: obj.functionName,
+        functionComment: obj.functionComment,
+      }));
+      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
+    } else {
+      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
+    }
+  }
 }
   

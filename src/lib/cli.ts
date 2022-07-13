@@ -1,47 +1,43 @@
 import * as fs from "fs";
 import * as path from "path";
-
 import CairoParser from "./CairoParser";
 
-const lodash = require("lodash");
-const yaml = require("js-yaml");
 
 export default class CLI {
-  constructor() {}
-
-  static dumpParsingResult(
-    parsingResult: ParsingResult[] | null,
-    outPath: string,
-    dumpCommentOnly: boolean = false
-  ): void {
-    if (dumpCommentOnly === true) {
-      const commentOnlyParsingResult = parsingResult?.map((obj) => ({
-        attributeName: obj.attributeName,
-        functionName: obj.functionName,
-        functionComment: obj.functionComment,
-      }));
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
-    } else {
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
-    }
+  public contractRootDir: string;
+  constructor(contractRootDir: string) {
+    this.contractRootDir = contractRootDir;
   }
 
-  static checkContractsCommentCompliance(
-    contractRootDir: string,
-  ): CommentComplicance {
-    const contractPaths = fs.readdirSync(contractRootDir);
+ generateContractsDocs(outDir: string, dumpCommentOnly: boolean = false): void{
+    const contractPaths = fs.readdirSync(this.contractRootDir);
     for (const contractFile of contractPaths) {
-      const filePath = path.join(contractRootDir, contractFile);
+      const filePath = path.join(this.contractRootDir, contractFile);
       const parsingResults = CairoParser.getFileParsingResult(filePath);
       if (parsingResults) {
-        for (const parsingResult of parsingResults) {
-          const isValid = CairoParser.isValidFunctionComment(parsingResult);
-          if (isValid.isValid === false) {
-            return {isCompliant: false, filePath: filePath, errorSource: isValid.errorSource};
-          }
-        }
+        CairoParser.dumpParsingResult(parsingResults, `${outDir}/${contractFile}`, dumpCommentOnly); 
       }
+    }
+    }
+
+
+ checkContractsCommentCompliance(
+    ): CommentComplicance {
+    const contractPaths = fs.readdirSync(this.contractRootDir);
+    for (const contractFile of contractPaths) {
+        const filePath = path.join(this.contractRootDir, contractFile);
+        const parsingResults = CairoParser.getFileParsingResult(filePath);
+        if (parsingResults) {
+        for (const parsingResult of parsingResults) {
+            const isValid = CairoParser.isValidFunctionComment(parsingResult);
+            if (isValid.isValid === false) {
+            return {isCompliant: false, filePath: filePath, errorSource: isValid.errorSource};
+            }
+        }
+        }
     }
     return {isCompliant: true, filePath: null, errorSource: null};
     }
+
+  
 }
