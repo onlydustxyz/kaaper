@@ -7,7 +7,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 2", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -48,7 +48,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 3", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -92,7 +92,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 4", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -140,7 +140,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 5", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -189,7 +189,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 6", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -239,7 +239,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse whole scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,

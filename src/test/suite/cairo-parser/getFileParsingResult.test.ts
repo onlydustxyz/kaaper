@@ -6,7 +6,7 @@ suite("get-file-parsing-result", () => {
   test("ERC20.cairo", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -589,7 +589,7 @@ suite("get-file-parsing-result", () => {
   test("library.cairo", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/library.cairo"
+      "../../../../testContracts/ERC20Compliant/library.cairo"
     );
 
     // parse whole scope

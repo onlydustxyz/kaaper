@@ -7,7 +7,7 @@ suite("function-signature: constructor", () => {
   test("ERC20: get attribute name", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const constructorText = CairoParser.parseFunctionScope(
       pathFile,
@@ -23,7 +23,7 @@ suite("function-signature: constructor", () => {
   test("ERC20: get function name", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const constructorText = CairoParser.parseFunctionScope(
       pathFile,
@@ -40,7 +40,7 @@ suite("function-signature: constructor", () => {
   test("ERC20: get implicit args", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const constructorText = CairoParser.parseFunctionScope(
       pathFile,
@@ -66,7 +66,7 @@ suite("function-signature: constructor", () => {
   test("ERC20: get explicit args", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const constructorText = CairoParser.parseFunctionScope(
       pathFile,

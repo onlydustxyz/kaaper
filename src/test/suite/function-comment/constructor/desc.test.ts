@@ -7,7 +7,7 @@ suite("function-comment: constructor: desc", () => {
   test("parse line 0", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -40,7 +40,7 @@ suite("function-comment: constructor: desc", () => {
   test("parse line 1", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -86,7 +86,7 @@ suite("function-comment: constructor: desc", () => {
   test("parse line 2", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -128,7 +128,7 @@ suite("function-comment: constructor: desc", () => {
   test("parse whole comment", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
