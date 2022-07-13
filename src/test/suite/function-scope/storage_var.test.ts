@@ -8,15 +8,18 @@ import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment/raises";
 
-suite("integration-test: view", () => {
+suite("integration-test: event", () => {
   test("0", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testAssets/library.cairo"
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -35,26 +38,20 @@ suite("integration-test: view", () => {
 
     const parsingTarget = [
       {
-        attributeName: "view",
-        functionName: "name",
+        attributeName: "storage_var",
+        functionName: "ERC20_name",
         functionSignature: {
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*" },
-            { name: "pedersen_ptr", type: "HashBuiltin*" },
-            { name: "range_check_ptr", type: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
           returns: [{ name: "name", type: "felt" }],
         },
         functionComment: {
           desc: [{ name: "", type: "", desc: "Returns the name of the token" }],
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "name", type: "felt", desc: "name of the token" }],
+          returns: [
+            { name: "name", type: "felt", desc: "The name of the token" },
+          ],
           raises: null,
         },
       },
@@ -99,11 +96,14 @@ suite("integration-test: view", () => {
   test("1", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testAssets/library.cairo"
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -125,14 +125,10 @@ suite("integration-test: view", () => {
 
     const parsingTarget = [
       {
-        attributeName: "view",
-        functionName: "symbol",
+        attributeName: "storage_var",
+        functionName: "ERC20_symbol",
         functionSignature: {
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*" },
-            { name: "pedersen_ptr", type: "HashBuiltin*" },
-            { name: "range_check_ptr", type: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
           returns: [{ name: "symbol", type: "felt" }],
         },
@@ -140,14 +136,10 @@ suite("integration-test: view", () => {
           desc: [
             { name: "", type: "", desc: "Returns the symbol of the token" },
           ],
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
           returns: [
-            { name: "symbol", type: "felt", desc: "symbol of the token" },
+            { name: "symbol", type: "felt", desc: "The symbol of the token" },
           ],
           raises: null,
         },
@@ -195,11 +187,14 @@ suite("integration-test: view", () => {
   test("2", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testAssets/library.cairo"
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -210,7 +205,7 @@ suite("integration-test: view", () => {
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
     );
-    console.log(commentLines);
+
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -221,36 +216,28 @@ suite("integration-test: view", () => {
 
     const parsingTarget = [
       {
-        attributeName: "view",
-        functionName: "totalSupply",
+        attributeName: "storage_var",
+        functionName: "ERC20_decimals",
         functionSignature: {
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*" },
-            { name: "pedersen_ptr", type: "HashBuiltin*" },
-            { name: "range_check_ptr", type: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "totalSupply", type: "Uint256" }],
+          returns: [{ name: "decimals", type: "Uint256" }],
         },
         functionComment: {
           desc: [
             {
               name: "",
               type: "",
-              desc: "Returns the total supply of the token",
+              desc: "Returns the number of decimals of the token",
             },
           ],
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
           returns: [
             {
-              name: "totalSupply",
+              name: "decimals",
               type: "Uint256",
-              desc: "total supply of the token",
+              desc: "The number of decimals of the token",
             },
           ],
           raises: null,
@@ -299,11 +286,14 @@ suite("integration-test: view", () => {
   test("3", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testAssets/library.cairo"
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -314,7 +304,7 @@ suite("integration-test: view", () => {
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
     );
-    console.log(commentLines);
+
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -325,29 +315,29 @@ suite("integration-test: view", () => {
 
     const parsingTarget = [
       {
-        attributeName: "view",
-        functionName: "decimals",
+        attributeName: "storage_var",
+        functionName: "ERC20_total_supply",
         functionSignature: {
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*" },
-            { name: "pedersen_ptr", type: "HashBuiltin*" },
-            { name: "range_check_ptr", type: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
-          returns: [{ name: "decimals", type: "felt" }],
+          returns: [{ name: "total_supply", type: "Uint256" }],
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the decimals of the token" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns total amount of tokens in existence",
+            },
           ],
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: null,
           returns: [
-            { name: "decimals", type: "felt", desc: "decimals of the token" },
+            {
+              name: "total_supply",
+              type: "Uint256",
+              desc: "The total amount of tokens in existence",
+            },
           ],
           raises: null,
         },
@@ -395,11 +385,14 @@ suite("integration-test: view", () => {
   test("4", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testAssets/library.cairo"
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -410,7 +403,7 @@ suite("integration-test: view", () => {
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
     );
-    console.log(commentLines);
+
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -421,38 +414,34 @@ suite("integration-test: view", () => {
 
     const parsingTarget = [
       {
-        attributeName: "view",
-        functionName: "balanceOf",
+        attributeName: "storage_var",
+        functionName: "ERC20_balances",
         functionSignature: {
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*" },
-            { name: "pedersen_ptr", type: "HashBuiltin*" },
-            { name: "range_check_ptr", type: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: [{ name: "account", type: "felt" }],
           returns: [{ name: "balance", type: "Uint256" }],
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the balance of the account" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns the amount of tokens owned by an account",
+            },
           ],
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: [
             {
               name: "account",
               type: "felt",
-              desc: "account to query balance for",
+              desc: "The address of the account",
             },
           ],
           returns: [
             {
               name: "balance",
               type: "Uint256",
-              desc: "the balance of the account",
+              desc: "The amount of tokens owned by an account",
             },
           ],
           raises: null,
@@ -501,11 +490,14 @@ suite("integration-test: view", () => {
   test("5", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testAssets/library.cairo"
     );
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "storage_var"
+    );
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -516,7 +508,7 @@ suite("integration-test: view", () => {
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
     );
-    console.log(commentLines);
+
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
       new FunctionCommentImplicitArgsParser();
@@ -527,50 +519,38 @@ suite("integration-test: view", () => {
 
     const parsingTarget = [
       {
-        attributeName: "view",
-        functionName: "allowance",
+        attributeName: "storage_var",
+        functionName: "ERC20_allowances",
         functionSignature: {
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*" },
-            { name: "pedersen_ptr", type: "HashBuiltin*" },
-            { name: "range_check_ptr", type: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: [
             { name: "owner", type: "felt" },
             { name: "spender", type: "felt" },
           ],
-          returns: [{ name: "remaining", type: "Uint256" }],
+          returns: [{ name: "allowance", type: "Uint256" }],
         },
         functionComment: {
           desc: [
             {
               name: "",
               type: "",
-              desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
+              desc: "Store the amount of tokens that an owner is allowed to delegate to a spender",
             },
           ],
-          implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
-          ],
+          implicitArgs: null,
           explicitArgs: [
-            {
-              name: "owner",
-              type: "felt",
-              desc: "the address of owner of the tokens",
-            },
+            { name: "owner", type: "felt", desc: "The address of the owner" },
             {
               name: "spender",
               type: "felt",
-              desc: "the address of spender (delegated account) of the tokens",
+              desc: "The address of the spender",
             },
           ],
           returns: [
             {
-              name: "remaining",
+              name: "allowance",
               type: "Uint256",
-              desc: "the amount of remaining tokens allowed to be spent by the spender",
+              desc: "The amount of tokens that an owner is allowed to delegate to a spender",
             },
           ],
           raises: null,
@@ -614,5 +594,22 @@ suite("integration-test: view", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
+
+  test("6", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testAssets/library.cairo"
+    );
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      pathFile,
+      "event"
+    );
+
+    const line = 6;
+
+    assert.equal(functionScopeLines![line], null);
   });
 });

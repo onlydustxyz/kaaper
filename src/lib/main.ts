@@ -10,13 +10,15 @@ import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 
 // const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
-const yaml = require('js-yaml');
+const yaml = require("js-yaml");
 
 // TODO: refactor this
 let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
+map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
+map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
 
 export default class CairoParser {
   constructor() {}
@@ -122,16 +124,40 @@ export default class CairoParser {
       "external"
     );
 
-    // combine 3 results
-    if (
-      constructorParsingResult &&
-      viewParsingResult &&
-      externalParsingResult
-    ) {
-      return constructorParsingResult
-        .concat(viewParsingResult)
-        .concat(externalParsingResult);
+    const eventParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "event"
+    );
+
+    const storageVarParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "storage_var"
+    );
+
+    var allParsingResult: ParsingResult[] = [];
+    // combine all scopes
+
+    // TODO: refactor this
+    if (constructorParsingResult) {
+      allParsingResult = allParsingResult.concat(constructorParsingResult);
     }
+    if (viewParsingResult) {
+      allParsingResult = allParsingResult.concat(viewParsingResult);
+    }
+    if (externalParsingResult) {
+      allParsingResult = allParsingResult.concat(externalParsingResult);
+    }
+    if (eventParsingResult) {
+      allParsingResult = allParsingResult.concat(eventParsingResult);
+    }
+    if (storageVarParsingResult) {
+      allParsingResult = allParsingResult.concat(storageVarParsingResult);
+    }
+
+    if (allParsingResult.length > 0) {
+      return allParsingResult;
+    }
+
     return null;
   }
 
@@ -194,10 +220,21 @@ export default class CairoParser {
   }
 
   // https://github.com/onlydustxyz/kaaper/issues/6
-  static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
-    fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
+  static dumpParsingResult(
+    parsingResult: ParsingResult[] | null,
+    outPath: string,
+    dumpCommentOnly: boolean = false
+  ): void {
+    if (dumpCommentOnly === true) {
+      const commentOnlyParsingResult = parsingResult?.map((obj) => ({
+        attributeName: obj.attributeName,
+        functionName: obj.functionName,
+        functionComment: obj.functionComment,
+      }));
+      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
+    } else {
+      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
+    }
   }
-
-
   // TODO: parse all files under a directory
 }
