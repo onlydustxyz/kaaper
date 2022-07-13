@@ -30,3 +30,9 @@ interface FunctionCommentValidity {
   isValid: boolean;
   errorSource: string | null;
 }
+
+interface CommentComplicance {
+  isCompliant: boolean;
+  filePath: string | null;
+  errorSource: string | null;
+}

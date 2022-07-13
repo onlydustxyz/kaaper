@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
-import CairoParser from "../../../../lib/main";
+import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: desc", () => {
   test("parse line 0", () => {

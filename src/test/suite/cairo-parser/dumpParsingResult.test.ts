@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../lib/CairoParser";
 
 suite("dumpParsingResult", () => {
   test("ERC20", () => {

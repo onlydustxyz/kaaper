@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import CairoParser from "../../../../lib/main";
+import CairoParser from "../../../../lib/CairoParser";
 
 suite("isValidFunctionComment: returns", () => {
   test("valid (both are not null)", () => {

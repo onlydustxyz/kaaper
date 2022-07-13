@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../lib/CairoParser";
 
 suite("function-signature: constructor", () => {
   test("ERC20: get attribute name", () => {

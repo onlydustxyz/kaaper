@@ -1,8 +1,9 @@
 import * as fs from "fs";
+import * as path from "path";
 
 import { BaseCommentParser } from "./parser/interfaces/function-comment";
-import FunctionSignatureRegexParser from "../lib/parser/function-signature/regex";
-import FunctionCommentDescParser from "../lib/parser/function-comment/desc";
+import FunctionSignatureRegexParser from "./parser/function-signature/regex";
+import FunctionCommentDescParser from "./parser/function-comment/desc";
 import FunctionCommentImplicitArgsParser from "./parser/function-comment/implicit-args";
 import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "./parser/function-comment/returns";
@@ -235,5 +236,23 @@ export default class CairoParser {
       fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
     }
   }
-  // TODO: parse all files under a directory
+
+  static checkContractsCommentCompliance(
+    contractRootDir: string,
+  ): CommentComplicance {
+    const contractPaths = fs.readdirSync(contractRootDir);
+    for (const contractFile of contractPaths) {
+      const filePath = path.join(contractRootDir, contractFile);
+      const parsingResults = CairoParser.getFileParsingResult(filePath);
+      if (parsingResults) {
+        for (const parsingResult of parsingResults) {
+          const isValid = CairoParser.isValidFunctionComment(parsingResult);
+          if (isValid.isValid === false) {
+            return {isCompliant: false, filePath: filePath, errorSource: isValid.errorSource};
+          }
+        }
+      }
+    }
+    return {isCompliant: true, filePath: null, errorSource: null};
+  }
 }
