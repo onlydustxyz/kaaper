@@ -2,18 +2,15 @@ import * as assert from "assert";
 import * as path from "path";
 import CairoParser from "../../../lib/main";
 
-suite("integration-test: main", () => {
-  test("constructor", () => {
+suite("get-file-parsing-result", () => {
+  test("constructor-view-external", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
 
     // parse whole scope
-    const parsingOutput = CairoParser.getScopeParsingResult(
-      pathFile,
-      "constructor"
-    );
+    const parsingOutput = CairoParser.getFileParsingResult(pathFile);
 
     const parsingTarget = [
       {
@@ -73,25 +70,6 @@ suite("integration-test: main", () => {
           ],
         },
       },
-    ];
-
-    assert.deepEqual(
-      parsingTarget,
-      parsingOutput,
-      "failed parsing whole scope"
-    );
-  });
-
-  test("view", () => {
-    const pathFile = path.resolve(
-      __dirname,
-      "../../../../test_assets/ERC20.cairo"
-    );
-
-    // parse whole scope
-    const parsingOutput = CairoParser.getScopeParsingResult(pathFile, "view");
-
-    const parsingTarget = [
       {
         attributeName: "view",
         functionName: "name",
@@ -296,28 +274,6 @@ suite("integration-test: main", () => {
           raises: null,
         },
       },
-    ];
-
-    assert.deepEqual(
-      parsingTarget,
-      parsingOutput,
-      "failed parsing whole scope"
-    );
-  });
-
-  test("external", () => {
-    const pathFile = path.resolve(
-      __dirname,
-      "../../../../test_assets/ERC20.cairo"
-    );
-
-    // parse whole scope
-    const parsingOutput = CairoParser.getScopeParsingResult(
-      pathFile,
-      "external"
-    );
-
-    const parsingTarget = [
       {
         attributeName: "external",
         functionName: "transfer",

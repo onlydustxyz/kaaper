@@ -25,3 +25,8 @@ interface ParsingResult {
     raises: FunctionComment[] | null;
   };
 }
+
+interface FunctionCommentValidity {
+  isValid: boolean;
+  errorSource: string | null;
+}

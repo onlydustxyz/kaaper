@@ -1,4 +1,5 @@
 import * as fs from "fs";
+
 import { BaseCommentParser } from "./parser/interfaces/function-comment";
 import FunctionSignatureRegexParser from "../lib/parser/function-signature/regex";
 import FunctionCommentDescParser from "../lib/parser/function-comment/desc";
@@ -6,6 +7,10 @@ import FunctionCommentImplicitArgsParser from "./parser/function-comment/implici
 import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "./parser/function-comment/returns";
 import FunctionCommentRaisesParser from "./parser/function-comment/raises";
+
+// const isEqual = require('lodash.isequal');
+const lodash = require("lodash");
+const yaml = require('js-yaml');
 
 // TODO: refactor this
 let map = new Map();
@@ -102,11 +107,97 @@ export default class CairoParser {
     return null;
   }
 
-  // TODO: dump all parsed data to a file
-  // https://github.com/onlydustxyz/kaaper/issues/6
+  // TODO: refactor this
+  static getFileParsingResult(filePath: string): ParsingResult[] | null {
+    const constructorParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "constructor"
+    );
+    const viewParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "view"
+    );
+    const externalParsingResult = CairoParser.getScopeParsingResult(
+      filePath,
+      "external"
+    );
 
-  // TODO: check if there's mismatch between function signature and comment
-  // https://github.com/onlydustxyz/kaaper/issues/7
+    // combine 3 results
+    if (
+      constructorParsingResult &&
+      viewParsingResult &&
+      externalParsingResult
+    ) {
+      return constructorParsingResult
+        .concat(viewParsingResult)
+        .concat(externalParsingResult);
+    }
+    return null;
+  }
+
+  private static _isValidFunctionComment(
+    functionSignature: FunctionSignature[] | null,
+    functionComment: FunctionComment[] | null
+  ): boolean {
+    if (functionSignature === null || functionComment === null) {
+      const isImplicitArgsEqual = lodash.isEqual(
+        functionSignature,
+        functionComment
+      );
+      if (isImplicitArgsEqual === false) {
+        return false;
+      }
+    } else {
+      const isImplicitArgsEqual = lodash.isEqual(
+        functionSignature,
+        functionComment?.map((obj) => ({ name: obj.name, type: obj.type }))
+      );
+      if (isImplicitArgsEqual === false) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  static isValidFunctionComment(
+    parsingResult: ParsingResult
+  ): FunctionCommentValidity {
+    const functionSignature = parsingResult.functionSignature;
+    const functionComment = parsingResult.functionComment;
+
+    const isImplicitArgsEqual = this._isValidFunctionComment(
+      functionSignature.implicitArgs,
+      functionComment.implicitArgs
+    );
+    if (isImplicitArgsEqual === false) {
+      return { isValid: false, errorSource: "implicitArgs" };
+    }
+
+    const isExplicitArgsEqual = this._isValidFunctionComment(
+      functionSignature.explicitArgs,
+      functionComment.explicitArgs
+    );
+    if (isExplicitArgsEqual === false) {
+      return { isValid: false, errorSource: "explicitArgs" };
+    }
+
+    const isReturnsEqual = this._isValidFunctionComment(
+      functionSignature.returns,
+      functionComment.returns
+    );
+    if (isReturnsEqual === false) {
+      return { isValid: false, errorSource: "returns" };
+    }
+
+    return { isValid: true, errorSource: null };
+  }
+
+  // https://github.com/onlydustxyz/kaaper/issues/6
+  static dumpParsingResult(parsingResult: ParsingResult[] | null, outPath:string): void {
+    fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult))
+  }
+
 
   // TODO: parse all files under a directory
 }
