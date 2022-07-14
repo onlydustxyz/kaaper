@@ -17,15 +17,13 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     #   Initialize the contract
     # Implicit args:
     #   syscall_ptr(felt)
-    #   pedersen_ptr(HashBuiltin)
+    #   pedersen_ptr(HashBuiltin*)
     #   range_check_ptr
     # Explicit args:
     #   symbol(felt): symbol of the token
     #   decimals(felt): floating point of the token
     #   initial_supply(Uint256): amount of initial supply of the token
     #   recipient(felt): the address of recipient of the initial supply
-    # Returns:
-    #   None
     # Raises:
     #   decimals: decimals exceed 2^8
     #   recipient: cannot mint to the zero address
