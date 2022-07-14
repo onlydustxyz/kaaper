@@ -47,7 +47,7 @@ func name{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -
     #   pedersen_ptr(HashBuiltin*)
     #   range_check_ptr
     # Returns:
-    #   name(felt): name of the token
+    #   names(felt): name of the token
     let (name) = ERC20.name()
     return (name)
 end
@@ -248,7 +248,7 @@ func decreaseAllowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
     #   spender(felt): the address of ERC20 spender
     #   subtracted_value(Uint256): the amount of ERC20 token to decrease allowance
     # Returns:
-    #   success(felt): 1 if decrease allowance was successful, 0 otherwise
+    #   sucess(felt): 1 if decrease allowance was successful, 0 otherwise
     # Raises:
     #   subtracted_value: subtracted_value is not a valid Uint256
     #   spender: cannot decrease allowance to the zero address

@@ -21,7 +21,6 @@ func Transfer(from_ : felt, to : felt, value : Uint256):
     # Desc: 
     #   Emit event when a transfer is made
     # Explicit args:
-    #   from_(felt): The address of the sender
     #   to(felt): The address of the receiver
     #   value(Uint256): The amount of tokens transferred
 end
@@ -53,6 +52,8 @@ end
 func ERC20_symbol() -> (symbol : felt):
     # Desc: 
     #   Returns the symbol of the token
+    # Explicit args:
+    #   symbol(felt): The symbol of the token
     # Returns:
     #   symbol(felt): The symbol of the token
 end

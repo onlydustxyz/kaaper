@@ -33,6 +33,30 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: "constructor",
         errorSource: ["implicitArgs", "explicitArgs"],
       },
+      {
+        filePath: "testContracts/ERC20NonCompliant/ERC20.cairo",
+        attributeName: "view",
+        functionName: "name",
+        errorSource: "returns",
+      },
+      {
+        filePath: "testContracts/ERC20NonCompliant/ERC20.cairo",
+        attributeName: "external",
+        functionName: "decreaseAllowance",
+        errorSource: "returns",
+      },
+      {
+        filePath: "testContracts/ERC20NonCompliant/library.cairo",
+        attributeName: "event",
+        functionName: "Transfer",
+        errorSource: "explicitArgs",
+      },
+      {
+        filePath: "testContracts/ERC20NonCompliant/library.cairo",
+        attributeName: "storage_var",
+        functionName: "ERC20_symbol",
+        errorSource: "explicitArgs",
+      },
     ];
     assert.deepEqual(target, result);
   });
