@@ -21,9 +21,11 @@ program
   .description("Generate contract docs")
   .argument("<rootdir>", "root directory of contracts")
   .argument(["outdir"], "output directory")
-  .action((rootdir: any, outdir: any) => {
+  .option("--comment", "dump comment only")
+  .action((rootdir: string, outdir: string, options: any) => {
     const cli = new CLI(rootdir);
-    cli.generateContractsDocs(outdir, false);
+    const commentOnly = options.comment ? true : false;
+    cli.generateContractsDocs(outdir, commentOnly);
     console.log("documents generated at:", outdir);
   });
 

@@ -50,6 +50,16 @@ To see available commands
 kaaper
 ```
 
+Generate docs
+```
+kaaper generate testContracts docs
+```
+
+Generate docs (comment only)
+```
+kaaper generate --comment testContracts docs
+```
+
 ## 🌡️ Testing
 ```
 yarn test
