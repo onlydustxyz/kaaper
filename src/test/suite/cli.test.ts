@@ -2,15 +2,14 @@ import CLI from "../../lib/cli";
 
 suite("generateContractsDocs", () => {
   test("dump all", () => {
-    const cli = new CLI("testContracts/ERC20Compliant");
+    const cli = new CLI("testContracts/");
 
-    cli.generateContractsDocs("docs/ERC20/", false);
+    cli.generateContractsDocs("docs/all/", false);
   });
 
   test("only comment", () => {
-    const cli = new CLI("testContracts/ERC20Compliant");
+    const cli = new CLI("testContracts/");
 
-    cli.generateContractsDocs("docs/ERC20_comment_only/", true);
+    cli.generateContractsDocs("docs/comment_only/", true);
   });
-    
 });

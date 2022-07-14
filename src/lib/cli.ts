@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import CairoParser from "./CairoParser";
+var glob = require("glob");
 
 export default class CLI {
   public contractRootDir: string;
@@ -12,21 +13,24 @@ export default class CLI {
     outDir: string,
     dumpCommentOnly: boolean = false
   ): void {
-    const contractPaths = fs.readdirSync(this.contractRootDir);
-    if (!fs.existsSync(outDir)) {
-        fs.mkdirSync(outDir);
-    }
-    for (const contractFile of contractPaths) {
-      const filePath = path.join(this.contractRootDir, contractFile);
-      const parsingResults = CairoParser.getFileParsingResult(filePath);
-      if (parsingResults) {
-        CairoParser.dumpParsingResult(
-          parsingResults,
-          `${outDir}/${contractFile}`,
-          dumpCommentOnly
-        );
+    glob(`${this.contractRootDir}/**/*.cairo`, (_: any, files: string) => {
+      for (const file of files) {
+        const parsingResult = CairoParser.getFileParsingResult(file);
+        if (parsingResult) {
+          const relativePath = path.relative(this.contractRootDir, file);
+          const outPath = path.join(outDir, relativePath);
+          const outDirPath = path.dirname(outPath);
+          if (!fs.existsSync(outDirPath)) {
+            fs.mkdirSync(outDirPath, { recursive: true });
+          }
+          CairoParser.dumpParsingResult(
+            parsingResult,
+            outPath,
+            dumpCommentOnly
+          );
+        }
       }
-    }
+    });
   }
 
   checkContractsCommentCompliance(): CommentComplicance[] {
