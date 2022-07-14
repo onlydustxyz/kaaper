@@ -3,6 +3,8 @@ import * as path from "path";
 import CairoParser from "./CairoParser";
 var glob = require("glob");
 
+import { CommentComplicance } from "./types";
+
 export default class CLI {
   public contractRootDir: string;
   constructor(contractRootDir: string) {
@@ -33,28 +35,29 @@ export default class CLI {
     });
   }
 
-  // checkContractsCommentCompliance(): CommentComplicance[] {
-  //   const contractPaths = fs.readdirSync(this.contractRootDir);
-  //   var contractsCommentCompliance: CommentComplicance[] = [];
-  //   for (const contractFile of contractPaths) {
-  //     const filePath = path.join(this.contractRootDir, contractFile);
-  //     const parsingResults = CairoParser.getFileParsingResult(filePath);
-  //     if (parsingResults) {
-  //       for (const parsingResult of parsingResults) {
-  //         const isValid = CairoParser.isValidFunctionComment(parsingResult);
-  //         if (isValid.isValid === false) {
-  //           console.log(
-  //             `comment on ${filePath}: ${parsingResult.functionName} - ${isValid.errorSource} is not valid`
-  //           );
-  //         }
-  //         contractsCommentCompliance.push({
-  //           isCompliant: isValid.isValid,
-  //           filePath: filePath,
-  //           errorSource: isValid.errorSource,
-  //         });
-  //       }
-  //     }
-  //   }
-  //   return contractsCommentCompliance;
-  // }
+  getNonCompliantCommentFunction(): CommentComplicance[] | null {
+    var invalidContractsCommentsCompliance: CommentComplicance[] = [];
+    var files = glob.sync(`${this.contractRootDir}/**/*.cairo`);
+
+    for (var file of files) {
+      const parsingResult = CairoParser.getFileParsingResult(file);
+      if (parsingResult) {
+        for (const scopeParsingResult of parsingResult) {
+          const result = CairoParser.isValidFunctionComment(scopeParsingResult);
+          if (result.isValid === false) {
+            const commentComplicance = {
+              isCompliant: false,
+              filePath: file,
+              errorSource: result.errorSource,
+            };
+            invalidContractsCommentsCompliance.push(commentComplicance);
+          }
+        }
+      }
+    }
+    if (invalidContractsCommentsCompliance.length > 0) {
+      return invalidContractsCommentsCompliance;
+    }
+    return null;
+  }
 }

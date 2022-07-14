@@ -99,7 +99,6 @@ suite("integration-test: event", () => {
       "../../../../testContracts/ERC20Compliant/library.cairo"
     );
 
-
     // parse whole scope
     const functionScopeLines = CairoParser.parseFunctionScope(
       pathFile,
