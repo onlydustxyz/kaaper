@@ -13,7 +13,7 @@ export default class FunctionCommentReturnsParser extends BaseCommentParser {
 
       if (matchCommentLines) {
         if (matchCommentLines[1] === "None") {
-          return null ;
+          return null;
         }
         const matchInterface = line.match(/(\w+)(\((\w+)\)):(.*)/);
         if (matchInterface) {
