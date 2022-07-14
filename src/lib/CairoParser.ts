@@ -6,8 +6,13 @@ import FunctionCommentImplicitArgsParser from "./parser/function-comment/implici
 import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "./parser/function-comment/returns";
 import FunctionCommentRaisesParser from "./parser/function-comment/raises";
+import {
+  FunctionSignature,
+  FunctionComment,
+  ParsingResult,
+  FunctionCommentValidity,
+} from "./types";
 
-// const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
 const yaml = require("js-yaml");
 
