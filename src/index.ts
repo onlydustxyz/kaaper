@@ -6,6 +6,7 @@ const figlet = require("figlet");
 const path = require("path");
 const program = require("commander");
 
+import { exit } from "process";
 import CLI from "./lib/cli";
 
 clear();
@@ -27,6 +28,21 @@ program
     const commentOnly = options.comment ? true : false;
     cli.generateContractsDocs(outdir, commentOnly);
     console.log("documents generated at:", outdir);
+  });
+
+program
+  .command("check-compliance")
+  .description("Check comment compliance of contracts")
+  .argument("<rootdir>", "root directory of contracts")
+  .action((rootdir: string) => {
+    const cli = new CLI(rootdir);
+    const result = cli.getNonCompliantCommentFunction();
+    if (result !== null) {
+      console.log("comment not compliant, check the following functions:");
+      console.log(result);
+      exit(1);
+    }
+    console.log("comment compliant");
   });
 
 program.parse(process.argv);

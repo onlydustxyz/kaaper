@@ -50,14 +50,19 @@ To see available commands
 kaaper
 ```
 
-Generate docs
+## Generate docs
 ```
-kaaper generate testContracts docs
+kaaper generate <rootdir> <outdir>
 ```
 
 Generate docs (comment only)
 ```
-kaaper generate --comment testContracts docs
+kaaper generate --comment <rootdir> <outdir>
+```
+
+## Check comment compliancy
+```
+kaaper check-compliance <rootdir>
 ```
 
 ## 🌡️ Testing
