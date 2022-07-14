@@ -39,7 +39,16 @@ yarn install
 ```
 
 ## 🔬 Usage
+Install CLI Locally
+```
+npm run create
+npm run local
+```
 
+To see available commands
+```
+kaaper
+```
 
 ## 🌡️ Testing
 ```
