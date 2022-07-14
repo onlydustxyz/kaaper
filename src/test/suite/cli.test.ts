@@ -31,7 +31,7 @@ suite("getNonCompliantCommentFunction", () => {
         filePath: "testContracts/ERC20NonCompliant/ERC20.cairo",
         attributeName: "constructor",
         functionName: "constructor",
-        errorSource: "implicitArgs",
+        errorSource: ["implicitArgs", "explicitArgs"],
       },
     ];
     assert.deepEqual(target, result);

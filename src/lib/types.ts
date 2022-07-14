@@ -28,12 +28,12 @@ export interface ParsingResult {
 
 export interface FunctionCommentValidity {
   isValid: boolean;
-  errorSource: string | null;
+  errorSource: string | string[] | null;
 }
 
 export interface CommentComplicance {
   filePath: string | null;
   attributeName: string | null;
   functionName: string | null;
-  errorSource: string | null;
+  errorSource: string | string[] | null;
 }

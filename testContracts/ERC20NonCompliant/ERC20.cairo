@@ -25,7 +25,7 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     #   initial_supply(Uint256): amount of initial supply of the token
     #   recipient(felt): the address of recipient of the initial supply
     # Raises:
-    #   decimals: decimals exceed 2^8
+    #   decimal: decimals exceed 2^8
     #   recipient: cannot mint to the zero address
     #   initial_supply: not valid Uint256
     #   initial_supply: mint overflow
