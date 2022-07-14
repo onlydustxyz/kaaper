@@ -104,7 +104,7 @@ suite("function-comment: constructor: implicit-args", () => {
 
     const line = 4;
     assert.equal(
-      "#   pedersen_ptr(HashBuiltin)",
+      "#   pedersen_ptr(HashBuiltin*)",
       commentText![line].trim(),
       `check line ${line}`
     );
@@ -121,7 +121,7 @@ suite("function-comment: constructor: implicit-args", () => {
 
     const targetLineParsing = {
       name: "pedersen_ptr",
-      type: "HashBuiltin",
+      type: "HashBuiltin*",
       desc: "",
     };
     assert.deepEqual(
@@ -249,7 +249,7 @@ suite("function-comment: constructor: implicit-args", () => {
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     const targetLineParsing = [
       { name: "syscall_ptr", type: "felt*", desc: "" },
-      { name: "pedersen_ptr", type: "HashBuiltin", desc: "" },
+      { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
       { name: "range_check_ptr", type: "", desc: "" },
     ];
 

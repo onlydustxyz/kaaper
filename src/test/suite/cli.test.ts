@@ -26,6 +26,9 @@ suite("getNonCompliantCommentFunction", () => {
   test("non compliant", () => {
     const cli = new CLI("testContracts/ERC20NonCompliant/");
     const result = cli.getNonCompliantCommentFunction();
-    assert.deepEqual(null, result);
+    const target = [
+      {filePath:'testContracts/ERC20NonCompliant/ERC20.cairo', attributeName: 'constructor', functionName: 'constructor', errorSource: 'implicitArgs'},
+    ]
+    assert.deepEqual(target, result);
   });
 });

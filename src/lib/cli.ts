@@ -46,8 +46,9 @@ export default class CLI {
           const result = CairoParser.isValidFunctionComment(scopeParsingResult);
           if (result.isValid === false) {
             const commentComplicance = {
-              isCompliant: false,
               filePath: file,
+              attributeName: scopeParsingResult.attributeName,
+              functionName: scopeParsingResult.functionName,
               errorSource: result.errorSource,
             };
             invalidContractsCommentsCompliance.push(commentComplicance);

@@ -58,7 +58,7 @@ suite("integration-test: constructor", () => {
           desc: [{ name: "", type: "", desc: "Initialize the contract" }],
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
             { name: "range_check_ptr", type: "", desc: "" },
           ],
           explicitArgs: [
@@ -80,7 +80,7 @@ suite("integration-test: constructor", () => {
               desc: "the address of recipient of the initial supply",
             },
           ],
-          returns: [{ name: "", type: "", desc: "None" }],
+          returns: null,
           raises: [
             { name: "decimals", type: "", desc: "decimals exceed 2^8" },
             {

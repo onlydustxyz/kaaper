@@ -73,7 +73,7 @@ suite("function-comment: constructor: returns", () => {
       commentText![line]
     );
 
-    const targetLineParsing = { name: "", type: "", desc: "None" };
+    const targetLineParsing = null;
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
@@ -132,7 +132,7 @@ suite("function-comment: constructor: returns", () => {
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const returnsParser = new FunctionCommentReturnsParser();
 
-    const targetLineParsing = [{ name: "", type: "", desc: "None" }];
+    const targetLineParsing = null;
     const resultLineParsing = returnsParser.parseCommentLines(commentText!);
 
     assert.deepEqual(

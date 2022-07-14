@@ -32,7 +32,8 @@ export interface FunctionCommentValidity {
 }
 
 export interface CommentComplicance {
-  isCompliant: boolean;
   filePath: string | null;
+  attributeName: string | null;
+  functionName: string | null;
   errorSource: string | null;
 }
