@@ -1,4 +1,5 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
+import { FunctionComment } from "../../types";
 
 export default class FunctionCommentExplicitArgsParser extends BaseCommentParser {
   constructor() {

@@ -1,13 +1,13 @@
 import * as assert from "assert";
 import * as path from "path";
 import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import CairoParser from "../../../../lib/main";
+import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: implicit-args", () => {
   test("parse line 2", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -48,7 +48,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 3", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -92,7 +92,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 4", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -104,7 +104,7 @@ suite("function-comment: constructor: implicit-args", () => {
 
     const line = 4;
     assert.equal(
-      "#   pedersen_ptr(HashBuiltin)",
+      "#   pedersen_ptr(HashBuiltin*)",
       commentText![line].trim(),
       `check line ${line}`
     );
@@ -121,7 +121,7 @@ suite("function-comment: constructor: implicit-args", () => {
 
     const targetLineParsing = {
       name: "pedersen_ptr",
-      type: "HashBuiltin",
+      type: "HashBuiltin*",
       desc: "",
     };
     assert.deepEqual(
@@ -140,7 +140,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 5", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -189,7 +189,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse line 6", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -239,7 +239,7 @@ suite("function-comment: constructor: implicit-args", () => {
   test("parse whole scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -249,7 +249,7 @@ suite("function-comment: constructor: implicit-args", () => {
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     const targetLineParsing = [
       { name: "syscall_ptr", type: "felt*", desc: "" },
-      { name: "pedersen_ptr", type: "HashBuiltin", desc: "" },
+      { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
       { name: "range_check_ptr", type: "", desc: "" },
     ];
 

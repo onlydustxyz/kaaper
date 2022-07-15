@@ -1,14 +1,18 @@
 import * as fs from "fs";
 
-import { BaseCommentParser } from "./parser/interfaces/function-comment";
-import FunctionSignatureRegexParser from "../lib/parser/function-signature/regex";
-import FunctionCommentDescParser from "../lib/parser/function-comment/desc";
+import FunctionSignatureRegexParser from "./parser/function-signature/regex";
+import FunctionCommentDescParser from "./parser/function-comment/desc";
 import FunctionCommentImplicitArgsParser from "./parser/function-comment/implicit-args";
 import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "./parser/function-comment/returns";
 import FunctionCommentRaisesParser from "./parser/function-comment/raises";
+import {
+  FunctionSignature,
+  FunctionComment,
+  ParsingResult,
+  FunctionCommentValidity,
+} from "./types";
 
-// const isEqual = require('lodash.isequal');
 const lodash = require("lodash");
 const yaml = require("js-yaml");
 
@@ -136,7 +140,6 @@ export default class CairoParser {
 
     var allParsingResult: ParsingResult[] = [];
     // combine all scopes
-
     // TODO: refactor this
     if (constructorParsingResult) {
       allParsingResult = allParsingResult.concat(constructorParsingResult);
@@ -192,12 +195,13 @@ export default class CairoParser {
     const functionSignature = parsingResult.functionSignature;
     const functionComment = parsingResult.functionComment;
 
+    var errorSource: string[] = [];
     const isImplicitArgsEqual = this._isValidFunctionComment(
       functionSignature.implicitArgs,
       functionComment.implicitArgs
     );
     if (isImplicitArgsEqual === false) {
-      return { isValid: false, errorSource: "implicitArgs" };
+      errorSource.push("implicitArgs");
     }
 
     const isExplicitArgsEqual = this._isValidFunctionComment(
@@ -205,7 +209,7 @@ export default class CairoParser {
       functionComment.explicitArgs
     );
     if (isExplicitArgsEqual === false) {
-      return { isValid: false, errorSource: "explicitArgs" };
+      errorSource.push("explicitArgs");
     }
 
     const isReturnsEqual = this._isValidFunctionComment(
@@ -213,13 +217,25 @@ export default class CairoParser {
       functionComment.returns
     );
     if (isReturnsEqual === false) {
-      return { isValid: false, errorSource: "returns" };
+      errorSource.push("returns");
+    }
+    if (errorSource.length === 0) {
+      return {
+        isValid: true,
+        errorSource: null,
+      };
     }
 
-    return { isValid: true, errorSource: null };
+    if (errorSource.length === 1) {
+      return {
+        isValid: false,
+        errorSource: errorSource[0],
+      };
+    }
+
+    return { isValid: false, errorSource: errorSource };
   }
 
-  // https://github.com/onlydustxyz/kaaper/issues/6
   static dumpParsingResult(
     parsingResult: ParsingResult[] | null,
     outPath: string,
@@ -236,5 +252,4 @@ export default class CairoParser {
       fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
     }
   }
-  // TODO: parse all files under a directory
 }

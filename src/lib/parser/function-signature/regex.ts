@@ -1,4 +1,5 @@
 import { BaseFunctionSignatureParser } from "../interfaces/function-signature";
+import { FunctionSignature } from "../../types";
 
 export default class FunctionSignatureRegexParser extends BaseFunctionSignatureParser {
   constructor() {

@@ -1,3 +1,5 @@
+import { FunctionSignature } from "../../types";
+
 export abstract class BaseFunctionSignatureParser {
   constructor() {}
 

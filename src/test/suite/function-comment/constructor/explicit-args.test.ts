@@ -1,13 +1,13 @@
 import * as assert from "assert";
 import * as path from "path";
 import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import CairoParser from "../../../../lib/main";
+import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: explicit-args", () => {
   test("parse line 6", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -51,7 +51,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse line 7", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -95,7 +95,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse line 8", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -142,7 +142,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse line 9", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -189,7 +189,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse line 10", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -236,7 +236,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse line 11", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -283,7 +283,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse line 12", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -322,7 +322,7 @@ suite("function-comment: constructor: explicit-args", () => {
   test("parse whole scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,

@@ -17,7 +17,7 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     #   Initialize the contract
     # Implicit args:
     #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin)
+    #   pedersen_ptr(HashBuiltin*)
     #   range_check_ptr
     # Explicit args:
     #   name(felt): name of the token

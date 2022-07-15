@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../lib/CairoParser";
 import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
 import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment/implicit-args";
@@ -12,7 +12,7 @@ suite("integration-test: constructor", () => {
   test("0", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -58,7 +58,7 @@ suite("integration-test: constructor", () => {
           desc: [{ name: "", type: "", desc: "Initialize the contract" }],
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
             { name: "range_check_ptr", type: "", desc: "" },
           ],
           explicitArgs: [
@@ -80,7 +80,7 @@ suite("integration-test: constructor", () => {
               desc: "the address of recipient of the initial supply",
             },
           ],
-          returns: [{ name: "", type: "", desc: "None" }],
+          returns: null,
           raises: [
             { name: "decimals", type: "", desc: "decimals exceed 2^8" },
             {

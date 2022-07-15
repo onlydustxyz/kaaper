@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../lib/CairoParser";
 import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
 import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment/implicit-args";
@@ -12,7 +12,7 @@ suite("integration-test: event", () => {
   test("0", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/library.cairo"
+      "../../../../testContracts/ERC20Compliant/library.cairo"
     );
 
     // parse whole scope
@@ -116,7 +116,7 @@ suite("integration-test: event", () => {
   test("1", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/library.cairo"
+      "../../../../testContracts/ERC20Compliant/library.cairo"
     );
 
     // parse whole scope
@@ -229,7 +229,7 @@ suite("integration-test: event", () => {
   test("2", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/library.cairo"
+      "../../../../testContracts/ERC20Compliant/library.cairo"
     );
 
     // parse whole scope

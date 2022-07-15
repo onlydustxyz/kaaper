@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../lib/CairoParser";
 import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
 import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment/implicit-args";
@@ -12,7 +12,7 @@ suite("integration-test: external", () => {
   test("0", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -134,7 +134,7 @@ suite("integration-test: external", () => {
   test("1", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -273,7 +273,7 @@ suite("integration-test: external", () => {
   test("2", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -401,7 +401,7 @@ suite("integration-test: external", () => {
   test("3", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -533,7 +533,7 @@ suite("integration-test: external", () => {
   test("4", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope

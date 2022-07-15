@@ -1,12 +1,12 @@
 import * as assert from "assert";
 import * as path from "path";
-import CairoParser from "../../../lib/main";
+import CairoParser from "../../../lib/CairoParser";
 
 suite("get-scope-parsing-result", () => {
   test("constructor", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -38,7 +38,7 @@ suite("get-scope-parsing-result", () => {
           desc: [{ name: "", type: "", desc: "Initialize the contract" }],
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
             { name: "range_check_ptr", type: "", desc: "" },
           ],
           explicitArgs: [
@@ -60,7 +60,7 @@ suite("get-scope-parsing-result", () => {
               desc: "the address of recipient of the initial supply",
             },
           ],
-          returns: [{ name: "", type: "", desc: "None" }],
+          returns: null,
           raises: [
             { name: "decimals", type: "", desc: "decimals exceed 2^8" },
             {
@@ -85,7 +85,7 @@ suite("get-scope-parsing-result", () => {
   test("view", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope
@@ -308,7 +308,7 @@ suite("get-scope-parsing-result", () => {
   test("external", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testAssets/ERC20.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     // parse whole scope

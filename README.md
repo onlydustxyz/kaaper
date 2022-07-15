@@ -39,7 +39,31 @@ yarn install
 ```
 
 ## 🔬 Usage
+Install CLI Locally
+```
+npm run create
+npm run local
+```
 
+To see available commands
+```
+kaaper
+```
+
+## Generate docs
+```
+kaaper generate <rootdir> <outdir>
+```
+
+Generate docs (comment only)
+```
+kaaper generate --comment <rootdir> <outdir>
+```
+
+## Check comment compliancy
+```
+kaaper check-compliance <rootdir>
+```
 
 ## 🌡️ Testing
 ```

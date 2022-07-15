@@ -1,13 +1,13 @@
 import * as assert from "assert";
 import * as path from "path";
 import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import CairoParser from "../../../../lib/main";
+import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: returns", () => {
   test("parse line 12", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     const functionText = CairoParser.parseFunctionScope(
@@ -48,7 +48,7 @@ suite("function-comment: constructor: returns", () => {
   test("parse line 13", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -73,7 +73,7 @@ suite("function-comment: constructor: returns", () => {
       commentText![line]
     );
 
-    const targetLineParsing = { name: "", type: "", desc: "None" };
+    const targetLineParsing = null;
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
@@ -84,7 +84,7 @@ suite("function-comment: constructor: returns", () => {
   test("parse line 14", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -123,7 +123,7 @@ suite("function-comment: constructor: returns", () => {
   test("parse whole scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../../testAssets/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(
       pathFile,
@@ -132,7 +132,7 @@ suite("function-comment: constructor: returns", () => {
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const returnsParser = new FunctionCommentReturnsParser();
 
-    const targetLineParsing = [{ name: "", type: "", desc: "None" }];
+    const targetLineParsing = null;
     const resultLineParsing = returnsParser.parseCommentLines(commentText!);
 
     assert.deepEqual(

@@ -1,15 +1,15 @@
-interface FunctionSignature {
+export interface FunctionSignature {
   name: string;
   type: string;
 }
 
-interface FunctionComment {
+export interface FunctionComment {
   name: string;
   type: string;
   desc: string;
 }
 
-interface ParsingResult {
+export interface ParsingResult {
   attributeName: string;
   functionName: string;
   functionSignature: {
@@ -26,7 +26,14 @@ interface ParsingResult {
   };
 }
 
-interface FunctionCommentValidity {
+export interface FunctionCommentValidity {
   isValid: boolean;
-  errorSource: string | null;
+  errorSource: string | string[] | null;
+}
+
+export interface CommentComplicance {
+  filePath: string | null;
+  attributeName: string | null;
+  functionName: string | null;
+  errorSource: string | string[] | null;
 }
