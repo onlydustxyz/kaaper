@@ -11,6 +11,7 @@ import {
   FunctionComment,
   ParsingResult,
   FunctionCommentValidity,
+  Namespace,
 } from "./types";
 
 const lodash = require("lodash");
@@ -23,12 +24,63 @@ map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
 map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
+map.set("namespace", /namespace\s+(\w+):/);
+map.set(
+  "function",
+  /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
+);
+// func\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s^
 
 export default class CairoParser {
   constructor() {}
 
   static getRegex(name: string): RegExp {
     return map.get(name);
+  }
+
+  static getNamespaceScopes(filePath: string): Namespace[] | null {
+    const text = fs.readFileSync(filePath, "utf8");
+    const lines = text.split("\n");
+    var namespaces: Namespace[] = [];
+    var attributeName: string = "";
+    var startLineNumber = 0;
+    var lineCount = 0;
+    var runningScope = false;
+    var texts: string = "";
+
+    for (var line of lines) {
+      // console.log(line)
+      lineCount += 1;
+
+      if (runningScope === true) {
+        // console.log(line)
+        texts += line + "\n";
+      }
+
+      if (line.startsWith("namespace")) {
+        attributeName = `namespace ${line.split(" ")[1].split(":")[0]}`;
+        startLineNumber = lineCount;
+        runningScope = true;
+        texts += line + "\n";
+      }
+      if (line === "end" && runningScope === true) {
+        const namespace = {
+          namespace: attributeName,
+          startLineNumber: startLineNumber,
+          endLineNumber: lineCount,
+          text: texts.trim(),
+        };
+
+        texts = "";
+        attributeName = "";
+        runningScope = false;
+        namespaces.push(namespace);
+      }
+    }
+    if (namespaces.length === 0) {
+      return null;
+    }
+    return namespaces;
   }
 
   // parse whole scope
@@ -38,6 +90,7 @@ export default class CairoParser {
   ): RegExpMatchArray | null {
     const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
+
     if (result) {
       return result;
     }
@@ -112,6 +165,8 @@ export default class CairoParser {
     }
     return null;
   }
+
+  // parse scope `special` for namespace
 
   // TODO: refactor this
   static getFileParsingResult(filePath: string): ParsingResult[] | null {
