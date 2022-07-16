@@ -166,6 +166,63 @@ export default class CairoParser {
     return null;
   }
 
+  static getNamespaceScopeParsingResult(
+    filePath: string
+  ): ParsingResult[] | null {
+    const namespaceScopes = CairoParser.getNamespaceScopes(filePath);
+    var parsingOutputs = [];
+    for (var namespaceScope of namespaceScopes!) {
+      const text = namespaceScope.text;
+      const matches = text!.match(this.getRegex("function"));
+      for (var match of matches!) {
+        const commentLines = CairoParser.parseCommentLines(match);
+        const functionSignatureParser = new FunctionSignatureRegexParser();
+        const functionCommentDescParser = new FunctionCommentDescParser();
+
+        const functionCommentImplicitArgsParser =
+          new FunctionCommentImplicitArgsParser();
+        const functionCommentExplicitArgsParser =
+          new FunctionCommentExplicitArgsParser();
+        const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+        const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+        const parsingOutput = {
+          attributeName: functionSignatureParser.getAttributeName(
+            match!,
+            namespaceScope.namespace
+          ),
+          functionName: functionSignatureParser.getFunctionName(match),
+          functionSignature: {
+            implicitArgs: functionSignatureParser.getImplicitArgs(match),
+            explicitArgs: functionSignatureParser.getExplicitArgs(match),
+            returns: functionSignatureParser.getReturns(match),
+          },
+          functionComment: {
+            desc: functionCommentDescParser.parseCommentLines(commentLines!),
+            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+              commentLines!
+            ),
+            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+              commentLines!
+            ),
+            returns: functionCommentReturnsParser.parseCommentLines(
+              commentLines!
+            ),
+            raises: functionCommentRaisesParser.parseCommentLines(
+              commentLines!
+            ),
+          },
+        };
+        parsingOutputs.push(parsingOutput);
+      }
+    }
+    if (parsingOutputs.length === 0) {
+      return null;
+    }
+
+    return parsingOutputs;
+  }
+
   // parse scope `special` for namespace
 
   // TODO: refactor this
