@@ -104,7 +104,8 @@ export default class CairoParser {
     return comments;
   }
 
-  // parse whole scope and return appropiate data structure
+  // parse whole scope except for namespace
+  // for namespace, use getNamespaceScopeParsingResult
   static getScopeParsingResult(
     filePath: string,
     name: string
@@ -166,6 +167,8 @@ export default class CairoParser {
     return null;
   }
 
+  // parse only namespace scope, because it have different structure than the rest
+  // e.g. without (@)
   static getNamespaceScopeParsingResult(
     filePath: string
   ): ParsingResult[] | null {
