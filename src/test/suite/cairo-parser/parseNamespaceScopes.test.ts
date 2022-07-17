@@ -18,4 +18,32 @@ suite("parseNamespaceScopes", () => {
       parsingOutput![scopeNumber].split("\n")[0]
     );
   });
+  test("scopeNumber: 1", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const scopeNumber = 1;
+    // parse whole scope
+    const parsingOutput = CairoParser.parseNamespaceScopes(text);
+    assert.equal(
+      "@namespace ERC20",
+      parsingOutput![scopeNumber].split("\n")[0]
+    );
+  });
+  test("scopeNumber: 2", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const scopeNumber = 2;
+    // parse whole scope
+    const parsingOutput = CairoParser.parseNamespaceScopes(text);
+    assert.equal(
+      "@namespace ERC20",
+      parsingOutput![scopeNumber].split("\n")[0]
+    );
+  });
 });
