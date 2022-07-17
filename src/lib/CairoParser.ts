@@ -169,6 +169,7 @@ export default class CairoParser {
 
   // parse only namespace scope, because it have different structure than the rest
   // e.g. without (@)
+  // TODO: refactor this to use getScopeParsingResult
   static getNamespaceScopeParsingResult(
     filePath: string
   ): ParsingResult[] | null {
@@ -225,8 +226,6 @@ export default class CairoParser {
 
     return parsingOutputs;
   }
-
-  // parse scope `special` for namespace
 
   // TODO: refactor this
   static getFileParsingResult(filePath: string): ParsingResult[] | null {
