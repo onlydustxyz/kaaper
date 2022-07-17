@@ -29,7 +29,6 @@ map.set(
   "function",
   /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
 );
-// func\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s^
 
 export default class CairoParser {
   constructor() {}
@@ -124,8 +123,6 @@ export default class CairoParser {
     return comments;
   }
 
-  // parse whole scope except for namespace
-  // for namespace, use getNamespaceScopeParsingResult
   static getScopeParsingResult(
     text: string,
     name: string
@@ -189,65 +186,6 @@ export default class CairoParser {
     return null;
   }
 
-  // parse only namespace scope, because it have different structure than the rest
-  // e.g. without (@)
-  // TODO: refactor this to use getScopeParsingResult
-  static getNamespaceScopeParsingResult(text: string): ParsingResult[] | null {
-    const namespaceScopes = CairoParser.getNamespaceScopes(text);
-    var parsingOutputs = [];
-    for (var namespaceScope of namespaceScopes!) {
-      const text = namespaceScope.text;
-      const matches = text!.match(this.getRegex("function"));
-      for (var match of matches!) {
-        const commentLines = CairoParser.parseCommentLines(match);
-        const functionSignatureParser = new FunctionSignatureRegexParser();
-        const functionCommentDescParser = new FunctionCommentDescParser();
-
-        const functionCommentImplicitArgsParser =
-          new FunctionCommentImplicitArgsParser();
-        const functionCommentExplicitArgsParser =
-          new FunctionCommentExplicitArgsParser();
-        const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-        const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-
-        const parsingOutput = {
-          attributeName: functionSignatureParser.getAttributeName(
-            match!,
-            namespaceScope.namespace
-          ),
-          functionName: functionSignatureParser.getFunctionName(match),
-          functionSignature: {
-            implicitArgs: functionSignatureParser.getImplicitArgs(match),
-            explicitArgs: functionSignatureParser.getExplicitArgs(match),
-            returns: functionSignatureParser.getReturns(match),
-          },
-          functionComment: {
-            desc: functionCommentDescParser.parseCommentLines(commentLines!),
-            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-              commentLines!
-            ),
-            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-              commentLines!
-            ),
-            returns: functionCommentReturnsParser.parseCommentLines(
-              commentLines!
-            ),
-            raises: functionCommentRaisesParser.parseCommentLines(
-              commentLines!
-            ),
-          },
-        };
-        parsingOutputs.push(parsingOutput);
-      }
-    }
-    if (parsingOutputs.length === 0) {
-      return null;
-    }
-
-    return parsingOutputs;
-  }
-
-  // TODO: refactor this
   static getFileParsingResult(filePath: string): ParsingResult[] | null {
     const text = fs.readFileSync(filePath, "utf8");
     const constructorParsingResult = CairoParser.getScopeParsingResult(
