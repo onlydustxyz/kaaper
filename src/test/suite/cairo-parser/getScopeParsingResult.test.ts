@@ -633,83 +633,231 @@ suite("get-scope-parsing-result", () => {
       "failed parsing whole scope"
     );
   });
-//   test("namespace", () => {
-//     const pathFile = path.resolve(
-//       __dirname,
-//       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
-//     );
+  test("namespace", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
 
-//     const text = fs.readFileSync(pathFile, "utf8");
-//     // parse whole scope
-//     const parsingOutput = CairoParser.getScopeParsingResult(
-//       text,
-//       "namespace"
-//     );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const parsingOutput = CairoParser.getScopeParsingResult(text, "namespace");
 
-//     const parsingTarget = [
-//       {
-//         attributeName: "constructor",
-//         functionName: "constructor",
-//         functionSignature: {
-//           implicitArgs: [
-//             { name: "syscall_ptr", type: "felt*" },
-//             { name: "pedersen_ptr", type: "HashBuiltin*" },
-//             { name: "range_check_ptr", type: "" },
-//           ],
-//           explicitArgs: [
-//             { name: "name", type: "felt" },
-//             { name: "symbol", type: "felt" },
-//             { name: "decimals", type: "Uint256" },
-//             { name: "initial_supply", type: "Uint256" },
-//             { name: "recipient", type: "felt" },
-//           ],
-//           returns: null,
-//         },
-//         functionComment: {
-//           desc: [{ name: "", type: "", desc: "Initialize the contract" }],
-//           implicitArgs: [
-//             { name: "syscall_ptr", type: "felt*", desc: "" },
-//             { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-//             { name: "range_check_ptr", type: "", desc: "" },
-//           ],
-//           explicitArgs: [
-//             { name: "name", type: "felt", desc: "name of the token" },
-//             { name: "symbol", type: "felt", desc: "symbol of the token" },
-//             {
-//               name: "decimals",
-//               type: "Uint256",
-//               desc: "floating point of the token",
-//             },
-//             {
-//               name: "initial_supply",
-//               type: "Uint256",
-//               desc: "amount of initial supply of the token",
-//             },
-//             {
-//               name: "recipient",
-//               type: "felt",
-//               desc: "the address of recipient of the initial supply",
-//             },
-//           ],
-//           returns: null,
-//           raises: [
-//             { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-//             {
-//               name: "recipient",
-//               type: "",
-//               desc: "cannot mint to the zero address",
-//             },
-//             { name: "initial_supply", type: "", desc: "not valid Uint256" },
-//             { name: "initial_supply", type: "", desc: "mint overflow" },
-//           ],
-//         },
-//       },
-//     ];
+    const parsingTarget = [
+      {
+        attributeName: "namespace ERC20",
+        functionName: "constructor",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "name", type: "felt" },
+            { name: "symbol", type: "felt" },
+            { name: "multiplier", type: "felt" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Initializes the contract with the given name, symbol, and decimals",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            { name: "name", type: "felt", desc: "The name of the token" },
+            { name: "symbol", type: "felt", desc: "The symbol of the token" },
+            {
+              name: "multiplier",
+              type: "felt",
+              desc: "The multiplier of the token",
+            },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+      {
+        attributeName: "namespace ERC20",
+        functionName: "name",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: null,
+          returns: [{ name: "name", type: "felt" }],
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the name of the token",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: null,
+          returns: [
+            { name: "name", type: "felt", desc: "The name of the token" },
+          ],
+          raises: null,
+        },
+      },
+      {
+        attributeName: "namespace ERC20",
+        functionName: "transfer_from",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "sender", type: "felt" },
+            { name: "recipient", type: "felt" },
+            { name: "amount", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Transfers tokens from one account to another",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            { name: "sender", type: "felt", desc: "The address of the sender" },
+            {
+              name: "recipient",
+              type: "felt",
+              desc: "The address of the recipient",
+            },
+            {
+              name: "amount",
+              type: "Uint256",
+              desc: "The amount of tokens to be transferred",
+            },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+      {
+        attributeName: "namespace internal",
+        functionName: "_mint",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "recipient", type: "felt" },
+            { name: "amount", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Mints tokens to an account",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "recipient",
+              type: "felt",
+              desc: "The address of the recipient",
+            },
+            {
+              name: "amount",
+              type: "Uint256",
+              desc: "The amount of tokens to be minted",
+            },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+      {
+        attributeName: "namespace internal",
+        functionName: "_burn",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "account", type: "felt" },
+            { name: "amount", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Burns tokens from an account",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "account",
+              type: "felt",
+              desc: "The address of the recipient",
+            },
+            {
+              name: "amount",
+              type: "Uint256",
+              desc: "The amount of tokens to be burned",
+            },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+    ];
 
-//     assert.deepEqual(
-//       parsingTarget,
-//       parsingOutput,
-//       "failed parsing whole scope"
-//     );
-//   });
+    assert.deepEqual(
+      parsingTarget,
+      parsingOutput,
+      "failed parsing whole scope"
+    );
+  });
 });
