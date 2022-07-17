@@ -228,4 +228,110 @@ suite("function-scope: namespace", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
+
+  test("2 ", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    // Comment parsing
+    // parse comment lines
+    const line = 2;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
+
+    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser();
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser();
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+    const parsingTarget = [
+      {
+        attributeName: "namespace ERC20",
+        functionName: "transfer_from",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "sender", type: "felt" },
+            { name: "recipient", type: "felt" },
+            { name: "amount", type: "Uint256" },
+          ],
+          returns: null
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Transfers tokens from one account to another",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            { name: "sender", type: "felt", desc: "The address of the sender" },
+            { name: "recipient", type: "felt", desc: "The address of the recipient" },
+            { name: "amount", type: "Uint256", desc: "The amount of tokens to be transferred" },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+    ];
+
+    const parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![line]
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            commentLines!
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            commentLines!
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+        },
+      },
+    ];
+
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
 });
