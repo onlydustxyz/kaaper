@@ -86,21 +86,22 @@ export default class CairoParser {
   static parseNamespaceScopes(text: string): string[] | null {
     const namespaces = CairoParser.getNamespaceScopes(text);
     var namespaceScopes: string[] = [];
-    for (var namespace of namespaces!) {
-      const text = namespace.text;
-      const namespaceName = namespace.namespace;
-      const matches = text!.match(this.getRegex("function"));
-      if (matches) {
-        for (var match of matches) {
-          const namespaceScope = `@${namespaceName}\n${match}`;
-          namespaceScopes.push(namespaceScope);
+    if (namespaces) {
+      for (var namespace of namespaces) {
+        const text = namespace.text;
+        const namespaceName = namespace.namespace;
+        const matches = text!.match(this.getRegex("function"));
+        if (matches) {
+          for (var match of matches) {
+            const namespaceScope = `@${namespaceName}\n${match}`;
+            namespaceScopes.push(namespaceScope);
+          }
         }
       }
+      return namespaceScopes;
     }
-    if (namespaceScopes.length === 0) {
-      return null;
-    }
-    return namespaceScopes;
+
+    return null;
   }
 
   // parse whole scope
