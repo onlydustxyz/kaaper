@@ -9,7 +9,7 @@ import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment/raises";
 
-suite("integration-test: namespace", () => {
+suite("function-scope: namespace", () => {
   test("0 ", () => {
     const pathFile = path.resolve(
       __dirname,
