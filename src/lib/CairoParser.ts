@@ -68,7 +68,6 @@ export default class CairoParser {
           endLineNumber: lineCount,
           text: texts.trim(),
         };
-        // console.log(texts.trim())
 
         texts = "";
         attributeName = "";
@@ -205,6 +204,8 @@ export default class CairoParser {
       "storage_var"
     );
 
+    const namespaceParsingResult = CairoParser.getScopeParsingResult(text, "namespace");
+
     var allParsingResult: ParsingResult[] = [];
     // combine all scopes
     // TODO: refactor this
@@ -222,6 +223,10 @@ export default class CairoParser {
     }
     if (storageVarParsingResult) {
       allParsingResult = allParsingResult.concat(storageVarParsingResult);
+    }
+
+    if(namespaceParsingResult) {
+      allParsingResult = allParsingResult.concat(namespaceParsingResult);
     }
 
     if (allParsingResult.length > 0) {
