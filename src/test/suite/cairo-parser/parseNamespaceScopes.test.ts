@@ -75,4 +75,14 @@ suite("parseNamespaceScopes", () => {
       parsingOutput![scopeNumber].split("\n")[0]
     );
   });
+
+  test("array length should be 5", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const parsingOutput = CairoParser.parseNamespaceScopes(text);
+    assert.equal(5, parsingOutput!.length);
+  });
 });
