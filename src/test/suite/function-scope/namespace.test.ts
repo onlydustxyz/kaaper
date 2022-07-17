@@ -15,26 +15,19 @@ suite("integration-test: namespace", () => {
       __dirname,
       "../../../../testContracts/ERC20Namespace/library.cairo"
     );
-    const wholeText = fs.readFileSync(pathFile, "utf8");
-
+    const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
-    const functionScopeLines = CairoParser.getNamespaceScopes(wholeText);
-    const namespace = functionScopeLines![0].namespace;
-
-    const text = functionScopeLines![0].text;
-    const match = text!.match(
-      /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
-    );
-
-    const line = 0;
-    const functionScope = match![line];
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(functionScope);
+    const line = 0;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -89,17 +82,24 @@ suite("integration-test: namespace", () => {
       },
     ];
 
-    var parsingOutput = [
+    const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScope,
-          namespace
+          functionScopeLines![line]
         ),
-        functionName: functionSignatureParser.getFunctionName(functionScope),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![line]
+        ),
         functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(functionScope),
-          explicitArgs: functionSignatureParser.getExplicitArgs(functionScope),
-          returns: functionSignatureParser.getReturns(functionScope),
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![line]
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![line]
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),

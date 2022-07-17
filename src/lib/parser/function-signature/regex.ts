@@ -10,7 +10,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
     if (namespace) {
       return namespace;
     }
-    const result = line.match(/@(\w+)/);
+    const result = line.match(/@(.+)/);
     if (result) {
       return result[1];
     }

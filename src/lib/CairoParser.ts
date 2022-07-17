@@ -129,8 +129,10 @@ export default class CairoParser {
     text: string,
     name: string
   ): ParsingResult[] | null {
-    const functionScopeLines = CairoParser.parseFunctionScope(text, name);
-
+    const functionScopeLines =
+      name === "namespace"
+        ? CairoParser.parseNamespaceScopes(text)
+        : CairoParser.parseFunctionScope(text, name);
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
