@@ -38,8 +38,7 @@ export default class CairoParser {
     return map.get(name);
   }
 
-  static getNamespaceScopes(filePath: string): Namespace[] | null {
-    const text = fs.readFileSync(filePath, "utf8");
+  static getNamespaceScopes(text: string): Namespace[] | null {
     const lines = text.split("\n");
     var namespaces: Namespace[] = [];
     var attributeName: string = "";
@@ -85,10 +84,9 @@ export default class CairoParser {
 
   // parse whole scope
   static parseFunctionScope(
-    filePath: string,
+    text: string,
     name: string
   ): RegExpMatchArray | null {
-    const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
 
     if (result) {
@@ -107,10 +105,10 @@ export default class CairoParser {
   // parse whole scope except for namespace
   // for namespace, use getNamespaceScopeParsingResult
   static getScopeParsingResult(
-    filePath: string,
+    text: string,
     name: string
   ): ParsingResult[] | null {
-    const functionScopeLines = CairoParser.parseFunctionScope(filePath, name);
+    const functionScopeLines = CairoParser.parseFunctionScope(text, name);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -170,10 +168,8 @@ export default class CairoParser {
   // parse only namespace scope, because it have different structure than the rest
   // e.g. without (@)
   // TODO: refactor this to use getScopeParsingResult
-  static getNamespaceScopeParsingResult(
-    filePath: string
-  ): ParsingResult[] | null {
-    const namespaceScopes = CairoParser.getNamespaceScopes(filePath);
+  static getNamespaceScopeParsingResult(text: string): ParsingResult[] | null {
+    const namespaceScopes = CairoParser.getNamespaceScopes(text);
     var parsingOutputs = [];
     for (var namespaceScope of namespaceScopes!) {
       const text = namespaceScope.text;
@@ -229,26 +225,21 @@ export default class CairoParser {
 
   // TODO: refactor this
   static getFileParsingResult(filePath: string): ParsingResult[] | null {
+    const text = fs.readFileSync(filePath, "utf8");
     const constructorParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
+      text,
       "constructor"
     );
-    const viewParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
-      "view"
-    );
+    const viewParsingResult = CairoParser.getScopeParsingResult(text, "view");
     const externalParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
+      text,
       "external"
     );
 
-    const eventParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
-      "event"
-    );
+    const eventParsingResult = CairoParser.getScopeParsingResult(text, "event");
 
     const storageVarParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
+      text,
       "storage_var"
     );
 

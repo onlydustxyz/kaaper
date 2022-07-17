@@ -1,5 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
+
 import CairoParser from "../../../lib/CairoParser";
 
 suite("get-scope-parsing-result", () => {
@@ -9,9 +11,10 @@ suite("get-scope-parsing-result", () => {
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
+    const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
     const parsingOutput = CairoParser.getScopeParsingResult(
-      pathFile,
+      text,
       "constructor"
     );
 
@@ -88,8 +91,10 @@ suite("get-scope-parsing-result", () => {
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
+    const text = fs.readFileSync(pathFile, "utf8");
+
     // parse whole scope
-    const parsingOutput = CairoParser.getScopeParsingResult(pathFile, "view");
+    const parsingOutput = CairoParser.getScopeParsingResult(text, "view");
 
     const parsingTarget = [
       {
@@ -311,11 +316,10 @@ suite("get-scope-parsing-result", () => {
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
+    const text = fs.readFileSync(pathFile, "utf8");
+
     // parse whole scope
-    const parsingOutput = CairoParser.getScopeParsingResult(
-      pathFile,
-      "external"
-    );
+    const parsingOutput = CairoParser.getScopeParsingResult(text, "external");
 
     const parsingTarget = [
       {

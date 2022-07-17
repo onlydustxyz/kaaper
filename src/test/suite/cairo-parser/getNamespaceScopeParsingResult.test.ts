@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
 import CairoParser from "../../../lib/CairoParser";
 
 suite("getNamespaceScopeParsingResult", () => {
@@ -9,8 +10,9 @@ suite("getNamespaceScopeParsingResult", () => {
       "../../../../testContracts/ERC20Namespace/library.cairo"
     );
 
+    const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
-    const parsingOutput = CairoParser.getNamespaceScopeParsingResult(pathFile);
+    const parsingOutput = CairoParser.getNamespaceScopeParsingResult(text);
 
     const parsingTarget = [
       {

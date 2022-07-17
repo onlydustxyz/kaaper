@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
 import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
 import CairoParser from "../../../../lib/CairoParser";
 
@@ -9,10 +10,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
@@ -53,10 +52,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
@@ -97,10 +94,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
@@ -144,10 +139,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
@@ -191,10 +184,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
@@ -238,10 +229,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
@@ -285,10 +274,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
     explicitArgsParser.setStartScope(commentText![6]);
@@ -324,10 +311,8 @@ suite("function-comment: constructor: explicit-args", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 

@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
 import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
 import CairoParser from "../../../../lib/CairoParser";
 
@@ -9,11 +10,8 @@ suite("function-comment: constructor: returns", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
 
     const returnsParser = new FunctionCommentReturnsParser();
@@ -50,10 +48,8 @@ suite("function-comment: constructor: returns", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const returnsParser = new FunctionCommentReturnsParser();
     returnsParser.setStartScope(commentText![12]);
@@ -86,10 +82,8 @@ suite("function-comment: constructor: returns", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const returnsParser = new FunctionCommentReturnsParser();
     returnsParser.setStartScope(commentText![12]);
@@ -125,10 +119,8 @@ suite("function-comment: constructor: returns", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionText = CairoParser.parseFunctionScope(text, "constructor");
     const commentText = CairoParser.parseCommentLines(functionText![0]);
     const returnsParser = new FunctionCommentReturnsParser();
 

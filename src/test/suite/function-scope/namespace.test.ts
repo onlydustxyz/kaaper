@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
 import CairoParser from "../../../lib/CairoParser";
 import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
@@ -14,9 +15,10 @@ suite("integration-test: namespace", () => {
       __dirname,
       "../../../../testContracts/ERC20Namespace/library.cairo"
     );
+    const wholeText = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.getNamespaceScopes(pathFile);
+    const functionScopeLines = CairoParser.getNamespaceScopes(wholeText);
     const namespace = functionScopeLines![0].namespace;
 
     const text = functionScopeLines![0].text;
