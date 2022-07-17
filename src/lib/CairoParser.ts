@@ -69,6 +69,7 @@ export default class CairoParser {
           endLineNumber: lineCount,
           text: texts.trim(),
         };
+        // console.log(texts.trim())
 
         texts = "";
         attributeName = "";
@@ -80,6 +81,26 @@ export default class CairoParser {
       return null;
     }
     return namespaces;
+  }
+
+  static parseNamespaceScopes(text: string): string[] | null {
+    const namespaces = CairoParser.getNamespaceScopes(text);
+    var namespaceScopes: string[] = [];
+    for (var namespace of namespaces!) {
+      const text = namespace.text;
+      const namespaceName = namespace.namespace;
+      const matches = text!.match(this.getRegex("function"));
+      if (matches) {
+        for (var match of matches) {
+          const namespaceScope = `@${namespaceName}\n${match}`;
+          namespaceScopes.push(namespaceScope);
+        }
+      }
+    }
+    if (namespaceScopes.length === 0) {
+      return null;
+    }
+    return namespaceScopes;
   }
 
   // parse whole scope
