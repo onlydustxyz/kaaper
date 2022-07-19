@@ -6,10 +6,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
     super();
   }
 
-  getAttributeName(line: string, namespace: string | null = null): string {
-    if (namespace) {
-      return namespace;
-    }
+  getAttributeName(line: string): string {
     const result = line.match(/@(.+)/);
     if (result) {
       return result[1];
