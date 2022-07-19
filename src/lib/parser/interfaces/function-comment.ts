@@ -53,19 +53,23 @@ export abstract class BaseCommentParser {
     throw new Error("NOT IMPLEMENTED!");
   }
 
-  parseCommentLines(lines: RegExpMatchArray): Array<FunctionComment> | null {
+  parseCommentLines(
+    lines: RegExpMatchArray | null
+  ): Array<FunctionComment> | null {
     var result: Array<FunctionComment> = [];
-
-    for (const line of lines) {
-      this.setStartScope(line);
-      this.setEndScope(line);
-      const functionComment = this.parseCommentLine(line);
-      if (functionComment) {
-        result.push(functionComment);
+    if (lines) {
+      for (const line of lines) {
+        this.setStartScope(line);
+        this.setEndScope(line);
+        const functionComment = this.parseCommentLine(line);
+        if (functionComment) {
+          result.push(functionComment);
+        }
       }
-    }
-    if (result.length > 0) {
-      return result;
+      if (result.length > 0) {
+        return result;
+      }
+      return null;
     }
     return null;
   }

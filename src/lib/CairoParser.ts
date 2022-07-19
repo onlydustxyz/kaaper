@@ -47,11 +47,9 @@ export default class CairoParser {
     var texts: string = "";
 
     for (var line of lines) {
-      // console.log(line)
       lineCount += 1;
 
       if (runningScope === true) {
-        // console.log(line)
         texts += line + "\n";
       }
 
@@ -119,7 +117,10 @@ export default class CairoParser {
   // run this after parsing the whole scope using parseFunctionScope
   static parseCommentLines(line: string): RegExpMatchArray | null {
     const comments = line.match(/#\s+(.+)/gm);
-    return comments;
+    if (comments && comments.length > 0) {
+      return comments;
+    }
+    return null;
   }
 
   static getScopeParsingResult(
@@ -161,19 +162,14 @@ export default class CairoParser {
             returns: functionSignatureParser.getReturns(functionScope),
           },
           functionComment: {
-            desc: functionCommentDescParser.parseCommentLines(commentLines!),
-            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-              commentLines!
-            ),
-            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-              commentLines!
-            ),
-            returns: functionCommentReturnsParser.parseCommentLines(
-              commentLines!
-            ),
-            raises: functionCommentRaisesParser.parseCommentLines(
-              commentLines!
-            ),
+            desc: functionCommentDescParser.parseCommentLines(commentLines),
+            implicitArgs:
+              functionCommentImplicitArgsParser.parseCommentLines(commentLines),
+            explicitArgs:
+              functionCommentExplicitArgsParser.parseCommentLines(commentLines),
+            returns:
+              functionCommentReturnsParser.parseCommentLines(commentLines),
+            raises: functionCommentRaisesParser.parseCommentLines(commentLines),
           },
         };
 
@@ -204,7 +200,10 @@ export default class CairoParser {
       "storage_var"
     );
 
-    const namespaceParsingResult = CairoParser.getScopeParsingResult(text, "namespace");
+    const namespaceParsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "namespace"
+    );
 
     var allParsingResult: ParsingResult[] = [];
     // combine all scopes
@@ -225,7 +224,7 @@ export default class CairoParser {
       allParsingResult = allParsingResult.concat(storageVarParsingResult);
     }
 
-    if(namespaceParsingResult) {
+    if (namespaceParsingResult) {
       allParsingResult = allParsingResult.concat(namespaceParsingResult);
     }
 
