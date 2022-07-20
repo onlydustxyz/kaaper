@@ -11,6 +11,7 @@ import {
   FunctionComment,
   ParsingResult,
   FunctionCommentValidity,
+  Namespace,
 } from "./types";
 
 const lodash = require("lodash");
@@ -23,6 +24,11 @@ map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
 map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
+map.set("namespace", /namespace\s+(\w+):/);
+map.set(
+  "function",
+  /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
+);
 
 export default class CairoParser {
   constructor() {}
@@ -31,13 +37,76 @@ export default class CairoParser {
     return map.get(name);
   }
 
+  static getNamespaceScopes(text: string): Namespace[] | null {
+    const lines = text.split("\n");
+    var namespaces: Namespace[] = [];
+    var attributeName: string = "";
+    var startLineNumber = 0;
+    var lineCount = 0;
+    var runningScope = false;
+    var texts: string = "";
+
+    for (var line of lines) {
+      lineCount += 1;
+
+      if (runningScope === true) {
+        texts += line + "\n";
+      }
+
+      if (line.startsWith("namespace")) {
+        attributeName = `namespace ${line.split(" ")[1].split(":")[0]}`;
+        startLineNumber = lineCount;
+        runningScope = true;
+        texts += line + "\n";
+      }
+      if (line === "end" && runningScope === true) {
+        const namespace = {
+          namespace: attributeName,
+          startLineNumber: startLineNumber,
+          endLineNumber: lineCount,
+          text: texts.trim(),
+        };
+
+        texts = "";
+        attributeName = "";
+        runningScope = false;
+        namespaces.push(namespace);
+      }
+    }
+    if (namespaces.length === 0) {
+      return null;
+    }
+    return namespaces;
+  }
+
+  static parseNamespaceScopes(text: string): string[] | null {
+    const namespaces = CairoParser.getNamespaceScopes(text);
+    var namespaceScopes: string[] = [];
+    if (namespaces) {
+      for (var namespace of namespaces) {
+        const text = namespace.text;
+        const namespaceName = namespace.namespace;
+        const matches = text!.match(this.getRegex("function"));
+        if (matches) {
+          for (var match of matches) {
+            const namespaceScope = `@${namespaceName}\n${match}`;
+            namespaceScopes.push(namespaceScope);
+          }
+        }
+      }
+      return namespaceScopes;
+    }
+
+    return null;
+  }
+
   // parse whole scope
   static parseFunctionScope(
-    filePath: string,
+    text: string,
     name: string
   ): RegExpMatchArray | null {
-    const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
+
     if (result) {
       return result;
     }
@@ -48,16 +117,20 @@ export default class CairoParser {
   // run this after parsing the whole scope using parseFunctionScope
   static parseCommentLines(line: string): RegExpMatchArray | null {
     const comments = line.match(/#\s+(.+)/gm);
-    return comments;
+    if (comments && comments.length > 0) {
+      return comments;
+    }
+    return null;
   }
 
-  // parse whole scope and return appropiate data structure
   static getScopeParsingResult(
-    filePath: string,
+    text: string,
     name: string
   ): ParsingResult[] | null {
-    const functionScopeLines = CairoParser.parseFunctionScope(filePath, name);
-
+    const functionScopeLines =
+      name === "namespace"
+        ? CairoParser.parseNamespaceScopes(text)
+        : CairoParser.parseFunctionScope(text, name);
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
@@ -89,19 +162,14 @@ export default class CairoParser {
             returns: functionSignatureParser.getReturns(functionScope),
           },
           functionComment: {
-            desc: functionCommentDescParser.parseCommentLines(commentLines!),
-            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-              commentLines!
-            ),
-            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-              commentLines!
-            ),
-            returns: functionCommentReturnsParser.parseCommentLines(
-              commentLines!
-            ),
-            raises: functionCommentRaisesParser.parseCommentLines(
-              commentLines!
-            ),
+            desc: functionCommentDescParser.parseCommentLines(commentLines),
+            implicitArgs:
+              functionCommentImplicitArgsParser.parseCommentLines(commentLines),
+            explicitArgs:
+              functionCommentExplicitArgsParser.parseCommentLines(commentLines),
+            returns:
+              functionCommentReturnsParser.parseCommentLines(commentLines),
+            raises: functionCommentRaisesParser.parseCommentLines(commentLines),
           },
         };
 
@@ -113,29 +181,28 @@ export default class CairoParser {
     return null;
   }
 
-  // TODO: refactor this
   static getFileParsingResult(filePath: string): ParsingResult[] | null {
+    const text = fs.readFileSync(filePath, "utf8");
     const constructorParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
+      text,
       "constructor"
     );
-    const viewParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
-      "view"
-    );
+    const viewParsingResult = CairoParser.getScopeParsingResult(text, "view");
     const externalParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
+      text,
       "external"
     );
 
-    const eventParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
-      "event"
-    );
+    const eventParsingResult = CairoParser.getScopeParsingResult(text, "event");
 
     const storageVarParsingResult = CairoParser.getScopeParsingResult(
-      filePath,
+      text,
       "storage_var"
+    );
+
+    const namespaceParsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "namespace"
     );
 
     var allParsingResult: ParsingResult[] = [];
@@ -155,6 +222,10 @@ export default class CairoParser {
     }
     if (storageVarParsingResult) {
       allParsingResult = allParsingResult.concat(storageVarParsingResult);
+    }
+
+    if (namespaceParsingResult) {
+      allParsingResult = allParsingResult.concat(namespaceParsingResult);
     }
 
     if (allParsingResult.length > 0) {

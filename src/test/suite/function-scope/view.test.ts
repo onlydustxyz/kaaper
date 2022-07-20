@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
 import CairoParser from "../../../lib/CairoParser";
 import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
@@ -14,9 +15,9 @@ suite("integration-test: view", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-
+    const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -101,9 +102,10 @@ suite("integration-test: view", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -197,9 +199,10 @@ suite("integration-test: view", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -301,9 +304,10 @@ suite("integration-test: view", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -397,9 +401,10 @@ suite("integration-test: view", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -503,9 +508,10 @@ suite("integration-test: view", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(pathFile, "view");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();

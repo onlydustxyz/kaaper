@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import * as fs from "fs";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
 import CairoParser from "../../../lib/CairoParser";
 
@@ -9,10 +10,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const constructorText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const constructorText = CairoParser.parseFunctionScope(text, "constructor");
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
     const attributeName = functionSignatureParser.getAttributeName(
@@ -25,10 +24,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const constructorText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const constructorText = CairoParser.parseFunctionScope(text, "constructor");
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
     const functionName = functionSignatureParser.getFunctionName(
@@ -42,10 +39,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const constructorText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const constructorText = CairoParser.parseFunctionScope(text, "constructor");
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
     const implicitArgs = functionSignatureParser.getImplicitArgs(
@@ -68,10 +63,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const constructorText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const constructorText = CairoParser.parseFunctionScope(text, "constructor");
 
     const functionSignatureParser = new FunctionSignatureRegexParser();
     const explicitArgs = functionSignatureParser.getExplicitArgs(

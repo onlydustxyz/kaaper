@@ -3,13 +3,13 @@ import * as assert from "assert";
 
 suite("generateContractsDocs", () => {
   test("dump all", () => {
-    const cli = new CLI("testContracts/");
+    const cli = new CLI("testContracts/ERC20Compliant");
 
     cli.generateContractsDocs("docs/all/", false);
   });
 
   test("only comment", () => {
-    const cli = new CLI("testContracts/");
+    const cli = new CLI("testContracts/ERC20Compliant");
 
     cli.generateContractsDocs("docs/comment_only/", true);
   });
@@ -55,6 +55,18 @@ suite("getNonCompliantCommentFunction", () => {
         filePath: "testContracts/ERC20NonCompliant/library.cairo",
         attributeName: "storage_var",
         functionName: "ERC20_symbol",
+        errorSource: "explicitArgs",
+      },
+      {
+        filePath: "testContracts/ERC20NonCompliant/library.cairo",
+        attributeName: "namespace ERC20",
+        functionName: "constructor",
+        errorSource: ["implicitArgs", "explicitArgs"],
+      },
+      {
+        filePath: "testContracts/ERC20NonCompliant/library.cairo",
+        attributeName: "namespace internal",
+        functionName: "_mint",
         errorSource: "explicitArgs",
       },
     ];

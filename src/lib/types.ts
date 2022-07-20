@@ -37,3 +37,10 @@ export interface CommentComplicance {
   functionName: string | null;
   errorSource: string | string[] | null;
 }
+
+export interface Namespace {
+  namespace: string | null;
+  startLineNumber: number | null;
+  endLineNumber: number | null;
+  text: string | null;
+}

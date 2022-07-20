@@ -9,22 +9,25 @@ import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment/raises";
 
-suite("integration-test: external", () => {
-  test("0", () => {
+suite("function-scope: namespace", () => {
+  test("0 ", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../testContracts/ERC20Namespace/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "external");
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![0]);
+    const line = 0;
+    const commentLines = CairoParser.parseCommentLines(
+      functionScopeLines![line]
+    );
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -36,8 +39,8 @@ suite("integration-test: external", () => {
 
     const parsingTarget = [
       {
-        attributeName: "external",
-        functionName: "transfer",
+        attributeName: "namespace ERC20",
+        functionName: "constructor",
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -45,70 +48,58 @@ suite("integration-test: external", () => {
             { name: "range_check_ptr", type: "" },
           ],
           explicitArgs: [
-            { name: "recipient", type: "felt" },
-            { name: "amount", type: "Uint256" },
+            { name: "name", type: "felt" },
+            { name: "symbol", type: "felt" },
+            { name: "multiplier", type: "felt" },
           ],
-          returns: [{ name: "success", type: "felt" }],
+          returns: null,
         },
         functionComment: {
-          desc: [{ name: "", type: "", desc: "Perform transfer to recipient" }],
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Initializes the contract with the given name, symbol, and decimals",
+            },
+          ],
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*", desc: "" },
             { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
             { name: "range_check_ptr", type: "", desc: "" },
           ],
           explicitArgs: [
+            { name: "name", type: "felt", desc: "The name of the token" },
+            { name: "symbol", type: "felt", desc: "The symbol of the token" },
             {
-              name: "recipient",
+              name: "multiplier",
               type: "felt",
-              desc: "the address of ERC20 recipient",
-            },
-            {
-              name: "amount",
-              type: "Uint256",
-              desc: "the amount of ERC20 transfer",
+              desc: "The multiplier of the token",
             },
           ],
-          returns: [
-            {
-              name: "success",
-              type: "felt",
-              desc: "1 if transfer was successful, 0 otherwise",
-            },
-          ],
-          raises: [
-            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
-            {
-              name: "recipient",
-              type: "",
-              desc: "cannot transfer to the zero address",
-            },
-            {
-              name: "amount",
-              type: "",
-              desc: "transfer amount exceeds balance",
-            },
-          ],
+          returns: null,
+          raises: null,
         },
       },
     ];
 
-    var parsingOutput = [
+    const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![0]
+          functionScopeLines![line]
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![0]
+          functionScopeLines![line]
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![0]
+            functionScopeLines![line]
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![0]
+            functionScopeLines![line]
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![0]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![line]
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -129,15 +120,14 @@ suite("integration-test: external", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
-  test("1", () => {
+  test("1 ", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../testContracts/ERC20Namespace/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "external");
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -159,27 +149,28 @@ suite("integration-test: external", () => {
 
     const parsingTarget = [
       {
-        attributeName: "external",
-        functionName: "transferFrom",
+        attributeName: "namespace ERC20",
+        functionName: "name",
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
             { name: "pedersen_ptr", type: "HashBuiltin*" },
             { name: "range_check_ptr", type: "" },
           ],
-          explicitArgs: [
-            { name: "sender", type: "felt" },
-            { name: "recipient", type: "felt" },
-            { name: "amount", type: "Uint256" },
+          explicitArgs: null,
+          returns: [
+            {
+              name: "name",
+              type: "felt",
+            },
           ],
-          returns: [{ name: "success", type: "felt" }],
         },
         functionComment: {
           desc: [
             {
               name: "",
               type: "",
-              desc: "Perform transfer from sender to recipient with allowance",
+              desc: "Returns the name of the token",
             },
           ],
           implicitArgs: [
@@ -187,48 +178,20 @@ suite("integration-test: external", () => {
             { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
             { name: "range_check_ptr", type: "", desc: "" },
           ],
-          explicitArgs: [
-            {
-              name: "sender",
-              type: "felt",
-              desc: "the address of ERC20 sender",
-            },
-            {
-              name: "recipient",
-              type: "felt",
-              desc: "the address of ERC20 recipient",
-            },
-            {
-              name: "amount",
-              type: "Uint256",
-              desc: "the amount of ERC20 transfer",
-            },
-          ],
+          explicitArgs: null,
           returns: [
             {
-              name: "success",
+              name: "name",
               type: "felt",
-              desc: "1 if transfer was successful, 0 otherwise",
+              desc: "The name of the token",
             },
           ],
-          raises: [
-            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
-            {
-              name: "sender",
-              type: "",
-              desc: "cannot transfer from the zero address",
-            },
-            {
-              name: "amount",
-              type: "",
-              desc: "transfer amount exceeds balance",
-            },
-          ],
+          raises: null,
         },
       },
     ];
 
-    var parsingOutput = [
+    const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
           functionScopeLines![line]
@@ -266,15 +229,14 @@ suite("integration-test: external", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
-  test("2", () => {
+  test("2 ", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../testContracts/ERC20Namespace/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "external");
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -296,8 +258,8 @@ suite("integration-test: external", () => {
 
     const parsingTarget = [
       {
-        attributeName: "external",
-        functionName: "approve",
+        attributeName: "namespace ERC20",
+        functionName: "transfer_from",
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -305,17 +267,18 @@ suite("integration-test: external", () => {
             { name: "range_check_ptr", type: "" },
           ],
           explicitArgs: [
-            { name: "spender", type: "felt" },
+            { name: "sender", type: "felt" },
+            { name: "recipient", type: "felt" },
             { name: "amount", type: "Uint256" },
           ],
-          returns: [{ name: "success", type: "felt" }],
+          returns: null,
         },
         functionComment: {
           desc: [
             {
               name: "",
               type: "",
-              desc: "Approve spender to spend amount of tokens",
+              desc: "Transfers tokens from one account to another",
             },
           ],
           implicitArgs: [
@@ -324,37 +287,25 @@ suite("integration-test: external", () => {
             { name: "range_check_ptr", type: "", desc: "" },
           ],
           explicitArgs: [
+            { name: "sender", type: "felt", desc: "The address of the sender" },
             {
-              name: "spender",
+              name: "recipient",
               type: "felt",
-              desc: "the address of ERC20 spender",
+              desc: "The address of the recipient",
             },
             {
               name: "amount",
               type: "Uint256",
-              desc: "the amount of ERC20 token to approve",
+              desc: "The amount of tokens to be transferred",
             },
           ],
-          returns: [
-            {
-              name: "success",
-              type: "felt",
-              desc: "1 if approve was successful, 0 otherwise",
-            },
-          ],
-          raises: [
-            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
-            {
-              name: "spender",
-              type: "",
-              desc: "cannot approve to the zero address",
-            },
-          ],
+          returns: null,
+          raises: null,
         },
       },
     ];
 
-    var parsingOutput = [
+    const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
           functionScopeLines![line]
@@ -392,15 +343,14 @@ suite("integration-test: external", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
-  test("3", () => {
+  test("3 ", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../testContracts/ERC20Namespace/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "external");
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -422,8 +372,8 @@ suite("integration-test: external", () => {
 
     const parsingTarget = [
       {
-        attributeName: "external",
-        functionName: "increaseAllowance",
+        attributeName: "namespace internal",
+        functionName: "_mint",
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -431,17 +381,17 @@ suite("integration-test: external", () => {
             { name: "range_check_ptr", type: "" },
           ],
           explicitArgs: [
-            { name: "spender", type: "felt" },
-            { name: "added_value", type: "Uint256" },
+            { name: "recipient", type: "felt" },
+            { name: "amount", type: "Uint256" },
           ],
-          returns: [{ name: "success", type: "felt" }],
+          returns: null,
         },
         functionComment: {
           desc: [
             {
               name: "",
               type: "",
-              desc: "Increase allowance of spender by added_value",
+              desc: "Mints tokens to an account",
             },
           ],
           implicitArgs: [
@@ -451,40 +401,23 @@ suite("integration-test: external", () => {
           ],
           explicitArgs: [
             {
-              name: "spender",
+              name: "recipient",
               type: "felt",
-              desc: "the address of ERC20 spender",
+              desc: "The address of the recipient",
             },
             {
-              name: "added_value",
+              name: "amount",
               type: "Uint256",
-              desc: "the amount of ERC20 token to increase allowance",
+              desc: "The amount of tokens to be minted",
             },
           ],
-          returns: [
-            {
-              name: "success",
-              type: "felt",
-              desc: "1 if increase allowance was successful, 0 otherwise",
-            },
-          ],
-          raises: [
-            {
-              name: "added_value",
-              type: "",
-              desc: "added_value is not a valid Uint256",
-            },
-            {
-              name: "spender",
-              type: "",
-              desc: "cannot increase allowance to the zero address",
-            },
-          ],
+          returns: null,
+          raises: null,
         },
       },
     ];
 
-    var parsingOutput = [
+    const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
           functionScopeLines![line]
@@ -522,15 +455,14 @@ suite("integration-test: external", () => {
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
 
-  test("4", () => {
+  test("3 ", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../testContracts/ERC20Namespace/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "external");
+    const functionScopeLines = CairoParser.parseNamespaceScopes(text);
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -552,8 +484,8 @@ suite("integration-test: external", () => {
 
     const parsingTarget = [
       {
-        attributeName: "external",
-        functionName: "decreaseAllowance",
+        attributeName: "namespace internal",
+        functionName: "_burn",
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -561,17 +493,17 @@ suite("integration-test: external", () => {
             { name: "range_check_ptr", type: "" },
           ],
           explicitArgs: [
-            { name: "spender", type: "felt" },
-            { name: "subtracted_value", type: "Uint256" },
+            { name: "account", type: "felt" },
+            { name: "amount", type: "Uint256" },
           ],
-          returns: [{ name: "success", type: "felt" }],
+          returns: null,
         },
         functionComment: {
           desc: [
             {
               name: "",
               type: "",
-              desc: "Decrease allowance of spender by subtracted_value",
+              desc: "Burns tokens from an account",
             },
           ],
           implicitArgs: [
@@ -581,40 +513,23 @@ suite("integration-test: external", () => {
           ],
           explicitArgs: [
             {
-              name: "spender",
+              name: "account",
               type: "felt",
-              desc: "the address of ERC20 spender",
+              desc: "The address of the recipient",
             },
             {
-              name: "subtracted_value",
+              name: "amount",
               type: "Uint256",
-              desc: "the amount of ERC20 token to decrease allowance",
+              desc: "The amount of tokens to be burned",
             },
           ],
-          returns: [
-            {
-              name: "success",
-              type: "felt",
-              desc: "1 if decrease allowance was successful, 0 otherwise",
-            },
-          ],
-          raises: [
-            {
-              name: "subtracted_value",
-              type: "",
-              desc: "subtracted_value is not a valid Uint256",
-            },
-            {
-              name: "spender",
-              type: "",
-              desc: "cannot decrease allowance to the zero address",
-            },
-          ],
+          returns: null,
+          raises: null,
         },
       },
     ];
 
-    var parsingOutput = [
+    const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
           functionScopeLines![line]
