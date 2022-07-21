@@ -82,4 +82,4 @@ Kaaper, also commonly known as Sheikh el-Beled, was an ancient Egyptian scribe a
 
 The job of a scribe was to record in writing the everyday life and extraordinary happenings in ancient Egypt.
 
-A documentation generator has pretty much the same duties as a scribe, right ?
+A documentation generator has pretty much the same duties as a scribe, right?
