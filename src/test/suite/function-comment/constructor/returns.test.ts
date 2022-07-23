@@ -12,7 +12,7 @@ suite("function-comment: constructor: returns", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
 
     const returnsParser = new FunctionCommentReturnsParser();
 
@@ -50,7 +50,7 @@ suite("function-comment: constructor: returns", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
     const returnsParser = new FunctionCommentReturnsParser();
     returnsParser.setStartScope(commentText![12]);
 
@@ -84,7 +84,7 @@ suite("function-comment: constructor: returns", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
     const returnsParser = new FunctionCommentReturnsParser();
     returnsParser.setStartScope(commentText![12]);
 
@@ -121,7 +121,7 @@ suite("function-comment: constructor: returns", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
     const returnsParser = new FunctionCommentReturnsParser();
 
     const targetLineParsing = null;

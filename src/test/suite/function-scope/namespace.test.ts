@@ -27,7 +27,7 @@ suite("function-scope: namespace", () => {
     const line = 0;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    );
+    )!.match;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -137,7 +137,7 @@ suite("function-scope: namespace", () => {
     const line = 1;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    );
+    )!.match;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -246,7 +246,7 @@ suite("function-scope: namespace", () => {
     const line = 2;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    );
+    )!.match;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -360,7 +360,7 @@ suite("function-scope: namespace", () => {
     const line = 3;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    );
+    )!.match;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -472,7 +472,7 @@ suite("function-scope: namespace", () => {
     const line = 4;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    );
+    )!.match;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =

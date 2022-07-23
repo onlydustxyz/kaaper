@@ -12,6 +12,7 @@ import {
   ParsingResult,
   FunctionCommentValidity,
   Namespace,
+  CommentLines,
 } from "./types";
 
 const lodash = require("lodash");
@@ -115,10 +116,17 @@ export default class CairoParser {
 
   // parse only commented lines
   // run this after parsing the whole scope using parseFunctionScope
-  static parseCommentLines(line: string): RegExpMatchArray | null {
+  static parseCommentLines(line: string): CommentLines | null {
     const comments = line.match(/#\s+(.+)/gm);
     if (comments && comments.length > 0) {
-      return comments;
+      const matchStart = comments.index;
+      const matchEnd = matchStart! + comments.length;
+      const commentLines = {
+        match: comments,
+        startLine: matchStart!,
+        endLine: matchEnd!,
+      }
+      return commentLines;
     }
     return null;
   }
@@ -139,7 +147,7 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
-        const commentLines = CairoParser.parseCommentLines(functionScope);
+        const commentLines = CairoParser.parseCommentLines(functionScope)!.match;
 
         const functionCommentDescParser = new FunctionCommentDescParser();
         const functionCommentImplicitArgsParser =

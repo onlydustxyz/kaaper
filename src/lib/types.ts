@@ -9,6 +9,12 @@ export interface FunctionComment {
   desc: string;
 }
 
+export interface CommentLines {
+  match: RegExpMatchArray;
+  startLine: number;
+  endLine: number;
+}
+
 export interface ParsingResult {
   attributeName: string;
   functionName: string;

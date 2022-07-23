@@ -28,7 +28,7 @@ suite("integration-test: constructor", () => {
 
     // Comment parsing
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(functionScopeLines![0]);
+    const commentLines = CairoParser.parseCommentLines(functionScopeLines![0])!.match;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
