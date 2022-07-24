@@ -15,6 +15,7 @@ import {
   CommentLines,
 } from "./types";
 
+
 const lodash = require("lodash");
 const yaml = require("js-yaml");
 
@@ -30,6 +31,9 @@ map.set(
   "function",
   /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
 );
+map.set("comment", /\s*#\s*(.+)/gm);
+// @\w+[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send
+//
 
 export default class CairoParser {
   constructor() {}
@@ -114,18 +118,58 @@ export default class CairoParser {
     return null;
   }
 
+  static parseFunctionScopeWithMatchAll(
+    text: string,
+    name: string
+  ): RegExpMatchArray[] | null {
+    const regexp = this.getRegex(name);
+    const matches = [...text.matchAll(regexp)];
+    if (matches.length > 0) {
+      return matches;
+    }
+    return null;
+  }
+
+  static parseCommentLinesWithMatchAll(
+    scope: RegExpMatchArray
+  ): CommentLines | null {
+    const regexp = this.getRegex("comment");
+    const commentLinesText = this.parseCommentLines(scope[0]);
+    if (scope && commentLinesText) {
+      // if scope is not null, then extract the index
+      // const matchStart = scope.index? scope.index : 0;
+      const scopeLineStart = scope.index;
+      const commentLines = [...scope[0].matchAll(regexp)];
+      const commentLineStart = scopeLineStart! + commentLines[0].index!;
+
+      const commentLineEnd =
+        scopeLineStart! +
+        commentLines[commentLines.length - 1].index! +
+        commentLines[commentLines.length - 1][0].length;
+
+      const commentLineRange = {
+        match: commentLinesText.match,
+        startLine: commentLineStart,
+        endLine: commentLineEnd,
+      };
+      return commentLineRange;
+    }
+    return null;
+  }
+
+
   // parse only commented lines
   // run this after parsing the whole scope using parseFunctionScope
   static parseCommentLines(line: string): CommentLines | null {
     const comments = line.match(/#\s+(.+)/gm);
     if (comments && comments.length > 0) {
-      const matchStart = comments.index;
+      const matchStart = 0;
       const matchEnd = matchStart! + comments.length;
       const commentLines = {
         match: comments,
         startLine: matchStart!,
         endLine: matchEnd!,
-      }
+      };
       return commentLines;
     }
     return null;
@@ -147,7 +191,8 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
-        const commentLines = CairoParser.parseCommentLines(functionScope)!.match;
+        const commentLines =
+          CairoParser.parseCommentLines(functionScope)!.match;
 
         const functionCommentDescParser = new FunctionCommentDescParser();
         const functionCommentImplicitArgsParser =
