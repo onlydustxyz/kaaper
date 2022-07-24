@@ -61,10 +61,12 @@
 		}
 	},
 	"dependencies": {
+		"@types/string.prototype.matchall": "^4.0.1",
 		"chalk": "^4.1.2",
 		"clear": "^0.1.0",
 		"commander": "^9.3.0",
 		"figlet": "^1.5.2",
-		"js-yaml": "^4.1.0"
+		"js-yaml": "^4.1.0",
+		"string.prototype.matchall": "^4.0.7"
 	}
 }
