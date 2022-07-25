@@ -188,7 +188,6 @@ export default class CairoParser {
   ): CommentScope | null {
     const regexp = this.getRegex("comment");
     const commentLinesText = this.parseCommentLines(scope.text);
-    // console.log(commentLinesText!.text)
     if (scope && commentLinesText) {
       const scopeLineStart = scope.start;
       const scopeText =
@@ -343,8 +342,9 @@ export default class CairoParser {
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
         const commentLines =
-          CairoParser.parseCommentLinesWithMatchAll(functionScope);
-        // console.log(commentLines[1])
+          name === "namespace"
+            ? CairoParser.parseCommentLinesWithMatchAll(functionScope, true)
+            : CairoParser.parseCommentLinesWithMatchAll(functionScope, false);
 
         const functionCommentDescParser = new FunctionCommentDescParser();
         const functionCommentImplicitArgsParser =
