@@ -55,7 +55,7 @@ suite("function-comment: constructor: desc", () => {
       `check line ${line}`
     );
 
-    assert.equal("# Desc:", descParser.startLine);
+    assert.equal("\n    # Desc:", descParser.startLine);
     assert.notEqual(line, descParser.startLine);
 
     assert.equal(
@@ -99,7 +99,7 @@ suite("function-comment: constructor: desc", () => {
       `check line ${line}`
     );
 
-    assert.equal("# Desc:", descParser.startLine);
+    assert.equal("\n    # Desc:", descParser.startLine);
     assert.notEqual(line, descParser.startLine);
     const isEndScope = descParser.isEndScope(commentText![line]);
     assert.equal(true, isEndScope, `failed to get end scope line ${line}`);
