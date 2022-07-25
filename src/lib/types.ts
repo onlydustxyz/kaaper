@@ -69,9 +69,9 @@ export interface CommentComplicance {
   errorSource: string | string[] | null;
 }
 
-export interface Namespace {
+export interface NamespaceScope {
   namespace: string | null;
-  startLineNumber: number | null;
-  endLineNumber: number | null;
+  start: number | null;
+  end: number | null;
   text: string | null;
 }

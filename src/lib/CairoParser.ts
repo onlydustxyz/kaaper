@@ -11,11 +11,10 @@ import {
   FunctionComment,
   ParsingResult,
   FunctionCommentValidity,
-  Namespace,
   FunctionScope,
   CommentScope,
+  NamespaceScope,
 } from "./types";
-import { start } from "repl";
 
 const lodash = require("lodash");
 const yaml = require("js-yaml");
@@ -27,7 +26,7 @@ map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
 map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
-map.set("namespace", /namespace\s+(\w+):/);
+map.set("namespace", /namespace\s+(\w+):/gm);
 map.set(
   "function",
   /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
@@ -43,9 +42,9 @@ export default class CairoParser {
     return map.get(name);
   }
 
-  static getNamespaceScopes(text: string): Namespace[] | null {
+  static getNamespaceScopes(text: string): NamespaceScope[] | null {
     const lines = text.split("\n");
-    var namespaces: Namespace[] = [];
+    var namespaces: NamespaceScope[] = [];
     var attributeName: string = "";
     var startLineNumber = 0;
     var lineCount = 0;
@@ -68,8 +67,8 @@ export default class CairoParser {
       if (line === "end" && runningScope === true) {
         const namespace = {
           namespace: attributeName,
-          startLineNumber: startLineNumber,
-          endLineNumber: lineCount,
+          start: startLineNumber,
+          end: lineCount,
           text: texts.trim(),
         };
 
@@ -85,62 +84,78 @@ export default class CairoParser {
     return namespaces;
   }
 
-  static parseNamespaceScopes(text: string): string[] | null {
-    const namespaces = CairoParser.getNamespaceScopes(text);
-    var namespaceScopes: string[] = [];
-    if (namespaces) {
-      for (var namespace of namespaces) {
-        const text = namespace.text;
-        const namespaceName = namespace.namespace;
-        const matches = text!.match(this.getRegex("function"));
-        if (matches) {
-          for (var match of matches) {
-            const namespaceScope = `@${namespaceName}\n${match}`;
-            namespaceScopes.push(namespaceScope);
-          }
-        }
-      }
-      return namespaceScopes;
-    }
+  static getNamespaceScopesMatchAll(text: string): NamespaceScope[] | null {
+    const lines = text.split("\n");
+    var namespaces: NamespaceScope[] = [];
+    var startLineNumber = 0;
+    var attributeName: string = "";
+    var lineCount = 0;
+    var runningScope = false;
+    var texts: string = "";
 
-    return null;
+    const regexp = this.getRegex("namespace");
+    const namespaceScopes = [...text.matchAll(regexp)];
+
+    var namespaceCount = 0;
+    for (var line of lines) {
+      lineCount += 1;
+
+      if (runningScope === true) {
+        texts += line + "\n";
+      }
+
+      if (line.startsWith("namespace")) {
+        attributeName = `namespace ${line.split(" ")[1].split(":")[0]}`;
+        startLineNumber = lineCount;
+        runningScope = true;
+        texts += line + "\n";
+      }
+      if (line === "end" && runningScope === true) {
+        const namespace = {
+          namespace: attributeName,
+          start: namespaceScopes[namespaceCount].index!,
+          end: 0,
+          text: texts.trim(),
+        };
+
+        texts = "";
+        attributeName = "";
+        runningScope = false;
+        namespaceCount += 1;
+        namespaces.push(namespace);
+      }
+    }
+    if (namespaces.length === 0) {
+      return null;
+    }
+    return namespaces;
   }
 
   static parseNamespaceScopesWithMatchAll(
     text: string
   ): FunctionScope[] | null {
-    const namespaces = CairoParser.getNamespaceScopes(text);
+    const namespaces = CairoParser.getNamespaceScopesMatchAll(text);
     var namespaceScopes: FunctionScope[] = [];
     if (namespaces) {
       for (var namespace of namespaces) {
-        const text = namespace.text;
+        const namespaceText = namespace.text;
         const namespaceName = namespace.namespace;
-        const matches = this.parseFunctionScopeWithMatchAll(text!, "function");
+        const matches = this.parseFunctionScopeWithMatchAll(
+          namespaceText!,
+          "function"
+        );
         if (matches) {
           for (var match of matches) {
             const functionScope = {
-              text: `@${namespaceName}\n${match}`,
-              start: match.start,
-              end: match.end,
+              text: `@${namespaceName}\n${match.text}`,
+              start: namespace.start! + match.start,
+              end: namespace.start! + match.end,
             };
             namespaceScopes.push(functionScope);
           }
         }
-        return namespaceScopes;
       }
-    }
-    return null;
-  }
-
-  // parse whole scope
-  static parseFunctionScope(
-    text: string,
-    name: string
-  ): RegExpMatchArray | null {
-    const result = text.match(this.getRegex(name));
-
-    if (result) {
-      return result;
+      return namespaceScopes;
     }
     return null;
   }
@@ -191,6 +206,40 @@ export default class CairoParser {
         end: commentLineEnd,
       };
       return commentLineRange;
+    }
+    return null;
+  }
+
+  static parseNamespaceScopes(text: string): string[] | null {
+    const namespaces = CairoParser.getNamespaceScopes(text);
+    var namespaceScopes: string[] = [];
+    if (namespaces) {
+      for (var namespace of namespaces) {
+        const text = namespace.text;
+        const namespaceName = namespace.namespace;
+        const matches = text!.match(this.getRegex("function"));
+        if (matches) {
+          for (var match of matches) {
+            const namespaceScope = `@${namespaceName}\n${match}`;
+            namespaceScopes.push(namespaceScope);
+          }
+        }
+      }
+      return namespaceScopes;
+    }
+
+    return null;
+  }
+
+  // parse whole scope
+  static parseFunctionScope(
+    text: string,
+    name: string
+  ): RegExpMatchArray | null {
+    const result = text.match(this.getRegex(name));
+
+    if (result) {
+      return result;
     }
     return null;
   }
