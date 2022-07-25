@@ -26,7 +26,7 @@ suite("integration-test: view", () => {
     // parse comment lines
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![0]
-    )!.match;
+    )!.text;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -117,7 +117,7 @@ suite("integration-test: view", () => {
     const line = 1;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    )!.match;
+    )!.text;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -214,7 +214,7 @@ suite("integration-test: view", () => {
     const line = 2;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    )!.match;
+    )!.text;
     console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -319,7 +319,7 @@ suite("integration-test: view", () => {
     const line = 3;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    )!.match;
+    )!.text;
     console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -416,7 +416,7 @@ suite("integration-test: view", () => {
     const line = 4;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    )!.match;
+    )!.text;
     console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -523,7 +523,7 @@ suite("integration-test: view", () => {
     const line = 5;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    )!.match;
+    )!.text;
     console.log(commentLines);
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =

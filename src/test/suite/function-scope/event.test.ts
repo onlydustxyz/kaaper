@@ -27,7 +27,7 @@ suite("integration-test: event", () => {
     // parse comment lines
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![0]
-    )!.match;
+    )!.text;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -131,7 +131,7 @@ suite("integration-test: event", () => {
     const line = 1;
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![line]
-    )!.match;
+    )!.text;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =

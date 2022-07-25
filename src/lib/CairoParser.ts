@@ -12,9 +12,10 @@ import {
   ParsingResult,
   FunctionCommentValidity,
   Namespace,
-  CommentLines,
+  FunctionScope,
+  CommentScope,
 } from "./types";
-
+import { start } from "repl";
 
 const lodash = require("lodash");
 const yaml = require("js-yaml");
@@ -105,6 +106,32 @@ export default class CairoParser {
     return null;
   }
 
+  static parseNamespaceScopesWithMatchAll(
+    text: string
+  ): FunctionScope[] | null {
+    const namespaces = CairoParser.getNamespaceScopes(text);
+    var namespaceScopes: FunctionScope[] = [];
+    if (namespaces) {
+      for (var namespace of namespaces) {
+        const text = namespace.text;
+        const namespaceName = namespace.namespace;
+        const matches = this.parseFunctionScopeWithMatchAll(text!, "function");
+        if (matches) {
+          for (var match of matches) {
+            const functionScope = {
+              text: `@${namespaceName}\n${match}`,
+              start: match.start,
+              end: match.end,
+            };
+            namespaceScopes.push(functionScope);
+          }
+        }
+        return namespaceScopes;
+      }
+    }
+    return null;
+  }
+
   // parse whole scope
   static parseFunctionScope(
     text: string,
@@ -121,25 +148,36 @@ export default class CairoParser {
   static parseFunctionScopeWithMatchAll(
     text: string,
     name: string
-  ): RegExpMatchArray[] | null {
+  ): FunctionScope[] | null {
     const regexp = this.getRegex(name);
-    const matches = [...text.matchAll(regexp)];
-    if (matches.length > 0) {
-      return matches;
+    var functionScopes: FunctionScope[] = [];
+    const matches = text.matchAll(regexp);
+    for (const match of matches) {
+      const startIndex = match.index ? match.index : 0;
+      const functionScope = {
+        text: match[0],
+        start: startIndex,
+        end: startIndex + match[0].length,
+      };
+      functionScopes.push(functionScope);
+    }
+
+    if (functionScopes.length > 0) {
+      return functionScopes;
     }
     return null;
   }
 
   static parseCommentLinesWithMatchAll(
-    scope: RegExpMatchArray
-  ): CommentLines | null {
+    scope: FunctionScope
+  ): CommentScope | null {
     const regexp = this.getRegex("comment");
-    const commentLinesText = this.parseCommentLines(scope[0]);
+    const commentLinesText = this.parseCommentLines(scope.text);
     if (scope && commentLinesText) {
       // if scope is not null, then extract the index
       // const matchStart = scope.index? scope.index : 0;
-      const scopeLineStart = scope.index;
-      const commentLines = [...scope[0].matchAll(regexp)];
+      const scopeLineStart = scope.start;
+      const commentLines = [...scope.text.matchAll(regexp)];
       const commentLineStart = scopeLineStart! + commentLines[0].index!;
 
       const commentLineEnd =
@@ -148,27 +186,26 @@ export default class CairoParser {
         commentLines[commentLines.length - 1][0].length;
 
       const commentLineRange = {
-        match: commentLinesText.match,
-        startLine: commentLineStart,
-        endLine: commentLineEnd,
+        text: commentLinesText.text,
+        start: commentLineStart,
+        end: commentLineEnd,
       };
       return commentLineRange;
     }
     return null;
   }
 
-
   // parse only commented lines
   // run this after parsing the whole scope using parseFunctionScope
-  static parseCommentLines(line: string): CommentLines | null {
+  static parseCommentLines(line: string): CommentScope | null {
     const comments = line.match(/#\s+(.+)/gm);
     if (comments && comments.length > 0) {
       const matchStart = 0;
       const matchEnd = matchStart! + comments.length;
       const commentLines = {
-        match: comments,
-        startLine: matchStart!,
-        endLine: matchEnd!,
+        text: comments,
+        start: matchStart!,
+        end: matchEnd!,
       };
       return commentLines;
     }
@@ -191,8 +228,7 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopeLines) {
       for (var functionScope of functionScopeLines) {
-        const commentLines =
-          CairoParser.parseCommentLines(functionScope)!.match;
+        const commentLines = CairoParser.parseCommentLines(functionScope)!.text;
 
         const functionCommentDescParser = new FunctionCommentDescParser();
         const functionCommentImplicitArgsParser =
@@ -223,6 +259,82 @@ export default class CairoParser {
             returns:
               functionCommentReturnsParser.parseCommentLines(commentLines),
             raises: functionCommentRaisesParser.parseCommentLines(commentLines),
+          },
+        };
+
+        parsingOutputs.push(parsingOutput);
+      }
+
+      return parsingOutputs;
+    }
+    return null;
+  }
+
+  static getScopeParsingResultMatchAll(
+    text: string,
+    name: string
+  ): ParsingResult[] | null {
+    // const functionScopeLines =
+    //   name === "namespace"
+    //     ? CairoParser.parseNamespaceScopes(text)
+    //     : CairoParser.parseFunctionScopeWithMatchAll(text, name);
+    const functionScopeLines = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      name
+    );
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    var parsingOutputs = [];
+
+    // parse comment lines
+    if (functionScopeLines) {
+      for (var functionScope of functionScopeLines) {
+        const commentLines =
+          CairoParser.parseCommentLinesWithMatchAll(functionScope);
+        // console.log(commentLines[1])
+
+        const functionCommentDescParser = new FunctionCommentDescParser();
+        const functionCommentImplicitArgsParser =
+          new FunctionCommentImplicitArgsParser();
+        const functionCommentExplicitArgsParser =
+          new FunctionCommentExplicitArgsParser();
+        const functionCommentReturnsParser = new FunctionCommentReturnsParser();
+        const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+
+        const parsingOutput = {
+          attributeName: functionSignatureParser.getAttributeName(
+            functionScope!.text
+          ),
+          functionName: functionSignatureParser.getFunctionName(
+            functionScope!.text
+          ),
+          functionSignature: {
+            implicitArgs: functionSignatureParser.getImplicitArgs(
+              functionScope!.text
+            ),
+            explicitArgs: functionSignatureParser.getExplicitArgs(
+              functionScope!.text
+            ),
+            returns: functionSignatureParser.getReturns(functionScope!.text),
+          },
+          functionComment: {
+            desc: functionCommentDescParser.parseCommentLines(
+              commentLines!.text
+            ),
+            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+              commentLines!.text
+            ),
+            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+              commentLines!.text
+            ),
+            returns: functionCommentReturnsParser.parseCommentLines(
+              commentLines!.text
+            ),
+            raises: functionCommentRaisesParser.parseCommentLines(
+              commentLines!.text
+            ),
           },
         };
 

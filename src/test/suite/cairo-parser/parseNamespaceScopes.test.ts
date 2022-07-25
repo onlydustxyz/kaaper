@@ -2,6 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as assert from "assert";
 import CairoParser from "../../../lib/CairoParser";
+import { Console } from "console";
 
 suite("parseNamespaceScopes", () => {
   test("scopeNumber: 0", () => {
@@ -13,6 +14,7 @@ suite("parseNamespaceScopes", () => {
     const scopeNumber = 0;
     // parse whole scope
     const parsingOutput = CairoParser.parseNamespaceScopes(text);
+    console.log(parsingOutput![scopeNumber]);
     assert.equal(
       "@namespace ERC20",
       parsingOutput![scopeNumber].split("\n")[0]

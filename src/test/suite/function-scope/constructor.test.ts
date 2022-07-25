@@ -30,7 +30,7 @@ suite("integration-test: constructor", () => {
     // parse comment lines
     const commentLines = CairoParser.parseCommentLines(
       functionScopeLines![0]
-    )!.match;
+    )!.text;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -153,10 +153,10 @@ suite("integration-test: constructor", () => {
     const functionCommentLines = CairoParser.parseCommentLinesWithMatchAll(
       functionScopeLines![0]
     );
-    assert.equal(functionCommentLines!.startLine, 526);
-    assert.equal(functionCommentLines!.endLine, 1187);
+    assert.equal(functionCommentLines!.start, 526);
+    assert.equal(functionCommentLines!.end, 1187);
 
-    const commentLines = functionCommentLines!.match;
+    const commentLines = functionCommentLines!.text;
 
     const functionCommentDescParser = new FunctionCommentDescParser();
     const functionCommentImplicitArgsParser =
@@ -228,17 +228,17 @@ suite("integration-test: constructor", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![0][0]
+          functionScopeLines![0].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![0][0]
+          functionScopeLines![0].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![0][0]
+            functionScopeLines![0].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![0][0]
+            functionScopeLines![0].text
           ),
         },
         functionComment: {

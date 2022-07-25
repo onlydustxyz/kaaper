@@ -12,7 +12,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
 
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
 
@@ -51,7 +51,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     implicitArgsParser.setStartScope(commentText![2]);
 
@@ -93,7 +93,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     implicitArgsParser.setStartScope(commentText![2]);
 
@@ -139,7 +139,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     implicitArgsParser.setStartScope(commentText![2]);
 
@@ -186,7 +186,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     implicitArgsParser.setStartScope(commentText![2]);
 
@@ -234,7 +234,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
     const targetLineParsing = [
       { name: "syscall_ptr", type: "felt*", desc: "" },

@@ -13,7 +13,7 @@ suite("function-comment: constructor: raises", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
 
     const raisesParser = new FunctionCommentRaisesParser();
 
@@ -49,7 +49,7 @@ suite("function-comment: constructor: raises", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -89,7 +89,7 @@ suite("function-comment: constructor: raises", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -129,7 +129,7 @@ suite("function-comment: constructor: raises", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -169,7 +169,7 @@ suite("function-comment: constructor: raises", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const raisesParser = new FunctionCommentRaisesParser();
     raisesParser.setStartScope(commentText![14]);
 
@@ -209,7 +209,7 @@ suite("function-comment: constructor: raises", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.match;
+    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
     const raisesParser = new FunctionCommentRaisesParser();
 
     const targetLineParsing = [

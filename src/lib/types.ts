@@ -1,3 +1,9 @@
+export interface FunctionScope {
+  text: string;
+  start: number;
+  end: number;
+}
+
 export interface FunctionSignature {
   name: string;
   type: string;
@@ -9,10 +15,10 @@ export interface FunctionComment {
   desc: string;
 }
 
-export interface CommentLines {
-  match: RegExpMatchArray;
-  startLine: number;
-  endLine: number;
+export interface CommentScope {
+  text: RegExpMatchArray;
+  start: number;
+  end: number;
 }
 
 export interface ParsingResult {
@@ -29,6 +35,25 @@ export interface ParsingResult {
     explicitArgs: FunctionComment[] | null;
     returns: FunctionComment[] | null;
     raises: FunctionComment[] | null;
+  };
+}
+
+export interface ParsingResultNew {
+  attributeName: string;
+  functionName: string;
+  functionSignature: {
+    implicitArgs: FunctionSignature[] | null;
+    explicitArgs: FunctionSignature[] | null;
+    returns: FunctionSignature[] | null;
+  };
+  functionComment: {
+    desc: FunctionComment[] | null;
+    implicitArgs: FunctionComment[] | null;
+    explicitArgs: FunctionComment[] | null;
+    returns: FunctionComment[] | null;
+    raises: FunctionComment[] | null;
+    start: number;
+    end: number;
   };
 }
 
