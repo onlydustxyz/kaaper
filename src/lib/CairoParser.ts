@@ -32,8 +32,7 @@ map.set(
   /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
 );
 map.set("comment", /\s*#\s*(.+)/gm);
-// @\w+[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send
-//
+
 
 export default class CairoParser {
   constructor() {}
@@ -323,15 +322,11 @@ export default class CairoParser {
     text: string,
     name: string
   ): ParsingResult[] | null {
-    // const functionScopeLines =
-    //   name === "namespace"
-    //     ? CairoParser.parseNamespaceScopes(text)
-    //     : CairoParser.parseFunctionScopeWithMatchAll(text, name);
-    const functionScopeLines = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      name
-    );
-
+    const functionScopeLines =
+      name === "namespace"
+        ? CairoParser.parseNamespaceScopesWithMatchAll(text)
+        : CairoParser.parseFunctionScopeWithMatchAll(text, name);
+        
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
