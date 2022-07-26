@@ -415,21 +415,31 @@ suite("function-comment: constructor: explicit-args", () => {
     assert.equal(functionCommentReference, wholeFileReference);
   });
 
-
   test("parse line 12", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
+    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
+      functionScopes![0]
+    )!.text;
     const functionCommentText = functionCommentScope!.join("\n");
-    const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
     explicitArgsParser.setStartScope(functionCommentScope![6]);
 
     const line = 12;
-    assert.equal("# Returns:", functionCommentScope![line].trim(), `check line ${line}`);
+    assert.equal(
+      "# Returns:",
+      functionCommentScope![line].trim(),
+      `check line ${line}`
+    );
     assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
     assert.equal(
       true,
@@ -454,44 +464,64 @@ suite("function-comment: constructor: explicit-args", () => {
     );
   });
 
-  // test("parse whole scope", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const functionCommentText = functionCommentScope!.join("\n");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
+  test("parse whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
+    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
+      functionScopes![0]
+    )!.text;
+    const functionCommentText = functionCommentScope!.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
 
-  //   const targetLineParsing = [
-  //     { name: "name", type: "felt", desc: "name of the token" },
-  //     { name: "symbol", type: "felt", desc: "symbol of the token" },
-  //     {
-  //       name: "decimals",
-  //       type: "Uint256",
-  //       desc: "floating point of the token",
-  //     },
-  //     {
-  //       name: "initial_supply",
-  //       type: "Uint256",
-  //       desc: "amount of initial supply of the token",
-  //     },
-  //     {
-  //       name: "recipient",
-  //       type: "felt",
-  //       desc: "the address of recipient of the initial supply",
-  //     },
-  //   ];
-  //   const resultLineParsing = explicitArgsParser.parseCommentLinesWithMatchAll(
-  //     functionCommentScope!
-  //   );
+    const targetLineParsing = [
+      {
+        name: "name",
+        type: "felt",
+        desc: "name of the token",
+        charIndex: { start: 181, end: 219 },
+      },
+      {
+        name: "symbol",
+        type: "felt",
+        desc: "symbol of the token",
+        charIndex: { start: 219, end: 261 },
+      },
+      {
+        name: "decimals",
+        type: "Uint256",
+        desc: "floating point of the token",
+        charIndex: { start: 261, end: 316 },
+      },
+      {
+        name: "initial_supply",
+        type: "Uint256",
+        desc: "amount of initial supply of the token",
+        charIndex: { start: 316, end: 387 },
+      },
+      {
+        name: "recipient",
+        type: "felt",
+        desc: "the address of recipient of the initial supply",
+        charIndex: { start: 387, end: 459 },
+      },
+    ];
+    const resultLineParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!
+    );
 
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing on whole scope`
-  //   );
-  // });
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      `failed to get resultLineParsing on whole scope`
+    );
+  });
 });
