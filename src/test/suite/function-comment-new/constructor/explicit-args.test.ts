@@ -343,97 +343,78 @@ suite("function-comment: constructor: explicit-args", () => {
     assert.equal(functionCommentReference, wholeFileReference);
   });
 
-  // test("parse line 9", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const functionCommentText = functionCommentScope!.join("\n");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
-  //   explicitArgsParser.setStartScope(functionCommentScope![6]);
+  test("parse line 11", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
+    const functionScope = functionScopes![0];
+    const functionCommentScope =
+      CairoParser.parseCommentLinesWithMatchAll(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
+    explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
 
-  //   const line = 9;
-  //   assert.equal(
-  //     "#   decimals(Uint256): floating point of the token",
-  //     functionCommentScope![line].trim(),
-  //     `check line ${line}`
-  //   );
-  //   assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
-  //   assert.equal(
-  //     false,
-  //     explicitArgsParser.isEndScope(functionCommentScope![line]),
-  //     `failed to get end scope line ${line}`
-  //   );
+    const line = 11;
+    const functionCommentLine = functionCommentScope!.text[line];
+    assert.equal(
+      "#   recipient(felt): the address of recipient of the initial supply",
+      functionCommentLine.trim(),
+      `check line ${line}`
+    );
+    assert.notEqual(functionCommentLine, explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
+    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
-  //   assert.equal(
-  //     true,
-  //     explicitArgsParser.runningScope,
-  //     `failed to get running scope line ${line}`
-  //   );
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(
-  //     functionCommentScope![line]
-  //   );
+    assert.equal(
+      true,
+      explicitArgsParser.runningScope,
+      `failed to get running scope line ${line}`
+    );
+    const resultLineParsing =
+      explicitArgsParser.parseCommentLine(functionCommentLine);
 
-  //   const targetLineParsing = {
-  //     name: "decimals",
-  //     type: "Uint256",
-  //     desc: "floating point of the token",
-  //   };
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing line ${line}`
-  //   );
-  // });
+    const targetLineParsing = {
+      name: "recipient",
+      type: "felt",
+      desc: "the address of recipient of the initial supply",
+      charIndex: {
+        start: 387,
+        end: 459,
+      },
+    };
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      `failed to get resultLineParsing line ${line}`
+    );
 
-  // test("parse line 10", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const functionCommentText = functionCommentScope!.join("\n");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
-  //   explicitArgsParser.setStartScope(functionCommentScope![6]);
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
 
-  //   const line = 10;
-  //   assert.equal(
-  //     "#   initial_supply(Uint256): amount of initial supply of the token",
-  //     functionCommentScope![line].trim(),
-  //     `check line ${line}`
-  //   );
-  //   assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
-  //   assert.equal(
-  //     false,
-  //     explicitArgsParser.isEndScope(functionCommentScope![line]),
-  //     `failed to get end scope line ${line}`
-  //   );
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
+  });
 
-  //   assert.equal(
-  //     true,
-  //     explicitArgsParser.runningScope,
-  //     `failed to get running scope line ${line}`
-  //   );
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(
-  //     functionCommentScope![line]
-  //   );
-
-  //   const targetLineParsing = {
-  //     name: "initial_supply",
-  //     type: "Uint256",
-  //     desc: "amount of initial supply of the token",
-  //   };
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing line ${line}`
-  //   );
-  // });
 
   // test("parse line 11", () => {
   //   const pathFile = path.resolve(
