@@ -13,7 +13,7 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
       const functionComments = [...this.functionComment.matchAll(regexp)];
       for (var functionComment of functionComments) {
         // without # or anything else, just pure content
-        // e.g name(felt): The name of the token instead of 
+        // e.g name(felt): The name of the token instead of
         // # name(felt): The name of the token
         const commentContentOnly = line.match(regexp);
         if (functionComment[0] === commentContentOnly![0]) {

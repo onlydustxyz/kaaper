@@ -65,25 +65,24 @@ suite("function-comment: constructor: explicit-args", () => {
       text,
       "constructor"
     );
-    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
-      functionScopes![0]
-    )!.text;
-    const functionCommentText = functionCommentScope!.join("");
+    const functionScope = functionScopes![0];
+    const functionCommentScope =
+      CairoParser.parseCommentLinesWithMatchAll(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
     );
-    explicitArgsParser.setStartScope(functionCommentScope![6]);
+    explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
 
     const line = 7;
+    const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
       "#   name(felt): name of the token",
-      functionCommentScope![line].trim(),
+      functionCommentLine.trim(),
       `check line ${line}`
     );
-    assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
-    const isEndScope = explicitArgsParser.isEndScope(
-      functionCommentScope![line]
-    );
+    assert.notEqual(functionCommentLine, explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(
@@ -91,9 +90,8 @@ suite("function-comment: constructor: explicit-args", () => {
       explicitArgsParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = explicitArgsParser.parseCommentLine(
-      functionCommentScope![line]
-    );
+    const resultLineParsing =
+      explicitArgsParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = {
       name: "name",
@@ -109,6 +107,24 @@ suite("function-comment: constructor: explicit-args", () => {
       resultLineParsing,
       `failed to get resultLineParsing line ${line}`
     );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
   });
 
   // test("parse line 8", () => {
@@ -117,13 +133,21 @@ suite("function-comment: constructor: explicit-args", () => {
   //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
   //   );
   //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const functionCommentText = functionCommentScope!.join("\n");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
+  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+  //     text,
+  //     "constructor"
+  //   );
+  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
+  //     functionScopes![0]
+  //   )!.text;
+  //   const functionCommentText = functionCommentScope!.join("");
+  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+  //     functionCommentText
+  //   );
   //   explicitArgsParser.setStartScope(functionCommentScope![6]);
 
-  //   const line = 8;
+  //   const line = 7;
+
   //   assert.equal(
   //     "#   symbol(felt): symbol of the token",
   //     functionCommentScope![line].trim(),
