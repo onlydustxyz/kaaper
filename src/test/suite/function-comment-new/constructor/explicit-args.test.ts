@@ -416,89 +416,43 @@ suite("function-comment: constructor: explicit-args", () => {
   });
 
 
-  // test("parse line 11", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const functionCommentText = functionCommentScope!.join("\n");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
-  //   explicitArgsParser.setStartScope(functionCommentScope![6]);
+  test("parse line 12", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
+    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
+    const functionCommentText = functionCommentScope!.join("\n");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
+    explicitArgsParser.setStartScope(functionCommentScope![6]);
 
-  //   const line = 11;
-  //   assert.equal(
-  //     "#   recipient(felt): the address of recipient of the initial supply",
-  //     functionCommentScope![line].trim(),
-  //     `check line ${line}`
-  //   );
-  //   assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
-  //   assert.equal(
-  //     false,
-  //     explicitArgsParser.isEndScope(functionCommentScope![line]),
-  //     `failed to get end scope line ${line}`
-  //   );
+    const line = 12;
+    assert.equal("# Returns:", functionCommentScope![line].trim(), `check line ${line}`);
+    assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
+    assert.equal(
+      true,
+      explicitArgsParser.isEndScope(functionCommentScope![line]),
+      `failed to get end scope line ${line}`
+    );
+    explicitArgsParser.setEndScope(functionCommentScope![line]);
 
-  //   assert.equal(
-  //     true,
-  //     explicitArgsParser.runningScope,
-  //     `failed to get running scope line ${line}`
-  //   );
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(
-  //     functionCommentScope![line]
-  //   );
+    assert.equal(
+      false,
+      explicitArgsParser.runningScope,
+      `failed to get running scope line ${line}`
+    );
+    const resultLineParsing = explicitArgsParser.parseCommentLine(
+      functionCommentScope![line]
+    );
 
-  //   const targetLineParsing = {
-  //     name: "recipient",
-  //     type: "felt",
-  //     desc: "the address of recipient of the initial supply",
-  //   };
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing line ${line}`
-  //   );
-  // });
-
-  // test("parse line 12", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const functionCommentText = functionCommentScope!.join("\n");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(functionCommentText);
-  //   explicitArgsParser.setStartScope(functionCommentScope![6]);
-
-  //   const line = 12;
-  //   assert.equal("# Returns:", functionCommentScope![line].trim(), `check line ${line}`);
-  //   assert.notEqual(functionCommentScope![line], explicitArgsParser.startLine);
-  //   assert.equal(
-  //     true,
-  //     explicitArgsParser.isEndScope(functionCommentScope![line]),
-  //     `failed to get end scope line ${line}`
-  //   );
-  //   explicitArgsParser.setEndScope(functionCommentScope![line]);
-
-  //   assert.equal(
-  //     false,
-  //     explicitArgsParser.runningScope,
-  //     `failed to get running scope line ${line}`
-  //   );
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(
-  //     functionCommentScope![line]
-  //   );
-
-  //   assert.deepEqual(
-  //     null,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing line ${line}`
-  //   );
-  // });
+    assert.deepEqual(
+      null,
+      resultLineParsing,
+      `failed to get resultLineParsing line ${line}`
+    );
+  });
 
   // test("parse whole scope", () => {
   //   const pathFile = path.resolve(
