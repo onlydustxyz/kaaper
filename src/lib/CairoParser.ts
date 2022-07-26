@@ -187,7 +187,8 @@ export default class CairoParser {
     isNamespace: boolean = false
   ): CommentScope | null {
     const regexp = this.getRegex("comment");
-    const commentLinesText = this.parseCommentLines(scope.text);
+    const commentLinesText = scope.text.match(regexp);
+
     if (scope && commentLinesText) {
       const scopeLineStart = scope.start;
       const scopeText =
@@ -206,7 +207,7 @@ export default class CairoParser {
         commentLines[commentLines.length - 1][0].length;
 
       const commentLineRange = {
-        text: commentLinesText.text,
+        text: commentLinesText,
         start: commentLineStart,
         end: commentLineEnd,
       };
