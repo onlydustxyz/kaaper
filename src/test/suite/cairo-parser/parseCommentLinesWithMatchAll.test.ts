@@ -146,7 +146,10 @@ suite("parseCommentLines: constructor Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
     const functionScope = functionScopes![scopeNumber];
 
     const functionComment = CairoParser.parseCommentLinesWithMatchAll(
@@ -175,7 +178,10 @@ suite("parseCommentLines: View Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "view");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "view"
+    );
     const functionScope = functionScopes![scopeNumber];
 
     const functionComment = CairoParser.parseCommentLinesWithMatchAll(

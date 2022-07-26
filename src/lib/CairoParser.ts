@@ -328,7 +328,7 @@ export default class CairoParser {
   static getScopeParsingResultMatchAll(
     text: string,
     name: string
-  ): ParsingResultNew[] | null {
+  ): ParsingResult[] | null {
     const functionScopeLines =
       name === "namespace"
         ? CairoParser.parseNamespaceScopesWithMatchAll(text)

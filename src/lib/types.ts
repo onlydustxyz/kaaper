@@ -15,6 +15,18 @@ export interface FunctionComment {
   desc: string;
 }
 
+export interface CharIndex {
+  start: number;
+  end: number;
+}
+
+export interface FunctionCommentNew {
+  name: string;
+  type: string;
+  desc: string;
+  charIndex: CharIndex;
+}
+
 export interface CommentScope {
   text: RegExpMatchArray;
   start: number;
@@ -52,8 +64,14 @@ export interface ParsingResultNew {
     explicitArgs: FunctionComment[] | null;
     returns: FunctionComment[] | null;
     raises: FunctionComment[] | null;
-    start: number;
-    end: number;
+  };
+  functionCommentIndex: {
+    functionComment: CharIndex[] | null;
+    desc: CharIndex[] | null;
+    implicitArgs: CharIndex[] | null;
+    explicitArgs: CharIndex[] | null;
+    returns: CharIndex[] | null;
+    raises: CharIndex[] | null;
   };
 }
 
