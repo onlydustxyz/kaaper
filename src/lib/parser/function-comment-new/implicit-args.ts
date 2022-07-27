@@ -13,12 +13,10 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
       const functionComments = [...this.functionComment.matchAll(regexp)];
       for (var functionComment of functionComments) {
         // without # or anything else, just pure content
-        // e.g name(felt): The name of the token instead of
-        // # name(felt): The name of the token
+        // e.g pedersen_ptr(HashBuiltin*) instead of
+        // #     pedersen_ptr(HashBuiltin*)
         const commentLine = [...line.matchAll(regexp)];
         if (functionComment[0] === commentLine![0][0]) {
-          console.log(functionComment[1]);
-          console.log(commentLine![0][1]);
           const start = functionComment.index!;
           const matchInterface = {
             name: functionComment[2].trim(),
@@ -26,7 +24,7 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
             desc: "",
             charIndex: {
               start: start,
-              end: start + line.length,
+              end: start + functionComment[0].length,
             },
           };
           return matchInterface;

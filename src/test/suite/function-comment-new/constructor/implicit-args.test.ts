@@ -93,7 +93,80 @@ suite("function-comment: constructor: implicit-args", () => {
       name: "syscall_ptr",
       type: "felt*",
       desc: "",
-      charIndex: { start: 74, end: 101 },
+      charIndex: { start: 74, end: 92 },
+    };
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      `failed to get resultLineParsing line ${line}`
+    );
+
+    assert.equal(
+      false,
+      implicitArgsParser.isEndScope(functionCommentLine),
+      `failed to get end scope line ${line}`
+    );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
+  });
+
+  test("parse line 4", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
+    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const implicitArgsParser = new FunctionCommentImplicitArgsParser(
+      functionCommentText
+    );
+    implicitArgsParser.setStartScope(functionCommentScope!.text[2]);
+
+    const line = 4;
+    const functionCommentLine = functionCommentScope!.text[line];
+    assert.equal(
+      "#   pedersen_ptr(HashBuiltin*)",
+      functionCommentLine.trim(),
+      `check line ${line}`
+    );
+    assert.notEqual(functionCommentLine, implicitArgsParser.startLine);
+
+    assert.equal(
+      true,
+      implicitArgsParser.runningScope,
+      `failed to get running scope line ${line}`
+    );
+    const resultLineParsing =
+      implicitArgsParser.parseCommentLine(functionCommentLine);
+
+    const targetLineParsing = {
+      name: "pedersen_ptr",
+      type: "HashBuiltin*",
+      desc: "",
+      charIndex: { start: 101, end: 127 },
     };
     assert.deepEqual(
       targetLineParsing,
