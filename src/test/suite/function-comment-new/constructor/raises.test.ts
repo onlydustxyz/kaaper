@@ -331,68 +331,56 @@ suite("function-comment: constructor: raises", () => {
     assert.equal(functionCommentReference, wholeFileReference);
   });
 
-  // test("parse line 18", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const commentText = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const raisesParser = new FunctionCommentRaisesParser();
-  //   raisesParser.setStartScope(commentText![14]);
+  test("parse whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
+    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
 
-  //   const line = 18;
-  //   assert.equal(
-  //     "#   initial_supply: mint overflow",
-  //     commentText![line].trim(),
-  //     `check line ${line}`
-  //   );
-  //   assert.notEqual(commentText![line], raisesParser.startLine);
-  //   const isEndScope = raisesParser.isEndScope(commentText![line]);
-  //   assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+    const targetLineParsing = [
+      {
+        name: "decimals",
+        type: "",
+        desc: "decimals exceed 2^8",
+        charIndex: { start: 501, end: 530 },
+      },
+      {
+        name: "recipient",
+        type: "",
+        desc: "cannot mint to the zero address",
+        charIndex: { start: 539, end: 581 },
+      },
+      {
+        name: "initial_supply",
+        type: "",
+        desc: "not valid Uint256",
+        charIndex: { start: 590, end: 623 },
+      },
+      {
+        name: "initial_supply",
+        type: "",
+        desc: "mint overflow",
+        charIndex: { start: 632, end: 661 },
+      },
+    ];
+    const resultLineParsing = raisesParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
-  //   assert.equal(
-  //     true,
-  //     raisesParser.runningScope,
-  //     `failed to get running scope line ${line}`
-  //   );
-  //   const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
-
-  //   const targetLineParsing = {
-  //     name: "initial_supply",
-  //     type: "",
-  //     desc: "mint overflow",
-  //   };
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing line ${line}`
-  //   );
-  // });
-
-  // test("parse whole scope", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const commentText = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const raisesParser = new FunctionCommentRaisesParser();
-
-  //   const targetLineParsing = [
-  //     { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-  //     { name: "recipient", type: "", desc: "cannot mint to the zero address" },
-  //     { name: "initial_supply", type: "", desc: "not valid Uint256" },
-  //     { name: "initial_supply", type: "", desc: "mint overflow" },
-  //   ];
-  //   const resultLineParsing = raisesParser.parseCommentLines(commentText!);
-
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing on whole scope`
-  //   );
-  // });
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      `failed to get resultLineParsing on whole scope`
+    );
+  });
 });
