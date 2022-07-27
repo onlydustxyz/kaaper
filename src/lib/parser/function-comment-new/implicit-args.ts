@@ -1,28 +1,35 @@
-import { BaseCommentParser } from "../interfaces/function-comment";
-import { FunctionComment } from "../../types";
+import { BaseCommentParser } from "../interfaces/function-comment-new";
+import { FunctionCommentNew } from "../../types";
 
 export default class FunctionCommentImplicitArgsParser extends BaseCommentParser {
-  constructor() {
-    super();
+  constructor(functionComment: string) {
+    super(functionComment);
     this.name = "Implicit args";
   }
 
-  parseCommentLine(line: string): FunctionComment | null {
+  parseCommentLine(line: string): FunctionCommentNew | null {
     if (this.runningScope === true && this.startLine !== line) {
-      const matchCommentLines = line.match(/#\s+(.+)/);
-      if (matchCommentLines) {
-        const matchInterface = line.match(/#\s+(\w+)(\(?([\w\*]+)\))?$/);
-        if (matchInterface) {
-          if (matchInterface[3]) {
-            return {
-              name: matchInterface[1],
-              type: matchInterface[3],
-              desc: "",
-            };
-          }
-          return { name: matchInterface[1], type: "", desc: "" };
+      const regexp = /#\s+((\w+)(\(?([\w\*]+)\))?)$/gm;
+      const functionComments = [...this.functionComment.matchAll(regexp)];
+      for (var functionComment of functionComments) {
+        // match the comment line
+        // # name(felt): The name of the token
+        const commentLine = line.match(regexp);
+        if (functionComment[0] === commentLine![0]) {
+          const start = functionComment.index!;
+          const matchInterface = {
+            name: functionComment[2].trim(),
+            type: functionComment[4].trim(),
+            desc: "",
+            charIndex: {
+              start: start,
+              end: start + line.length,
+            },
+          };
+          return matchInterface;
         }
       }
+      return null;
     }
     return null;
   }

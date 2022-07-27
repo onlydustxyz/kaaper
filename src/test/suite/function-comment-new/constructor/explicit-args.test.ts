@@ -18,7 +18,7 @@ suite("function-comment: constructor: explicit-args", () => {
     const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
       functionScopes![0]
     )!.text;
-    const functionCommentText = functionCommentScope!.join("\n");
+    const functionCommentText = functionCommentScope!.join("");
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
