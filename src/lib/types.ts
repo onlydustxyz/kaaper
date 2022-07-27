@@ -47,33 +47,34 @@ export interface ParsingResult {
     explicitArgs: FunctionComment[] | null;
     returns: FunctionComment[] | null;
     raises: FunctionComment[] | null;
+    charIndex: CharIndex | null;
   };
 }
 
-export interface ParsingResultNew {
-  attributeName: string;
-  functionName: string;
-  functionSignature: {
-    implicitArgs: FunctionSignature[] | null;
-    explicitArgs: FunctionSignature[] | null;
-    returns: FunctionSignature[] | null;
-  };
-  functionComment: {
-    desc: FunctionComment[] | null;
-    implicitArgs: FunctionComment[] | null;
-    explicitArgs: FunctionComment[] | null;
-    returns: FunctionComment[] | null;
-    raises: FunctionComment[] | null;
-  };
-  functionCommentIndex: {
-    functionComment: CharIndex[] | null;
-    desc: CharIndex[] | null;
-    implicitArgs: CharIndex[] | null;
-    explicitArgs: CharIndex[] | null;
-    returns: CharIndex[] | null;
-    raises: CharIndex[] | null;
-  };
-}
+// export interface ParsingResultNew {
+//   attributeName: string;
+//   functionName: string;
+//   functionSignature: {
+//     implicitArgs: FunctionSignature[] | null;
+//     explicitArgs: FunctionSignature[] | null;
+//     returns: FunctionSignature[] | null;
+//   };
+//   functionComment: {
+//     desc: FunctionComment[] | null;
+//     implicitArgs: FunctionComment[] | null;
+//     explicitArgs: FunctionComment[] | null;
+//     returns: FunctionComment[] | null;
+//     raises: FunctionComment[] | null;
+//   };
+//   functionCommentIndex: {
+//     functionComment: CharIndex[] | null;
+//     desc: CharIndex[] | null;
+//     implicitArgs: CharIndex[] | null;
+//     explicitArgs: CharIndex[] | null;
+//     returns: CharIndex[] | null;
+//     raises: CharIndex[] | null;
+//   };
+// }
 
 export interface FunctionCommentValidity {
   isValid: boolean;
