@@ -65,35 +65,35 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
       functionScopes![0]
-    )!.text;
-    const functionCommentText = functionCommentScope!.join("");
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
     const implicitArgsParser = new FunctionCommentImplicitArgsParser(
       functionCommentText
     );
-    implicitArgsParser.setStartScope(functionCommentScope![2]);
+    implicitArgsParser.setStartScope(functionCommentScope!.text[2]);
 
     const line = 3;
+    const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
       "#   syscall_ptr(felt*)",
-      functionCommentScope![line].trim(),
+      functionCommentLine.trim(),
       `check line ${line}`
     );
-    assert.notEqual(functionCommentScope![line], implicitArgsParser.startLine);
+    assert.notEqual(functionCommentLine, implicitArgsParser.startLine);
 
     assert.equal(
       true,
       implicitArgsParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = implicitArgsParser.parseCommentLine(
-      functionCommentScope![line]
-    );
+    const resultLineParsing =
+      implicitArgsParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = {
       name: "syscall_ptr",
       type: "felt*",
       desc: "",
-      charIndex: { start: 70, end: 97 },
+      charIndex: { start: 74, end: 101 },
     };
     assert.deepEqual(
       targetLineParsing,
@@ -103,9 +103,27 @@ suite("function-comment: constructor: implicit-args", () => {
 
     assert.equal(
       false,
-      implicitArgsParser.isEndScope(functionCommentScope![line]),
+      implicitArgsParser.isEndScope(functionCommentLine),
       `failed to get end scope line ${line}`
     );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
   });
 
   // test("parse line 4", () => {
