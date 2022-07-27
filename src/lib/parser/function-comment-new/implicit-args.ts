@@ -13,14 +13,15 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
       const functionComments = [...this.functionComment.matchAll(regexp)];
       for (var functionComment of functionComments) {
         // without # or anything else, just pure content
-        // e.g pedersen_ptr(HashBuiltin*) instead of
+        // e.g `pedersen_ptr(HashBuiltin*)` instead of
         // #     pedersen_ptr(HashBuiltin*)
         const commentLine = [...line.matchAll(regexp)];
         if (functionComment[0] === commentLine![0][0]) {
           const start = functionComment.index!;
+          const type = functionComment[4] ? functionComment[4].trim() : "";
           const matchInterface = {
             name: functionComment[2].trim(),
-            type: functionComment[4].trim(),
+            type: type,
             desc: "",
             charIndex: {
               start: start,
