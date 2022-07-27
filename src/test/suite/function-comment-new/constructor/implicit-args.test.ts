@@ -328,29 +328,52 @@ suite("function-comment: constructor: implicit-args", () => {
     );
   });
 
-  // test("parse whole scope", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(text, "constructor");
-  //   const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(functionScopes![0])!.text;
-  //   const implicitArgsParser = new FunctionCommentImplicitArgsParser();
-  //   const targetLineParsing = [
-  //     { name: "syscall_ptr", type: "felt*", desc: "" },
-  //     { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //     { name: "range_check_ptr", type: "", desc: "" },
-  //   ];
+  test("parse whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
+      text,
+      "constructor"
+    );
+    const functionCommentScope = CairoParser.parseCommentLinesWithMatchAll(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const implicitArgsParser = new FunctionCommentImplicitArgsParser(
+      functionCommentText
+    );
+    const targetLineParsing = [
+      {
+        name: "syscall_ptr",
+        type: "felt*",
+        desc: "",
+        charIndex: { start: 74, end: 92 },
+      },
+      {
+        name: "pedersen_ptr",
+        type: "HashBuiltin*",
+        desc: "",
+        charIndex: { start: 101, end: 127 },
+      },
+      {
+        name: "range_check_ptr",
+        type: "",
+        desc: "",
+        charIndex: { start: 136, end: 151 },
+      },
+    ];
 
-  //   const resultLineParsing = implicitArgsParser.parseCommentLinesWithMatchAll(
-  //     functionCommentScope!
-  //   );
+    const resultLineParsing = implicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing on whole scope`
-  //   );
-  // });
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      `failed to get resultLineParsing on whole scope`
+    );
+  });
 });
