@@ -107,6 +107,53 @@ suite("function-comment: view - decimals", () => {
 });
 
 suite("function-comment: view: balanceOf", () => {
+  test("should've not start yet on lineNumber 6", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeLine = 4;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeLine];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
+    explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
+
+    const lineNumber = 6;
+    const functionCommentLine = functionCommentScope!.text[lineNumber];
+    assert.equal(
+      "# Explicit args:",
+      functionCommentLine.trim(),
+      `check lineNumber ${lineNumber}`
+    );
+    assert.equal(functionCommentLine, explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
+    assert.equal(
+      false,
+      isEndScope,
+      `failed to get end scope lineNumber ${lineNumber}`
+    );
+
+    assert.equal(
+      true,
+      explicitArgsParser.runningScope,
+      `failed to get running scope lineNumber ${lineNumber}`
+    );
+
+    const functionCommentParsing =
+      explicitArgsParser.parseCommentLine(functionCommentLine);
+
+    assert.equal(
+      null,
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
+    );
+  });
+
   test("should've found explicit args on `balanceOf` methods", () => {
     const pathFile = path.resolve(
       __dirname,
