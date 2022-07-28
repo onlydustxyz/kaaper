@@ -92,7 +92,7 @@ suite("function-comment: constructor: explicit-args", () => {
       desc: "name of the token",
       charIndex: {
         start: 181,
-        end: 219,
+        end: 210,
       },
     };
     assert.deepEqual(
@@ -160,7 +160,7 @@ suite("function-comment: constructor: explicit-args", () => {
       desc: "symbol of the token",
       charIndex: {
         start: 219,
-        end: 261,
+        end: 252,
       },
     };
     assert.deepEqual(
@@ -228,7 +228,7 @@ suite("function-comment: constructor: explicit-args", () => {
       desc: "floating point of the token",
       charIndex: {
         start: 261,
-        end: 316,
+        end: 307,
       },
     };
     assert.deepEqual(
@@ -296,7 +296,7 @@ suite("function-comment: constructor: explicit-args", () => {
       desc: "amount of initial supply of the token",
       charIndex: {
         start: 316,
-        end: 387,
+        end: 378,
       },
     };
     assert.deepEqual(
@@ -364,7 +364,7 @@ suite("function-comment: constructor: explicit-args", () => {
       desc: "the address of recipient of the initial supply",
       charIndex: {
         start: 387,
-        end: 459,
+        end: 450,
       },
     };
     assert.deepEqual(
@@ -458,31 +458,31 @@ suite("function-comment: constructor: explicit-args", () => {
         name: "name",
         type: "felt",
         desc: "name of the token",
-        charIndex: { start: 181, end: 219 },
+        charIndex: { start: 181, end: 210 },
       },
       {
         name: "symbol",
         type: "felt",
         desc: "symbol of the token",
-        charIndex: { start: 219, end: 261 },
+        charIndex: { start: 219, end: 252 },
       },
       {
         name: "decimals",
         type: "Uint256",
         desc: "floating point of the token",
-        charIndex: { start: 261, end: 316 },
+        charIndex: { start: 261, end: 307 },
       },
       {
         name: "initial_supply",
         type: "Uint256",
         desc: "amount of initial supply of the token",
-        charIndex: { start: 316, end: 387 },
+        charIndex: { start: 316, end: 378 },
       },
       {
         name: "recipient",
         type: "felt",
         desc: "the address of recipient of the initial supply",
-        charIndex: { start: 387, end: 459 },
+        charIndex: { start: 387, end: 450 },
       },
     ];
     const resultLineParsing = explicitArgsParser.parseCommentLines(

@@ -4,33 +4,31 @@ import * as fs from "fs";
 import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment-new/explicit-args";
 import CairoParser from "../../../../lib/CairoParser";
 
-
 suite("function-comment: view - name", () => {
   test("doesn't have explicit args on `name` method", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const scopeLine = 0
+    const scopeLine = 0;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
     // console.log(functionScope.text);
-    const functionCommentScope = CairoParser.parseCommentLines(
-      functionScope
-    )!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
     const functionCommentText = functionCommentScope!.text.join("");
-    console.log(functionCommentText)
+    console.log(functionCommentText);
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
     );
 
-    const commentLineParsing = explicitArgsParser.parseCommentLines(functionCommentScope!.text);
-    assert.equal(null, commentLineParsing)
+    const commentLineParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
+    assert.equal(null, commentLineParsing);
   });
-
-})
+});
 
 suite("function-comment: view - symbol", () => {
   test("doesn't have explicit args on `symbol` method", () => {
@@ -38,26 +36,25 @@ suite("function-comment: view - symbol", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const scopeLine = 1
+    const scopeLine = 1;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
 
-    const functionCommentScope = CairoParser.parseCommentLines(
-      functionScope
-    )!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
     const functionCommentText = functionCommentScope!.text.join("");
-    console.log(functionCommentText)
+    console.log(functionCommentText);
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
     );
 
-    const commentLineParsing = explicitArgsParser.parseCommentLines(functionCommentScope!.text);
-    assert.equal(null, commentLineParsing)
+    const commentLineParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
+    assert.equal(null, commentLineParsing);
   });
-
-})
+});
 
 suite("function-comment: view - totalSupply", () => {
   test("doesn't have explicit args on `totalSupply` method", () => {
@@ -65,25 +62,24 @@ suite("function-comment: view - totalSupply", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const scopeLine = 2
+    const scopeLine = 2;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
 
-    const functionCommentScope = CairoParser.parseCommentLines(
-      functionScope
-    )!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
     const functionCommentText = functionCommentScope!.text.join("");
-
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
     );
 
-    const commentLineParsing = explicitArgsParser.parseCommentLines(functionCommentScope!.text);
-    assert.equal(null, commentLineParsing)
+    const commentLineParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
+    assert.equal(null, commentLineParsing);
   });
-})
+});
 
 suite("function-comment: view - decimals", () => {
   test("doesn't have explicit args on `decimals` method", () => {
@@ -91,26 +87,24 @@ suite("function-comment: view - decimals", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const scopeLine = 3
+    const scopeLine = 3;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
 
-    const functionCommentScope = CairoParser.parseCommentLines(
-      functionScope
-    )!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
     const functionCommentText = functionCommentScope!.text.join("");
-
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
     );
 
-    const commentLineParsing = explicitArgsParser.parseCommentLines(functionCommentScope!.text);
-    assert.equal(null, commentLineParsing)
+    const commentLineParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
+    assert.equal(null, commentLineParsing);
   });
-})
-
+});
 
 suite("function-comment: view: balanceOf", () => {
   test("should've found explicit args on `balanceOf` methods", () => {
@@ -118,7 +112,7 @@ suite("function-comment: view: balanceOf", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const scopeLine = 4
+    const scopeLine = 4;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
@@ -138,7 +132,11 @@ suite("function-comment: view: balanceOf", () => {
     );
     assert.notEqual(functionCommentLine, explicitArgsParser.startLine);
     const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
-    assert.equal(false, isEndScope, `failed to get end scope lineNumber ${lineNumber}`);
+    assert.equal(
+      false,
+      isEndScope,
+      `failed to get end scope lineNumber ${lineNumber}`
+    );
 
     assert.equal(
       true,
@@ -154,7 +152,7 @@ suite("function-comment: view: balanceOf", () => {
       desc: "account to query balance for",
       charIndex: {
         start: 192,
-        end: 244,
+        end: 235,
       },
     };
     assert.deepEqual(
@@ -180,13 +178,11 @@ suite("function-comment: view: balanceOf", () => {
       wholeFileReference += text[i];
     }
     assert.equal(functionCommentReference, wholeFileReference);
-
-    assert.equal("account(felt): account to query balance for", functionCommentReference);
-
-
+    assert.equal(
+      "account(felt): account to query balance for",
+      functionCommentReference
+    );
   });
-
-  
 
   // test("parse lineNumber 7", () => {
   //   const pathFile = path.resolve(

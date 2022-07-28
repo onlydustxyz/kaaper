@@ -24,7 +24,7 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
             desc: functionComment[4].trim(),
             charIndex: {
               start: start,
-              end: start + line.length,
+              end: start + functionComment[0].length,
             },
           };
           return matchInterface;
