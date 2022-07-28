@@ -444,6 +444,83 @@ suite("function-comment: view: allowance", () => {
     );
   });
 
+  test("should've found spender(felt)", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeLine = 5;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeLine];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
+    explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
+
+    const lineNumber = 8;
+    const functionCommentLine = functionCommentScope!.text[lineNumber];
+    assert.equal(
+      "#   spender(felt): the address of spender (delegated account) of the tokens",
+      functionCommentLine.trim(),
+      `check lineNumber ${lineNumber}`
+    );
+    assert.notEqual(functionCommentLine, explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
+    assert.equal(
+      false,
+      isEndScope,
+      `failed to get end scope lineNumber ${lineNumber}`
+    );
+
+    assert.equal(
+      true,
+      explicitArgsParser.runningScope,
+      `failed to get running scope lineNumber ${lineNumber}`
+    );
+    const resultLineParsing =
+      explicitArgsParser.parseCommentLine(functionCommentLine);
+
+    const targetLineParsing = {
+      name: "spender",
+      type: "felt",
+      desc: "the address of spender (delegated account) of the tokens",
+      charIndex: {
+        start: 287,
+        end: 358,
+      },
+    };
+    assert.deepEqual(
+      targetLineParsing,
+      resultLineParsing,
+      `failed to get resultLineParsing lineNumber ${lineNumber}`
+    );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
+    assert.equal(
+      "spender(felt): the address of spender (delegated account) of the tokens",
+      functionCommentReference
+    );
+  });
+
   // test("should've ended on lineNumber 8", () => {
   //   const pathFile = path.resolve(
   //     __dirname,
