@@ -12,108 +12,121 @@ import { FunctionCommentNew } from "../../../lib/types";
 import { KeyObject } from "crypto";
 
 suite("integration-test: event", () => {
-  // test("0", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/library.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   // parse whole scope
-  //   const functionScopes = CairoParser.parseFunctionScope(text, "event");
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopes![0]
-  //   )!;
-  //   const functionCommentText: string = functionCommentScope!.text.join("");
-  //   const functionCommentDescParser = new FunctionCommentDescParser(functionCommentText);
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser(functionCommentText);
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser(functionCommentText);
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser(functionCommentText);
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser(functionCommentText);
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "event",
-  //       functionName: "Transfer",
-  //       functionSignature: {
-  //         implicitArgs: null,
-  //         explicitArgs: [
-  //           { name: "from_", type: "felt"},
-  //           { name: "to", type: "felt" },
-  //           { name: "value", type: "Uint256" },
-  //         ],
-  //         returns: null,
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           { name: "", type: "", desc: "Emit event when a transfer is made", charIndex: {start: 13, end: 56} },
-  //         ],
-  //         implicitArgs: null,
-  //         explicitArgs: [
-  //           {
-  //             name: "from_",
-  //             type: "felt",
-  //             desc: "The address of the sender",
-  //             charIndex: { start: 86, end: 133 },
-  //           },
-  //           {
-  //             name: "to",
-  //             type: "felt",
-  //             desc: "The address of the receiver",
-  //             charIndex: { start: 133, end: 179 },
-  //           },
-  //           {
-  //             name: "value",
-  //             type: "Uint256",
-  //             desc: "The amount of tokens transferred",
-  //             charIndex: { start: 179, end: 236 },
-  //           },
-  //         ],
-  //         returns: null,
-  //         raises: null,
-  //       },
-  //     },
-  //   ];
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![0].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![0].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![0].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![0].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![0].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!.text),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!.text
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!.text
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           functionCommentScope!.text
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!.text),
-  //       },
-  //     },
-  //   ];
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+  test("0", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "event");
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Comment parsing
+    // parse comment lines
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![0]
+    )!;
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
+    const parsingTarget = [
+      {
+        attributeName: "event",
+        functionName: "Transfer",
+        functionSignature: {
+          implicitArgs: null,
+          explicitArgs: [
+            { name: "from_", type: "felt" },
+            { name: "to", type: "felt" },
+            { name: "value", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Emit event when a transfer is made",
+              charIndex: { start: 22, end: 56 },
+            },
+          ],
+          implicitArgs: null,
+          explicitArgs: [
+            {
+              name: "from_",
+              type: "felt",
+              desc: "The address of the sender",
+              charIndex: { start: 86, end: 124 },
+            },
+            {
+              name: "to",
+              type: "felt",
+              desc: "The address of the receiver",
+              charIndex: { start: 133, end: 170 },
+            },
+            {
+              name: "value",
+              type: "Uint256",
+              desc: "The amount of tokens transferred",
+              charIndex: { start: 179, end: 227 },
+            },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+    ];
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopes![0].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopes![0].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopes![0].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopes![0].text
+          ),
+          returns: functionSignatureParser.getReturns(functionScopes![0].text),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+  });
   // test("1", () => {
   //   const pathFile = path.resolve(
   //     __dirname,
