@@ -521,90 +521,99 @@ suite("function-comment: view: allowance", () => {
     );
   });
 
-  // test("should've ended on lineNumber 8", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const scopeLine = 4;
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScope(text, "view");
-  //   const functionScope = functionScopes![scopeLine];
-  //   const functionCommentScope = CairoParser.parseCommentLines(functionScope);
-  //   const functionCommentText = functionCommentScope!.text.join("");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(
-  //     functionCommentText
-  //   );
-  //   explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
+  test("should've ended on lineNumber 9", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeLine = 5;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeLine];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
+    explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
 
-  //   const lineNumber = 8;
-  //   const functionCommentLine = functionCommentScope!.text[lineNumber];
-  //   assert.equal(
-  //     "# Returns:",
-  //     functionCommentLine.trim(),
-  //     `check lineNumber ${lineNumber}`
-  //   );
-  //   assert.notEqual(lineNumber, explicitArgsParser.startLine);
-  //   const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
-  //   assert.equal(
-  //     true,
-  //     isEndScope,
-  //     `failed to get end scope lineNumber ${lineNumber}`
-  //   );
+    const lineNumber = 9;
+    const functionCommentLine = functionCommentScope!.text[lineNumber];
+    assert.equal(
+      "# Returns:",
+      functionCommentLine.trim(),
+      `check lineNumber ${lineNumber}`
+    );
+    assert.notEqual(lineNumber, explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
+    assert.equal(
+      true,
+      isEndScope,
+      `failed to get end scope lineNumber ${lineNumber}`
+    );
 
-  //   explicitArgsParser.setEndScope(functionCommentLine);
+    explicitArgsParser.setEndScope(functionCommentLine);
 
-  //   assert.equal(
-  //     false,
-  //     explicitArgsParser.runningScope,
-  //     `failed to get running scope lineNumber ${lineNumber}`
-  //   );
+    assert.equal(
+      false,
+      explicitArgsParser.runningScope,
+      `failed to get running scope lineNumber ${lineNumber}`
+    );
 
-  //   const functionCommentParsing =
-  //     explicitArgsParser.parseCommentLine(functionCommentLine);
+    const functionCommentParsing =
+      explicitArgsParser.parseCommentLine(functionCommentLine);
 
-  //   assert.equal(
-  //     null,
-  //     functionCommentParsing,
-  //     `failed to get functionCommentParsing line ${lineNumber}`
-  //   );
-  // });
+    assert.equal(
+      null,
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
+    );
+  });
 
-  // test("should've get the whole scope", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const scopeLine = 4;
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScope(text, "view");
-  //   const functionScope = functionScopes![scopeLine];
-  //   const functionCommentScope = CairoParser.parseCommentLines(functionScope);
-  //   const functionCommentText = functionCommentScope!.text.join("");
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser(
-  //     functionCommentText
-  //   );
+  test("should've get the whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeLine = 5;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeLine];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
 
-  //   const functionCommentParsing = explicitArgsParser.parseCommentLines(
-  //     functionCommentScope!.text
-  //   );
+    const functionCommentParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
-  //   const targetLineParsing = [
-  //     {
-  //       name: "account",
-  //       type: "felt",
-  //       desc: "account to query balance for",
-  //       charIndex: {
-  //         start: 192,
-  //         end: 235,
-  //       },
-  //     },
-  //   ];
+    const targetLineParsing = [
+      {
+        name: "owner",
+        type: "felt",
+        desc: "the address of owner of the tokens",
+        charIndex: {
+          start: 231,
+          end: 278,
+        },
+      },
+      {
+        name: "spender",
+        type: "felt",
+        desc: "the address of spender (delegated account) of the tokens",
+        charIndex: {
+          start: 287,
+          end: 358,
+        },
+      },
+    ];
 
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     functionCommentParsing,
-  //     "failed to get functionCommentParsing"
-  //   );
-  // });
+    assert.deepEqual(
+      targetLineParsing,
+      functionCommentParsing,
+      "failed to get functionCommentParsing"
+    );
+  });
 });
