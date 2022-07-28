@@ -107,7 +107,7 @@ suite("function-comment: view - decimals", () => {
 });
 
 suite("function-comment: view: balanceOf", () => {
-  test("should've not start yet on lineNumber 6", () => {
+  test("should've started on lineNumber 6", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
@@ -228,6 +228,93 @@ suite("function-comment: view: balanceOf", () => {
     assert.equal(
       "account(felt): account to query balance for",
       functionCommentReference
+    );
+  });
+
+  test("should've ended on lineNumber 8", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeLine = 4;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeLine];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
+    explicitArgsParser.setStartScope(functionCommentScope!.text[6]);
+
+    const lineNumber = 8;
+    const functionCommentLine = functionCommentScope!.text[lineNumber];
+    assert.equal(
+      "# Returns:",
+      functionCommentLine.trim(),
+      `check lineNumber ${lineNumber}`
+    );
+    assert.notEqual(lineNumber, explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(functionCommentLine);
+    assert.equal(
+      true,
+      isEndScope,
+      `failed to get end scope lineNumber ${lineNumber}`
+    );
+
+    explicitArgsParser.setEndScope(functionCommentLine);
+
+    assert.equal(
+      false,
+      explicitArgsParser.runningScope,
+      `failed to get running scope lineNumber ${lineNumber}`
+    );
+
+    const functionCommentParsing =
+      explicitArgsParser.parseCommentLine(functionCommentLine);
+
+    assert.equal(
+      null,
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
+    );
+  });
+
+  test("should've get the whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeLine = 4;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeLine];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
+    const functionCommentText = functionCommentScope!.text.join("");
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser(
+      functionCommentText
+    );
+
+    const functionCommentParsing = explicitArgsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
+
+    const targetLineParsing = [
+      {
+        name: "account",
+        type: "felt",
+        desc: "account to query balance for",
+        charIndex: {
+          start: 192,
+          end: 235,
+        },
+      },
+    ];
+
+    assert.deepEqual(
+      targetLineParsing,
+      functionCommentParsing,
+      "failed to get functionCommentParsing"
     );
   });
 
