@@ -133,110 +133,88 @@ suite("function-comment-new: view: desc", () => {
     assert.equal(functionCommentReference, targetLineParsing.desc);
   });
 
-  // test("parse line 2", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScope(text, "view");
-  //   const functionScope = functionScopes![0];
-  //   const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+  test("parse line 2", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
-  //   const lineNumber = 2;
-  //   const functionCommentLine: string = functionCommentScope!.text[lineNumber];
-  //   const functionCommentText: string = functionCommentScope!.text.join("");
-  //   const descParser = new FunctionCommentDescParser(functionCommentText);
-  //   descParser.setStartScope(functionCommentScope!.text[0]);
+    const lineNumber = 2;
+    const functionCommentLine: string = functionCommentScope!.text[lineNumber];
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const descParser = new FunctionCommentDescParser(functionCommentText);
+    descParser.setStartScope(functionCommentScope!.text[0]);
 
-  //   assert.equal(
-  //     "# Implicit args:",
-  //     functionCommentLine.trim(),
-  //     `check line ${lineNumber}`
-  //   );
+    assert.equal(
+      "# Implicit args:",
+      functionCommentLine.trim(),
+      `check line ${lineNumber}`
+    );
 
-  //   assert.equal("\n    # Desc:", descParser.startLine);
-  //   assert.notEqual(lineNumber, descParser.startLine);
-  //   const isEndScope = descParser.isEndScope(functionCommentLine);
-  //   assert.equal(
-  //     true,
-  //     isEndScope,
-  //     `failed to get end scope line ${lineNumber}`
-  //   );
+    assert.equal("\n    # Desc:", descParser.startLine);
+    assert.notEqual(lineNumber, descParser.startLine);
+    const isEndScope = descParser.isEndScope(functionCommentLine);
+    assert.equal(
+      true,
+      isEndScope,
+      `failed to get end scope line ${lineNumber}`
+    );
 
-  //   descParser.setEndScope(functionCommentLine);
+    descParser.setEndScope(functionCommentLine);
 
-  //   assert.equal(
-  //     false,
-  //     descParser.runningScope,
-  //     `failed to get running scope line ${lineNumber}`
-  //   );
+    assert.equal(
+      false,
+      descParser.runningScope,
+      `failed to get running scope line ${lineNumber}`
+    );
 
-  //   const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
+    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
 
-  //   assert.deepEqual(
-  //     null,
-  //     resultLineParsing,
-  //     `failed to get resultLineParsing line ${lineNumber}`
-  //   );
-  // });
+    assert.deepEqual(
+      null,
+      resultLineParsing,
+      `failed to get resultLineParsing line ${lineNumber}`
+    );
+  });
 
-  // test("parse whole comment", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const scopeNumber = 0;
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   const functionScopes = CairoParser.parseFunctionScope(text, "view");
-  //   const functionScope = functionScopes![scopeNumber];
-  //   const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+  test("parse whole comment", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const scopeNumber = 0;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![scopeNumber];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
-  //   const functionCommentText: string = functionCommentScope!.text.join("");
-  //   const descParser = new FunctionCommentDescParser(functionCommentText);
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const descParser = new FunctionCommentDescParser(functionCommentText);
 
-  //   const commentLineParsing = descParser.parseCommentLines(
-  //     functionCommentScope!.text
-  //   );
+    const commentLineParsing = descParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
-  //   const functionCommentStart = functionCommentScope!.start;
+    const targetLineParsing = [
+      {
+        name: "",
+        type: "",
+        desc: "Returns the name of the token",
+        charIndex: {
+          start: 21,
+          end: 50,
+        },
+      },
+    ];
 
-  //   const descCommentStart = commentLineParsing![0].charIndex.start;
-  //   const descCommentEnd = commentLineParsing![0].charIndex.end;
-
-  //   const targetLineParsing = [
-  //     {
-  //       name: "",
-  //       type: "",
-  //       desc: "Initialize the contract",
-  //       charIndex: { start: 12, end: 44 },
-  //     },
-  //   ];
-
-  //   assert.deepEqual(
-  //     targetLineParsing,
-  //     commentLineParsing,
-  //     "failed to get resultLineParsing"
-  //   );
-
-  //   var functionCommentReference = "";
-  //   for (let i = descCommentStart; i < descCommentEnd; i++) {
-  //     functionCommentReference += functionCommentText.at(i);
-  //   }
-
-  //   var wholeFileReference = "";
-  //   for (
-  //     let i = functionCommentStart + descCommentStart;
-  //     i < functionCommentStart + descCommentEnd;
-  //     i++
-  //   ) {
-  //     wholeFileReference += text.at(i);
-  //   }
-
-  //   assert.equal(
-  //     functionCommentReference,
-  //     wholeFileReference,
-  //     "failed to get whole file reference"
-  //   );
-  // });
+    assert.deepEqual(
+      targetLineParsing,
+      commentLineParsing,
+      "failed to get resultLineParsing"
+    );
+  });
 });
