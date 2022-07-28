@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
+import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment-new/returns";
 import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: returns", () => {
@@ -11,20 +11,26 @@ suite("function-comment: constructor: returns", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
-
-    const returnsParser = new FunctionCommentReturnsParser();
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const returnsParser = new FunctionCommentReturnsParser(functionCommentText);
 
     const line = 12;
-    assert.equal("# Returns:", commentText![line].trim(), `check line ${line}`);
-    returnsParser.setStartScope(commentText![line]);
+    const functionCommentLine = functionCommentScope!.text[line];
 
-    assert.equal(commentText![line], returnsParser.startLine);
-
-    const resultLineParsing = returnsParser.parseCommentLine(
-      commentText![line]
+    assert.equal(
+      "# Returns:",
+      functionCommentLine.trim(),
+      `check line ${line}`
     );
+    returnsParser.setStartScope(functionCommentLine);
+
+    assert.equal(functionCommentLine, returnsParser.startLine);
+
+    const resultLineParsing =
+      returnsParser.parseCommentLine(functionCommentLine);
 
     assert.equal(
       true,
@@ -33,7 +39,7 @@ suite("function-comment: constructor: returns", () => {
     );
     assert.equal(
       false,
-      returnsParser.isEndScope(commentText![line]),
+      returnsParser.isEndScope(functionCommentLine),
       `failed to get end scope line ${line}`
     );
     assert.equal(
@@ -49,15 +55,19 @@ suite("function-comment: constructor: returns", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
-    const returnsParser = new FunctionCommentReturnsParser();
-    returnsParser.setStartScope(commentText![12]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const returnsParser = new FunctionCommentReturnsParser(functionCommentText);
+    returnsParser.setStartScope(functionCommentScope!.text[12]);
 
     const line = 13;
-    assert.equal("#   None", commentText![line].trim(), `check line ${line}`);
-    assert.notEqual(commentText![line], returnsParser.startLine);
-    const isEndScope = returnsParser.isEndScope(commentText![line]);
+    const functionCommentLine = functionCommentScope!.text[line];
+    assert.equal("#   None", functionCommentLine.trim(), `check line ${line}`);
+    assert.notEqual(functionCommentLine, returnsParser.startLine);
+    const isEndScope = returnsParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(
@@ -65,9 +75,8 @@ suite("function-comment: constructor: returns", () => {
       returnsParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = returnsParser.parseCommentLine(
-      commentText![line]
-    );
+    const resultLineParsing =
+      returnsParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = null;
     assert.deepEqual(
@@ -83,29 +92,32 @@ suite("function-comment: constructor: returns", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
-    const returnsParser = new FunctionCommentReturnsParser();
-    returnsParser.setStartScope(commentText![12]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const returnsParser = new FunctionCommentReturnsParser(functionCommentText);
+    returnsParser.setStartScope(functionCommentScope!.text[12]);
 
     const line = 14;
-    assert.equal("# Raises:", commentText![line].trim(), `check line ${line}`);
-    assert.notEqual(commentText![line], returnsParser.startLine);
+    const functionCommentLine = functionCommentScope!.text[line];
+    assert.equal("# Raises:", functionCommentLine.trim(), `check line ${line}`);
+    assert.notEqual(functionCommentLine, returnsParser.startLine);
     assert.equal(
       true,
-      returnsParser.isEndScope(commentText![line]),
+      returnsParser.isEndScope(functionCommentLine),
       `failed to get end scope line ${line}`
     );
-    returnsParser.setEndScope(commentText![line]);
+    returnsParser.setEndScope(functionCommentLine);
 
     assert.equal(
       false,
       returnsParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = returnsParser.parseCommentLine(
-      commentText![line]
-    );
+    const resultLineParsing =
+      returnsParser.parseCommentLine(functionCommentLine);
 
     assert.deepEqual(
       null,
@@ -120,12 +132,17 @@ suite("function-comment: constructor: returns", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
-    const returnsParser = new FunctionCommentReturnsParser();
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const returnsParser = new FunctionCommentReturnsParser(functionCommentText);
 
     const targetLineParsing = null;
-    const resultLineParsing = returnsParser.parseCommentLines(commentText!);
+    const resultLineParsing = returnsParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
     assert.deepEqual(
       targetLineParsing,

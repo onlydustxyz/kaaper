@@ -2,38 +2,53 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
+import FunctionCommentDescParser from "../../../../lib/parser/function-comment-new/desc";
 import CairoParser from "../../../../lib/CairoParser";
 
-suite("function-comment: constructor: desc", () => {
+suite("function-comment-new: constructor: desc", () => {
   test("parse line 0", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const lineNumber = 0;
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![lineNumber];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
-    const descParser = new FunctionCommentDescParser();
+    const functionCommentLine: string = functionCommentScope!.text[lineNumber];
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const descParser = new FunctionCommentDescParser(functionCommentText);
 
-    const line = 0;
-    assert.equal("# Desc:", commentText![line].trim(), `check line ${line}`);
-    descParser.setStartScope(commentText![line]);
+    const functionCommentLines = descParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
-    const resultLineParsing = descParser.parseCommentLine(commentText![line]);
-    const isEndScope = descParser.isEndScope(commentText![line]);
+    assert.equal(
+      "# Desc:",
+      functionCommentLine.trim(),
+      `check line ${lineNumber}`
+    );
+    descParser.setStartScope(functionCommentLine);
+
+    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
+    const isEndScope = descParser.isEndScope(functionCommentLine);
 
     assert.equal(
       true,
       descParser.runningScope,
-      `failed to get running scope line ${line}`
+      `failed to get running scope line ${lineNumber}`
     );
-    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+    assert.equal(
+      false,
+      isEndScope,
+      `failed to get end scope line ${lineNumber}`
+    );
     assert.equal(
       null,
       resultLineParsing,
-      `failed to get resultLineParsing line ${line}`
+      `failed to get resultLineParsing line ${lineNumber}`
     );
   });
 
@@ -42,42 +57,50 @@ suite("function-comment: constructor: desc", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
-    const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
-    const descParser = new FunctionCommentDescParser();
-    descParser.setStartScope(commentText![0]);
 
-    const line = 1;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+
+    const lineNumber = 1;
+    const functionCommentLine: string = functionCommentScope!.text[lineNumber];
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const descParser = new FunctionCommentDescParser(functionCommentText);
+    descParser.setStartScope(functionCommentScope!.text[0]);
+
     assert.equal(
       "#   Initialize the contract",
-      commentText![line].trim(),
-      `check line ${line}`
+      functionCommentLine.trim(),
+      `check line ${lineNumber}`
     );
-
-    assert.equal("\n    # Desc:", descParser.startLine);
-    assert.notEqual(line, descParser.startLine);
+    const isEndScope = descParser.isEndScope(functionCommentLine);
 
     assert.equal(
       true,
       descParser.runningScope,
-      `failed to get running scope line ${line}`
+      `failed to get running scope line ${lineNumber}`
+    );
+    assert.equal(
+      false,
+      isEndScope,
+      `failed to get end scope line ${lineNumber}`
     );
 
-    const isEndScope = descParser.isEndScope(commentText![line]);
-    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
-
-    const resultLineParsing = descParser.parseCommentLine(commentText![line]);
-
+    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
     const targetLineParsing = {
       name: "",
       type: "",
       desc: "Initialize the contract",
+      charIndex: {
+        start: 12,
+        end: 44,
+      },
     };
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
-      `failed to get resultLineParsing line ${line}`
+      `failed to get resultLineParsing line ${lineNumber}`
     );
   });
 
@@ -87,37 +110,45 @@ suite("function-comment: constructor: desc", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
-    const descParser = new FunctionCommentDescParser();
-    descParser.setStartScope(commentText![0]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
-    const line = 2;
+    const lineNumber = 2;
+    const functionCommentLine: string = functionCommentScope!.text[lineNumber];
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const descParser = new FunctionCommentDescParser(functionCommentText);
+    descParser.setStartScope(functionCommentScope!.text[0]);
+
     assert.equal(
       "# Implicit args:",
-      commentText![line].trim(),
-      `check line ${line}`
+      functionCommentLine.trim(),
+      `check line ${lineNumber}`
     );
 
     assert.equal("\n    # Desc:", descParser.startLine);
-    assert.notEqual(line, descParser.startLine);
-    const isEndScope = descParser.isEndScope(commentText![line]);
-    assert.equal(true, isEndScope, `failed to get end scope line ${line}`);
+    assert.notEqual(lineNumber, descParser.startLine);
+    const isEndScope = descParser.isEndScope(functionCommentLine);
+    assert.equal(
+      true,
+      isEndScope,
+      `failed to get end scope line ${lineNumber}`
+    );
 
-    descParser.setEndScope(commentText![line]);
+    descParser.setEndScope(functionCommentLine);
 
     assert.equal(
       false,
       descParser.runningScope,
-      `failed to get running scope line ${line}`
+      `failed to get running scope line ${lineNumber}`
     );
 
-    const resultLineParsing = descParser.parseCommentLine(commentText![line]);
+    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
 
     assert.deepEqual(
       null,
       resultLineParsing,
-      `failed to get resultLineParsing line ${line}`
+      `failed to get resultLineParsing line ${lineNumber}`
     );
   });
 
@@ -126,22 +157,57 @@ suite("function-comment: constructor: desc", () => {
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
+    const scopeNumber = 0;
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0])!.text;
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![scopeNumber];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
-    const descParser = new FunctionCommentDescParser();
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const descParser = new FunctionCommentDescParser(functionCommentText);
 
-    const resultLineParsing = descParser.parseCommentLines(commentText!);
+    const commentLineParsing = descParser.parseCommentLines(
+      functionCommentScope!.text
+    );
+
+    const functionCommentStart = functionCommentScope!.start;
+
+    const descCommentStart = commentLineParsing![0].charIndex.start;
+    const descCommentEnd = commentLineParsing![0].charIndex.end;
 
     const targetLineParsing = [
-      { name: "", type: "", desc: "Initialize the contract" },
+      {
+        name: "",
+        type: "",
+        desc: "Initialize the contract",
+        charIndex: { start: 12, end: 44 },
+      },
     ];
 
     assert.deepEqual(
       targetLineParsing,
-      resultLineParsing,
+      commentLineParsing,
       "failed to get resultLineParsing"
+    );
+
+    var functionCommentReference = "";
+    for (let i = descCommentStart; i < descCommentEnd; i++) {
+      functionCommentReference += functionCommentText.at(i);
+    }
+
+    var wholeFileReference = "";
+    for (
+      let i = functionCommentStart + descCommentStart;
+      i < functionCommentStart + descCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text.at(i);
+    }
+
+    assert.equal(
+      functionCommentReference,
+      wholeFileReference,
+      "failed to get whole file reference"
     );
   });
 });

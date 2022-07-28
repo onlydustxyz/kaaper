@@ -2,12 +2,12 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../lib/parser/function-comment/raises";
+import FunctionCommentDescParser from "../../../lib/parser/function-comment-new/desc";
+import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment-new/implicit-args";
+import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment-new/explicit-args";
+import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-new/returns";
+import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
 suite("integration-test: constructor", () => {
   test("0", () => {
@@ -18,27 +18,31 @@ suite("integration-test: constructor", () => {
 
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(
-      text,
-      "constructor"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     // Comment parsing
     // parse comment lines
-    const commentLines = CairoParser.parseCommentLines(
-      functionScopeLines![0]
-    )!.text;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope);
 
-    const functionCommentDescParser = new FunctionCommentDescParser();
+    const functionCommentText: string = functionCommentScope!.text.join("");
+
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
     const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser();
+      new FunctionCommentImplicitArgsParser(functionCommentText);
     const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser();
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
     const parsingTarget = [
       {
@@ -59,41 +63,92 @@ suite("integration-test: constructor", () => {
           ],
         },
         functionComment: {
-          desc: [{ name: "", type: "", desc: "Initialize the contract" }],
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Initialize the contract",
+              charIndex: { start: 12, end: 44 },
+            },
+          ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 74, end: 92 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 101, end: 127 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 136, end: 151 },
+            },
           ],
           explicitArgs: [
-            { name: "name", type: "felt", desc: "name of the token" },
-            { name: "symbol", type: "felt", desc: "symbol of the token" },
+            {
+              name: "name",
+              type: "felt",
+              desc: "name of the token",
+              charIndex: { start: 181, end: 219 },
+            },
+            {
+              name: "symbol",
+              type: "felt",
+              desc: "symbol of the token",
+              charIndex: { start: 219, end: 261 },
+            },
             {
               name: "decimals",
               type: "Uint256",
               desc: "floating point of the token",
+              charIndex: { start: 261, end: 316 },
             },
             {
               name: "initial_supply",
               type: "Uint256",
               desc: "amount of initial supply of the token",
+              charIndex: { start: 316, end: 387 },
             },
             {
               name: "recipient",
               type: "felt",
               desc: "the address of recipient of the initial supply",
+              charIndex: { start: 387, end: 459 },
             },
           ],
           returns: null,
           raises: [
-            { name: "decimals", type: "", desc: "decimals exceed 2^8" },
+            {
+              name: "decimals",
+              type: "",
+              desc: "decimals exceed 2^8",
+              charIndex: { start: 501, end: 530 },
+            },
             {
               name: "recipient",
               type: "",
               desc: "cannot mint to the zero address",
+              charIndex: { start: 539, end: 581 },
             },
-            { name: "initial_supply", type: "", desc: "not valid Uint256" },
-            { name: "initial_supply", type: "", desc: "mint overflow" },
+            {
+              name: "initial_supply",
+              type: "",
+              desc: "not valid Uint256",
+              charIndex: { start: 590, end: 623 },
+            },
+            {
+              name: "initial_supply",
+              type: "",
+              desc: "mint overflow",
+              charIndex: { start: 632, end: 661 },
+            },
           ],
         },
       },
@@ -102,163 +157,39 @@ suite("integration-test: constructor", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![0].text
+          functionScopes![0].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![0].text
+          functionScopes![0].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![0].text
+            functionScopes![0].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![0].text
+            functionScopes![0].text
           ),
         },
         functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(commentLines!),
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
           implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            commentLines!
+            functionCommentScope!.text
           ),
           explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            commentLines!
+            functionCommentScope!.text
           ),
           returns: functionCommentReturnsParser.parseCommentLines(
-            commentLines!
+            functionCommentScope!.text
           ),
-          raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
   });
-
-  // test("using match all", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScopeWithMatchAll(
-  //     text,
-  //     "constructor"
-  //   );
-
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
-
-  //   const functionCommentLines = CairoParser.parseCommentLinesWithMatchAll(
-  //     functionScopeLines![0].text
-  //   );
-  //   // var temp = ""
-  //   // const start = functionCommentLines!.start;
-  //   // const end = functionCommentLines!.end;
-  //   // for (let i = start; i < end; i++) {
-  //   //   temp += text[i];
-  //   // }
-  //   // assert.equal(functionCommentLines!.start, 526);
-  //   // assert.equal(functionCommentLines!.end, 1187);
-
-  //   const commentLines = functionCommentLines!.text;
-
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "constructor",
-  //       functionName: "constructor",
-  //       functionSignature: {
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //           { name: "range_check_ptr", type: "" },
-  //         ],
-  //         explicitArgs: [
-  //           { name: "name", type: "felt" },
-  //           { name: "symbol", type: "felt" },
-  //           { name: "decimals", type: "Uint256" },
-  //           { name: "initial_supply", type: "Uint256" },
-  //           { name: "recipient", type: "felt" },
-  //         ],
-  //       },
-  //       functionComment: {
-  //         desc: [{ name: "", type: "", desc: "Initialize the contract" }],
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*", desc: "" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //           { name: "range_check_ptr", type: "", desc: "" },
-  //         ],
-  //         explicitArgs: [
-  //           { name: "name", type: "felt", desc: "name of the token" },
-  //           { name: "symbol", type: "felt", desc: "symbol of the token" },
-  //           {
-  //             name: "decimals",
-  //             type: "Uint256",
-  //             desc: "floating point of the token",
-  //           },
-  //           {
-  //             name: "initial_supply",
-  //             type: "Uint256",
-  //             desc: "amount of initial supply of the token",
-  //           },
-  //           {
-  //             name: "recipient",
-  //             type: "felt",
-  //             desc: "the address of recipient of the initial supply",
-  //           },
-  //         ],
-  //         returns: null,
-  //         raises: [
-  //           { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-  //           {
-  //             name: "recipient",
-  //             type: "",
-  //             desc: "cannot mint to the zero address",
-  //           },
-  //           { name: "initial_supply", type: "", desc: "not valid Uint256" },
-  //           { name: "initial_supply", type: "", desc: "mint overflow" },
-  //         ],
-  //       },
-  //     },
-  //   ];
-
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![0].text.text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![0].text.text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![0].text.text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![0].text.text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(commentLines),
-  //         implicitArgs:
-  //           functionCommentImplicitArgsParser.parseCommentLines(commentLines),
-  //         explicitArgs:
-  //           functionCommentExplicitArgsParser.parseCommentLines(commentLines),
-  //         returns: functionCommentReturnsParser.parseCommentLines(commentLines),
-  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines),
-  //       },
-  //     },
-  //   ];
-
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
 });
