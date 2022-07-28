@@ -66,17 +66,11 @@ suite("function-comment-new: view: desc", () => {
     const lineNumber = 1;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
-    // console.log(functionCommentText)
 
-    // console.log(functionCommentScope!.start)
-    // console.log
     const descParser = new FunctionCommentDescParser(functionCommentText);
     descParser.setStartScope(functionCommentScope!.text[0]);
 
     const commentLineParsing = descParser.parseCommentLine(functionCommentLine);
-    // const functionCommentStart = functionCommentScope!.start;
-    // const descCommentStart = commentLineParsing![lineNumber].charIndex.start;
-    // const descCommentEnd = commentLineParsing![lineNumber].charIndex.end;
 
     assert.equal(
       "#   Returns the name of the token",
@@ -96,7 +90,6 @@ suite("function-comment-new: view: desc", () => {
       `failed to get end scope line ${lineNumber}`
     );
 
-    // const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
     const targetLineParsing = {
       name: "",
       type: "",
