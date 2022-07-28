@@ -118,6 +118,7 @@ suite("function-comment: constructor: explicit-args", () => {
       wholeFileReference += text[i];
     }
     assert.equal(functionCommentReference, wholeFileReference);
+    assert.equal("name(felt): name of the token", functionCommentReference);
   });
 
   test("parse line 8", () => {
@@ -186,6 +187,7 @@ suite("function-comment: constructor: explicit-args", () => {
       wholeFileReference += text[i];
     }
     assert.equal(functionCommentReference, wholeFileReference);
+    assert.equal("symbol(felt): symbol of the token", functionCommentReference);
   });
 
   test("parse line 9", () => {
@@ -254,6 +256,10 @@ suite("function-comment: constructor: explicit-args", () => {
       wholeFileReference += text[i];
     }
     assert.equal(functionCommentReference, wholeFileReference);
+    assert.equal(
+      "decimals(Uint256): floating point of the token",
+      functionCommentReference
+    );
   });
 
   test("parse line 10", () => {
@@ -322,6 +328,10 @@ suite("function-comment: constructor: explicit-args", () => {
       wholeFileReference += text[i];
     }
     assert.equal(functionCommentReference, wholeFileReference);
+    assert.equal(
+      "initial_supply(Uint256): amount of initial supply of the token",
+      functionCommentReference
+    );
   });
 
   test("parse line 11", () => {
@@ -390,6 +400,10 @@ suite("function-comment: constructor: explicit-args", () => {
       wholeFileReference += text[i];
     }
     assert.equal(functionCommentReference, wholeFileReference);
+    assert.equal(
+      "recipient(felt): the address of recipient of the initial supply",
+      functionCommentReference
+    );
   });
 
   test("parse line 12", () => {

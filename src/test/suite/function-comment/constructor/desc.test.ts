@@ -131,6 +131,7 @@ suite("function-comment-new: constructor: desc", () => {
     );
 
     assert.equal(wholeFileReference, targetLineParsing.desc);
+    assert.equal("Initialize the contract", wholeFileReference);
   });
 
   test("parse line 2", () => {
