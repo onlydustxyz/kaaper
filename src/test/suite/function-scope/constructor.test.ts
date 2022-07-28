@@ -191,5 +191,6 @@ suite("integration-test: constructor", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    
   });
 });
