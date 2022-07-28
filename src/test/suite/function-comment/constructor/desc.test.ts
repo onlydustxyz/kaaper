@@ -93,7 +93,7 @@ suite("function-comment-new: constructor: desc", () => {
       type: "",
       desc: "Initialize the contract",
       charIndex: {
-        start: 12,
+        start: 21,
         end: 44,
       },
     };
@@ -180,7 +180,7 @@ suite("function-comment-new: constructor: desc", () => {
         name: "",
         type: "",
         desc: "Initialize the contract",
-        charIndex: { start: 12, end: 44 },
+        charIndex: { start: 21, end: 44 },
       },
     ];
 

@@ -9,22 +9,28 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
 
   parseCommentLine(line: string): FunctionCommentNew | null {
     if (this.runningScope === true && this.startLine !== line) {
-      const regexp = new RegExp(`${line}`, "gm");
+      const regexp = /#(\s+)(.+)/gm;
       const functionComments = [...this.functionComment.matchAll(regexp)];
-      if (functionComments.length > 0) {
-        // functionComments[0] is equal to line
-        const start = functionComments[0].index!;
-        const desc: string = line.match(/#\s+(.+)/)![1];
-        const matchInterface = {
-          name: "",
-          type: "",
-          desc: desc,
-          charIndex: {
-            start: start,
-            end: start + line.length,
-          },
-        };
-        return matchInterface;
+      for (var functionComment of functionComments) {
+        // without # or anything else, just pure content
+        // e.g name(felt): The name of the token, instead of
+        // # name(felt): The name of the token
+        const commentContentOnly = [...line.matchAll(regexp)];
+        if (functionComment[0] === commentContentOnly![0][0]) {
+          const startLineIndex = functionComment.index!;
+          const startDescIndex = startLineIndex + 1 + functionComment[1].length;
+          const desc = functionComment[2];
+          const matchInterface = {
+            name: "",
+            type: "",
+            desc: desc.trim(),
+            charIndex: {
+              start: startDescIndex,
+              end: startDescIndex + desc.length,
+            },
+          };
+          return matchInterface;
+        }
       }
       return null;
     }

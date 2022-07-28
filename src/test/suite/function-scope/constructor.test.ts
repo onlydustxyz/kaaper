@@ -68,7 +68,7 @@ suite("integration-test: constructor", () => {
               name: "",
               type: "",
               desc: "Initialize the contract",
-              charIndex: { start: 12, end: 44 },
+              charIndex: { start: 21, end: 44 },
             },
           ],
           implicitArgs: [
@@ -191,6 +191,5 @@ suite("integration-test: constructor", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-    
   });
 });
