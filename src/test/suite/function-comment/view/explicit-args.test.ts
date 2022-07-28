@@ -154,7 +154,7 @@ suite("function-comment: view: balanceOf", () => {
     );
   });
 
-  test("should've found explicit args on `balanceOf` methods", () => {
+  test("should've found account(felt)", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
