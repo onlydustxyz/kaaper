@@ -32,7 +32,8 @@ suite("function-comment-new: constructor: desc", () => {
     );
     descParser.setStartScope(functionCommentLine);
 
-    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
+    const functionCommentParsing =
+      descParser.parseCommentLine(functionCommentLine);
     const isEndScope = descParser.isEndScope(functionCommentLine);
 
     assert.equal(
@@ -47,8 +48,8 @@ suite("function-comment-new: constructor: desc", () => {
     );
     assert.equal(
       null,
-      resultLineParsing,
-      `failed to get resultLineParsing line ${lineNumber}`
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
     );
   });
 
@@ -87,7 +88,8 @@ suite("function-comment-new: constructor: desc", () => {
       `failed to get end scope line ${lineNumber}`
     );
 
-    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
+    const functionCommentParsing =
+      descParser.parseCommentLine(functionCommentLine);
     const targetLineParsing = {
       name: "",
       type: "",
@@ -99,9 +101,36 @@ suite("function-comment-new: constructor: desc", () => {
     };
     assert.deepEqual(
       targetLineParsing,
-      resultLineParsing,
-      `failed to get resultLineParsing line ${lineNumber}`
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
     );
+
+    const functionCommentStart = functionCommentScope!.start;
+
+    const descCommentStart = functionCommentParsing!.charIndex.start;
+    const descCommentEnd = functionCommentParsing!.charIndex.end;
+
+    var functionCommentReference = "";
+    for (let i = descCommentStart; i < descCommentEnd; i++) {
+      functionCommentReference += functionCommentText.at(i);
+    }
+
+    var wholeFileReference = "";
+    for (
+      let i = functionCommentStart + descCommentStart;
+      i < functionCommentStart + descCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text.at(i);
+    }
+
+    assert.equal(
+      functionCommentReference,
+      wholeFileReference,
+      "failed to get whole file reference"
+    );
+
+    assert.equal(wholeFileReference, targetLineParsing.desc);
   });
 
   test("parse line 2", () => {
@@ -143,12 +172,13 @@ suite("function-comment-new: constructor: desc", () => {
       `failed to get running scope line ${lineNumber}`
     );
 
-    const resultLineParsing = descParser.parseCommentLine(functionCommentLine);
+    const functionCommentParsing =
+      descParser.parseCommentLine(functionCommentLine);
 
     assert.deepEqual(
       null,
-      resultLineParsing,
-      `failed to get resultLineParsing line ${lineNumber}`
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
     );
   });
 
@@ -166,14 +196,9 @@ suite("function-comment-new: constructor: desc", () => {
     const functionCommentText: string = functionCommentScope!.text.join("");
     const descParser = new FunctionCommentDescParser(functionCommentText);
 
-    const commentLineParsing = descParser.parseCommentLines(
+    const functionCommentParsing = descParser.parseCommentLines(
       functionCommentScope!.text
     );
-
-    const functionCommentStart = functionCommentScope!.start;
-
-    const descCommentStart = commentLineParsing![0].charIndex.start;
-    const descCommentEnd = commentLineParsing![0].charIndex.end;
 
     const targetLineParsing = [
       {
@@ -186,28 +211,8 @@ suite("function-comment-new: constructor: desc", () => {
 
     assert.deepEqual(
       targetLineParsing,
-      commentLineParsing,
-      "failed to get resultLineParsing"
-    );
-
-    var functionCommentReference = "";
-    for (let i = descCommentStart; i < descCommentEnd; i++) {
-      functionCommentReference += functionCommentText.at(i);
-    }
-
-    var wholeFileReference = "";
-    for (
-      let i = functionCommentStart + descCommentStart;
-      i < functionCommentStart + descCommentEnd;
-      i++
-    ) {
-      wholeFileReference += text.at(i);
-    }
-
-    assert.equal(
-      functionCommentReference,
-      wholeFileReference,
-      "failed to get whole file reference"
+      functionCommentParsing,
+      "failed to get functionCommentParsing"
     );
   });
 });
