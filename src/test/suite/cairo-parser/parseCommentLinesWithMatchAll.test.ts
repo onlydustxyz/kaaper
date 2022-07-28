@@ -13,13 +13,10 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      true
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, true);
 
     const start = functionComment!.start;
     const end = functionComment!.end;
@@ -40,13 +37,10 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 1;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      true
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, true);
     const start = functionComment!.start;
     const end = functionComment!.end;
     console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
@@ -66,13 +60,10 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 2;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      true
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, true);
     const start = functionComment!.start;
     const end = functionComment!.end;
     console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
@@ -92,13 +83,10 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 3;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      true
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, true);
     const start = functionComment!.start;
     const end = functionComment!.end;
     console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
@@ -118,13 +106,10 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 4;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      true
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, true);
     const start = functionComment!.start;
     const end = functionComment!.end;
     console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
@@ -146,16 +131,10 @@ suite("parseCommentLines: constructor Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      "constructor"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      false
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, false);
 
     const start = functionComment!.start;
     const end = functionComment!.end;
@@ -178,16 +157,10 @@ suite("parseCommentLines: View Using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      "view"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeNumber];
 
-    const functionComment = CairoParser.parseCommentLinesWithMatchAll(
-      functionScope,
-      false
-    );
+    const functionComment = CairoParser.parseCommentLines(functionScope, false);
 
     const start = functionComment!.start;
     const end = functionComment!.end;

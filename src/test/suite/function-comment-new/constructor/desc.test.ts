@@ -13,13 +13,9 @@ suite("function-comment-new: constructor: desc", () => {
     );
     const lineNumber = 0;
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      "constructor"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![lineNumber];
-    const functionCommentScope =
-      CairoParser.parseCommentLinesWithMatchAll(functionScope)!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -63,13 +59,9 @@ suite("function-comment-new: constructor: desc", () => {
     );
 
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      "constructor"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
-    const functionCommentScope =
-      CairoParser.parseCommentLinesWithMatchAll(functionScope)!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
     const lineNumber = 1;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
@@ -118,13 +110,9 @@ suite("function-comment-new: constructor: desc", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      "constructor"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
-    const functionCommentScope =
-      CairoParser.parseCommentLinesWithMatchAll(functionScope)!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
     const lineNumber = 2;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
@@ -171,13 +159,9 @@ suite("function-comment-new: constructor: desc", () => {
     );
     const scopeNumber = 0;
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionScopes = CairoParser.parseFunctionScopeWithMatchAll(
-      text,
-      "constructor"
-    );
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![scopeNumber];
-    const functionCommentScope =
-      CairoParser.parseCommentLinesWithMatchAll(functionScope)!;
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const descParser = new FunctionCommentDescParser(functionCommentText);

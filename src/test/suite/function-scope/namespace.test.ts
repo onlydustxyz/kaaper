@@ -85,20 +85,20 @@ suite("function-scope: namespace", () => {
     const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -194,20 +194,20 @@ suite("function-scope: namespace", () => {
     const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -308,20 +308,20 @@ suite("function-scope: namespace", () => {
     const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -420,20 +420,20 @@ suite("function-scope: namespace", () => {
     const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -532,20 +532,20 @@ suite("function-scope: namespace", () => {
     const parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {

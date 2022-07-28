@@ -66,19 +66,21 @@ suite("integration-test: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![0]
+          functionScopeLines![0].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![0]
+          functionScopeLines![0].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![0]
+            functionScopeLines![0].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![0]
+            functionScopeLines![0].text
           ),
-          returns: functionSignatureParser.getReturns(functionScopeLines![0]),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![0].text
+          ),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(commentLines!),
@@ -161,20 +163,20 @@ suite("integration-test: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -266,20 +268,20 @@ suite("integration-test: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -363,20 +365,20 @@ suite("integration-test: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -470,20 +472,20 @@ suite("integration-test: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {
@@ -589,20 +591,20 @@ suite("integration-test: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![line]
+          functionScopeLines![line].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![line]
+            functionScopeLines![line].text
           ),
         },
         functionComment: {

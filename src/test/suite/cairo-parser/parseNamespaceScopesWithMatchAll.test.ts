@@ -13,12 +13,12 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const namespaceScopes = CairoParser.getNamespaceScopesMatchAll(text);
+    const namespaceScopes = CairoParser.getNamespaceScopes(text);
 
     const namespaceScopeText = namespaceScopes![scopeNumber].text;
     const namespaceName = namespaceScopes![scopeNumber].namespace;
     assert.equal("namespace ERC20", namespaceName);
-    const matches = CairoParser.parseFunctionScopeWithMatchAll(
+    const matches = CairoParser.parseFunctionScope(
       namespaceScopeText!,
       "function"
     );
@@ -33,13 +33,13 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 1;
     // parse whole scope
-    const namespaceScopes = CairoParser.getNamespaceScopesMatchAll(text);
+    const namespaceScopes = CairoParser.getNamespaceScopes(text);
 
     const namespaceScopeText = namespaceScopes![scopeNumber].text;
     const namespaceName = namespaceScopes![scopeNumber].namespace;
     assert.equal("namespace internal", namespaceName);
 
-    const matches = CairoParser.parseFunctionScopeWithMatchAll(
+    const matches = CairoParser.parseFunctionScope(
       namespaceScopeText!,
       "function"
     );
@@ -53,7 +53,7 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
 
     assert.equal(5, functionScopes!.length);
   });
@@ -66,7 +66,7 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 0;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     console.log(functionScopes![scopeNumber]);
     assert.equal(
       "@namespace ERC20",
@@ -96,7 +96,7 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 1;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace ERC20",
       functionScopes![scopeNumber].text.split("\n")[0]
@@ -125,7 +125,7 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 2;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace ERC20",
       functionScopes![scopeNumber].text.split("\n")[0]
@@ -154,7 +154,7 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 3;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace internal",
       functionScopes![scopeNumber].text.split("\n")[0]
@@ -183,7 +183,7 @@ suite("parseNamespaceScopes with using Match All", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const scopeNumber = 4;
     // parse whole scope
-    const functionScopes = CairoParser.parseNamespaceScopesWithMatchAll(text);
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace internal",
       functionScopes![scopeNumber].text.split("\n")[0]
