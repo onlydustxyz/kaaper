@@ -124,16 +124,16 @@ end
 func allowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     owner : felt, spender : felt
 ) -> (remaining : Uint256):
-    # Desc
+    # Desc:
     #   Returns the amount of remaining tokens allowed to be spent by the spender
-    # Implicit args
+    # Implicit args:
     #   syscall_ptr(felt*)
     #   pedersen_ptr(HashBuiltin*)
     #   range_check_ptr
-    # Explicit args
+    # Explicit args:
     #   owner(felt): the address of owner of the tokens
     #   spender(felt): the address of spender (delegated account) of the tokens
-    # Returns
+    # Returns:
     #   remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender
     let (remaining : Uint256) = ERC20.allowance(owner, spender)
     return (remaining)
