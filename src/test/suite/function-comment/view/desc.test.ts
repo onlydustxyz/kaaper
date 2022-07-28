@@ -136,6 +136,8 @@ suite("function-comment-new: view: desc", () => {
       wholeFileReference,
       "failed to get whole file reference"
     );
+
+    assert.equal(functionCommentReference, targetLineParsing.desc);
   });
 
   // test("parse line 2", () => {
