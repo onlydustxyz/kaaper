@@ -10,7 +10,7 @@ import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-n
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
 suite("integration-test: constructor", () => {
-  test("0", () => {
+  test("should get `constructor` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
@@ -191,22 +191,50 @@ suite("integration-test: constructor", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-    for (let [_, values] of Object.entries(parsingOutput[0].functionComment)) {
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
-          // iterate over char Index
-          var wtf = "";
+          var char = "";
           for (
             let i = functionCommentScope!.start + charIndex.start;
             i < functionCommentScope!.start + charIndex.end;
             i++
           ) {
-            wtf += text.at(i);
+            char += text.at(i);
           }
-          console.log(wtf);
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
         }
       }
     }
+    const textTarget = [
+      { desc: "Initialize the contract" },
+      { implicitArgs: "syscall_ptr(felt*)" },
+      { implicitArgs: "pedersen_ptr(HashBuiltin*)" },
+      { implicitArgs: "range_check_ptr" },
+      { explicitArgs: "name(felt): name of the token" },
+      { explicitArgs: "symbol(felt): symbol of the token" },
+      { explicitArgs: "decimals(Uint256): floating point of the token" },
+      {
+        explicitArgs:
+          "initial_supply(Uint256): amount of initial supply of the token",
+      },
+      {
+        explicitArgs:
+          "recipient(felt): the address of recipient of the initial supply",
+      },
+      { raises: "decimals: decimals exceed 2^8" },
+      { raises: "recipient: cannot mint to the zero address" },
+      { raises: "initial_supply: not valid Uint256" },
+      { raises: "initial_supply: mint overflow" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 });
