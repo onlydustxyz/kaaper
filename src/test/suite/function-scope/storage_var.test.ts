@@ -139,97 +139,137 @@ suite("getScopeParsingResult: storage_var", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("1", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/library.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
+  test("should get `ERC20_symbol` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
 
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScope(
-  //     text,
-  //     "storage_var"
-  //   );
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      text,
+      "storage_var"
+    );
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const line = 1;
-  //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![line]
-  //   )!.text;
+    // Comment parsing
+    // parse comment lines
+    const scopeNumber = 1;
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopeLines![scopeNumber]
+    )!;
 
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    const functionCommentText: string = functionCommentScope!.text.join("");
 
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "storage_var",
-  //       functionName: "ERC20_symbol",
-  //       functionSignature: {
-  //         implicitArgs: null,
-  //         explicitArgs: null,
-  //         returns: [{ name: "symbol", type: "felt" }],
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           { name: "", type: "", desc: "Returns the symbol of the token" },
-  //         ],
-  //         implicitArgs: null,
-  //         explicitArgs: null,
-  //         returns: [
-  //           { name: "symbol", type: "felt", desc: "The symbol of the token" },
-  //         ],
-  //         raises: null,
-  //       },
-  //     },
-  //   ];
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![line].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![line].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![line].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![line].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![line].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
-  //       },
-  //     },
-  //   ];
+    const parsingTarget = [
+      {
+        attributeName: "storage_var",
+        functionName: "ERC20_symbol",
+        functionSignature: {
+          implicitArgs: null,
+          explicitArgs: null,
+          returns: [{ name: "symbol", type: "felt" }],
+        },
+        functionComment: {
+          desc: [
+            { name: "", type: "", desc: "Returns the symbol of the token" },
+          ],
+          implicitArgs: null,
+          explicitArgs: null,
+          returns: [
+            { name: "symbol", type: "felt", desc: "The symbol of the token" },
+          ],
+          raises: null,
+        },
+      },
+    ];
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![scopeNumber].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![scopeNumber].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![scopeNumber].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![scopeNumber].text
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![scopeNumber].text
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
+
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
+        }
+      }
+    }
+    const textTarget = [
+      { desc: "Returns the symbol of the token" },
+      { returns: "symbol(felt): The symbol of the token" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
 
   // test("2", () => {
   //   const pathFile = path.resolve(
@@ -249,9 +289,9 @@ suite("getScopeParsingResult: storage_var", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 2;
+  //   const scopeNumber = 2;
   //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![line]
+  //     functionScopeLines![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -296,20 +336,20 @@ suite("getScopeParsingResult: storage_var", () => {
   //   var parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
@@ -349,9 +389,9 @@ suite("getScopeParsingResult: storage_var", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 3;
+  //   const scopeNumber = 3;
   //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![line]
+  //     functionScopeLines![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -396,20 +436,20 @@ suite("getScopeParsingResult: storage_var", () => {
   //   var parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
@@ -449,9 +489,9 @@ suite("getScopeParsingResult: storage_var", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 4;
+  //   const scopeNumber = 4;
   //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![line]
+  //     functionScopeLines![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -502,20 +542,20 @@ suite("getScopeParsingResult: storage_var", () => {
   //   var parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
@@ -555,9 +595,9 @@ suite("getScopeParsingResult: storage_var", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 5;
+  //   const scopeNumber = 5;
   //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![line]
+  //     functionScopeLines![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -612,20 +652,20 @@ suite("getScopeParsingResult: storage_var", () => {
   //   var parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![line].text
+  //         functionScopeLines![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![line].text
+  //           functionScopeLines![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
@@ -657,8 +697,8 @@ suite("getScopeParsingResult: storage_var", () => {
   //   // parse whole scope
   //   const functionScopeLines = CairoParser.parseFunctionScope(text, "event");
 
-  //   const line = 6;
+  //   const scopeNumber = 6;
 
-  //   assert.equal(functionScopeLines![line], null);
+  //   assert.equal(functionScopeLines![scopeNumber], null);
   // });
 });
