@@ -31,17 +31,17 @@ suite("getScopeParsingResult: external", () => {
     const functionCommentText: string = functionCommentScope!.text.join("");
 
     const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentScope
+      functionCommentText
     );
     const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentScope);
+      new FunctionCommentImplicitArgsParser(functionCommentText);
     const functionCommentExplicitArgsParser =
       new FunctionCommentExplicitArgsParser(functionCommentText);
     const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentScope
+      functionCommentText
     );
     const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentScope
+      functionCommentText
     );
 
     const parsingTarget = [
@@ -179,14 +179,7 @@ suite("getScopeParsingResult: external", () => {
       { raises: "recipient: cannot transfer to the zero address" },
       { raises: "amount: transfer amount exceeds balance" },
     ];
-    console.log("EXTERNAL");
-    // iteratate for commentParsingResult
-    // assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
-    for (const parsingR of commentParsingResult) {
-      for (const [key, value] of Object.entries(parsingR)) {
-        console.log(`${key}: ${value}`);
-      }
-    }
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
   // test("1", () => {

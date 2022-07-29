@@ -10,15 +10,16 @@ export abstract class BaseCommentParser {
   public endScope: boolean;
   public startEndScopeRegexp: RegExp;
   public name: string;
-  public functionCommentScope: FunctionCommentScope;
+  public functionCommentText: string;
+  // public functionCommentScope: FunctionCommentScope;
 
-  constructor(functionCommentScope: FunctionCommentScope) {
+  constructor(functionCommentText: string) {
     this.startLine = "";
     this.runningScope = false;
     this.endScope = false;
     this.startEndScopeRegexp = /#\s?(\w+\s?\w+)/;
     this.name = "";
-    this.functionCommentScope = functionCommentScope;
+    this.functionCommentText = functionCommentText;
   }
 
   isStartScope(line: string): boolean {
@@ -55,11 +56,7 @@ export abstract class BaseCommentParser {
     }
   }
 
-  parseCommentLine(
-    line: string,
-    text: string,
-    charIndex: CharIndex
-  ): FunctionCommentNew | null {
+  parseCommentLine(line: string, text: string): FunctionCommentNew | null {
     throw new Error("NOT IMPLEMENTED!");
   }
 
@@ -67,20 +64,13 @@ export abstract class BaseCommentParser {
     lines: RegExpMatchArray | null
   ): Array<FunctionCommentNew> | null {
     var result: Array<FunctionCommentNew> = [];
-    const functionCommentText: string =
-      this.functionCommentScope!.text.join("");
-    const charIndex: CharIndex = {
-      start: this.functionCommentScope!.start,
-      end: this.functionCommentScope!.end,
-    };
     if (lines) {
       for (const line of lines) {
         this.setStartScope(line);
         this.setEndScope(line);
         const functionComment = this.parseCommentLine(
           line,
-          functionCommentText,
-          charIndex
+          this.functionCommentText
         );
         if (functionComment) {
           result.push(functionComment);

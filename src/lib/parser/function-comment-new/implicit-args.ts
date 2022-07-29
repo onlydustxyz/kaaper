@@ -2,15 +2,15 @@ import { BaseCommentParser } from "../interfaces/function-comment-new";
 import { FunctionCommentNew } from "../../types";
 
 export default class FunctionCommentImplicitArgsParser extends BaseCommentParser {
-  constructor(functionComment: string) {
-    super(functionComment);
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Implicit args";
   }
 
   parseCommentLine(line: string): FunctionCommentNew | null {
     if (this.runningScope === true && this.startLine !== line) {
       const regexp = /((\w+)(\(?([\w\*]+)\))?)$/gm;
-      const functionComments = [...this.functionComment.matchAll(regexp)];
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
       for (var functionComment of functionComments) {
         // without # or anything else, just pure content
         // e.g `pedersen_ptr(HashBuiltin*)` instead of

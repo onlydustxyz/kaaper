@@ -2,8 +2,8 @@ import { BaseCommentParser } from "../interfaces/function-comment-new";
 import { FunctionCommentNew } from "../../types";
 
 export default class FunctionCommentRaisesParser extends BaseCommentParser {
-  constructor(functionComment: string) {
-    super(functionComment);
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Raises";
   }
 
@@ -13,7 +13,7 @@ export default class FunctionCommentRaisesParser extends BaseCommentParser {
         return null;
       }
       const regexp = /(\w+):\s*([\w\s\^]+)$/gm;
-      const functionComments = [...this.functionComment.matchAll(regexp)];
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
       for (var functionComment of functionComments) {
         const commentLine = [...line.matchAll(regexp)];
         if (functionComment[0] === commentLine![0][0]) {

@@ -2,15 +2,15 @@ import { BaseCommentParser } from "../interfaces/function-comment-new";
 import { FunctionCommentNew, FunctionCommentScope } from "../../types";
 
 export default class FunctionCommentDescParser extends BaseCommentParser {
-  constructor(functionCommentScope: FunctionCommentScope) {
-    super(functionCommentScope);
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Desc";
   }
 
   parseCommentLine(line: string): FunctionCommentNew | null {
     if (this.runningScope === true && this.startLine !== line) {
       const regexp = /#(\s+)(.+)/gm;
-      const functionComments = [...this.functionCommentScope.matchAll(regexp)];
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
       for (var functionComment of functionComments) {
         // without # or anything else, just pure content
         // e.g name(felt): The name of the token, instead of
