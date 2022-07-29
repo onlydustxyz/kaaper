@@ -493,117 +493,162 @@ suite("getScopeParsingResult: namespace", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("3 ", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Namespace/library.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   // parse whole scope
-  //   const functionScopes = CairoParser.parseNamespaceScopes(text);
+  test("should get `_mint` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const scopeNumber = 3;
-  //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopes![scopeNumber]
-  //   )!.text;
+    // Comment parsing
+    // parse comment lines
+    const scopeNumber = 3;
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![scopeNumber],
+      true
+    )!;
+    const functionCommentText: string = functionCommentScope!.text.join("");
 
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "namespace internal",
-  //       functionName: "_mint",
-  //       functionSignature: {
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //           { name: "range_check_ptr", type: "" },
-  //         ],
-  //         explicitArgs: [
-  //           { name: "recipient", type: "felt" },
-  //           { name: "amount", type: "Uint256" },
-  //         ],
-  //         returns: null,
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           {
-  //             name: "",
-  //             type: "",
-  //             desc: "Mints tokens to an account",
-  //           },
-  //         ],
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*", desc: "" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //           { name: "range_check_ptr", type: "", desc: "" },
-  //         ],
-  //         explicitArgs: [
-  //           {
-  //             name: "recipient",
-  //             type: "felt",
-  //             desc: "The address of the recipient",
-  //           },
-  //           {
-  //             name: "amount",
-  //             type: "Uint256",
-  //             desc: "The amount of tokens to be minted",
-  //           },
-  //         ],
-  //         returns: null,
-  //         raises: null,
-  //       },
-  //     },
-  //   ];
+    const parsingTarget = [
+      {
+        attributeName: "namespace internal",
+        functionName: "_mint",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "recipient", type: "felt" },
+            { name: "amount", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Mints tokens to an account",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "recipient",
+              type: "felt",
+              desc: "The address of the recipient",
+            },
+            {
+              name: "amount",
+              type: "Uint256",
+              desc: "The amount of tokens to be minted",
+            },
+          ],
+          returns: null,
+          raises: null,
+        },
+      },
+    ];
 
-  //   const parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![scopeNumber].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![scopeNumber].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![scopeNumber].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![scopeNumber].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![scopeNumber].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
-  //       },
-  //     },
-  //   ];
+    const parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopes![scopeNumber].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopes![scopeNumber].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopes![scopeNumber].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopes![scopeNumber].text
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopes![scopeNumber].text
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
+        }
+      }
+    }
+    const textTarget = [
+      { desc: "Mints tokens to an account" },
+      { implicitArgs: "syscall_ptr(felt*)" },
+      { implicitArgs: "pedersen_ptr(HashBuiltin*)" },
+      { implicitArgs: "range_check_ptr" },
+      { explicitArgs: "recipient(felt): The address of the recipient" },
+      { explicitArgs: "amount(Uint256): The amount of tokens to be minted" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
 
   // test("3 ", () => {
   //   const pathFile = path.resolve(
