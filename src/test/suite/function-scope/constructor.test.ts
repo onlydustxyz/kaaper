@@ -191,5 +191,22 @@ suite("integration-test: constructor", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    for (let [_, values] of Object.entries(parsingOutput[0].functionComment)) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          // iterate over char Index
+          var wtf = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            wtf += text.at(i);
+          }
+          console.log(wtf);
+        }
+      }
+    }
   });
 });

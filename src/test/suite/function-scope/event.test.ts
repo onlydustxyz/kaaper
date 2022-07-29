@@ -8,11 +8,9 @@ import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment-new/explicit-args";
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-new/returns";
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
-import { FunctionCommentNew } from "../../../lib/types";
-import { KeyObject } from "crypto";
 
 suite("integration-test: event", () => {
-  test("0", () => {
+  test("should get `Transfer` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/library.cairo"
@@ -126,6 +124,38 @@ suite("integration-test: event", () => {
       },
     ];
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const www = {
+            [key]: char,
+          };
+          commentParsingResult.push(www);
+        }
+      }
+    }
+    const textTarget = [
+      { desc: "Emit event when a transfer is made" },
+      { explicitArgs: "from_(felt): The address of the sender" },
+      { explicitArgs: "to(felt): The address of the receiver" },
+      { explicitArgs: "value(Uint256): The amount of tokens transferred" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
   // test("1", () => {
   //   const pathFile = path.resolve(
