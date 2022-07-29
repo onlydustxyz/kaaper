@@ -175,114 +175,161 @@ suite("getScopeParsingResult: namespace", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("1 ", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Namespace/library.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
-  //   // parse whole scope
-  //   const functionScopes = CairoParser.parseNamespaceScopes(text);
+  test("should get `name` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Namespace/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const line = 1;
-  //   const commentLines = CairoParser.parseCommentLines(
-  //     functionScopes![line]
-  //   )!.text;
+    // Comment parsing
+    // parse comment lines
+    const scopeNumber = 1;
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![scopeNumber],
+      true
+    )!;
 
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    const functionCommentText: string = functionCommentScope!.text.join("");
 
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "namespace ERC20",
-  //       functionName: "name",
-  //       functionSignature: {
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //           { name: "range_check_ptr", type: "" },
-  //         ],
-  //         explicitArgs: null,
-  //         returns: [
-  //           {
-  //             name: "name",
-  //             type: "felt",
-  //           },
-  //         ],
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           {
-  //             name: "",
-  //             type: "",
-  //             desc: "Returns the name of the token",
-  //           },
-  //         ],
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*", desc: "" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //           { name: "range_check_ptr", type: "", desc: "" },
-  //         ],
-  //         explicitArgs: null,
-  //         returns: [
-  //           {
-  //             name: "name",
-  //             type: "felt",
-  //             desc: "The name of the token",
-  //           },
-  //         ],
-  //         raises: null,
-  //       },
-  //     },
-  //   ];
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
-  //   const parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![line].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![line].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![line].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![line].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![line].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(commentLines!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           commentLines!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           commentLines!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           commentLines!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
-  //       },
-  //     },
-  //   ];
+    const parsingTarget = [
+      {
+        attributeName: "namespace ERC20",
+        functionName: "name",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: null,
+          returns: [
+            {
+              name: "name",
+              type: "felt",
+            },
+          ],
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the name of the token",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: null,
+          returns: [
+            {
+              name: "name",
+              type: "felt",
+              desc: "The name of the token",
+            },
+          ],
+          raises: null,
+        },
+      },
+    ];
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    const parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopes![scopeNumber].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopes![scopeNumber].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopes![scopeNumber].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopes![scopeNumber].text
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopes![scopeNumber].text
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
+
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
+        }
+      }
+    }
+    const textTarget = [
+      {
+        desc: "Returns the name of the token",
+      },
+      { implicitArgs: "syscall_ptr(felt*)" },
+      { implicitArgs: "pedersen_ptr(HashBuiltin*)" },
+      { implicitArgs: "range_check_ptr" },
+      { returns: "name(felt): The name of the token" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
 
   // test("2 ", () => {
   //   const pathFile = path.resolve(
@@ -298,9 +345,9 @@ suite("getScopeParsingResult: namespace", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 2;
-  //   const commentLines = CairoParser.parseCommentLines(
-  //     functionScopes![line]
+  //   const scopeNumber = 2;
+  //   const functionCommentScope = CairoParser.parseCommentLines(
+  //     functionScopes![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -363,34 +410,34 @@ suite("getScopeParsingResult: namespace", () => {
   //   const parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![line].text
+  //         functionScopes![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![line].text
+  //         functionScopes![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(commentLines!),
+  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
   //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
   //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
   //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
   //       },
   //     },
   //   ];
@@ -412,9 +459,9 @@ suite("getScopeParsingResult: namespace", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 3;
-  //   const commentLines = CairoParser.parseCommentLines(
-  //     functionScopes![line]
+  //   const scopeNumber = 3;
+  //   const functionCommentScope = CairoParser.parseCommentLines(
+  //     functionScopes![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -475,34 +522,34 @@ suite("getScopeParsingResult: namespace", () => {
   //   const parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![line].text
+  //         functionScopes![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![line].text
+  //         functionScopes![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(commentLines!),
+  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
   //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
   //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
   //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
   //       },
   //     },
   //   ];
@@ -524,9 +571,9 @@ suite("getScopeParsingResult: namespace", () => {
 
   //   // Comment parsing
   //   // parse comment lines
-  //   const line = 4;
-  //   const commentLines = CairoParser.parseCommentLines(
-  //     functionScopes![line]
+  //   const scopeNumber = 4;
+  //   const functionCommentScope = CairoParser.parseCommentLines(
+  //     functionScopes![scopeNumber]
   //   )!.text;
 
   //   const functionCommentDescParser = new FunctionCommentDescParser();
@@ -587,34 +634,34 @@ suite("getScopeParsingResult: namespace", () => {
   //   const parsingOutput = [
   //     {
   //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![line].text
+  //         functionScopes![scopeNumber].text
   //       ),
   //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![line].text
+  //         functionScopes![scopeNumber].text
   //       ),
   //       functionSignature: {
   //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![line].text
+  //           functionScopes![scopeNumber].text
   //         ),
   //       },
   //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(commentLines!),
+  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
   //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
   //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
   //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           commentLines!
+  //           functionCommentScope!
   //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(commentLines!),
+  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
   //       },
   //     },
   //   ];
