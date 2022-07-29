@@ -369,131 +369,179 @@ suite("getScopeParsingResult: external", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("2", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
+  test("should get `approve` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
 
-  //   // parse whole scope
-  //   const functionScopes = CairoParser.parseFunctionScope(text, "external");
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "external");
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const line = 2;
-  //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopes![line]
-  //   )!.text;
+    // Comment parsing
+    // parse comment lines
+    const line = 2;
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![line]
+    )!;
 
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    const functionCommentText: string = functionCommentScope!.text.join("");
 
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "external",
-  //       functionName: "approve",
-  //       functionSignature: {
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //           { name: "range_check_ptr", type: "" },
-  //         ],
-  //         explicitArgs: [
-  //           { name: "spender", type: "felt" },
-  //           { name: "amount", type: "Uint256" },
-  //         ],
-  //         returns: [{ name: "success", type: "felt" }],
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           {
-  //             name: "",
-  //             type: "",
-  //             desc: "Approve spender to spend amount of tokens",
-  //           },
-  //         ],
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*", desc: "" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //           { name: "range_check_ptr", type: "", desc: "" },
-  //         ],
-  //         explicitArgs: [
-  //           {
-  //             name: "spender",
-  //             type: "felt",
-  //             desc: "the address of ERC20 spender",
-  //           },
-  //           {
-  //             name: "amount",
-  //             type: "Uint256",
-  //             desc: "the amount of ERC20 token to approve",
-  //           },
-  //         ],
-  //         returns: [
-  //           {
-  //             name: "success",
-  //             type: "felt",
-  //             desc: "1 if approve was successful, 0 otherwise",
-  //           },
-  //         ],
-  //         raises: [
-  //           { name: "amount", type: "", desc: "amount is not a valid Uint256" },
-  //           {
-  //             name: "spender",
-  //             type: "",
-  //             desc: "cannot approve to the zero address",
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   ];
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopes![line].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopes![line].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopes![line].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopes![line].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopes![line].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
-  //       },
-  //     },
-  //   ];
+    const parsingTarget = [
+      {
+        attributeName: "external",
+        functionName: "approve",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "spender", type: "felt" },
+            { name: "amount", type: "Uint256" },
+          ],
+          returns: [{ name: "success", type: "felt" }],
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Approve spender to spend amount of tokens",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "spender",
+              type: "felt",
+              desc: "the address of ERC20 spender",
+            },
+            {
+              name: "amount",
+              type: "Uint256",
+              desc: "the amount of ERC20 token to approve",
+            },
+          ],
+          returns: [
+            {
+              name: "success",
+              type: "felt",
+              desc: "1 if approve was successful, 0 otherwise",
+            },
+          ],
+          raises: [
+            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
+            {
+              name: "spender",
+              type: "",
+              desc: "cannot approve to the zero address",
+            },
+          ],
+        },
+      },
+    ];
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopes![line].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopes![line].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopes![line].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopes![line].text
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopes![line].text
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
+
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
+        }
+      }
+    }
+    const textTarget = [
+      { desc: "Approve spender to spend amount of tokens" },
+      { implicitArgs: "syscall_ptr(felt*)" },
+      { implicitArgs: "pedersen_ptr(HashBuiltin*)" },
+      { implicitArgs: "range_check_ptr" },
+      { explicitArgs: "spender(felt): the address of ERC20 spender" },
+      { explicitArgs: "amount(Uint256): the amount of ERC20 token to approve" },
+      { returns: "success(felt): 1 if approve was successful, 0 otherwise" },
+      { raises: "amount: amount is not a valid Uint256" },
+      { raises: "spender: cannot approve to the zero address" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
 
   // test("3", () => {
   //   const pathFile = path.resolve(
