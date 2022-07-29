@@ -9,7 +9,7 @@ import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-new/returns";
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
-suite("integration-test: constructor", () => {
+suite("getScopeParsingResult: constructor", () => {
   test("should get `constructor` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
