@@ -14,11 +14,9 @@ suite("function-comment: view - name", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    // console.log(functionScope.text);
+
     const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
     const functionCommentText = functionCommentScope!.text.join("");
-    console.log(functionCommentText);
-
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText
     );
@@ -43,7 +41,6 @@ suite("function-comment: view - symbol", () => {
 
     const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
     const functionCommentText = functionCommentScope!.text.join("");
-    console.log(functionCommentText);
 
     const explicitArgsParser = new FunctionCommentExplicitArgsParser(
       functionCommentText

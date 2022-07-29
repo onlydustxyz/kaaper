@@ -2,7 +2,6 @@ import * as path from "path";
 import * as fs from "fs";
 import * as assert from "assert";
 import CairoParser from "../../../lib/CairoParser";
-import { Console } from "console";
 
 suite("parseCommentLines: Namespace Using Match All", () => {
   test("Namespace: 0 ", () => {
@@ -26,6 +25,10 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     for (let i = start; i < end; i++) {
       functionCommentText += text.at(i);
     }
+
+    console.log("Namespace test");
+    console.log(functionScope.text);
+    console.log(functionCommentText);
     assert.equal([...functionComment!.text].join(""), functionCommentText);
   });
 
@@ -72,6 +75,8 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     for (let i = start; i < end; i++) {
       functionCommentText += text.at(i);
     }
+    console.log("Namespace 2");
+    console.log(functionCommentText);
     assert.equal([...functionComment!.text].join(""), functionCommentText);
   });
 

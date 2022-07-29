@@ -2,7 +2,6 @@ import * as path from "path";
 import * as fs from "fs";
 import * as assert from "assert";
 import CairoParser from "../../../lib/CairoParser";
-import { Console } from "console";
 
 suite("parseNamespaceScopes", () => {
   test("scopeNumber: 0", () => {
