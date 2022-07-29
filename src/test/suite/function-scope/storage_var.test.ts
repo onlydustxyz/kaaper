@@ -862,18 +862,18 @@ suite("getScopeParsingResult: storage_var", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("6", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/library.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
+  test("should not get storage_var function scope anymore", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
 
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScope(text, "event");
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "event");
 
-  //   const scopeNumber = 6;
+    const scopeNumber = 6;
 
-  //   assert.equal(functionScopeLines![scopeNumber], null);
-  // });
+    assert.equal(functionScopeLines![scopeNumber], null);
+  });
 });
