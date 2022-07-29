@@ -12,7 +12,7 @@ import {
   ParsingResult,
   FunctionCommentValidity,
   FunctionScope,
-  CommentScope,
+  FunctionCommentScope,
   NamespaceScope,
   CharIndex,
 } from "./types";
@@ -140,7 +140,7 @@ export default class CairoParser {
   static parseCommentLines(
     scope: FunctionScope,
     isNamespace: boolean = false
-  ): CommentScope | null {
+  ): FunctionCommentScope | null {
     const regexp = this.getRegex("comment");
     const commentLinesText = scope.text.match(regexp);
 

@@ -27,7 +27,7 @@ export interface FunctionCommentNew {
   charIndex: CharIndex;
 }
 
-export interface CommentScope {
+export interface FunctionCommentScope {
   text: RegExpMatchArray;
   start: number;
   end: number;
