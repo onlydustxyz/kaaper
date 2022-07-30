@@ -572,112 +572,157 @@ suite("getScopeParsingResult: view", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("4", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
+  test("should get `balanceOf` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
 
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const scopeNumber = 4;
-  //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![scopeNumber]
-  //   )!.text;
-  //   console.log(functionCommentScope);
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    // Comment parsing
+    // parse comment lines
+    const scopeNumber = 4;
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopeLines![scopeNumber]
+    )!;
 
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "view",
-  //       functionName: "balanceOf",
-  //       functionSignature: {
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //           { name: "range_check_ptr", type: "" },
-  //         ],
-  //         explicitArgs: [{ name: "account", type: "felt" }],
-  //         returns: [{ name: "balance", type: "Uint256" }],
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           { name: "", type: "", desc: "Returns the balance of the account" },
-  //         ],
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*", desc: "" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //           { name: "range_check_ptr", type: "", desc: "" },
-  //         ],
-  //         explicitArgs: [
-  //           {
-  //             name: "account",
-  //             type: "felt",
-  //             desc: "account to query balance for",
-  //           },
-  //         ],
-  //         returns: [
-  //           {
-  //             name: "balance",
-  //             type: "Uint256",
-  //             desc: "the balance of the account",
-  //           },
-  //         ],
-  //         raises: null,
-  //       },
-  //     },
-  //   ];
+    const functionCommentText: string = functionCommentScope!.text.join("");
 
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![scopeNumber].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![scopeNumber].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![scopeNumber].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![scopeNumber].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![scopeNumber].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
-  //       },
-  //     },
-  //   ];
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "balanceOf",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [{ name: "account", type: "felt" }],
+          returns: [{ name: "balance", type: "Uint256" }],
+        },
+        functionComment: {
+          desc: [
+            { name: "", type: "", desc: "Returns the balance of the account" },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "account",
+              type: "felt",
+              desc: "account to query balance for",
+            },
+          ],
+          returns: [
+            {
+              name: "balance",
+              type: "Uint256",
+              desc: "the balance of the account",
+            },
+          ],
+          raises: null,
+        },
+      },
+    ];
+
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![scopeNumber].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![scopeNumber].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![scopeNumber].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![scopeNumber].text
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![scopeNumber].text
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
+
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
+        }
+      }
+    }
+    const textTarget = [
+      { desc: "Returns the balance of the account" },
+      { implicitArgs: "syscall_ptr(felt*)" },
+      { implicitArgs: "pedersen_ptr(HashBuiltin*)" },
+      { implicitArgs: "range_check_ptr" },
+      { explicitArgs: "account(felt): account to query balance for" },
+      { returns: "balance(Uint256): the balance of the account" },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
 
   // test("5", () => {
   //   const pathFile = path.resolve(
