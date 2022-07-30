@@ -895,4 +895,18 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
+  test("should not get view function scope anymore", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "event");
+
+    const scopeNumber = 6;
+
+    assert.equal(functionScopeLines![scopeNumber], null);
+  });
 });
