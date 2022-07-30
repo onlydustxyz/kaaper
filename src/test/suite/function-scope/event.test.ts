@@ -10,6 +10,16 @@ import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-n
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: event", () => {
+  test("should get `2` for the length of function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "event");
+    assert.equal(functionScopes!.length, 2, "failed to parse");
+  });
   test("should get `Transfer` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
@@ -308,14 +318,156 @@ suite("getScopeParsingResult: event", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
-  test("should get `2` for the length of function scope", () => {
+  test("should get all `event` function scopes", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    // parse whole scope
-    const functionScopes = CairoParser.parseFunctionScope(text, "event");
-    assert.equal(functionScopes!.length, 2, "failed to parse");
+
+    const parsingOutput = CairoParser.getScopeParsingResult(text, "event");
+
+    const parsingTarget = [
+      {
+        attributeName: "event",
+        functionName: "Transfer",
+        functionSignature: {
+          implicitArgs: null,
+          explicitArgs: [
+            { name: "from_", type: "felt" },
+            { name: "to", type: "felt" },
+            { name: "value", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Emit event when a transfer is made",
+              charIndex: { start: 22, end: 56 },
+            },
+          ],
+          implicitArgs: null,
+          explicitArgs: [
+            {
+              name: "from_",
+              type: "felt",
+              desc: "The address of the sender",
+              charIndex: { start: 86, end: 124 },
+            },
+            {
+              name: "to",
+              type: "felt",
+              desc: "The address of the receiver",
+              charIndex: { start: 133, end: 170 },
+            },
+            {
+              name: "value",
+              type: "Uint256",
+              desc: "The amount of tokens transferred",
+              charIndex: { start: 179, end: 227 },
+            },
+          ],
+          returns: null,
+          raises: null,
+          charIndex: { start: 691, end: 918 },
+        },
+      },
+      {
+        attributeName: "event",
+        functionName: "Approval",
+        functionSignature: {
+          implicitArgs: null,
+          explicitArgs: [
+            { name: "owner", type: "felt" },
+            { name: "spender", type: "felt" },
+            { name: "value", type: "Uint256" },
+          ],
+          returns: null,
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Emit event when a delegation is made",
+              charIndex: { start: 21, end: 57 },
+            },
+          ],
+          implicitArgs: null,
+          explicitArgs: [
+            {
+              name: "owner",
+              type: "felt",
+              desc: "the address of the owner",
+              charIndex: { start: 87, end: 124 },
+            },
+            {
+              name: "spender",
+              type: "felt",
+              desc: "the address of the spender",
+              charIndex: { start: 133, end: 174 },
+            },
+            {
+              name: "value",
+              type: "Uint256",
+              desc: "the amount of tokens approved for the spender",
+              charIndex: { start: 183, end: 244 },
+            },
+          ],
+          returns: null,
+          raises: null,
+          charIndex: { start: 993, end: 1237 },
+        },
+      },
+    ];
+
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    {
+      const scopeNumber = 0;
+      const charIndex = parsingOutput![scopeNumber].functionComment.charIndex;
+      var functionCommentParsingResult = "";
+      for (var i = charIndex!.start; i < charIndex!.end; i++) {
+        functionCommentParsingResult += text.at(i);
+      }
+
+      const functionCommentTarget = `
+    # Desc: 
+    #   Emit event when a transfer is made
+    # Explicit args:
+    #   from_(felt): The address of the sender
+    #   to(felt): The address of the receiver
+    #   value(Uint256): The amount of tokens transferred`;
+
+      assert.equal(
+        functionCommentTarget,
+        functionCommentParsingResult,
+        "failed to parse"
+      );
+    }
+    {
+      const scopeNumber = 1;
+      const charIndex = parsingOutput![scopeNumber].functionComment.charIndex;
+      var functionCommentParsingResult = "";
+      for (var i = charIndex!.start; i < charIndex!.end; i++) {
+        functionCommentParsingResult += text.at(i);
+      }
+
+      const functionCommentTarget = `
+    # Desc: 
+    #  Emit event when a delegation is made
+    # Explicit args:
+    #   owner(felt): the address of the owner
+    #   spender(felt): the address of the spender
+    #   value(Uint256): the amount of tokens approved for the spender`;
+
+      assert.equal(
+        functionCommentTarget,
+        functionCommentParsingResult,
+        "failed to parse"
+      );
+    }
   });
 });
