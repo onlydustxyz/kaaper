@@ -21,7 +21,7 @@ suite("getScopeParsingResult: constructor", () => {
 
     assert.equal(functionScopes!.length, 1);
   });
-  test("should get `constructor` function scope using constituent functions", () => {
+  test("should get `constructor` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
@@ -251,7 +251,7 @@ suite("getScopeParsingResult: constructor", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  test("should get `constructor` function scope using `getScopeParsingResult`", () => {
+  test("should get all `constructor` function scopes", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
