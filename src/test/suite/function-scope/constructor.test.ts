@@ -237,4 +237,15 @@ suite("getScopeParsingResult: constructor", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
+  test("should get `1` for the length of function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+
+    assert.equal(functionScopes!.length, 1);
+  });
 });

@@ -57,11 +57,23 @@ suite("getScopeParsingResult: storage_var", () => {
           returns: [{ name: "name", type: "felt" }],
         },
         functionComment: {
-          desc: [{ name: "", type: "", desc: "Returns the name of the token" }],
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the name of the token",
+              charIndex: { start: 22, end: 51 },
+            },
+          ],
           implicitArgs: null,
           explicitArgs: null,
           returns: [
-            { name: "name", type: "felt", desc: "The name of the token" },
+            {
+              name: "name",
+              type: "felt",
+              desc: "The name of the token",
+              charIndex: { start: 75, end: 108 },
+            },
           ],
           raises: null,
         },
@@ -107,7 +119,7 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -325,6 +337,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns the number of decimals of the token",
+              charIndex: { start: 22, end: 65 },
             },
           ],
           implicitArgs: null,
@@ -334,6 +347,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "decimals",
               type: "Uint256",
               desc: "The number of decimals of the token",
+              charIndex: { start: 89, end: 143 },
             },
           ],
           raises: null,
@@ -380,7 +394,7 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -466,6 +480,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns total amount of tokens in existence",
+              charIndex: { start: 22, end: 65 },
             },
           ],
           implicitArgs: null,
@@ -475,6 +490,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "total_supply",
               type: "Uint256",
               desc: "The total amount of tokens in existence",
+              charIndex: { start: 89, end: 151 },
             },
           ],
           raises: null,
@@ -521,7 +537,7 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -610,6 +626,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns the amount of tokens owned by an account",
+              charIndex: { start: 22, end: 70 },
             },
           ],
           implicitArgs: null,
@@ -618,6 +635,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "account",
               type: "felt",
               desc: "The address of the account",
+              charIndex: { start: 100, end: 141 },
             },
           ],
           returns: [
@@ -625,6 +643,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "balance",
               type: "Uint256",
               desc: "The amount of tokens owned by an account",
+              charIndex: { start: 165, end: 223 },
             },
           ],
           raises: null,
@@ -671,7 +690,7 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -761,15 +780,22 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Store the amount of tokens that an owner is allowed to delegate to a spender",
+              charIndex: { start: 22, end: 98 },
             },
           ],
           implicitArgs: null,
           explicitArgs: [
-            { name: "owner", type: "felt", desc: "The address of the owner" },
+            {
+              name: "owner",
+              type: "felt",
+              desc: "The address of the owner",
+              charIndex: { start: 128, end: 165 },
+            },
             {
               name: "spender",
               type: "felt",
               desc: "The address of the spender",
+              charIndex: { start: 174, end: 215 },
             },
           ],
           returns: [
@@ -777,6 +803,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "allowance",
               type: "Uint256",
               desc: "The amount of tokens that an owner is allowed to delegate to a spender",
+              charIndex: { start: 239, end: 329 },
             },
           ],
           raises: null,
@@ -823,7 +850,7 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -870,10 +897,10 @@ suite("getScopeParsingResult: storage_var", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "event");
-
-    const scopeNumber = 6;
-
-    assert.equal(functionScopeLines![scopeNumber], null);
+    const functionScopeLines = CairoParser.parseFunctionScope(
+      text,
+      "storage_var"
+    );
+    assert.equal(functionScopeLines!.length, 6);
   });
 });

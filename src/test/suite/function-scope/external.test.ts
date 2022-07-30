@@ -61,22 +61,46 @@ suite("getScopeParsingResult: external", () => {
           returns: [{ name: "success", type: "felt" }],
         },
         functionComment: {
-          desc: [{ name: "", type: "", desc: "Perform transfer to recipient" }],
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Perform transfer to recipient",
+              charIndex: { start: 29, end: 58 },
+            },
+          ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 96, end: 114 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 127, end: 153 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 166, end: 181 },
+            },
           ],
           explicitArgs: [
             {
               name: "recipient",
               type: "felt",
               desc: "the address of ERC20 recipient",
+              charIndex: { start: 219, end: 266 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "the amount of ERC20 transfer",
+              charIndex: { start: 279, end: 324 },
             },
           ],
           returns: [
@@ -84,19 +108,27 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if transfer was successful, 0 otherwise",
+              charIndex: { start: 356, end: 412 },
             },
           ],
           raises: [
-            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
+            {
+              name: "amount",
+              type: "",
+              desc: "amount is not a valid Uint256",
+              charIndex: { start: 443, end: 480 },
+            },
             {
               name: "recipient",
               type: "",
               desc: "cannot transfer to the zero address",
+              charIndex: { start: 493, end: 539 },
             },
             {
               name: "amount",
               type: "",
               desc: "transfer amount exceeds balance",
+              charIndex: { start: 552, end: 591 },
             },
           ],
         },
@@ -140,7 +172,7 @@ suite("getScopeParsingResult: external", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -197,9 +229,9 @@ suite("getScopeParsingResult: external", () => {
 
     // Comment parsing
     // parse comment lines
-    const line = 1;
+    const scopeNumber = 1;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopes![line]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -241,28 +273,47 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Perform transfer from sender to recipient with allowance",
+              charIndex: { start: 21, end: 77 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 107, end: 125 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 134, end: 160 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 169, end: 184 },
+            },
           ],
           explicitArgs: [
             {
               name: "sender",
               type: "felt",
               desc: "the address of ERC20 sender",
+              charIndex: { start: 214, end: 255 },
             },
             {
               name: "recipient",
               type: "felt",
               desc: "the address of ERC20 recipient",
+              charIndex: { start: 264, end: 311 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "the amount of ERC20 transfer",
+              charIndex: { start: 320, end: 365 },
             },
           ],
           returns: [
@@ -270,19 +321,27 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if transfer was successful, 0 otherwise",
+              charIndex: { start: 389, end: 445 },
             },
           ],
           raises: [
-            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
+            {
+              name: "amount",
+              type: "",
+              desc: "amount is not a valid Uint256",
+              charIndex: { start: 468, end: 505 },
+            },
             {
               name: "sender",
               type: "",
               desc: "cannot transfer from the zero address",
+              charIndex: { start: 514, end: 559 },
             },
             {
               name: "amount",
               type: "",
               desc: "transfer amount exceeds balance",
+              charIndex: { start: 568, end: 607 },
             },
           ],
         },
@@ -292,20 +351,20 @@ suite("getScopeParsingResult: external", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -328,7 +387,7 @@ suite("getScopeParsingResult: external", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -384,9 +443,9 @@ suite("getScopeParsingResult: external", () => {
 
     // Comment parsing
     // parse comment lines
-    const line = 2;
+    const scopeNumber = 2;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopes![line]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -427,23 +486,41 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Approve spender to spend amount of tokens",
+              charIndex: { start: 21, end: 62 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 92, end: 110 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 119, end: 145 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 154, end: 169 },
+            },
           ],
           explicitArgs: [
             {
               name: "spender",
               type: "felt",
               desc: "the address of ERC20 spender",
+              charIndex: { start: 199, end: 242 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "the amount of ERC20 token to approve",
+              charIndex: { start: 251, end: 304 },
             },
           ],
           returns: [
@@ -451,14 +528,21 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if approve was successful, 0 otherwise",
+              charIndex: { start: 328, end: 383 },
             },
           ],
           raises: [
-            { name: "amount", type: "", desc: "amount is not a valid Uint256" },
+            {
+              name: "amount",
+              type: "",
+              desc: "amount is not a valid Uint256",
+              charIndex: { start: 406, end: 443 },
+            },
             {
               name: "spender",
               type: "",
               desc: "cannot approve to the zero address",
+              charIndex: { start: 452, end: 495 },
             },
           ],
         },
@@ -468,20 +552,20 @@ suite("getScopeParsingResult: external", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -504,7 +588,7 @@ suite("getScopeParsingResult: external", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -558,9 +642,9 @@ suite("getScopeParsingResult: external", () => {
 
     // Comment parsing
     // parse comment lines
-    const line = 3;
+    const scopeNumber = 3;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopes![line]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -601,23 +685,41 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Increase allowance of spender by added_value",
+              charIndex: { start: 21, end: 65 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 95, end: 113 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 122, end: 148 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 157, end: 172 },
+            },
           ],
           explicitArgs: [
             {
               name: "spender",
               type: "felt",
               desc: "the address of ERC20 spender",
+              charIndex: { start: 202, end: 245 },
             },
             {
               name: "added_value",
               type: "Uint256",
               desc: "the amount of ERC20 token to increase allowance",
+              charIndex: { start: 254, end: 323 },
             },
           ],
           returns: [
@@ -625,6 +727,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if increase allowance was successful, 0 otherwise",
+              charIndex: { start: 347, end: 413 },
             },
           ],
           raises: [
@@ -632,11 +735,13 @@ suite("getScopeParsingResult: external", () => {
               name: "added_value",
               type: "",
               desc: "added_value is not a valid Uint256",
+              charIndex: { start: 436, end: 483 },
             },
             {
               name: "spender",
               type: "",
               desc: "cannot increase allowance to the zero address",
+              charIndex: { start: 492, end: 546 },
             },
           ],
         },
@@ -646,20 +751,20 @@ suite("getScopeParsingResult: external", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -682,7 +787,7 @@ suite("getScopeParsingResult: external", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -742,9 +847,9 @@ suite("getScopeParsingResult: external", () => {
 
     // Comment parsing
     // parse comment lines
-    const line = 4;
+    const scopeNumber = 4;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopes![line]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -785,23 +890,41 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Decrease allowance of spender by subtracted_value",
+              charIndex: { start: 21, end: 70 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 100, end: 118 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 127, end: 153 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 162, end: 177 },
+            },
           ],
           explicitArgs: [
             {
               name: "spender",
               type: "felt",
               desc: "the address of ERC20 spender",
+              charIndex: { start: 207, end: 250 },
             },
             {
               name: "subtracted_value",
               type: "Uint256",
               desc: "the amount of ERC20 token to decrease allowance",
+              charIndex: { start: 259, end: 333 },
             },
           ],
           returns: [
@@ -809,6 +932,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if decrease allowance was successful, 0 otherwise",
+              charIndex: { start: 357, end: 423 },
             },
           ],
           raises: [
@@ -816,11 +940,13 @@ suite("getScopeParsingResult: external", () => {
               name: "subtracted_value",
               type: "",
               desc: "subtracted_value is not a valid Uint256",
+              charIndex: { start: 446, end: 503 },
             },
             {
               name: "spender",
               type: "",
               desc: "cannot decrease allowance to the zero address",
+              charIndex: { start: 512, end: 566 },
             },
           ],
         },
@@ -830,20 +956,20 @@ suite("getScopeParsingResult: external", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopes![line].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopes![line].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -866,7 +992,7 @@ suite("getScopeParsingResult: external", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -909,5 +1035,15 @@ suite("getScopeParsingResult: external", () => {
       { raises: "spender: cannot decrease allowance to the zero address" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
+  test("should get `2` for the length of function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "external");
+    assert.equal(functionScopes!.length, 5, "failed to parse");
   });
 });

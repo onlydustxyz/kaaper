@@ -71,20 +71,47 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Initializes the contract with the given name, symbol, and decimals",
+              charIndex: { start: 29, end: 95 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 133, end: 151 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 164, end: 190 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 203, end: 218 },
+            },
           ],
           explicitArgs: [
-            { name: "name", type: "felt", desc: "The name of the token" },
-            { name: "symbol", type: "felt", desc: "The symbol of the token" },
+            {
+              name: "name",
+              type: "felt",
+              desc: "The name of the token",
+              charIndex: { start: 256, end: 289 },
+            },
+            {
+              name: "symbol",
+              type: "felt",
+              desc: "The symbol of the token",
+              charIndex: { start: 302, end: 339 },
+            },
             {
               name: "multiplier",
               type: "felt",
               desc: "The multiplier of the token",
+              charIndex: { start: 352, end: 397 },
             },
           ],
           returns: null,
@@ -132,7 +159,7 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -235,12 +262,28 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Returns the name of the token",
+              charIndex: { start: 29, end: 58 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 96, end: 114 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 127, end: 153 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 166, end: 181 },
+            },
           ],
           explicitArgs: null,
           returns: [
@@ -248,6 +291,7 @@ suite("getScopeParsingResult: namespace", () => {
               name: "name",
               type: "felt",
               desc: "The name of the token",
+              charIndex: { start: 213, end: 246 },
             },
           ],
           raises: null,
@@ -294,7 +338,7 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -389,24 +433,47 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Transfers tokens from one account to another",
+              charIndex: { start: 29, end: 73 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 111, end: 129 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 142, end: 168 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 181, end: 196 },
+            },
           ],
           explicitArgs: [
-            { name: "sender", type: "felt", desc: "The address of the sender" },
+            {
+              name: "sender",
+              type: "felt",
+              desc: "The address of the sender",
+              charIndex: { start: 234, end: 273 },
+            },
             {
               name: "recipient",
               type: "felt",
               desc: "The address of the recipient",
+              charIndex: { start: 286, end: 331 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "The amount of tokens to be transferred",
+              charIndex: { start: 344, end: 399 },
             },
           ],
           returns: null,
@@ -454,7 +521,7 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -550,23 +617,41 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Mints tokens to an account",
+              charIndex: { start: 29, end: 55 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 93, end: 111 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 124, end: 150 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 163, end: 178 },
+            },
           ],
           explicitArgs: [
             {
               name: "recipient",
               type: "felt",
               desc: "The address of the recipient",
+              charIndex: { start: 216, end: 261 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "The amount of tokens to be minted",
+              charIndex: { start: 274, end: 324 },
             },
           ],
           returns: null,
@@ -614,7 +699,7 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -708,23 +793,41 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Burns tokens from an account",
+              charIndex: { start: 29, end: 57 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 95, end: 113 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 126, end: 152 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 165, end: 180 },
+            },
           ],
           explicitArgs: [
             {
               name: "account",
               type: "felt",
               desc: "The address of the recipient",
+              charIndex: { start: 218, end: 261 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "The amount of tokens to be burned",
+              charIndex: { start: 274, end: 324 },
             },
           ],
           returns: null,
@@ -772,7 +875,7 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -806,5 +909,16 @@ suite("getScopeParsingResult: namespace", () => {
       { explicitArgs: "amount(Uint256): The amount of tokens to be burned" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
+
+  test("should get `null` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "namespace");
+    assert.equal(functionScopes!.length, 2, "failed to parse");
   });
 });

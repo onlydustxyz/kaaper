@@ -57,14 +57,43 @@ suite("getScopeParsingResult: view", () => {
           returns: [{ name: "name", type: "felt" }],
         },
         functionComment: {
-          desc: [{ name: "", type: "", desc: "Returns the name of the token" }],
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the name of the token",
+              charIndex: { start: 21, end: 50 },
+            },
+          ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 80, end: 98 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 107, end: 133 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 142, end: 157 },
+            },
           ],
           explicitArgs: null,
-          returns: [{ name: "name", type: "felt", desc: "name of the token" }],
+          returns: [
+            {
+              name: "name",
+              type: "felt",
+              desc: "name of the token",
+              charIndex: { start: 181, end: 210 },
+            },
+          ],
           raises: null,
         },
       },
@@ -109,7 +138,7 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -195,16 +224,41 @@ suite("getScopeParsingResult: view", () => {
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the symbol of the token" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns the symbol of the token",
+              charIndex: { start: 21, end: 52 },
+            },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 82, end: 100 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 109, end: 135 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 144, end: 159 },
+            },
           ],
           explicitArgs: null,
           returns: [
-            { name: "symbol", type: "felt", desc: "symbol of the token" },
+            {
+              name: "symbol",
+              type: "felt",
+              desc: "symbol of the token",
+              charIndex: { start: 183, end: 216 },
+            },
           ],
           raises: null,
         },
@@ -250,7 +304,7 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -339,12 +393,28 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the total supply of the token",
+              charIndex: { start: 21, end: 58 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 88, end: 106 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 115, end: 141 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 150, end: 165 },
+            },
           ],
           explicitArgs: null,
           returns: [
@@ -352,6 +422,7 @@ suite("getScopeParsingResult: view", () => {
               name: "totalSupply",
               type: "Uint256",
               desc: "total supply of the token",
+              charIndex: { start: 189, end: 236 },
             },
           ],
           raises: null,
@@ -398,7 +469,7 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -482,16 +553,41 @@ suite("getScopeParsingResult: view", () => {
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the decimals of the token" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns the decimals of the token",
+              charIndex: { start: 21, end: 54 },
+            },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 84, end: 102 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 111, end: 137 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 146, end: 161 },
+            },
           ],
           explicitArgs: null,
           returns: [
-            { name: "decimals", type: "felt", desc: "decimals of the token" },
+            {
+              name: "decimals",
+              type: "felt",
+              desc: "decimals of the token",
+              charIndex: { start: 185, end: 222 },
+            },
           ],
           raises: null,
         },
@@ -537,7 +633,7 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -623,18 +719,39 @@ suite("getScopeParsingResult: view", () => {
         },
         functionComment: {
           desc: [
-            { name: "", type: "", desc: "Returns the balance of the account" },
+            {
+              name: "",
+              type: "",
+              desc: "Returns the balance of the account",
+              charIndex: { start: 21, end: 55 },
+            },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 85, end: 103 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 112, end: 138 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 147, end: 162 },
+            },
           ],
           explicitArgs: [
             {
               name: "account",
               type: "felt",
               desc: "account to query balance for",
+              charIndex: { start: 192, end: 235 },
             },
           ],
           returns: [
@@ -642,6 +759,7 @@ suite("getScopeParsingResult: view", () => {
               name: "balance",
               type: "Uint256",
               desc: "the balance of the account",
+              charIndex: { start: 259, end: 303 },
             },
           ],
           raises: null,
@@ -688,7 +806,7 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -781,23 +899,41 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
+              charIndex: { start: 21, end: 94 },
             },
           ],
           implicitArgs: [
-            { name: "syscall_ptr", type: "felt*", desc: "" },
-            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-            { name: "range_check_ptr", type: "", desc: "" },
+            {
+              name: "syscall_ptr",
+              type: "felt*",
+              desc: "",
+              charIndex: { start: 124, end: 142 },
+            },
+            {
+              name: "pedersen_ptr",
+              type: "HashBuiltin*",
+              desc: "",
+              charIndex: { start: 151, end: 177 },
+            },
+            {
+              name: "range_check_ptr",
+              type: "",
+              desc: "",
+              charIndex: { start: 186, end: 201 },
+            },
           ],
           explicitArgs: [
             {
               name: "owner",
               type: "felt",
               desc: "the address of owner of the tokens",
+              charIndex: { start: 231, end: 278 },
             },
             {
               name: "spender",
               type: "felt",
               desc: "the address of spender (delegated account) of the tokens",
+              charIndex: { start: 287, end: 358 },
             },
           ],
           returns: [
@@ -805,6 +941,7 @@ suite("getScopeParsingResult: view", () => {
               name: "remaining",
               type: "Uint256",
               desc: "the amount of remaining tokens allowed to be spent by the spender",
+              charIndex: { start: 382, end: 467 },
             },
           ],
           raises: null,
@@ -851,7 +988,7 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
@@ -895,18 +1032,16 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
-  test("should not get view function scope anymore", () => {
+  test("should get `6` for the length of function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/library.cairo"
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "event");
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
-    const scopeNumber = 6;
-
-    assert.equal(functionScopeLines![scopeNumber], null);
+    assert.equal(functionScopeLines!.length, 6, "failed to parse");
   });
 });

@@ -308,7 +308,7 @@ suite("getScopeParsingResult: event", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
-  test("should get `null` function scope", () => {
+  test("should get `2` for the length of function scope", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/library.cairo"
@@ -316,7 +316,6 @@ suite("getScopeParsingResult: event", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "event");
-    const scopeNumber = 2;
-    assert.equal(functionScopes![scopeNumber], null);
+    assert.equal(functionScopes!.length, 2, "failed to parse");
   });
 });
