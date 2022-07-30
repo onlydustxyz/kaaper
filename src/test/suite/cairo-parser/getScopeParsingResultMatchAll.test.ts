@@ -6,17 +6,17 @@
 
 // suite("get-scope-parsing-result-match-all", () => {
 //   test("constructor", () => {
-//     const pathFile = path.resolve(
-//       __dirname,
-//       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
-//     );
+// const pathFile = path.resolve(
+//   __dirname,
+//   "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+// );
 
-//     const text = fs.readFileSync(pathFile, "utf8");
-//     // parse whole scope
-//     const parsingOutput = CairoParser.getScopeParsingResultMatchAll(
-//       text,
-//       "constructor"
-//     );
+// const text = fs.readFileSync(pathFile, "utf8");
+// // parse whole scope
+// const parsingOutput = CairoParser.getScopeParsingResult(
+//   text,
+//   "constructor"
+// );
 
 //     const parsingTarget = [
 //       {
@@ -96,7 +96,7 @@
 //     const text = fs.readFileSync(pathFile, "utf8");
 
 //     // parse whole scope
-//     const parsingOutput = CairoParser.getScopeParsingResultMatchAll(
+//     const parsingOutput = CairoParser.getScopeParsingResult(
 //       text,
 //       "view"
 //     );
@@ -336,7 +336,7 @@
 //     const text = fs.readFileSync(pathFile, "utf8");
 
 //     // parse whole scope
-//     const parsingOutput = CairoParser.getScopeParsingResultMatchAll(
+//     const parsingOutput = CairoParser.getScopeParsingResult(
 //       text,
 //       "external"
 //     );
@@ -669,7 +669,7 @@
 
 //     const text = fs.readFileSync(pathFile, "utf8");
 //     // parse whole scope
-//     const parsingOutput = CairoParser.getScopeParsingResultMatchAll(
+//     const parsingOutput = CairoParser.getScopeParsingResult(
 //       text,
 //       "namespace"
 //     );
