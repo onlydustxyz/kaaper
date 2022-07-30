@@ -724,122 +724,175 @@ suite("getScopeParsingResult: view", () => {
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
   });
 
-  // test("5", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../testContracts/ERC20Compliant/ERC20.cairo"
-  //   );
-  //   const text = fs.readFileSync(pathFile, "utf8");
+  test("should get `balanceOf` function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
 
-  //   // parse whole scope
-  //   const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    // parse whole scope
+    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
 
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
 
-  //   // Comment parsing
-  //   // parse comment lines
-  //   const scopeNumber = 5;
-  //   const functionCommentScope = CairoParser.parseCommentLines(
-  //     functionScopeLines![scopeNumber]
-  //   )!.text;
-  //   console.log(functionCommentScope);
-  //   const functionCommentDescParser = new FunctionCommentDescParser();
-  //   const functionCommentImplicitArgsParser =
-  //     new FunctionCommentImplicitArgsParser();
-  //   const functionCommentExplicitArgsParser =
-  //     new FunctionCommentExplicitArgsParser();
-  //   const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //   const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+    // Comment parsing
+    // parse comment lines
+    const scopeNumber = 5;
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopeLines![scopeNumber]
+    )!;
 
-  //   const parsingTarget = [
-  //     {
-  //       attributeName: "view",
-  //       functionName: "allowance",
-  //       functionSignature: {
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*" },
-  //           { name: "range_check_ptr", type: "" },
-  //         ],
-  //         explicitArgs: [
-  //           { name: "owner", type: "felt" },
-  //           { name: "spender", type: "felt" },
-  //         ],
-  //         returns: [{ name: "remaining", type: "Uint256" }],
-  //       },
-  //       functionComment: {
-  //         desc: [
-  //           {
-  //             name: "",
-  //             type: "",
-  //             desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
-  //           },
-  //         ],
-  //         implicitArgs: [
-  //           { name: "syscall_ptr", type: "felt*", desc: "" },
-  //           { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-  //           { name: "range_check_ptr", type: "", desc: "" },
-  //         ],
-  //         explicitArgs: [
-  //           {
-  //             name: "owner",
-  //             type: "felt",
-  //             desc: "the address of owner of the tokens",
-  //           },
-  //           {
-  //             name: "spender",
-  //             type: "felt",
-  //             desc: "the address of spender (delegated account) of the tokens",
-  //           },
-  //         ],
-  //         returns: [
-  //           {
-  //             name: "remaining",
-  //             type: "Uint256",
-  //             desc: "the amount of remaining tokens allowed to be spent by the spender",
-  //           },
-  //         ],
-  //         raises: null,
-  //       },
-  //     },
-  //   ];
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const functionCommentDescParser = new FunctionCommentDescParser(
+      functionCommentText
+    );
+    const functionCommentImplicitArgsParser =
+      new FunctionCommentImplicitArgsParser(functionCommentText);
+    const functionCommentExplicitArgsParser =
+      new FunctionCommentExplicitArgsParser(functionCommentText);
+    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+      functionCommentText
+    );
+    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+      functionCommentText
+    );
 
-  //   var parsingOutput = [
-  //     {
-  //       attributeName: functionSignatureParser.getAttributeName(
-  //         functionScopeLines![scopeNumber].text
-  //       ),
-  //       functionName: functionSignatureParser.getFunctionName(
-  //         functionScopeLines![scopeNumber].text
-  //       ),
-  //       functionSignature: {
-  //         implicitArgs: functionSignatureParser.getImplicitArgs(
-  //           functionScopeLines![scopeNumber].text
-  //         ),
-  //         explicitArgs: functionSignatureParser.getExplicitArgs(
-  //           functionScopeLines![scopeNumber].text
-  //         ),
-  //         returns: functionSignatureParser.getReturns(
-  //           functionScopeLines![scopeNumber].text
-  //         ),
-  //       },
-  //       functionComment: {
-  //         desc: functionCommentDescParser.parseCommentLines(functionCommentScope!),
-  //         implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         returns: functionCommentReturnsParser.parseCommentLines(
-  //           functionCommentScope!
-  //         ),
-  //         raises: functionCommentRaisesParser.parseCommentLines(functionCommentScope!),
-  //       },
-  //     },
-  //   ];
+    const parsingTarget = [
+      {
+        attributeName: "view",
+        functionName: "allowance",
+        functionSignature: {
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
+          ],
+          explicitArgs: [
+            { name: "owner", type: "felt" },
+            { name: "spender", type: "felt" },
+          ],
+          returns: [{ name: "remaining", type: "Uint256" }],
+        },
+        functionComment: {
+          desc: [
+            {
+              name: "",
+              type: "",
+              desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
+            },
+          ],
+          implicitArgs: [
+            { name: "syscall_ptr", type: "felt*", desc: "" },
+            { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
+            { name: "range_check_ptr", type: "", desc: "" },
+          ],
+          explicitArgs: [
+            {
+              name: "owner",
+              type: "felt",
+              desc: "the address of owner of the tokens",
+            },
+            {
+              name: "spender",
+              type: "felt",
+              desc: "the address of spender (delegated account) of the tokens",
+            },
+          ],
+          returns: [
+            {
+              name: "remaining",
+              type: "Uint256",
+              desc: "the amount of remaining tokens allowed to be spent by the spender",
+            },
+          ],
+          raises: null,
+        },
+      },
+    ];
 
-  //   assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-  // });
+    var parsingOutput = [
+      {
+        attributeName: functionSignatureParser.getAttributeName(
+          functionScopeLines![scopeNumber].text
+        ),
+        functionName: functionSignatureParser.getFunctionName(
+          functionScopeLines![scopeNumber].text
+        ),
+        functionSignature: {
+          implicitArgs: functionSignatureParser.getImplicitArgs(
+            functionScopeLines![scopeNumber].text
+          ),
+          explicitArgs: functionSignatureParser.getExplicitArgs(
+            functionScopeLines![scopeNumber].text
+          ),
+          returns: functionSignatureParser.getReturns(
+            functionScopeLines![scopeNumber].text
+          ),
+        },
+        functionComment: {
+          desc: functionCommentDescParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          returns: functionCommentReturnsParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+          raises: functionCommentRaisesParser.parseCommentLines(
+            functionCommentScope!.text
+          ),
+        },
+      },
+    ];
+
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    var commentParsingResult = [];
+
+    for (let [key, values] of Object.entries(
+      parsingOutput[0].functionComment
+    )) {
+      if (values) {
+        for (const value of values) {
+          const charIndex = value.charIndex;
+          var char = "";
+          for (
+            let i = functionCommentScope!.start + charIndex.start;
+            i < functionCommentScope!.start + charIndex.end;
+            i++
+          ) {
+            char += text.at(i);
+          }
+          const commentParsing = {
+            [key]: char,
+          };
+          commentParsingResult.push(commentParsing);
+        }
+      }
+    }
+    const textTarget = [
+      {
+        desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
+      },
+      { implicitArgs: "syscall_ptr(felt*)" },
+      { implicitArgs: "pedersen_ptr(HashBuiltin*)" },
+      { implicitArgs: "range_check_ptr" },
+      { explicitArgs: "owner(felt): the address of owner of the tokens" },
+      {
+        explicitArgs:
+          "spender(felt): the address of spender (delegated account) of the tokens",
+      },
+      {
+        returns:
+          "remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender",
+      },
+    ];
+    assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+  });
 });
