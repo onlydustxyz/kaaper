@@ -1,19 +1,19 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser from "../../../lib/CairoParser";
-import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
-import FunctionCommentDescParser from "../../../lib/parser/function-comment-new/desc";
-import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment-new/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment-new/explicit-args";
-import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-new/returns";
-import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
+import CairoParser from "../../../../lib/CairoParser";
+import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
+import FunctionCommentDescParser from "../../../../lib/parser/function-comment-new/desc";
+import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment-new/implicit-args";
+import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment-new/explicit-args";
+import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment-new/returns";
+import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: constructor", () => {
   test("should get `1` for the length of function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
@@ -24,7 +24,7 @@ suite("getScopeParsingResult: constructor", () => {
   test("should get `constructor` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     const text = fs.readFileSync(pathFile, "utf8");
@@ -254,7 +254,7 @@ suite("getScopeParsingResult: constructor", () => {
   test("should get all `constructor` function scopes", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 

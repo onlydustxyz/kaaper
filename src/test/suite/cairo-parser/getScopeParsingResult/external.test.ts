@@ -1,19 +1,19 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser from "../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../lib/parser/function-comment-new/desc";
-import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment-new/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment-new/explicit-args";
-import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-new/returns";
-import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
+import CairoParser from "../../../../lib/CairoParser";
+import FunctionCommentDescParser from "../../../../lib/parser/function-comment-new/desc";
+import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
+import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment-new/implicit-args";
+import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment-new/explicit-args";
+import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment-new/returns";
+import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: external", () => {
   test("should get `5` for the length of function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
@@ -24,7 +24,7 @@ suite("getScopeParsingResult: external", () => {
   test("should get `transfer` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
@@ -228,7 +228,7 @@ suite("getScopeParsingResult: external", () => {
   test("should get `transferFrom` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
@@ -442,7 +442,7 @@ suite("getScopeParsingResult: external", () => {
   test("should get `approve` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
@@ -641,7 +641,7 @@ suite("getScopeParsingResult: external", () => {
   test("should get `increaseAllowance` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
@@ -846,7 +846,7 @@ suite("getScopeParsingResult: external", () => {
   test("should get `decreaseAllowance` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
@@ -1051,7 +1051,7 @@ suite("getScopeParsingResult: external", () => {
   test("should get all `external` function scopes", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+      "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
 
     const text = fs.readFileSync(pathFile, "utf8");

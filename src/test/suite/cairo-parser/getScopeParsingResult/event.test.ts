@@ -1,19 +1,19 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser from "../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../lib/parser/function-comment-new/desc";
-import FunctionSignatureRegexParser from "../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../lib/parser/function-comment-new/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comment-new/explicit-args";
-import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-new/returns";
-import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
+import CairoParser from "../../../../lib/CairoParser";
+import FunctionCommentDescParser from "../../../../lib/parser/function-comment-new/desc";
+import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
+import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment-new/implicit-args";
+import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment-new/explicit-args";
+import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment-new/returns";
+import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: event", () => {
   test("should get `2` for the length of function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/library.cairo"
+      "../../../../../testContracts/ERC20Compliant/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
@@ -23,7 +23,7 @@ suite("getScopeParsingResult: event", () => {
   test("should get `Transfer` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/library.cairo"
+      "../../../../../testContracts/ERC20Compliant/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
@@ -169,7 +169,7 @@ suite("getScopeParsingResult: event", () => {
   test("should get `Approval` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/library.cairo"
+      "../../../../../testContracts/ERC20Compliant/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
@@ -321,7 +321,7 @@ suite("getScopeParsingResult: event", () => {
   test("should get all `event` function scopes", () => {
     const pathFile = path.resolve(
       __dirname,
-      "../../../../testContracts/ERC20Compliant/library.cairo"
+      "../../../../../testContracts/ERC20Compliant/library.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
