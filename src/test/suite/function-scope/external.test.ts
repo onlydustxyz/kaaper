@@ -10,7 +10,7 @@ import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-n
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: external", () => {
-  test("should get `2` for the length of function scope", () => {
+  test("should get `5` for the length of function scope", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"

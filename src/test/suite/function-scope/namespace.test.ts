@@ -10,6 +10,20 @@ import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-n
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: namespace", () => {
+  test("should get `5` for the length of function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/library.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+    // parse whole scope
+    const functionScopes = CairoParser.parseNamespaceScopes(text);
+    assert.equal(functionScopes!.length, 5, "failed to parse");
+
+    const resultScope = CairoParser.getScopeParsingResult(text, "namespace");
+    assert.equal(resultScope!.length, 5, "failed to parse");
+  });
+
   test("should get `constructor` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
@@ -116,6 +130,7 @@ suite("getScopeParsingResult: namespace", () => {
           ],
           returns: null,
           raises: null,
+          charIndex: { start: 2992, end: 3389 },
         },
       },
     ];
@@ -155,17 +170,27 @@ suite("getScopeParsingResult: namespace", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -295,6 +320,7 @@ suite("getScopeParsingResult: namespace", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 3782, end: 4028 },
         },
       },
     ];
@@ -334,17 +360,27 @@ suite("getScopeParsingResult: namespace", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -478,6 +514,7 @@ suite("getScopeParsingResult: namespace", () => {
           ],
           returns: null,
           raises: null,
+          charIndex: { start: 4261, end: 4660 },
         },
       },
     ];
@@ -517,17 +554,27 @@ suite("getScopeParsingResult: namespace", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -579,6 +626,7 @@ suite("getScopeParsingResult: namespace", () => {
       functionScopes![scopeNumber],
       true
     )!;
+
     const functionCommentText: string = functionCommentScope!.text.join("");
 
     const functionCommentDescParser = new FunctionCommentDescParser(
@@ -656,6 +704,7 @@ suite("getScopeParsingResult: namespace", () => {
           ],
           returns: null,
           raises: null,
+          charIndex: { start: 5071, end: 5431 },
         },
       },
     ];
@@ -695,17 +744,26 @@ suite("getScopeParsingResult: namespace", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -832,6 +890,7 @@ suite("getScopeParsingResult: namespace", () => {
           ],
           returns: null,
           raises: null,
+          charIndex: { start: 6474, end: 6798 },
         },
       },
     ];
@@ -871,17 +930,27 @@ suite("getScopeParsingResult: namespace", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
+
+    const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -909,16 +978,5 @@ suite("getScopeParsingResult: namespace", () => {
       { explicitArgs: "amount(Uint256): The amount of tokens to be burned" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
-  });
-
-  test("should get `null` function scope", () => {
-    const pathFile = path.resolve(
-      __dirname,
-      "../../../../testContracts/ERC20Compliant/library.cairo"
-    );
-    const text = fs.readFileSync(pathFile, "utf8");
-    // parse whole scope
-    const functionScopes = CairoParser.parseFunctionScope(text, "namespace");
-    assert.equal(functionScopes!.length, 2, "failed to parse");
   });
 });
