@@ -225,6 +225,29 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+        # Desc:
+        #   Initializes the contract with the given name, symbol, and decimals
+        # Implicit args:
+        #   syscall_ptr(felt*)
+        #   pedersen_ptr(HashBuiltin*)
+        #   range_check_ptr
+        # Explicit args:
+        #   name(felt): The name of the token
+        #   symbol(felt): The symbol of the token
+        #   multiplier(felt): The multiplier of the token`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `name` function scope", () => {
@@ -409,6 +432,27 @@ suite("getScopeParsingResult: namespace", () => {
       { returns: "name(felt): The name of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+        # Desc:
+        #   Returns the name of the token
+        # Implicit args:
+        #   syscall_ptr(felt*)
+        #   pedersen_ptr(HashBuiltin*)
+        #   range_check_ptr
+        # Returns:
+        #   name(felt): The name of the token`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `transfer_from` function scope", () => {
@@ -605,6 +649,29 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+        # Desc:
+        #   Transfers tokens from one account to another
+        # Implicit args:
+        #   syscall_ptr(felt*)
+        #   pedersen_ptr(HashBuiltin*)
+        #   range_check_ptr
+        # Explicit args:
+        #   sender(felt): The address of the sender
+        #   recipient(felt): The address of the recipient
+        #   amount(Uint256): The amount of tokens to be transferred`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `_mint` function scope", () => {
@@ -791,6 +858,30 @@ suite("getScopeParsingResult: namespace", () => {
       { explicitArgs: "amount(Uint256): The amount of tokens to be minted" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+        # Desc:
+        #   Mints tokens to an account
+        # Implicit args:
+        #   syscall_ptr(felt*)
+        #   pedersen_ptr(HashBuiltin*)
+        #   range_check_ptr
+        # Explicit args:
+        #   recipient(felt): The address of the recipient
+        #   amount(Uint256): The amount of tokens to be minted
+        # Returns:
+        #   None`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `_burn` function scope", () => {
@@ -978,5 +1069,27 @@ suite("getScopeParsingResult: namespace", () => {
       { explicitArgs: "amount(Uint256): The amount of tokens to be burned" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+        # Desc:
+        #   Burns tokens from an account
+        # Implicit args:
+        #   syscall_ptr(felt*)
+        #   pedersen_ptr(HashBuiltin*)
+        #   range_check_ptr
+        # Explicit args:
+        #   account(felt): The address of the recipient
+        #   amount(Uint256): The amount of tokens to be burned`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 });
