@@ -1242,7 +1242,7 @@ suite("getScopeParsingResult: external", () => {
               charIndex: { start: 568, end: 607 },
             },
           ],
-          charIndex: { start: 5134, end: 5741 },
+          charIndex: { start: 5074, end: 5681 },
         },
       },
       {
@@ -1325,7 +1325,7 @@ suite("getScopeParsingResult: external", () => {
               charIndex: { start: 452, end: 495 },
             },
           ],
-          charIndex: { start: 5966, end: 6461 },
+          charIndex: { start: 5906, end: 6401 },
         },
       },
       {
@@ -1408,7 +1408,7 @@ suite("getScopeParsingResult: external", () => {
               charIndex: { start: 492, end: 546 },
             },
           ],
-          charIndex: { start: 6687, end: 7233 },
+          charIndex: { start: 6627, end: 7173 },
         },
       },
       {
@@ -1446,7 +1446,7 @@ suite("getScopeParsingResult: external", () => {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 107, end: 133 },
+              charIndex: { start: 127, end: 153 },
             },
             {
               name: "range_check_ptr",
@@ -1491,14 +1491,14 @@ suite("getScopeParsingResult: external", () => {
               charIndex: { start: 512, end: 566 },
             },
           ],
-          charIndex: { start: 7479, end: 8045 },
+          charIndex: { start: 7419, end: 7985 },
         },
       },
     ];
 
     assert.deepEqual(
-      parsingTarget[0],
-      parsingOutput![0],
+      parsingTarget,
+      parsingOutput!,
       "failed parsing whole scope"
     );
 
@@ -1526,6 +1526,132 @@ suite("getScopeParsingResult: external", () => {
     #   amount: amount is not a valid Uint256
     #   recipient: cannot transfer to the zero address
     #   amount: transfer amount exceeds balance`;
+
+      assert.equal(
+        functionCommentTarget,
+        functionCommentParsingResult,
+        "failed to parse"
+      );
+    }
+
+    {
+      const scopeNumber = 1;
+      const charIndex = parsingOutput![scopeNumber].functionComment.charIndex;
+      var functionCommentParsingResult = "";
+      for (var i = charIndex!.start; i < charIndex!.end; i++) {
+        functionCommentParsingResult += text.at(i);
+      }
+
+      const functionCommentTarget = `
+    # Desc:
+    #   Perform transfer from sender to recipient with allowance
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   sender(felt): the address of ERC20 sender
+    #   recipient(felt): the address of ERC20 recipient
+    #   amount(Uint256): the amount of ERC20 transfer
+    # Returns:
+    #   success(felt): 1 if transfer was successful, 0 otherwise
+    # Raises:
+    #   amount: amount is not a valid Uint256
+    #   sender: cannot transfer from the zero address
+    #   amount: transfer amount exceeds balance`;
+
+      assert.equal(
+        functionCommentTarget,
+        functionCommentParsingResult,
+        "failed to parse"
+      );
+    }
+
+    {
+      const scopeNumber = 2;
+      const charIndex = parsingOutput![scopeNumber].functionComment.charIndex;
+      var functionCommentParsingResult = "";
+      for (var i = charIndex!.start; i < charIndex!.end; i++) {
+        functionCommentParsingResult += text.at(i);
+      }
+
+      const functionCommentTarget = `
+    # Desc:
+    #   Approve spender to spend amount of tokens
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   spender(felt): the address of ERC20 spender
+    #   amount(Uint256): the amount of ERC20 token to approve
+    # Returns:
+    #   success(felt): 1 if approve was successful, 0 otherwise
+    # Raises:
+    #   amount: amount is not a valid Uint256
+    #   spender: cannot approve to the zero address`;
+
+      assert.equal(
+        functionCommentTarget,
+        functionCommentParsingResult,
+        "failed to parse"
+      );
+    }
+
+    {
+      const scopeNumber = 3;
+      const charIndex = parsingOutput![scopeNumber].functionComment.charIndex;
+      var functionCommentParsingResult = "";
+      for (var i = charIndex!.start; i < charIndex!.end; i++) {
+        functionCommentParsingResult += text.at(i);
+      }
+
+      const functionCommentTarget = `
+    # Desc:
+    #   Increase allowance of spender by added_value
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   spender(felt): the address of ERC20 spender
+    #   added_value(Uint256): the amount of ERC20 token to increase allowance
+    # Returns:
+    #   success(felt): 1 if increase allowance was successful, 0 otherwise
+    # Raises:
+    #   added_value: added_value is not a valid Uint256
+    #   spender: cannot increase allowance to the zero address`;
+
+      assert.equal(
+        functionCommentTarget,
+        functionCommentParsingResult,
+        "failed to parse"
+      );
+    }
+
+    {
+      const scopeNumber = 4;
+      const charIndex = parsingOutput![scopeNumber].functionComment.charIndex;
+      var functionCommentParsingResult = "";
+      for (var i = charIndex!.start; i < charIndex!.end; i++) {
+        functionCommentParsingResult += text.at(i);
+      }
+
+      const functionCommentTarget = `
+    # Desc:
+    #   Decrease allowance of spender by subtracted_value
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   spender(felt): the address of ERC20 spender
+    #   subtracted_value(Uint256): the amount of ERC20 token to decrease allowance
+    # Returns:
+    #   success(felt): 1 if decrease allowance was successful, 0 otherwise
+    # Raises:
+    #   subtracted_value: subtracted_value is not a valid Uint256
+    #   spender: cannot decrease allowance to the zero address`;
 
       assert.equal(
         functionCommentTarget,
