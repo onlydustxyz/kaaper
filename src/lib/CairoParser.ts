@@ -256,61 +256,14 @@ export default class CairoParser {
     return null;
   }
 
-  static getParsingResult(text: string): ParsingResult[] | null {
-    const constructorParsingResult = CairoParser.getScopeParsingResult(
-      text,
-      "constructor"
-    );
-    const viewParsingResult = CairoParser.getScopeParsingResult(text, "view");
-    const externalParsingResult = CairoParser.getScopeParsingResult(
-      text,
-      "external"
-    );
-
-    const eventParsingResult = CairoParser.getScopeParsingResult(text, "event");
-
-    const storageVarParsingResult = CairoParser.getScopeParsingResult(
-      text,
-      "storage_var"
-    );
-
-    const namespaceParsingResult = CairoParser.getScopeParsingResult(
-      text,
-      "namespace"
-    );
-
-    var allParsingResult: ParsingResult[] = [];
-    // combine all scopes
-    // TODO: refactor this
-    if (constructorParsingResult) {
-      allParsingResult = allParsingResult.concat(constructorParsingResult);
-    }
-    if (viewParsingResult) {
-      allParsingResult = allParsingResult.concat(viewParsingResult);
-    }
-    if (externalParsingResult) {
-      allParsingResult = allParsingResult.concat(externalParsingResult);
-    }
-    if (eventParsingResult) {
-      allParsingResult = allParsingResult.concat(eventParsingResult);
-    }
-    if (storageVarParsingResult) {
-      allParsingResult = allParsingResult.concat(storageVarParsingResult);
-    }
-
-    if (namespaceParsingResult) {
-      allParsingResult = allParsingResult.concat(namespaceParsingResult);
-    }
-
-    if (allParsingResult.length > 0) {
-      return allParsingResult;
-    }
-
-    return null;
-  }
-
-  static getFileParsingResult(filePath: string): ParsingResult[] | null {
-    const text = fs.readFileSync(filePath, "utf8");
+  static getFileParsingResult(
+    filePathOrBuffer: string,
+    isFilePath: boolean = true
+  ): ParsingResult[] | null {
+    const text =
+      isFilePath === true
+        ? fs.readFileSync(filePathOrBuffer, "utf8")
+        : filePathOrBuffer;
     const constructorParsingResult = CairoParser.getScopeParsingResult(
       text,
       "constructor"
