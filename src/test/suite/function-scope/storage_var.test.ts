@@ -996,8 +996,6 @@ suite("getScopeParsingResult: storage_var", () => {
     const { charIndex, ...parsingOutputWithoutCharIndex } =
       parsingOutput[0].functionComment;
 
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     var commentParsingResult = [];
 
     for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
