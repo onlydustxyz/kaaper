@@ -2,12 +2,12 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment-new/desc";
+import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment-new/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment-new/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment-new/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment-new/raises";
+import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
+import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
+import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
+import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
 suite("getScopeParsingResult: namespace", () => {
   test("should get `5` for the length of function scope", () => {

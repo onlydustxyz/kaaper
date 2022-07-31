@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment-new/returns";
+import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
 import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: returns", () => {

@@ -2,27 +2,36 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentImplicitArgsParser extends BaseCommentParser {
-  constructor() {
-    super();
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Implicit args";
   }
 
   parseCommentLine(line: string): FunctionComment | null {
     if (this.runningScope === true && this.startLine !== line) {
-      const matchCommentLines = line.match(/#\s+(.+)/);
-      if (matchCommentLines) {
-        const matchInterface = line.match(/#\s+(\w+)(\(?([\w\*]+)\))?$/);
-        if (matchInterface) {
-          if (matchInterface[3]) {
-            return {
-              name: matchInterface[1],
-              type: matchInterface[3],
-              desc: "",
-            };
-          }
-          return { name: matchInterface[1], type: "", desc: "" };
+      const regexp = /((\w+)(\(?([\w\*]+)\))?)$/gm;
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
+      for (var functionComment of functionComments) {
+        // without # or anything else, just pure content
+        // e.g `pedersen_ptr(HashBuiltin*)` instead of
+        // #     pedersen_ptr(HashBuiltin*)
+        const commentLine = [...line.matchAll(regexp)];
+        if (functionComment[0] === commentLine![0][0]) {
+          const start = functionComment.index!;
+          const type = functionComment[4] ? functionComment[4].trim() : "";
+          const matchInterface = {
+            name: functionComment[2].trim(),
+            type: type,
+            desc: "",
+            charIndex: {
+              start: start,
+              end: start + functionComment[0].length,
+            },
+          };
+          return matchInterface;
         }
       }
+      return null;
     }
     return null;
   }

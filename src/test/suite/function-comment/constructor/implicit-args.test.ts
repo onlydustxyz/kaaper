@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment-new/implicit-args";
+import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
 import CairoParser from "../../../../lib/CairoParser";
 
 suite("function-comment: constructor: implicit-args", () => {

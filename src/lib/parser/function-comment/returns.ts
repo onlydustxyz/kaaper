@@ -1,29 +1,36 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
-import { FunctionComment } from "../../types";
+import { FunctionComment, FunctionCommentScope } from "../../types";
 
 export default class FunctionCommentReturnsParser extends BaseCommentParser {
-  constructor() {
-    super();
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Returns";
   }
 
   parseCommentLine(line: string): FunctionComment | null {
     if (this.runningScope === true && this.startLine !== line) {
-      const matchCommentLines = line.match(/#\s+(.+)/);
-
-      if (matchCommentLines) {
-        if (matchCommentLines[1] === "None") {
-          return null;
-        }
-        const matchInterface = line.match(/(\w+)(\((\w+)\)):(.*)/);
-        if (matchInterface) {
-          return {
-            name: matchInterface[1],
-            type: matchInterface[3],
-            desc: matchInterface[4].trim(),
+      if (line.includes("None")) {
+        return null;
+      }
+      const regexp = /(\w+)(\((\w+)\)):(.*)/gm;
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
+      for (var functionComment of functionComments) {
+        const commentLine = [...line.matchAll(regexp)];
+        if (functionComment[0] === commentLine![0][0]) {
+          const start = functionComment.index!;
+          const matchInterface = {
+            name: functionComment[1].trim(),
+            type: functionComment[3].trim(),
+            desc: functionComment[4].trim(),
+            charIndex: {
+              start: start,
+              end: start + functionComment[0].length,
+            },
           };
+          return matchInterface;
         }
       }
+      return null;
     }
     return null;
   }

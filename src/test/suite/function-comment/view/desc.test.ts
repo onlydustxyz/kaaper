@@ -2,10 +2,10 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment-new/desc";
+import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
 import CairoParser from "../../../../lib/CairoParser";
 
-suite("function-comment-new: view: desc", () => {
+suite("function-comment: view: desc", () => {
   test("parse line 0", () => {
     const pathFile = path.resolve(
       __dirname,

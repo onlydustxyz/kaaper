@@ -1,4 +1,4 @@
-import { FunctionComment } from "../../types";
+import {FunctionComment } from "../../types";
 
 export abstract class BaseCommentParser {
   public startLine: string;
@@ -6,13 +6,15 @@ export abstract class BaseCommentParser {
   public endScope: boolean;
   public startEndScopeRegexp: RegExp;
   public name: string;
+  public functionCommentText: string;
 
-  constructor() {
+  constructor(functionCommentText: string) {
     this.startLine = "";
     this.runningScope = false;
     this.endScope = false;
     this.startEndScopeRegexp = /#\s?(\w+\s?\w+)/;
     this.name = "";
+    this.functionCommentText = functionCommentText;
   }
 
   isStartScope(line: string): boolean {
@@ -49,7 +51,7 @@ export abstract class BaseCommentParser {
     }
   }
 
-  parseCommentLine(line: string): FunctionComment | null {
+  parseCommentLine(line: string, text: string): FunctionComment | null {
     throw new Error("NOT IMPLEMENTED!");
   }
 
@@ -61,7 +63,10 @@ export abstract class BaseCommentParser {
       for (const line of lines) {
         this.setStartScope(line);
         this.setEndScope(line);
-        const functionComment = this.parseCommentLine(line);
+        const functionComment = this.parseCommentLine(
+          line,
+          this.functionCommentText
+        );
         if (functionComment) {
           result.push(functionComment);
         }

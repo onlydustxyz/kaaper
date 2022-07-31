@@ -9,18 +9,12 @@ export interface FunctionSignature {
   type: string;
 }
 
-export interface FunctionComment {
-  name: string;
-  type: string;
-  desc: string;
-}
-
 export interface CharIndex {
   start: number;
   end: number;
 }
 
-export interface FunctionCommentNew {
+export interface FunctionComment {
   name: string;
   type: string;
   desc: string;

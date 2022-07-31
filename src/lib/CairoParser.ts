@@ -1,11 +1,11 @@
 import * as fs from "fs";
 
 import FunctionSignatureRegexParser from "./parser/function-signature/regex";
-import FunctionCommentDescParser from "./parser/function-comment-new/desc";
-import FunctionCommentImplicitArgsParser from "./parser/function-comment-new/implicit-args";
-import FunctionCommentExplicitArgsParser from "./parser/function-comment-new/explicit-args";
-import FunctionCommentReturnsParser from "./parser/function-comment-new/returns";
-import FunctionCommentRaisesParser from "./parser/function-comment-new/raises";
+import FunctionCommentDescParser from "./parser/function-comment/desc";
+import FunctionCommentImplicitArgsParser from "./parser/function-comment/implicit-args";
+import FunctionCommentExplicitArgsParser from "./parser/function-comment/explicit-args";
+import FunctionCommentReturnsParser from "./parser/function-comment/returns";
+import FunctionCommentRaisesParser from "./parser/function-comment/raises";
 import {
   FunctionSignature,
   FunctionComment,
@@ -14,7 +14,6 @@ import {
   FunctionScope,
   FunctionCommentScope,
   NamespaceScope,
-  CharIndex,
 } from "./types";
 
 const lodash = require("lodash");
@@ -171,64 +170,6 @@ export default class CairoParser {
     return null;
   }
 
-  // static getScopeParsingResult(
-  //   text: string,
-  //   name: string
-  // ): ParsingResult[] | null {
-  //   const functionScopeLines =
-  //     name === "namespace"
-  //       ? CairoParser.parseNamespaceScopes(text)
-  //       : CairoParser.parseFunctionScope(text, name);
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
-
-  //   var parsingOutputs = [];
-
-  //   // parse comment lines
-  //   if (functionScopeLines) {
-  //     for (var functionScope of functionScopeLines) {
-  //       const commentLines = CairoParser.parseCommentLines(functionScope)!.text;
-
-  //       const functionCommentDescParser = new FunctionCommentDescParser();
-  //       const functionCommentImplicitArgsParser =
-  //         new FunctionCommentImplicitArgsParser();
-  //       const functionCommentExplicitArgsParser =
-  //         new FunctionCommentExplicitArgsParser();
-  //       const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //       const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-
-  //       const parsingOutput = {
-  //         attributeName: functionSignatureParser.getAttributeName(
-  //           functionScope!
-  //         ),
-  //         functionName: functionSignatureParser.getFunctionName(functionScope),
-  //         functionSignature: {
-  //           implicitArgs:
-  //             functionSignatureParser.getImplicitArgs(functionScope),
-  //           explicitArgs:
-  //             functionSignatureParser.getExplicitArgs(functionScope),
-  //           returns: functionSignatureParser.getReturns(functionScope),
-  //         },
-  //         functionComment: {
-  //           desc: functionCommentDescParser.parseCommentLines(commentLines),
-  //           implicitArgs:
-  //             functionCommentImplicitArgsParser.parseCommentLines(commentLines),
-  //           explicitArgs:
-  //             functionCommentExplicitArgsParser.parseCommentLines(commentLines),
-  //           returns:
-  //             functionCommentReturnsParser.parseCommentLines(commentLines),
-  //           raises: functionCommentRaisesParser.parseCommentLines(commentLines),
-  //         },
-  //       };
-
-  //       parsingOutputs.push(parsingOutput);
-  //     }
-
-  //     return parsingOutputs;
-  //   }
-  //   return null;
-  // }
-
   static getScopeParsingResult(
     text: string,
     name: string
@@ -314,81 +255,6 @@ export default class CairoParser {
     }
     return null;
   }
-
-  // static getScopeParsingResultMatchAll(
-  //   text: string,
-  //   name: string
-  // ): ParsingResult[] | null {
-  //   const functionScopeLines =
-  //     name === "namespace"
-  //       ? CairoParser.parseNamespaceScopesWithMatchAll(text)
-  //       : CairoParser.parseFunctionScopeWithMatchAll(text, name);
-
-  //   // Function signature parsing
-  //   const functionSignatureParser = new FunctionSignatureRegexParser();
-
-  //   var parsingOutputs = [];
-
-  //   // parse comment lines
-  //   if (functionScopeLines) {
-  //     for (var functionScope of functionScopeLines) {
-  //       const commentLines =
-  //         name === "namespace"
-  //           ? CairoParser.parseCommentLinesWithMatchAll(functionScope, true)
-  //           : CairoParser.parseCommentLinesWithMatchAll(functionScope, false);
-
-  //       const functionCommentDescParser = new FunctionCommentDescParser();
-  //       const functionCommentImplicitArgsParser =
-  //         new FunctionCommentImplicitArgsParser();
-  //       const functionCommentExplicitArgsParser =
-  //         new FunctionCommentExplicitArgsParser();
-  //       const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-  //       const functionCommentRaisesParser = new FunctionCommentRaisesParser();
-
-  //       const parsingOutput = {
-  //         attributeName: functionSignatureParser.getAttributeName(
-  //           functionScope!.text
-  //         ),
-  //         functionName: functionSignatureParser.getFunctionName(
-  //           functionScope!.text
-  //         ),
-  //         functionSignature: {
-  //           implicitArgs: functionSignatureParser.getImplicitArgs(
-  //             functionScope!.text
-  //           ),
-  //           explicitArgs: functionSignatureParser.getExplicitArgs(
-  //             functionScope!.text
-  //           ),
-  //           returns: functionSignatureParser.getReturns(functionScope!.text),
-  //         },
-  //         functionComment: {
-  //           desc: functionCommentDescParser.parseCommentLines(
-  //             commentLines!.text
-  //           ),
-  //           implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-  //             commentLines!.text
-  //           ),
-  //           explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-  //             commentLines!.text
-  //           ),
-  //           returns: functionCommentReturnsParser.parseCommentLines(
-  //             commentLines!.text
-  //           ),
-  //           raises: functionCommentRaisesParser.parseCommentLines(
-  //             commentLines!.text
-  //           ),
-  //           start: commentLines!.start,
-  //           end: commentLines!.end,
-  //         },
-  //       };
-
-  //       parsingOutputs.push(parsingOutput);
-  //     }
-
-  //     return parsingOutputs;
-  //   }
-  //   return null;
-  // }
 
   static getFileParsingResult(filePath: string): ParsingResult[] | null {
     const text = fs.readFileSync(filePath, "utf8");
