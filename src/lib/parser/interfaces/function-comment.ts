@@ -1,4 +1,4 @@
-import {FunctionComment } from "../../types";
+import { FunctionComment } from "../../types";
 
 export abstract class BaseCommentParser {
   public startLine: string;
