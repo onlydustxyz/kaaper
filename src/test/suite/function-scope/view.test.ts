@@ -10,6 +10,21 @@ import FunctionCommentReturnsParser from "../../../lib/parser/function-comment-n
 import FunctionCommentRaisesParser from "../../../lib/parser/function-comment-new/raises";
 
 suite("getScopeParsingResult: view", () => {
+  test("should get `6` for the length of function scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+    );
+    const text = fs.readFileSync(pathFile, "utf8");
+
+    // parse whole scope
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+
+    assert.equal(functionScopes!.length, 6, "failed to parse");
+
+    const resultScope = CairoParser.getScopeParsingResult(text, "view");
+    assert.equal(resultScope!.length, 6);
+  });
   test("should get `name` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
@@ -17,7 +32,7 @@ suite("getScopeParsingResult: view", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -25,7 +40,7 @@ suite("getScopeParsingResult: view", () => {
     // Comment parsing
     // parse comment lines
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopeLines![0]
+      functionScopes![0]
     )!;
     const functionCommentText: string = functionCommentScope!.text.join("");
 
@@ -95,6 +110,7 @@ suite("getScopeParsingResult: view", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 1413, end: 1623 },
         },
       },
     ];
@@ -102,21 +118,19 @@ suite("getScopeParsingResult: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![0].text
+          functionScopes![0].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![0].text
+          functionScopes![0].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![0].text
+            functionScopes![0].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![0].text
+            functionScopes![0].text
           ),
-          returns: functionSignatureParser.getReturns(
-            functionScopeLines![0].text
-          ),
+          returns: functionSignatureParser.getReturns(functionScopes![0].text),
         },
         functionComment: {
           desc: functionCommentDescParser.parseCommentLines(
@@ -134,17 +148,22 @@ suite("getScopeParsingResult: view", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -171,6 +190,27 @@ suite("getScopeParsingResult: view", () => {
       { returns: "name(felt): name of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Returns the name of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   name(felt): name of the token`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `symbol` function scope", () => {
@@ -181,7 +221,7 @@ suite("getScopeParsingResult: view", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -190,7 +230,7 @@ suite("getScopeParsingResult: view", () => {
     // parse comment lines
     const scopeNumber = 1;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopeLines![scopeNumber]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -261,6 +301,7 @@ suite("getScopeParsingResult: view", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 1783, end: 1999 },
         },
       },
     ];
@@ -268,20 +309,20 @@ suite("getScopeParsingResult: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -300,17 +341,22 @@ suite("getScopeParsingResult: view", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -337,6 +383,27 @@ suite("getScopeParsingResult: view", () => {
       { returns: "symbol(felt): symbol of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Returns the symbol of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   symbol(felt): symbol of the token`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `totalSupply` function scope", () => {
@@ -347,7 +414,7 @@ suite("getScopeParsingResult: view", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -356,7 +423,7 @@ suite("getScopeParsingResult: view", () => {
     // parse comment lines
     const scopeNumber = 2;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopeLines![scopeNumber]
+      functionScopes![scopeNumber]
     )!;
     const functionCommentText: string = functionCommentScope!.text.join("");
 
@@ -426,6 +493,7 @@ suite("getScopeParsingResult: view", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 2184, end: 2420 },
         },
       },
     ];
@@ -433,20 +501,20 @@ suite("getScopeParsingResult: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -465,17 +533,22 @@ suite("getScopeParsingResult: view", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -502,6 +575,27 @@ suite("getScopeParsingResult: view", () => {
       { returns: "totalSupply(Uint256): total supply of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Returns the total supply of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   totalSupply(Uint256): total supply of the token`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `decimals` function scope", () => {
@@ -512,7 +606,7 @@ suite("getScopeParsingResult: view", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -521,7 +615,7 @@ suite("getScopeParsingResult: view", () => {
     // parse comment lines
     const scopeNumber = 3;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopeLines![scopeNumber]
+      functionScopes![scopeNumber]
     )!;
     const functionCommentText: string = functionCommentScope!.text.join("");
     const functionCommentDescParser = new FunctionCommentDescParser(
@@ -590,6 +684,7 @@ suite("getScopeParsingResult: view", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 2622, end: 2844 },
         },
       },
     ];
@@ -597,20 +692,20 @@ suite("getScopeParsingResult: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -629,17 +724,22 @@ suite("getScopeParsingResult: view", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -666,6 +766,27 @@ suite("getScopeParsingResult: view", () => {
       { returns: "decimals(felt): decimals of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Returns the decimals of the token
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Returns:
+    #   decimals(felt): decimals of the token`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get `balanceOf` function scope", () => {
@@ -676,7 +797,7 @@ suite("getScopeParsingResult: view", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -685,7 +806,7 @@ suite("getScopeParsingResult: view", () => {
     // parse comment lines
     const scopeNumber = 4;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopeLines![scopeNumber]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -763,6 +884,7 @@ suite("getScopeParsingResult: view", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 3044, end: 3347 },
         },
       },
     ];
@@ -770,20 +892,20 @@ suite("getScopeParsingResult: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -802,17 +924,22 @@ suite("getScopeParsingResult: view", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
+
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -840,9 +967,32 @@ suite("getScopeParsingResult: view", () => {
       { returns: "balance(Uint256): the balance of the account" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Returns the balance of the account
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   account(felt): account to query balance for
+    # Returns:
+    #   balance(Uint256): the balance of the account`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
-  test("should get `balanceOf` function scope", () => {
+  test("should get `allowance` function scope", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../testContracts/ERC20Compliant/ERC20.cairo"
@@ -850,7 +1000,7 @@ suite("getScopeParsingResult: view", () => {
     const text = fs.readFileSync(pathFile, "utf8");
 
     // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
@@ -859,7 +1009,7 @@ suite("getScopeParsingResult: view", () => {
     // parse comment lines
     const scopeNumber = 5;
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopeLines![scopeNumber]
+      functionScopes![scopeNumber]
     )!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -945,6 +1095,7 @@ suite("getScopeParsingResult: view", () => {
             },
           ],
           raises: null,
+          charIndex: { start: 3579, end: 4046 },
         },
       },
     ];
@@ -952,20 +1103,20 @@ suite("getScopeParsingResult: view", () => {
     var parsingOutput = [
       {
         attributeName: functionSignatureParser.getAttributeName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionName: functionSignatureParser.getFunctionName(
-          functionScopeLines![scopeNumber].text
+          functionScopes![scopeNumber].text
         ),
         functionSignature: {
           implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
           returns: functionSignatureParser.getReturns(
-            functionScopeLines![scopeNumber].text
+            functionScopes![scopeNumber].text
           ),
         },
         functionComment: {
@@ -984,17 +1135,21 @@ suite("getScopeParsingResult: view", () => {
           raises: functionCommentRaisesParser.parseCommentLines(
             functionCommentScope!.text
           ),
+          charIndex: {
+            start: functionCommentScope!.start,
+            end: functionCommentScope!.end,
+          },
         },
       },
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    const { charIndex, ...parsingOutputWithoutCharIndex } =
+      parsingOutput[0].functionComment;
 
     var commentParsingResult = [];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
+    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
       if (values) {
         for (const value of values) {
           const charIndex = value.charIndex;
@@ -1031,17 +1186,29 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
-  });
-  test("should get `6` for the length of function scope", () => {
-    const pathFile = path.resolve(
-      __dirname,
-      "../../../../testContracts/ERC20Compliant/ERC20.cairo"
+
+    var functionCommentParsingResult = "";
+    for (var i = charIndex!.start; i < charIndex!.end; i++) {
+      functionCommentParsingResult += text.at(i);
+    }
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Returns the amount of remaining tokens allowed to be spent by the spender
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   owner(felt): the address of owner of the tokens
+    #   spender(felt): the address of spender (delegated account) of the tokens
+    # Returns:
+    #   remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
     );
-    const text = fs.readFileSync(pathFile, "utf8");
-
-    // parse whole scope
-    const functionScopeLines = CairoParser.parseFunctionScope(text, "view");
-
-    assert.equal(functionScopeLines!.length, 6, "failed to parse");
   });
 });
