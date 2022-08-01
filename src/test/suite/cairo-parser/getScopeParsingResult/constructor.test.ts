@@ -204,6 +204,8 @@ suite("getScopeParsingResult: constructor", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+
+    // test whether the charIndex would yield the correct position
     var commentParsingResult = [];
 
     for (let [key, values] of Object.entries(

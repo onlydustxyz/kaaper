@@ -8,6 +8,10 @@ import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-c
 import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
+import {
+  yieldFunctionCommentPartsFromCharIndex,
+  yieldWholeFunctionCommentStringFromCharIndex,
+} from "./utils";
 
 suite("getScopeParsingResult: event", () => {
   test("should get `2` for the length of function scope", () => {
@@ -150,30 +154,14 @@ suite("getScopeParsingResult: event", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    var commentParsingResult = [];
+    parsingResult.functionComment;
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Emit event when a transfer is made" },
       { explicitArgs: "from_(felt): The address of the sender" },
@@ -182,10 +170,8 @@ suite("getScopeParsingResult: event", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 
@@ -329,30 +315,12 @@ suite("getScopeParsingResult: event", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    var commentParsingResult = [];
-
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Emit event when a delegation is made" },
       { explicitArgs: "owner(felt): the address of the owner" },
@@ -364,10 +332,8 @@ suite("getScopeParsingResult: event", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 

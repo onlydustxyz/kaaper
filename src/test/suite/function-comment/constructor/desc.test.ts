@@ -4,6 +4,7 @@ import * as fs from "fs";
 
 import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
 import CairoParser from "../../../../lib/CairoParser";
+import { FunctionComment, FunctionCommentScope } from "../../../../lib/types";
 
 suite("function-comment: constructor: desc", () => {
   test("parse line 0", () => {
@@ -105,33 +106,40 @@ suite("function-comment: constructor: desc", () => {
       `failed to get functionCommentParsing line ${lineNumber}`
     );
 
-    const functionCommentStart = functionCommentScope!.start;
+    // this function wil check if the parsed comment line is correct
+    // for instance
+    // #   Initialize the contract have charIndex start at 21 and end at 44
 
-    const descCommentStart = functionCommentParsing!.charIndex.start;
-    const descCommentEnd = functionCommentParsing!.charIndex.end;
+    // function assertParsedCommentIsCorrect(targetString:string, functionCommentScope: FunctionCommentScope, functionCommentParsing:FunctionComment) {
+    //   const functionCommentStart = functionCommentScope!.start;
 
-    var functionCommentReference = "";
-    for (let i = descCommentStart; i < descCommentEnd; i++) {
-      functionCommentReference += functionCommentText.at(i);
-    }
+    //   const descCommentStart = functionCommentParsing!.charIndex.start;
+    //   const descCommentEnd = functionCommentParsing!.charIndex.end;
 
-    var wholeFileReference = "";
-    for (
-      let i = functionCommentStart + descCommentStart;
-      i < functionCommentStart + descCommentEnd;
-      i++
-    ) {
-      wholeFileReference += text.at(i);
-    }
+    //   var functionCommentReference = "";
+    //   for (let i = descCommentStart; i < descCommentEnd; i++) {
+    //     functionCommentReference += functionCommentText.at(i);
+    //   }
 
-    assert.equal(
-      functionCommentReference,
-      wholeFileReference,
-      "failed to get whole file reference"
-    );
+    //   var wholeFileReference = "";
+    //   for (
+    //     let i = functionCommentStart + descCommentStart;
+    //     i < functionCommentStart + descCommentEnd;
+    //     i++
+    //   ) {
+    //     wholeFileReference += text.at(i);
+    //   }
 
-    assert.equal(wholeFileReference, targetLineParsing.desc);
-    assert.equal("Initialize the contract", wholeFileReference);
+    //   assert.equal(
+    //     functionCommentReference,
+    //     wholeFileReference,
+    //     "failed to get whole file reference"
+    //   );
+
+    //   assert.equal(wholeFileReference, targetLineParsing.desc);
+    //   assert.equal("Initialize the contract", wholeFileReference);
+
+    // }
   });
 
   test("parse line 2", () => {
