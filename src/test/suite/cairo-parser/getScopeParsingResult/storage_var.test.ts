@@ -148,7 +148,11 @@ suite("getScopeParsingResult: storage_var", () => {
     )![scopeNumber];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(text, functionCommentScope, parsingResult);
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
     const textTarget = [
       { desc: "Returns the name of the token" },
@@ -156,7 +160,8 @@ suite("getScopeParsingResult: storage_var", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    const functionCommentParsingResult = yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult)
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 
@@ -284,16 +289,19 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-
-
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const parsingResult = CairoParser.getScopeParsingResult(text, "storage_var")![
-      scopeNumber
-    ];
+    const parsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "storage_var"
+    )![scopeNumber];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(text, functionCommentScope, parsingResult);
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
     const textTarget = [
       { desc: "Returns the symbol of the token" },
@@ -301,7 +309,8 @@ suite("getScopeParsingResult: storage_var", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    const functionCommentParsingResult = yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult)
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 
@@ -431,12 +440,17 @@ suite("getScopeParsingResult: storage_var", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const parsingResult = CairoParser.getScopeParsingResult(text, "storage_var")![
-      scopeNumber
-    ];
+    const parsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "storage_var"
+    )![scopeNumber];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(text, functionCommentScope, parsingResult);
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
     const textTarget = [
       { desc: "Returns the number of decimals of the token" },
@@ -444,7 +458,8 @@ suite("getScopeParsingResult: storage_var", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    const functionCommentParsingResult = yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult)
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 
@@ -571,15 +586,20 @@ suite("getScopeParsingResult: storage_var", () => {
         },
       },
     ];
-    
+
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const parsingResult = CairoParser.getScopeParsingResult(text, "storage_var")![
-      scopeNumber
-    ];
+    const parsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "storage_var"
+    )![scopeNumber];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(text, functionCommentScope, parsingResult);
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
     const textTarget = [
       { desc: "Returns total amount of tokens in existence" },
@@ -590,7 +610,8 @@ suite("getScopeParsingResult: storage_var", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    const functionCommentParsingResult = yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult)
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 
@@ -727,14 +748,18 @@ suite("getScopeParsingResult: storage_var", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const parsingResult = CairoParser.getScopeParsingResult(text, "storage_var")![
-      scopeNumber
-    ];
+    const parsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "storage_var"
+    )![scopeNumber];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(text, functionCommentScope, parsingResult);
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    
     const textTarget = [
       { desc: "Returns the amount of tokens owned by an account" },
       { explicitArgs: "account(felt): The address of the account" },
@@ -742,7 +767,8 @@ suite("getScopeParsingResult: storage_var", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    const functionCommentParsingResult = yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult)
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 
@@ -890,13 +916,18 @@ suite("getScopeParsingResult: storage_var", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const parsingResult = CairoParser.getScopeParsingResult(text, "storage_var")![
-      scopeNumber
-    ];
+    const parsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "storage_var"
+    )![scopeNumber];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(text, functionCommentScope, parsingResult);
-    
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
+
     const textTarget = [
       {
         desc: "Store the amount of tokens that an owner is allowed to delegate to a spender",
@@ -910,7 +941,8 @@ suite("getScopeParsingResult: storage_var", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    const functionCommentParsingResult = yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult)
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc: 

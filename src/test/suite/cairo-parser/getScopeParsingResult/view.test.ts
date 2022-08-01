@@ -9,6 +9,11 @@ import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-c
 import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
+import {
+  yieldFunctionCommentPartsFromCharIndex,
+  yieldWholeFunctionCommentStringFromCharIndex,
+} from "./utils";
+
 suite("getScopeParsingResult: view", () => {
   test("should get `6` for the length of function scope", () => {
     const pathFile = path.resolve(
@@ -37,10 +42,12 @@ suite("getScopeParsingResult: view", () => {
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
+    const scopeNumber = 0;
+
     // Comment parsing
     // parse comment lines
     const functionCommentScope = CairoParser.parseCommentLines(
-      functionScopes![0]
+      functionScopes![scopeNumber]
     )!;
     const functionCommentText: string = functionCommentScope!.text.join("");
 
@@ -158,30 +165,17 @@ suite("getScopeParsingResult: view", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    var commentParsingResult = [];
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Returns the name of the token" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -191,10 +185,8 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc:
@@ -351,30 +343,17 @@ suite("getScopeParsingResult: view", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    var commentParsingResult = [];
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Returns the symbol of the token" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -384,10 +363,8 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc:
@@ -543,30 +520,17 @@ suite("getScopeParsingResult: view", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    var commentParsingResult = [];
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Returns the total supply of the token" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -576,10 +540,8 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc:
@@ -734,30 +696,17 @@ suite("getScopeParsingResult: view", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    var commentParsingResult = [];
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Returns the decimals of the token" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -767,10 +716,8 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc:
@@ -934,30 +881,17 @@ suite("getScopeParsingResult: view", () => {
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    var commentParsingResult = [];
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Returns the balance of the account" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -968,10 +902,8 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc:
@@ -1144,30 +1076,18 @@ suite("getScopeParsingResult: view", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
 
-    var commentParsingResult = [];
+    const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
+      scopeNumber
+    ];
+    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
+
     const textTarget = [
       {
         desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
@@ -1187,10 +1107,8 @@ suite("getScopeParsingResult: view", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
     # Desc:
