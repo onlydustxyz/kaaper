@@ -7,6 +7,7 @@ export abstract class BaseCommentParser {
   public startEndScopeRegexp: RegExp;
   public name: string;
   public functionCommentText: string;
+  public regex: RegExp;
 
   constructor(functionCommentText: string) {
     this.startLine = "";
@@ -14,6 +15,7 @@ export abstract class BaseCommentParser {
     this.endScope = false;
     this.startEndScopeRegexp = /#\s?(\w+\s?\w+)/;
     this.name = "";
+    this.regex = /""/;
     this.functionCommentText = functionCommentText;
   }
 
@@ -49,6 +51,43 @@ export abstract class BaseCommentParser {
       this.runningScope = false;
       this.endScope = true;
     }
+  }
+
+  /*
+    * Parse a line of comment text and check if it's inside a scope, in this case explicit args
+    * For example, in the following scope
+    * ```
+    # Desc: 
+    #   Returns the amount of tokens owned by an account
+    # Explicit args:
+    #   account(felt): The address of the account
+    # Returns:
+    #   balance(Uint256): The amount of tokens owned by an account
+    ```
+
+    Since this is explicit args scope, we only want these lines to be parsed
+    account(felt): The address of the account
+
+    Then return this line as RegExpMatchArray
+    */
+
+  isInsideScope(line: string, regexp: RegExp): RegExpMatchArray | null {
+    if (line.includes("None")) {
+      return null;
+    }
+    if (this.runningScope === true && this.startLine !== line) {
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
+      for (var functionComment of functionComments) {
+        // without # or anything else, just pure content
+        // e.g name(felt): The name of the token instead of
+        // # name(felt): The name of the token
+        const commentLine = [...line.matchAll(regexp)];
+        if (functionComment[0] === commentLine![0][0]) {
+          return functionComment;
+        }
+      }
+    }
+    return null;
   }
 
   parseCommentLine(line: string, text: string): FunctionComment | null {

@@ -1,36 +1,27 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
-import { FunctionComment, FunctionCommentScope } from "../../types";
+import { FunctionComment } from "../../types";
 
 export default class FunctionCommentReturnsParser extends BaseCommentParser {
   constructor(functionCommentText: string) {
     super(functionCommentText);
     this.name = "Returns";
+    this.regex = /(\w+)(\((\w+)\)):(.*)/gm;
   }
 
   parseCommentLine(line: string): FunctionComment | null {
-    if (this.runningScope === true && this.startLine !== line) {
-      if (line.includes("None")) {
-        return null;
-      }
-      const regexp = /(\w+)(\((\w+)\)):(.*)/gm;
-      const functionComments = [...this.functionCommentText.matchAll(regexp)];
-      for (var functionComment of functionComments) {
-        const commentLine = [...line.matchAll(regexp)];
-        if (functionComment[0] === commentLine![0][0]) {
-          const start = functionComment.index!;
-          const matchInterface = {
-            name: functionComment[1].trim(),
-            type: functionComment[3].trim(),
-            desc: functionComment[4].trim(),
-            charIndex: {
-              start: start,
-              end: start + functionComment[0].length,
-            },
-          };
-          return matchInterface;
-        }
-      }
-      return null;
+    const lineCommentInsideScope = this.isInsideScope(line, this.regex);
+    if (lineCommentInsideScope !== null) {
+      const start = lineCommentInsideScope.index!;
+      const matchInterface = {
+        name: lineCommentInsideScope[1].trim(),
+        type: lineCommentInsideScope[3].trim(),
+        desc: lineCommentInsideScope[4].trim(),
+        charIndex: {
+          start: start,
+          end: start + lineCommentInsideScope[0].length,
+        },
+      };
+      return matchInterface;
     }
     return null;
   }
