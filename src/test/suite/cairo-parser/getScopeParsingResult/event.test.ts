@@ -160,8 +160,6 @@ suite("getScopeParsingResult: event", () => {
       parsingResult
     );
 
-    parsingResult.functionComment;
-
     const textTarget = [
       { desc: "Emit event when a transfer is made" },
       { explicitArgs: "from_(felt): The address of the sender" },

@@ -8,6 +8,10 @@ import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-c
 import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
 import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
+import {
+  yieldFunctionCommentPartsFromCharIndex,
+  yieldWholeFunctionCommentStringFromCharIndex,
+} from "./utils";
 
 suite("getScopeParsingResult: constructor", () => {
   test("should get `1` for the length of function scope", () => {
@@ -203,32 +207,19 @@ suite("getScopeParsingResult: constructor", () => {
       },
     ];
 
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
-    // test whether the charIndex would yield the correct position
-    var commentParsingResult = [];
+    const parsingResult = CairoParser.getScopeParsingResult(
+      text,
+      "constructor"
+    )![0];
 
-    for (let [key, values] of Object.entries(
-      parsingOutput[0].functionComment
-    )) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope!,
+      parsingResult
+    );
+
     const textTarget = [
       { desc: "Initialize the contract" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -251,6 +242,36 @@ suite("getScopeParsingResult: constructor", () => {
       { raises: "initial_supply: mint overflow" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
+
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
+
+    const functionCommentTarget = `
+    # Desc:
+    #   Initialize the contract
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   name(felt): name of the token
+    #   symbol(felt): symbol of the token
+    #   decimals(Uint256): floating point of the token
+    #   initial_supply(Uint256): amount of initial supply of the token
+    #   recipient(felt): the address of recipient of the initial supply
+    # Returns:
+    #   None
+    # Raises:
+    #   decimals: decimals exceed 2^8
+    #   recipient: cannot mint to the zero address
+    #   initial_supply: not valid Uint256
+    #   initial_supply: mint overflow`;
+
+    assert.equal(
+      functionCommentTarget,
+      functionCommentParsingResult,
+      "failed to parse"
+    );
   });
 
   test("should get all `constructor` function scopes", () => {
@@ -378,38 +399,5 @@ suite("getScopeParsingResult: constructor", () => {
     ];
 
     assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
-    const charIndex = parsingOutput![0].functionComment.charIndex;
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
-
-    const functionCommentTarget = `
-    # Desc:
-    #   Initialize the contract
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   name(felt): name of the token
-    #   symbol(felt): symbol of the token
-    #   decimals(Uint256): floating point of the token
-    #   initial_supply(Uint256): amount of initial supply of the token
-    #   recipient(felt): the address of recipient of the initial supply
-    # Returns:
-    #   None
-    # Raises:
-    #   decimals: decimals exceed 2^8
-    #   recipient: cannot mint to the zero address
-    #   initial_supply: not valid Uint256
-    #   initial_supply: mint overflow`;
-
-    assert.equal(
-      functionCommentTarget,
-      functionCommentParsingResult,
-      "failed to parse"
-    );
   });
 });
