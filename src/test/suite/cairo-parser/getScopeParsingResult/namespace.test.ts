@@ -9,6 +9,11 @@ import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-c
 import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
 import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
+import {
+  yieldFunctionCommentPartsFromCharIndex,
+  yieldWholeFunctionCommentStringFromCharIndex,
+} from "./utils";
+
 suite("getScopeParsingResult: namespace", () => {
   test("should get `5` for the length of function scope", () => {
     const pathFile = path.resolve(
@@ -185,30 +190,12 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    var commentParsingResult = [];
-
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       {
         desc: "Initializes the contract with the given name, symbol, and decimals",
@@ -226,10 +213,8 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
         # Desc:
@@ -398,30 +383,12 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    var commentParsingResult = [];
-
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       {
         desc: "Returns the name of the token",
@@ -433,10 +400,8 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
         # Desc:
@@ -613,30 +578,12 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    var commentParsingResult = [];
-
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Transfers tokens from one account to another" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -650,10 +597,8 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
         # Desc:
@@ -826,29 +771,12 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
-    var commentParsingResult = [];
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Mints tokens to an account" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -859,10 +787,8 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
         # Desc:
@@ -1034,32 +960,12 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
 
-    const { charIndex, ...parsingOutputWithoutCharIndex } =
-      parsingOutput[0].functionComment;
+    const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
+      text,
+      functionCommentScope,
+      parsingResult
+    );
 
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
-    var commentParsingResult = [];
-
-    for (let [key, values] of Object.entries(parsingOutputWithoutCharIndex)) {
-      if (values) {
-        for (const value of values) {
-          const charIndex = value.charIndex;
-          var char = "";
-          for (
-            let i = functionCommentScope!.start + charIndex.start;
-            i < functionCommentScope!.start + charIndex.end;
-            i++
-          ) {
-            char += text.at(i);
-          }
-          const commentParsing = {
-            [key]: char,
-          };
-          commentParsingResult.push(commentParsing);
-        }
-      }
-    }
     const textTarget = [
       { desc: "Burns tokens from an account" },
       { implicitArgs: "syscall_ptr(felt*)" },
@@ -1070,10 +976,8 @@ suite("getScopeParsingResult: namespace", () => {
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
-    var functionCommentParsingResult = "";
-    for (var i = charIndex!.start; i < charIndex!.end; i++) {
-      functionCommentParsingResult += text.at(i);
-    }
+    const functionCommentParsingResult =
+      yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
         # Desc:
