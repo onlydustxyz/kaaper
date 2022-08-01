@@ -72,7 +72,8 @@ export abstract class BaseCommentParser {
     */
 
   isInsideScope(line: string, regexp: RegExp): RegExpMatchArray | null {
-    if (line.includes("None")) {
+    const isNone = line.match(/#\s*None$/)
+    if (isNone) {
       return null;
     }
     if (this.runningScope === true && this.startLine !== line) {
