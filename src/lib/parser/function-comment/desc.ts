@@ -9,7 +9,7 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
   }
   parseCommentLine(line: string): FunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
-    if (lineCommentInsideScope !== null) {
+    if (lineCommentInsideScope) {
       const startLineIndex = lineCommentInsideScope.index!;
       // startLineIndex + 1 because the startline would be the the space after the #(1 character)
       const startDescIndex =

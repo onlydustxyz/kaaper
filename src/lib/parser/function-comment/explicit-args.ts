@@ -9,7 +9,7 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
   }
   parseCommentLine(line: string): FunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
-    if (lineCommentInsideScope !== null) {
+    if (lineCommentInsideScope) {
       const start = lineCommentInsideScope.index!;
       const matchInterface = {
         name: lineCommentInsideScope[1].trim(),
