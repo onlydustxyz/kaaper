@@ -38,34 +38,14 @@ suite("getScopeParsingResult: namespace", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 0;
-    const functionScope = functionScopes![scopeNumber];
 
     const functionCommentScope = CairoParser.parseCommentLines(
       functionScopes![scopeNumber],
       true
     )!;
-
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
@@ -140,55 +120,10 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    const parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
       scopeNumber
     ];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -244,9 +179,6 @@ suite("getScopeParsingResult: namespace", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 1;
@@ -254,22 +186,6 @@ suite("getScopeParsingResult: namespace", () => {
       functionScopes![scopeNumber],
       true
     )!;
-
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
@@ -333,55 +249,10 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    const parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
       scopeNumber
     ];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -429,9 +300,6 @@ suite("getScopeParsingResult: namespace", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 2;
@@ -439,21 +307,6 @@ suite("getScopeParsingResult: namespace", () => {
       functionScopes![scopeNumber],
       true
     )!;
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
@@ -528,55 +381,10 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    const parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
       scopeNumber
     ];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -628,9 +436,6 @@ suite("getScopeParsingResult: namespace", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 3;
@@ -638,22 +443,6 @@ suite("getScopeParsingResult: namespace", () => {
       functionScopes![scopeNumber],
       true
     )!;
-
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
@@ -721,55 +510,10 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    const parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
       scopeNumber
     ];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -819,32 +563,12 @@ suite("getScopeParsingResult: namespace", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseNamespaceScopes(text);
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
-    // Comment parsing
     // parse comment lines
     const scopeNumber = 4;
     const functionCommentScope = CairoParser.parseCommentLines(
       functionScopes![scopeNumber],
       true
     )!;
-
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
@@ -912,53 +636,10 @@ suite("getScopeParsingResult: namespace", () => {
       },
     ];
 
-    const parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
     const parsingResult = CairoParser.getScopeParsingResult(text, "namespace")![
       scopeNumber
     ];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,

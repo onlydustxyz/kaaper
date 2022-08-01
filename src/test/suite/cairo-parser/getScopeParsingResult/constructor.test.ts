@@ -36,28 +36,9 @@ suite("getScopeParsingResult: constructor", () => {
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const functionCommentScope = CairoParser.parseCommentLines(functionScope);
-
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
@@ -166,53 +147,17 @@ suite("getScopeParsingResult: constructor", () => {
               charIndex: { start: 632, end: 661 },
             },
           ],
+          charIndex: { start: 526, end: 1187 },
         },
       },
     ];
-
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![0].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![0].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![0].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![0].text
-          ),
-          returns: functionSignatureParser.getReturns(functionScopes![0].text),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-        },
-      },
-    ];
-
-    // assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
 
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "constructor"
     )![0];
+
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
