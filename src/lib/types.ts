@@ -1,12 +1,30 @@
+export interface FunctionScope {
+  text: string;
+  start: number;
+  end: number;
+}
+
 export interface FunctionSignature {
   name: string;
   type: string;
+}
+
+export interface CharIndex {
+  start: number;
+  end: number;
 }
 
 export interface FunctionComment {
   name: string;
   type: string;
   desc: string;
+  charIndex: CharIndex;
+}
+
+export interface FunctionCommentScope {
+  text: RegExpMatchArray;
+  start: number;
+  end: number;
 }
 
 export interface ParsingResult {
@@ -23,6 +41,7 @@ export interface ParsingResult {
     explicitArgs: FunctionComment[] | null;
     returns: FunctionComment[] | null;
     raises: FunctionComment[] | null;
+    charIndex: CharIndex | null;
   };
 }
 
@@ -38,9 +57,9 @@ export interface CommentComplicance {
   errorSource: string | string[] | null;
 }
 
-export interface Namespace {
+export interface NamespaceScope {
   namespace: string | null;
-  startLineNumber: number | null;
-  endLineNumber: number | null;
+  start: number | null;
+  end: number | null;
   text: string | null;
 }

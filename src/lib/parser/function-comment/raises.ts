@@ -2,29 +2,28 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentRaisesParser extends BaseCommentParser {
-  constructor() {
-    super();
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Raises";
+    this.regex = /(\w+):\s*([\w\s\^]+)$/gm;
   }
 
   parseCommentLine(line: string): FunctionComment | null {
-    if (this.runningScope === true && this.startLine !== line) {
-      const matchCommentLines = line.match(/#\s+(.+)/);
-
-      if (matchCommentLines) {
-        if (matchCommentLines[1] === "None") {
-          return { name: "", type: "", desc: "None" };
-        }
-        const matchInterface = line.match(/(\w+):\s*([\w\s\^]+)$/);
-        if (matchInterface) {
-          return {
-            name: matchInterface[1],
-            type: "",
-            desc: matchInterface[2],
-          };
-        }
-      }
+    const lineCommentInsideScope = this.isInsideScope(line, this.regex);
+    if (lineCommentInsideScope) {
+      const start = lineCommentInsideScope.index!;
+      const matchInterface = {
+        name: lineCommentInsideScope[1].trim(),
+        type: "",
+        desc: lineCommentInsideScope[2].trim(),
+        charIndex: {
+          start: start,
+          end: start + lineCommentInsideScope[0].length,
+        },
+      };
+      return matchInterface;
     }
+
     return null;
   }
 }

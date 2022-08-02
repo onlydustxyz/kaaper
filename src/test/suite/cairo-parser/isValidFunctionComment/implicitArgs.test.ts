@@ -21,12 +21,28 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "",
             type: "",
             desc: "Returns the total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         implicitArgs: [
-          { name: "syscall_ptr", type: "felt*", desc: "" },
-          { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-          { name: "range_check_ptr", type: "", desc: "" },
+          {
+            name: "syscall_ptr",
+            type: "felt*",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
+          {
+            name: "pedersen_ptr",
+            type: "HashBuiltin*",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
+          {
+            name: "range_check_ptr",
+            type: "",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
         ],
         explicitArgs: null,
         returns: [
@@ -34,9 +50,11 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "totalSupply",
             type: "Uint256",
             desc: "total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         raises: null,
+        charIndex: { start: 0, end: 0 },
       },
     };
 
@@ -63,11 +81,22 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "",
             type: "",
             desc: "Returns the total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         implicitArgs: [
-          { name: "syscall_ptr", type: "felt*", desc: "" },
-          { name: "range_check_ptr", type: "", desc: "" },
+          {
+            name: "syscall_ptr",
+            type: "felt*",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
+          {
+            name: "range_check_ptr",
+            type: "",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
         ],
         explicitArgs: null,
         returns: [
@@ -75,9 +104,11 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "totalSupply",
             type: "Uint256",
             desc: "total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         raises: null,
+        charIndex: { start: 0, end: 0 },
       },
     };
 
@@ -103,12 +134,28 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "",
             type: "",
             desc: "Returns the total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         implicitArgs: [
-          { name: "syscall_ptr", type: "felt*", desc: "" },
-          { name: "pedersen_ptr", type: "HashBuiltin*", desc: "" },
-          { name: "range_check_ptr", type: "", desc: "" },
+          {
+            name: "syscall_ptr",
+            type: "felt*",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
+          {
+            name: "pedersen_ptr",
+            type: "HashBuiltin*",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
+          {
+            name: "range_check_ptr",
+            type: "",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
         ],
         explicitArgs: null,
         returns: [
@@ -116,9 +163,11 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "totalSupply",
             type: "Uint256",
             desc: "total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         raises: null,
+        charIndex: { start: 0, end: 0 },
       },
     };
 
@@ -141,11 +190,22 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "",
             type: "",
             desc: "Returns the total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         implicitArgs: [
-          { name: "syscall_ptr", type: "felt*", desc: "" },
-          { name: "range_check_ptr", type: "", desc: "" },
+          {
+            name: "syscall_ptr",
+            type: "felt*",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
+          {
+            name: "range_check_ptr",
+            type: "",
+            desc: "",
+            charIndex: { start: 0, end: 0 },
+          },
         ],
         explicitArgs: null,
         returns: [
@@ -153,9 +213,11 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "totalSupply",
             type: "Uint256",
             desc: "total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         raises: null,
+        charIndex: { start: 0, end: 0 },
       },
     };
 
@@ -178,6 +240,7 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "",
             type: "",
             desc: "Returns the total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         implicitArgs: null,
@@ -187,9 +250,11 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "totalSupply",
             type: "Uint256",
             desc: "total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         raises: null,
+        charIndex: { start: 0, end: 0 },
       },
     };
 
@@ -212,6 +277,7 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "",
             type: "",
             desc: "Returns the total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         implicitArgs: null,
@@ -221,9 +287,11 @@ suite("isValidFunctionComment: implicit args", () => {
             name: "totalSupply",
             type: "Uint256",
             desc: "total supply of the token",
+            charIndex: { start: 0, end: 0 },
           },
         ],
         raises: null,
+        charIndex: { start: 0, end: 0 },
       },
     };
 

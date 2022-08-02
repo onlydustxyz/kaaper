@@ -12,18 +12,23 @@ suite("function-comment: constructor: raises", () => {
     );
     const text = fs.readFileSync(pathFile, "utf8");
 
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
 
-    const raisesParser = new FunctionCommentRaisesParser();
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
 
     const line = 14;
-    assert.equal("# Raises:", commentText![line].trim(), `check line ${line}`);
-    raisesParser.setStartScope(commentText![line]);
+    const functionCommentLine = functionCommentScope!.text[line];
 
-    assert.equal(commentText![line], raisesParser.startLine);
+    assert.equal("# Raises:", functionCommentLine.trim(), `check line ${line}`);
+    raisesParser.setStartScope(functionCommentLine);
 
-    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    assert.equal(functionCommentLine, raisesParser.startLine);
+
+    const resultLineParsing =
+      raisesParser.parseCommentLine(functionCommentLine);
 
     assert.equal(
       true,
@@ -32,7 +37,7 @@ suite("function-comment: constructor: raises", () => {
     );
     assert.equal(
       false,
-      raisesParser.isEndScope(commentText![line]),
+      raisesParser.isEndScope(functionCommentLine),
       `failed to get end scope line ${line}`
     );
     assert.equal(
@@ -48,19 +53,22 @@ suite("function-comment: constructor: raises", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
-    const raisesParser = new FunctionCommentRaisesParser();
-    raisesParser.setStartScope(commentText![14]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
+    raisesParser.setStartScope(functionCommentScope!.text[14]);
 
     const line = 15;
+    const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
       "#   decimals: decimals exceed 2^8",
-      commentText![line].trim(),
+      functionCommentLine.trim(),
       `check line ${line}`
     );
-    assert.notEqual(commentText![line], raisesParser.startLine);
-    const isEndScope = raisesParser.isEndScope(commentText![line]);
+    assert.notEqual(functionCommentLine, raisesParser.startLine);
+    const isEndScope = raisesParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(
@@ -68,18 +76,41 @@ suite("function-comment: constructor: raises", () => {
       raisesParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    const resultLineParsing =
+      raisesParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = {
       name: "decimals",
       type: "",
       desc: "decimals exceed 2^8",
+      charIndex: {
+        start: 501,
+        end: 530,
+      },
     };
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
       `failed to get resultLineParsing line ${line}`
     );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
   });
 
   test("parse line 16", () => {
@@ -88,19 +119,22 @@ suite("function-comment: constructor: raises", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
-    const raisesParser = new FunctionCommentRaisesParser();
-    raisesParser.setStartScope(commentText![14]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
+    raisesParser.setStartScope(functionCommentScope!.text[14]);
 
     const line = 16;
+    const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
       "#   recipient: cannot mint to the zero address",
-      commentText![line].trim(),
+      functionCommentLine.trim(),
       `check line ${line}`
     );
-    assert.notEqual(commentText![line], raisesParser.startLine);
-    const isEndScope = raisesParser.isEndScope(commentText![line]);
+    assert.notEqual(functionCommentLine, raisesParser.startLine);
+    const isEndScope = raisesParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(
@@ -108,18 +142,41 @@ suite("function-comment: constructor: raises", () => {
       raisesParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    const resultLineParsing =
+      raisesParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = {
       name: "recipient",
       type: "",
       desc: "cannot mint to the zero address",
+      charIndex: {
+        start: 539,
+        end: 581,
+      },
     };
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
       `failed to get resultLineParsing line ${line}`
     );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
   });
 
   test("parse line 17", () => {
@@ -128,19 +185,22 @@ suite("function-comment: constructor: raises", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
-    const raisesParser = new FunctionCommentRaisesParser();
-    raisesParser.setStartScope(commentText![14]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
+    raisesParser.setStartScope(functionCommentScope!.text[14]);
 
     const line = 17;
+    const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
       "#   initial_supply: not valid Uint256",
-      commentText![line].trim(),
+      functionCommentLine.trim(),
       `check line ${line}`
     );
-    assert.notEqual(commentText![line], raisesParser.startLine);
-    const isEndScope = raisesParser.isEndScope(commentText![line]);
+    assert.notEqual(functionCommentLine, raisesParser.startLine);
+    const isEndScope = raisesParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(
@@ -148,18 +208,41 @@ suite("function-comment: constructor: raises", () => {
       raisesParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    const resultLineParsing =
+      raisesParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = {
       name: "initial_supply",
       type: "",
       desc: "not valid Uint256",
+      charIndex: {
+        start: 590,
+        end: 623,
+      },
     };
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
       `failed to get resultLineParsing line ${line}`
     );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
   });
 
   test("parse line 18", () => {
@@ -168,19 +251,22 @@ suite("function-comment: constructor: raises", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
-    const raisesParser = new FunctionCommentRaisesParser();
-    raisesParser.setStartScope(commentText![14]);
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoParser.parseCommentLines(functionScope)!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
+    raisesParser.setStartScope(functionCommentScope!.text[14]);
 
     const line = 18;
+    const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
       "#   initial_supply: mint overflow",
-      commentText![line].trim(),
+      functionCommentLine.trim(),
       `check line ${line}`
     );
-    assert.notEqual(commentText![line], raisesParser.startLine);
-    const isEndScope = raisesParser.isEndScope(commentText![line]);
+    assert.notEqual(functionCommentLine, raisesParser.startLine);
+    const isEndScope = raisesParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(
@@ -188,18 +274,41 @@ suite("function-comment: constructor: raises", () => {
       raisesParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    const resultLineParsing =
+      raisesParser.parseCommentLine(functionCommentLine);
 
     const targetLineParsing = {
       name: "initial_supply",
       type: "",
       desc: "mint overflow",
+      charIndex: {
+        start: 632,
+        end: 661,
+      },
     };
     assert.deepEqual(
       targetLineParsing,
       resultLineParsing,
       `failed to get resultLineParsing line ${line}`
     );
+
+    var functionCommentReference = "";
+    const explicitArgsCommentStart = resultLineParsing!.charIndex.start;
+    const explicitArgsCommentEnd = resultLineParsing!.charIndex.end;
+    for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
+      functionCommentReference += functionCommentText[i];
+    }
+
+    var wholeFileReference = "";
+    const functionCommentStart = functionCommentScope!.start;
+    for (
+      var i = functionCommentStart + explicitArgsCommentStart;
+      i < functionCommentStart + explicitArgsCommentEnd;
+      i++
+    ) {
+      wholeFileReference += text[i];
+    }
+    assert.equal(functionCommentReference, wholeFileReference);
   });
 
   test("parse whole scope", () => {
@@ -208,17 +317,42 @@ suite("function-comment: constructor: raises", () => {
       "../../../../../testContracts/ERC20Compliant/ERC20.cairo"
     );
     const text = fs.readFileSync(pathFile, "utf8");
-    const functionText = CairoParser.parseFunctionScope(text, "constructor");
-    const commentText = CairoParser.parseCommentLines(functionText![0]);
-    const raisesParser = new FunctionCommentRaisesParser();
+    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
+    const functionCommentScope = CairoParser.parseCommentLines(
+      functionScopes![0]
+    )!;
+    const functionCommentText = functionCommentScope!.text.join("");
+    const raisesParser = new FunctionCommentRaisesParser(functionCommentText);
 
     const targetLineParsing = [
-      { name: "decimals", type: "", desc: "decimals exceed 2^8" },
-      { name: "recipient", type: "", desc: "cannot mint to the zero address" },
-      { name: "initial_supply", type: "", desc: "not valid Uint256" },
-      { name: "initial_supply", type: "", desc: "mint overflow" },
+      {
+        name: "decimals",
+        type: "",
+        desc: "decimals exceed 2^8",
+        charIndex: { start: 501, end: 530 },
+      },
+      {
+        name: "recipient",
+        type: "",
+        desc: "cannot mint to the zero address",
+        charIndex: { start: 539, end: 581 },
+      },
+      {
+        name: "initial_supply",
+        type: "",
+        desc: "not valid Uint256",
+        charIndex: { start: 590, end: 623 },
+      },
+      {
+        name: "initial_supply",
+        type: "",
+        desc: "mint overflow",
+        charIndex: { start: 632, end: 661 },
+      },
     ];
-    const resultLineParsing = raisesParser.parseCommentLines(commentText!);
+    const resultLineParsing = raisesParser.parseCommentLines(
+      functionCommentScope!.text
+    );
 
     assert.deepEqual(
       targetLineParsing,

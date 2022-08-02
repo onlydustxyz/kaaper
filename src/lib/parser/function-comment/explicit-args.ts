@@ -2,25 +2,25 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentExplicitArgsParser extends BaseCommentParser {
-  constructor() {
-    super();
+  constructor(functionCommentText: string) {
+    super(functionCommentText);
     this.name = "Explicit args";
+    this.regex = /(\w+)(\((\w+)\)):(.*)/gm;
   }
-
   parseCommentLine(line: string): FunctionComment | null {
-    if (this.runningScope === true && this.startLine !== line) {
-      const matchCommentLines = line.match(/#\s+(.+)/);
-
-      if (matchCommentLines) {
-        const matchInterface = line.match(/(\w+)(\((\w+)\)):(.*)/);
-        if (matchInterface) {
-          return {
-            name: matchInterface[1],
-            type: matchInterface[3],
-            desc: matchInterface[4].trim(),
-          };
-        }
-      }
+    const lineCommentInsideScope = this.isInsideScope(line, this.regex);
+    if (lineCommentInsideScope) {
+      const start = lineCommentInsideScope.index!;
+      const matchInterface = {
+        name: lineCommentInsideScope[1].trim(),
+        type: lineCommentInsideScope[3].trim(),
+        desc: lineCommentInsideScope[4].trim(),
+        charIndex: {
+          start: start,
+          end: start + lineCommentInsideScope[0].length,
+        },
+      };
+      return matchInterface;
     }
     return null;
   }

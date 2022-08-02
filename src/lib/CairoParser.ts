@@ -11,7 +11,9 @@ import {
   FunctionComment,
   ParsingResult,
   FunctionCommentValidity,
-  Namespace,
+  FunctionScope,
+  FunctionCommentScope,
+  NamespaceScope,
 } from "./types";
 
 const lodash = require("lodash");
@@ -24,11 +26,12 @@ map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
 map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
-map.set("namespace", /namespace\s+(\w+):/);
+map.set("namespace", /namespace\s+(\w+):/gm);
 map.set(
   "function",
   /func\s+\w+{[\w\s:*,]*}\([\w\s:*,]*\)\s*-?>?\s*\(?[\w\s:*,]*\)?:\s+[#\s\w:,\(\)*]+/gm
 );
+map.set("comment", /\s*#\s*(.+)/gm);
 
 export default class CairoParser {
   constructor() {}
@@ -37,15 +40,19 @@ export default class CairoParser {
     return map.get(name);
   }
 
-  static getNamespaceScopes(text: string): Namespace[] | null {
+  static getNamespaceScopes(text: string): NamespaceScope[] | null {
     const lines = text.split("\n");
-    var namespaces: Namespace[] = [];
-    var attributeName: string = "";
+    var namespaces: NamespaceScope[] = [];
     var startLineNumber = 0;
+    var attributeName: string = "";
     var lineCount = 0;
     var runningScope = false;
     var texts: string = "";
 
+    const regexp = this.getRegex("namespace");
+    const namespaceScopes = [...text.matchAll(regexp)];
+
+    var namespaceCount = 0;
     for (var line of lines) {
       lineCount += 1;
 
@@ -62,14 +69,15 @@ export default class CairoParser {
       if (line === "end" && runningScope === true) {
         const namespace = {
           namespace: attributeName,
-          startLineNumber: startLineNumber,
-          endLineNumber: lineCount,
+          start: namespaceScopes[namespaceCount].index!,
+          end: 0,
           text: texts.trim(),
         };
 
         texts = "";
         attributeName = "";
         runningScope = false;
+        namespaceCount += 1;
         namespaces.push(namespace);
       }
     }
@@ -79,46 +87,85 @@ export default class CairoParser {
     return namespaces;
   }
 
-  static parseNamespaceScopes(text: string): string[] | null {
+  static parseNamespaceScopes(text: string): FunctionScope[] | null {
     const namespaces = CairoParser.getNamespaceScopes(text);
-    var namespaceScopes: string[] = [];
+    var namespaceScopes: FunctionScope[] = [];
     if (namespaces) {
       for (var namespace of namespaces) {
-        const text = namespace.text;
+        const namespaceText = namespace.text;
         const namespaceName = namespace.namespace;
-        const matches = text!.match(this.getRegex("function"));
+        const matches = this.parseFunctionScope(namespaceText!, "function");
         if (matches) {
           for (var match of matches) {
-            const namespaceScope = `@${namespaceName}\n${match}`;
-            namespaceScopes.push(namespaceScope);
+            const functionScope = {
+              text: `@${namespaceName}\n${match.text}`,
+              start: namespace.start! + match.start,
+              end: namespace.start! + match.end,
+            };
+            namespaceScopes.push(functionScope);
           }
         }
       }
       return namespaceScopes;
     }
-
     return null;
   }
 
-  // parse whole scope
   static parseFunctionScope(
     text: string,
     name: string
-  ): RegExpMatchArray | null {
-    const result = text.match(this.getRegex(name));
+  ): FunctionScope[] | null {
+    const regexp = this.getRegex(name);
+    var functionScopes: FunctionScope[] = [];
+    const matches = text.matchAll(regexp);
+    for (const match of matches) {
+      const startIndex = match.index ? match.index : 0;
+      const functionScope = {
+        text: match[0],
+        start: startIndex,
+        end: startIndex + match[0].length,
+      };
+      functionScopes.push(functionScope);
+    }
 
-    if (result) {
-      return result;
+    if (functionScopes.length > 0) {
+      return functionScopes;
     }
     return null;
   }
 
   // parse only commented lines
   // run this after parsing the whole scope using parseFunctionScope
-  static parseCommentLines(line: string): RegExpMatchArray | null {
-    const comments = line.match(/#\s+(.+)/gm);
-    if (comments && comments.length > 0) {
-      return comments;
+  static parseCommentLines(
+    scope: FunctionScope,
+    isNamespace: boolean = false
+  ): FunctionCommentScope | null {
+    const regexp = this.getRegex("comment");
+    const commentLinesText = scope.text.match(regexp);
+
+    if (scope && commentLinesText) {
+      const scopeLineStart = scope.start;
+      const scopeText =
+        isNamespace === true
+          ? scope.text
+              .split("\n")
+              .slice(1, scope.text.split("\n").length)
+              .join("\n")
+          : scope.text;
+      const commentLines = [...scopeText.matchAll(regexp)];
+      const commentLineStart = scopeLineStart! + commentLines[0].index!;
+
+      const commentLineEnd =
+        scopeLineStart! +
+        commentLines[commentLines.length - 1].index! +
+        commentLines[commentLines.length - 1][0].length;
+
+      const commentLineRange = {
+        text: commentLinesText,
+        start: commentLineStart,
+        end: commentLineEnd,
+      };
+      return commentLineRange;
     }
     return null;
   }
@@ -127,49 +174,77 @@ export default class CairoParser {
     text: string,
     name: string
   ): ParsingResult[] | null {
-    const functionScopeLines =
+    const functionScopes =
       name === "namespace"
         ? CairoParser.parseNamespaceScopes(text)
         : CairoParser.parseFunctionScope(text, name);
+
     // Function signature parsing
     const functionSignatureParser = new FunctionSignatureRegexParser();
 
     var parsingOutputs = [];
 
     // parse comment lines
-    if (functionScopeLines) {
-      for (var functionScope of functionScopeLines) {
-        const commentLines = CairoParser.parseCommentLines(functionScope);
+    if (functionScopes) {
+      for (var functionScope of functionScopes) {
+        const commentLines =
+          name === "namespace"
+            ? CairoParser.parseCommentLines(functionScope, true)
+            : CairoParser.parseCommentLines(functionScope, false);
 
-        const functionCommentDescParser = new FunctionCommentDescParser();
+        const functionCommentScope =
+          CairoParser.parseCommentLines(functionScope)!.text;
+        const functionCommentText = functionCommentScope!.join("");
+        const functionCommentDescParser = new FunctionCommentDescParser(
+          functionCommentText
+        );
         const functionCommentImplicitArgsParser =
-          new FunctionCommentImplicitArgsParser();
+          new FunctionCommentImplicitArgsParser(functionCommentText);
         const functionCommentExplicitArgsParser =
-          new FunctionCommentExplicitArgsParser();
-        const functionCommentReturnsParser = new FunctionCommentReturnsParser();
-        const functionCommentRaisesParser = new FunctionCommentRaisesParser();
+          new FunctionCommentExplicitArgsParser(functionCommentText);
+        const functionCommentReturnsParser = new FunctionCommentReturnsParser(
+          functionCommentText
+        );
+        const functionCommentRaisesParser = new FunctionCommentRaisesParser(
+          functionCommentText
+        );
 
         const parsingOutput = {
           attributeName: functionSignatureParser.getAttributeName(
-            functionScope!
+            functionScope!.text
           ),
-          functionName: functionSignatureParser.getFunctionName(functionScope),
+          functionName: functionSignatureParser.getFunctionName(
+            functionScope!.text
+          ),
           functionSignature: {
-            implicitArgs:
-              functionSignatureParser.getImplicitArgs(functionScope),
-            explicitArgs:
-              functionSignatureParser.getExplicitArgs(functionScope),
-            returns: functionSignatureParser.getReturns(functionScope),
+            implicitArgs: functionSignatureParser.getImplicitArgs(
+              functionScope!.text
+            ),
+            explicitArgs: functionSignatureParser.getExplicitArgs(
+              functionScope!.text
+            ),
+            returns: functionSignatureParser.getReturns(functionScope!.text),
           },
           functionComment: {
-            desc: functionCommentDescParser.parseCommentLines(commentLines),
-            implicitArgs:
-              functionCommentImplicitArgsParser.parseCommentLines(commentLines),
-            explicitArgs:
-              functionCommentExplicitArgsParser.parseCommentLines(commentLines),
-            returns:
-              functionCommentReturnsParser.parseCommentLines(commentLines),
-            raises: functionCommentRaisesParser.parseCommentLines(commentLines),
+            desc: functionCommentDescParser.parseCommentLines(
+              commentLines!.text
+            ),
+            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
+              commentLines!.text
+            ),
+            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
+              commentLines!.text
+            ),
+            returns: functionCommentReturnsParser.parseCommentLines(
+              commentLines!.text
+            ),
+            raises: functionCommentRaisesParser.parseCommentLines(
+              commentLines!.text
+            ),
+            charIndex: {
+              start: commentLines!.start,
+              end: commentLines!.end,
+            },
           },
         };
 
@@ -181,8 +256,14 @@ export default class CairoParser {
     return null;
   }
 
-  static getFileParsingResult(filePath: string): ParsingResult[] | null {
-    const text = fs.readFileSync(filePath, "utf8");
+  static getFileParsingResult(
+    filePathOrBuffer: string,
+    isFilePath: boolean = true
+  ): ParsingResult[] | null {
+    const text =
+      isFilePath === true
+        ? fs.readFileSync(filePathOrBuffer, "utf8")
+        : filePathOrBuffer;
     const constructorParsingResult = CairoParser.getScopeParsingResult(
       text,
       "constructor"

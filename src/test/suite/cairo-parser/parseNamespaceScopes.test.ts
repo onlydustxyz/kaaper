@@ -13,9 +13,10 @@ suite("parseNamespaceScopes", () => {
     const scopeNumber = 0;
     // parse whole scope
     const parsingOutput = CairoParser.parseNamespaceScopes(text);
+    console.log(parsingOutput![scopeNumber]);
     assert.equal(
       "@namespace ERC20",
-      parsingOutput![scopeNumber].split("\n")[0]
+      parsingOutput![scopeNumber].text.split("\n")[0]
     );
   });
   test("scopeNumber: 1", () => {
@@ -29,7 +30,7 @@ suite("parseNamespaceScopes", () => {
     const parsingOutput = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace ERC20",
-      parsingOutput![scopeNumber].split("\n")[0]
+      parsingOutput![scopeNumber].text.split("\n")[0]
     );
   });
   test("scopeNumber: 2", () => {
@@ -43,7 +44,7 @@ suite("parseNamespaceScopes", () => {
     const parsingOutput = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace ERC20",
-      parsingOutput![scopeNumber].split("\n")[0]
+      parsingOutput![scopeNumber].text.split("\n")[0]
     );
   });
   test("scopeNumber: 3", () => {
@@ -57,7 +58,7 @@ suite("parseNamespaceScopes", () => {
     const parsingOutput = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace internal",
-      parsingOutput![scopeNumber].split("\n")[0]
+      parsingOutput![scopeNumber].text.split("\n")[0]
     );
   });
 
@@ -72,7 +73,7 @@ suite("parseNamespaceScopes", () => {
     const parsingOutput = CairoParser.parseNamespaceScopes(text);
     assert.equal(
       "@namespace internal",
-      parsingOutput![scopeNumber].split("\n")[0]
+      parsingOutput![scopeNumber].text.split("\n")[0]
     );
   });
 

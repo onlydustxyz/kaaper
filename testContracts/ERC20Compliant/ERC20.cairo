@@ -124,16 +124,16 @@ end
 func allowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     owner : felt, spender : felt
 ) -> (remaining : Uint256):
-    # Desc
+    # Desc:
     #   Returns the amount of remaining tokens allowed to be spent by the spender
-    # Implicit args
+    # Implicit args:
     #   syscall_ptr(felt*)
     #   pedersen_ptr(HashBuiltin*)
     #   range_check_ptr
-    # Explicit args
+    # Explicit args:
     #   owner(felt): the address of owner of the tokens
     #   spender(felt): the address of spender (delegated account) of the tokens
-    # Returns
+    # Returns:
     #   remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender
     let (remaining : Uint256) = ERC20.allowance(owner, spender)
     return (remaining)
@@ -147,21 +147,21 @@ end
 func transfer{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     recipient : felt, amount : Uint256
 ) -> (success : felt):
-        # Desc:
-        #   Perform transfer to recipient
-        # Implicit args:
-        #   syscall_ptr(felt*)
-        #   pedersen_ptr(HashBuiltin*)
-        #   range_check_ptr
-        # Explicit args:
-        #   recipient(felt): the address of ERC20 recipient
-        #   amount(Uint256): the amount of ERC20 transfer
-        # Returns:
-        #   success(felt): 1 if transfer was successful, 0 otherwise
-        # Raises:
-        #   amount: amount is not a valid Uint256
-        #   recipient: cannot transfer to the zero address
-        #   amount: transfer amount exceeds balance
+    # Desc:
+    #   Perform transfer to recipient
+    # Implicit args:
+    #   syscall_ptr(felt*)
+    #   pedersen_ptr(HashBuiltin*)
+    #   range_check_ptr
+    # Explicit args:
+    #   recipient(felt): the address of ERC20 recipient
+    #   amount(Uint256): the amount of ERC20 transfer
+    # Returns:
+    #   success(felt): 1 if transfer was successful, 0 otherwise
+    # Raises:
+    #   amount: amount is not a valid Uint256
+    #   recipient: cannot transfer to the zero address
+    #   amount: transfer amount exceeds balance
     ERC20.transfer(recipient, amount)
     return (TRUE)
 end
