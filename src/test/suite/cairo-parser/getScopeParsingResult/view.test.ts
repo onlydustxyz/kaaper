@@ -2,12 +2,6 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
-import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
 import {
   yieldFunctionCommentPartsFromCharIndex,
@@ -49,7 +43,10 @@ suite("getScopeParsingResult: view", () => {
     const parsingTarget = [
       {
         attributeName: "view",
-        functionName: "name",
+        functionName: {
+          name: "name",
+          charIndex: { start: 1322, end: 1326 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -161,7 +158,10 @@ suite("getScopeParsingResult: view", () => {
     const parsingTarget = [
       {
         attributeName: "view",
-        functionName: "symbol",
+        functionName: {
+          name: "symbol",
+          charIndex: { start: 1688, end: 1694 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -265,35 +265,20 @@ suite("getScopeParsingResult: view", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 2;
     const functionCommentScope = CairoParser.parseCommentLines(
       functionScopes![scopeNumber]
     )!;
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
 
     const parsingTarget = [
       {
         attributeName: "view",
-        functionName: "totalSupply",
+        functionName: {
+          name: "totalSupply",
+          charIndex: { start: 2070, end: 2081 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -347,55 +332,10 @@ suite("getScopeParsingResult: view", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(text, "view")![
       scopeNumber
     ];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -442,9 +382,6 @@ suite("getScopeParsingResult: view", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 3;
@@ -455,7 +392,10 @@ suite("getScopeParsingResult: view", () => {
     const parsingTarget = [
       {
         attributeName: "view",
-        functionName: "decimals",
+        functionName: {
+          name: "decimals",
+          charIndex: { start: 2517, end: 2525 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -569,7 +509,10 @@ suite("getScopeParsingResult: view", () => {
     const parsingTarget = [
       {
         attributeName: "view",
-        functionName: "balanceOf",
+        functionName: {
+          name: "balanceOf",
+          charIndex: { start: 2922, end: 2931 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -693,7 +636,10 @@ suite("getScopeParsingResult: view", () => {
     const parsingTarget = [
       {
         attributeName: "view",
-        functionName: "allowance",
+        functionName: {
+          name: "allowance",
+          charIndex: { start: 3441, end: 3450 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },

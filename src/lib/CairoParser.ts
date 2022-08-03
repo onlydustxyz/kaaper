@@ -209,13 +209,19 @@ export default class CairoParser {
           functionCommentText
         );
 
+        const isNamespaceScope = name === "namespace" ? true : false;
+
         const parsingOutput = {
           attributeName: functionSignatureParser.getAttributeName(
             functionScope!.text
           ),
-          functionName: functionSignatureParser.getFunctionName(
-            functionScope!.text
-          ),
+          functionName: {
+            name: functionSignatureParser.getFunctionName(functionScope!.text),
+            charIndex: functionSignatureParser.getFunctionNameCharIndex(
+              functionScope,
+              isNamespaceScope
+            ),
+          },
           functionSignature: {
             implicitArgs: functionSignatureParser.getImplicitArgs(
               functionScope!.text

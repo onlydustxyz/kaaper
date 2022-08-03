@@ -2,12 +2,6 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
-import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
 import {
   yieldFunctionCommentPartsFromCharIndex,
@@ -38,37 +32,18 @@ suite("getScopeParsingResult: storage_var", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "storage_var");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
-    // Comment parsing
-    // parse comment lines
-
     const scopeNumber = 0;
     const functionCommentScope = CairoParser.parseCommentLines(
       functionScopes![scopeNumber]
     )!;
 
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
-
     const parsingTarget = [
       {
         attributeName: "storage_var",
-        functionName: "ERC20_name",
+        functionName: {
+          name: "ERC20_name",
+          charIndex: { start: 1276, end: 1286 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -99,54 +74,11 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![0].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![0].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![0].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![0].text
-          ),
-          returns: functionSignatureParser.getReturns(functionScopes![0].text),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "storage_var"
     )![scopeNumber];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -186,9 +118,6 @@ suite("getScopeParsingResult: storage_var", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "storage_var");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 1;
@@ -196,26 +125,13 @@ suite("getScopeParsingResult: storage_var", () => {
       functionScopes![scopeNumber]
     )!;
 
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
-
     const parsingTarget = [
       {
         attributeName: "storage_var",
-        functionName: "ERC20_symbol",
+        functionName: {
+          name: "ERC20_symbol",
+          charIndex: { start: 1438, end: 1450 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -246,56 +162,14 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingTarget, parsingTarget, "failed to parse");
 
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "storage_var"
     )![scopeNumber];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -335,9 +209,6 @@ suite("getScopeParsingResult: storage_var", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "storage_var");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 2;
@@ -345,26 +216,13 @@ suite("getScopeParsingResult: storage_var", () => {
       functionScopes![scopeNumber]
     )!;
 
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
-
     const parsingTarget = [
       {
         attributeName: "storage_var",
-        functionName: "ERC20_decimals",
+        functionName: {
+          name: "ERC20_decimals",
+          charIndex: { start: 1610, end: 1624 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -395,56 +253,11 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "storage_var"
     )![scopeNumber];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -484,9 +297,6 @@ suite("getScopeParsingResult: storage_var", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "storage_var");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 3;
@@ -494,26 +304,13 @@ suite("getScopeParsingResult: storage_var", () => {
       functionScopes![scopeNumber]
     )!;
 
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
-
     const parsingTarget = [
       {
         attributeName: "storage_var",
-        functionName: "ERC20_total_supply",
+        functionName: {
+          name: "ERC20_total_supply",
+          charIndex: { start: 1864, end: 1882 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -544,56 +341,11 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "storage_var"
     )![scopeNumber];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -636,9 +388,6 @@ suite("getScopeParsingResult: storage_var", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "storage_var");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 4;
@@ -646,26 +395,13 @@ suite("getScopeParsingResult: storage_var", () => {
       functionScopes![scopeNumber]
     )!;
 
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
-
     const parsingTarget = [
       {
         attributeName: "storage_var",
-        functionName: "ERC20_balances",
+        functionName: {
+          name: "ERC20_balances",
+          charIndex: { start: 2088, end: 2102 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [{ name: "account", type: "felt" }],
@@ -703,56 +439,11 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "storage_var"
     )![scopeNumber];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,
@@ -795,9 +486,6 @@ suite("getScopeParsingResult: storage_var", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "storage_var");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 5;
@@ -805,26 +493,13 @@ suite("getScopeParsingResult: storage_var", () => {
       functionScopes![scopeNumber]
     )!;
 
-    const functionCommentText: string = functionCommentScope!.text.join("");
-
-    const functionCommentDescParser = new FunctionCommentDescParser(
-      functionCommentText
-    );
-    const functionCommentImplicitArgsParser =
-      new FunctionCommentImplicitArgsParser(functionCommentText);
-    const functionCommentExplicitArgsParser =
-      new FunctionCommentExplicitArgsParser(functionCommentText);
-    const functionCommentReturnsParser = new FunctionCommentReturnsParser(
-      functionCommentText
-    );
-    const functionCommentRaisesParser = new FunctionCommentRaisesParser(
-      functionCommentText
-    );
-
     const parsingTarget = [
       {
         attributeName: "storage_var",
-        functionName: "ERC20_allowances",
+        functionName: {
+          name: "ERC20_allowances",
+          charIndex: { start: 2389, end: 2405 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [
@@ -871,56 +546,11 @@ suite("getScopeParsingResult: storage_var", () => {
       },
     ];
 
-    var parsingOutput = [
-      {
-        attributeName: functionSignatureParser.getAttributeName(
-          functionScopes![scopeNumber].text
-        ),
-        functionName: functionSignatureParser.getFunctionName(
-          functionScopes![scopeNumber].text
-        ),
-        functionSignature: {
-          implicitArgs: functionSignatureParser.getImplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          explicitArgs: functionSignatureParser.getExplicitArgs(
-            functionScopes![scopeNumber].text
-          ),
-          returns: functionSignatureParser.getReturns(
-            functionScopes![scopeNumber].text
-          ),
-        },
-        functionComment: {
-          desc: functionCommentDescParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          returns: functionCommentReturnsParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          raises: functionCommentRaisesParser.parseCommentLines(
-            functionCommentScope!.text
-          ),
-          charIndex: {
-            start: functionCommentScope!.start,
-            end: functionCommentScope!.end,
-          },
-        },
-      },
-    ];
-
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
-
     const parsingResult = CairoParser.getScopeParsingResult(
       text,
       "storage_var"
     )![scopeNumber];
-    assert.deepEqual(parsingResult, parsingOutput[0], "failed to parse");
+    assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
       text,

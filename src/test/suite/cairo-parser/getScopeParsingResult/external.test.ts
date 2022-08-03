@@ -2,12 +2,6 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
-import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
 import {
   yieldFunctionCommentPartsFromCharIndex,
@@ -48,7 +42,10 @@ suite("getScopeParsingResult: external", () => {
     const parsingTarget = [
       {
         attributeName: "external",
-        functionName: "transfer",
+        functionName: {
+          name: "transfer",
+          charIndex: { start: 4171, end: 4179 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -200,9 +197,6 @@ suite("getScopeParsingResult: external", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "external");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 1;
@@ -213,7 +207,10 @@ suite("getScopeParsingResult: external", () => {
     const parsingTarget = [
       {
         attributeName: "external",
-        functionName: "transferFrom",
+        functionName: {
+          name: "transferFrom",
+          charIndex: { start: 4917, end: 4929 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -374,9 +371,6 @@ suite("getScopeParsingResult: external", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "external");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 2;
@@ -387,7 +381,10 @@ suite("getScopeParsingResult: external", () => {
     const parsingTarget = [
       {
         attributeName: "external",
-        functionName: "approve",
+        functionName: {
+          name: "approve",
+          charIndex: { start: 5771, end: 5778 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -530,9 +527,6 @@ suite("getScopeParsingResult: external", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "external");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 3;
@@ -543,7 +537,10 @@ suite("getScopeParsingResult: external", () => {
     const parsingTarget = [
       {
         attributeName: "external",
-        functionName: "increaseAllowance",
+        functionName: {
+          name: "increaseAllowance",
+          charIndex: { start: 6477, end: 6494 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -692,9 +689,6 @@ suite("getScopeParsingResult: external", () => {
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "external");
 
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-
     // Comment parsing
     // parse comment lines
     const scopeNumber = 4;
@@ -705,7 +699,10 @@ suite("getScopeParsingResult: external", () => {
     const parsingTarget = [
       {
         attributeName: "external",
-        functionName: "decreaseAllowance",
+        functionName: {
+          name: "decreaseAllowance",
+          charIndex: { start: 7264, end: 7281 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },

@@ -30,43 +30,85 @@ suite("getNonCompliantCommentFunction", () => {
       {
         filePath: "testContracts/ERC20NonCompliant/ERC20.cairo",
         attributeName: "constructor",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: {
+            start: 349,
+            end: 360,
+          },
+        },
         errorSource: ["implicitArgs", "explicitArgs"],
       },
       {
         filePath: "testContracts/ERC20NonCompliant/ERC20.cairo",
         attributeName: "view",
-        functionName: "name",
+        functionName: {
+          name: "name",
+          charIndex: {
+            start: 1251,
+            end: 1255,
+          },
+        },
         errorSource: "returns",
       },
       {
         filePath: "testContracts/ERC20NonCompliant/ERC20.cairo",
         attributeName: "external",
-        functionName: "decreaseAllowance",
+        functionName: {
+          name: "decreaseAllowance",
+          charIndex: {
+            start: 7250,
+            end: 7267,
+          },
+        },
         errorSource: "returns",
       },
       {
         filePath: "testContracts/ERC20NonCompliant/library.cairo",
         attributeName: "event",
-        functionName: "Transfer",
+        functionName: {
+          name: "Transfer",
+          charIndex: {
+            start: 640,
+            end: 648,
+          },
+        },
         errorSource: "explicitArgs",
       },
       {
         filePath: "testContracts/ERC20NonCompliant/library.cairo",
         attributeName: "storage_var",
-        functionName: "ERC20_symbol",
+        functionName: {
+          name: "ERC20_symbol",
+          charIndex: {
+            start: 1391,
+            end: 1403,
+          },
+        },
         errorSource: "explicitArgs",
       },
       {
         filePath: "testContracts/ERC20NonCompliant/library.cairo",
         attributeName: "namespace ERC20",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: {
+            start: 2872,
+            end: 2883,
+          },
+        },
         errorSource: ["implicitArgs", "explicitArgs"],
       },
       {
         filePath: "testContracts/ERC20NonCompliant/library.cairo",
         attributeName: "namespace internal",
-        functionName: "_mint",
+        functionName: {
+          name: "_mint",
+          charIndex: {
+            start: 4968,
+            end: 4973,
+          },
+        },
         errorSource: "explicitArgs",
       },
     ];

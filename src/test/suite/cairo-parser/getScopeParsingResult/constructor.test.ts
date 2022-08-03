@@ -2,12 +2,6 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 import {
   yieldFunctionCommentPartsFromCharIndex,
   yieldWholeFunctionCommentStringFromCharIndex,
@@ -43,7 +37,13 @@ suite("getScopeParsingResult: constructor", () => {
     const parsingTarget = [
       {
         attributeName: "constructor",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: {
+            start: 349,
+            end: 360,
+          },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -234,7 +234,13 @@ suite("getScopeParsingResult: constructor", () => {
     const parsingTarget = [
       {
         attributeName: "constructor",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: {
+            start: 349,
+            end: 360,
+          },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
