@@ -2,7 +2,7 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentDescParser extends BaseCommentParser {
-  constructor(functionCommentText: string) {
+  constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "Desc";
     this.regex = /#(\s+)(.+)/gm;

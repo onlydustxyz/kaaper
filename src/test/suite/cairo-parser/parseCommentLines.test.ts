@@ -19,16 +19,11 @@ suite("parseCommentLines: Namespace Using Match All", () => {
 
     const start = functionComment!.start;
     const end = functionComment!.end;
-    console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
 
     var functionCommentText = "";
     for (let i = start; i < end; i++) {
       functionCommentText += text.at(i);
     }
-
-    console.log("Namespace test");
-    console.log(functionScope.text);
-    console.log(functionCommentText);
     assert.equal([...functionComment!.text].join(""), functionCommentText);
   });
 
@@ -46,7 +41,6 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const functionComment = CairoParser.parseCommentLines(functionScope, true);
     const start = functionComment!.start;
     const end = functionComment!.end;
-    console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
 
     var functionCommentText = "";
     for (let i = start; i < end; i++) {
@@ -117,7 +111,6 @@ suite("parseCommentLines: Namespace Using Match All", () => {
     const functionComment = CairoParser.parseCommentLines(functionScope, true);
     const start = functionComment!.start;
     const end = functionComment!.end;
-    console.log(`Namespace ${scopeNumber}: ${start} ${end}`);
 
     var functionCommentText = "";
     for (let i = start; i < end; i++) {
@@ -143,7 +136,6 @@ suite("parseCommentLines: constructor Using Match All", () => {
 
     const start = functionComment!.start;
     const end = functionComment!.end;
-    console.log(`Constructor ${scopeNumber}: ${start} ${end}`);
 
     var functionCommentText = "";
     for (let i = start; i < end; i++) {
@@ -169,7 +161,6 @@ suite("parseCommentLines: View Using Match All", () => {
 
     const start = functionComment!.start;
     const end = functionComment!.end;
-    console.log(`View ${scopeNumber}: ${start} ${end}`);
 
     var functionCommentText = "";
     for (let i = start; i < end; i++) {

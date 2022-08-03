@@ -35,4 +35,21 @@ suite("dumpParsingResult", () => {
       true
     );
   });
+
+  test("should not get any comments in from library.cairo", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../testContracts/emptyComment/library.cairo"
+    );
+
+    // parse whole scope
+    const parsingOutput = CairoParser.getFileParsingResult(pathFile);
+
+    CairoParser.dumpParsingResult(parsingOutput, "docs/library");
+    CairoParser.dumpParsingResult(
+      parsingOutput,
+      "docs/library_without_comment",
+      true
+    );
+  });
 });

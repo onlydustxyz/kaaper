@@ -2,7 +2,7 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentReturnsParser extends BaseCommentParser {
-  constructor(functionCommentText: string) {
+  constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "Returns";
     this.regex = /(\w+)(\((\w+)\)):(.*)/gm;
