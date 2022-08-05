@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "ES2020",
+		"outDir": "out",
+		"lib": [
+			"ES2020"
+		],
+		"sourceMap": true,
+		"rootDirs": ["./core"],
+		"strict": true,  /* enable all strict type-checking options */
+		// "declaration": true,
+		"types": ["node"]
+		// "esModuleInterop": true,
+		// "resolveJsonModule": true
+		/* Additional Checks */
+		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
+		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
+		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
+	},
+	"include": ["src", "../core/**/*.ts"],
+	"exclude": ["node_modules", ".vscode-test"]
+}
