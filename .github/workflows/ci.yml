@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 16.x
       - name: installing yarn
-        run: npm install -g yarn
+        run: cd cli && npm install -g yarn
       - name: compiling and checking lint
         run: |
           yarn
