@@ -41,13 +41,13 @@ suite("dumpParsingResult", () => {
     );
     // read yaml file
     const generatedYAMLFile = fs.readFileSync(
-      path.resolve(__dirname, "../../../../docs/comment_only/ERC20.yaml"),
+      path.resolve(__dirname, "../../../../docs/ERC20_comment_only.yaml"),
       "utf8"
     );
     const targetYAMLFile = fs.readFileSync(
       path.resolve(
         __dirname,
-        "../../../../testGeneratedDocs/comment_only/ERC20.yaml"
+        "../../../../testGeneratedDocs/ERC20_comment_only.yaml"
       ),
       "utf8"
     );
