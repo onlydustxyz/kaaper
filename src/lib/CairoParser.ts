@@ -410,15 +410,20 @@ export default class CairoParser {
     outPath: string,
     dumpCommentOnly: boolean = false
   ): void {
+    // if outPath contains .cairo extension, remove it
+    const outFile = outPath.endsWith(".cairo")
+      ? (outPath = outPath.slice(0, -6))
+      : outPath;
+
     if (dumpCommentOnly === true) {
       const commentOnlyParsingResult = parsingResult?.map((obj) => ({
         attributeName: obj.attributeName,
         functionName: obj.functionName,
         functionComment: obj.functionComment,
       }));
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
+      fs.writeFileSync(`${outFile}.yaml`, yaml.dump(commentOnlyParsingResult));
     } else {
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
+      fs.writeFileSync(`${outFile}.yaml`, yaml.dump(parsingResult));
     }
   }
 }
