@@ -4,3 +4,6 @@ vscode-extension/server/out/
 vscode-extension/client/out/
 vscode-extension/client/tsconfig.tsbuildinfo
 **tsbuildinfo
+cli/.vscode-test/
+cli/node_modules/
+cli/out/
