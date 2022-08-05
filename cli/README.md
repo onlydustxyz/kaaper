@@ -32,14 +32,7 @@ Kaaper is a tool to generate documentation for Cairo projects.
 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
 
 
-## 📦 CLI Installation
-Navigate to CLI directory
-```
-cd cli
-```
-
-Then you can use any commands defined abbove
-
+## 📦 Installation
 ```
 yarn
 yarn install
@@ -76,30 +69,6 @@ kaaper check-compliance <rootdir>
 ```
 yarn test
 ```
-
-## 📦 VSCode Extension Installation
-The extension is not on the marketplace yet, so the only way to use it is by building it from source. Dont forget to open up the vscode on this directory.
-
-Open vscode-extension directory
-```
-code vscode
-```
-
-```
-yarn
-yarn install
-```
-
-- Press Ctrl+Shift+B to start compiling the client and server in [watch mode](https://code.visualstudio.com/docs/editor/tasks#:~:text=The%20first%20entry%20executes,the%20HelloWorld.js%20file.).
-- Switch to the Run and Debug View in the Sidebar (Ctrl+Shift+D).
-- Select `Launch Client` from the drop down (if it is not already).
-- Press ▷ to run the launch config (F5).
-- If you want to debug the server as well, use the launch configuration `Attach to Server`
-- In the [Extension Development Host](https://code.visualstudio.com/api/get-started/your-first-extension#:~:text=Then%2C%20inside%20the%20editor%2C%20press%20F5.%20This%20will%20compile%20and%20run%20the%20extension%20in%20a%20new%20Extension%20Development%20Host%20window.) instance of VSCode, open a document in 'plain text' language mode.
-  - Type `j` or `t` to see `Javascript` and `TypeScript` completion.
-  - Enter text content such as `AAA aaa BBB`. The extension will emit diagnostics for all words in all-uppercase.
-
-
 
 ## 🫶 Contributing
 
