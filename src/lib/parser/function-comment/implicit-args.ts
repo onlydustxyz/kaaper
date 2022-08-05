@@ -2,13 +2,16 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentImplicitArgsParser extends BaseCommentParser {
-  constructor(functionCommentText: string) {
+  constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "Implicit args";
     this.regex = /((\w+)(\(?([\w\*]+)\))?)$/gm;
   }
 
-  parseCommentLine(line: string): FunctionComment | null {
+  parseCommentLine(line: string | null): FunctionComment | null {
+    if (line === null) {
+      return null;
+    }
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
     if (lineCommentInsideScope) {
       const start = lineCommentInsideScope.index!;

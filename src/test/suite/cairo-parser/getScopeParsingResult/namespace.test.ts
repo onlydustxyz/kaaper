@@ -2,12 +2,6 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
-import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 
 import {
   yieldFunctionCommentPartsFromCharIndex,
@@ -50,7 +44,10 @@ suite("getScopeParsingResult: namespace", () => {
     const parsingTarget = [
       {
         attributeName: "namespace ERC20",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: { start: 2852, end: 2863 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -190,7 +187,10 @@ suite("getScopeParsingResult: namespace", () => {
     const parsingTarget = [
       {
         attributeName: "namespace ERC20",
-        functionName: "name",
+        functionName: {
+          name: "name",
+          charIndex: { start: 3691, end: 3695 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -311,7 +311,10 @@ suite("getScopeParsingResult: namespace", () => {
     const parsingTarget = [
       {
         attributeName: "namespace ERC20",
-        functionName: "transfer_from",
+        functionName: {
+          name: "transfer_from",
+          charIndex: { start: 4109, end: 4122 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -447,7 +450,10 @@ suite("getScopeParsingResult: namespace", () => {
     const parsingTarget = [
       {
         attributeName: "namespace internal",
-        functionName: "_mint",
+        functionName: {
+          name: "_mint",
+          charIndex: { start: 4948, end: 4953 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -573,7 +579,10 @@ suite("getScopeParsingResult: namespace", () => {
     const parsingTarget = [
       {
         attributeName: "namespace internal",
-        functionName: "_burn",
+        functionName: {
+          name: "_burn",
+          charIndex: { start: 6347, end: 6352 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },

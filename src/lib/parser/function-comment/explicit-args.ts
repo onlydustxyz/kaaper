@@ -2,7 +2,7 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 import { FunctionComment } from "../../types";
 
 export default class FunctionCommentExplicitArgsParser extends BaseCommentParser {
-  constructor(functionCommentText: string) {
+  constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "Explicit args";
     this.regex = /(\w+)(\((\w+)\)):(.*)/gm;

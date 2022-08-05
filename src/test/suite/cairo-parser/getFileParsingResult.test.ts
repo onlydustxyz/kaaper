@@ -15,7 +15,13 @@ suite("getFileParsingResult", () => {
     const parsingTarget = [
       {
         attributeName: "constructor",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: {
+            start: 349,
+            end: 360,
+          },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -124,7 +130,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "view",
-        functionName: "name",
+        functionName: {
+          name: "name",
+          charIndex: { start: 1322, end: 1326 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -178,7 +187,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "view",
-        functionName: "symbol",
+        functionName: {
+          name: "symbol",
+          charIndex: { start: 1688, end: 1694 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -232,7 +244,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "view",
-        functionName: "totalSupply",
+        functionName: {
+          name: "totalSupply",
+          charIndex: { start: 2070, end: 2081 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -286,7 +301,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "view",
-        functionName: "decimals",
+        functionName: {
+          name: "decimals",
+          charIndex: { start: 2517, end: 2525 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -340,7 +358,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "view",
-        functionName: "balanceOf",
+        functionName: {
+          name: "balanceOf",
+          charIndex: { start: 2922, end: 2931 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -401,7 +422,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "view",
-        functionName: "allowance",
+        functionName: {
+          name: "allowance",
+          charIndex: { start: 3441, end: 3450 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -471,7 +495,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "external",
-        functionName: "transfer",
+        functionName: {
+          name: "transfer",
+          charIndex: { start: 4171, end: 4179 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -560,7 +587,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "external",
-        functionName: "transferFrom",
+        functionName: {
+          name: "transferFrom",
+          charIndex: { start: 4917, end: 4929 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -656,7 +686,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "external",
-        functionName: "approve",
+        functionName: {
+          name: "approve",
+          charIndex: { start: 5771, end: 5778 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -739,7 +772,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "external",
-        functionName: "increaseAllowance",
+        functionName: {
+          name: "increaseAllowance",
+          charIndex: { start: 6477, end: 6494 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -822,7 +858,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "external",
-        functionName: "decreaseAllowance",
+        functionName: {
+          name: "decreaseAllowance",
+          charIndex: { start: 7264, end: 7281 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -924,7 +963,10 @@ suite("getFileParsingResult", () => {
     const parsingTarget = [
       {
         attributeName: "event",
-        functionName: "Transfer",
+        functionName: {
+          name: "Transfer",
+          charIndex: { start: 640, end: 648 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [
@@ -971,7 +1013,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "event",
-        functionName: "Approval",
+        functionName: {
+          name: "Approval",
+          charIndex: { start: 937, end: 945 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [
@@ -1018,7 +1063,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "storage_var",
-        functionName: "ERC20_name",
+        functionName: {
+          name: "ERC20_name",
+          charIndex: { start: 1276, end: 1286 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -1049,7 +1097,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "storage_var",
-        functionName: "ERC20_symbol",
+        functionName: {
+          name: "ERC20_symbol",
+          charIndex: { start: 1438, end: 1450 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -1080,7 +1131,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "storage_var",
-        functionName: "ERC20_decimals",
+        functionName: {
+          name: "ERC20_decimals",
+          charIndex: { start: 1610, end: 1624 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -1111,7 +1165,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "storage_var",
-        functionName: "ERC20_total_supply",
+        functionName: {
+          name: "ERC20_total_supply",
+          charIndex: { start: 1864, end: 1882 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: null,
@@ -1142,7 +1199,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "storage_var",
-        functionName: "ERC20_balances",
+        functionName: {
+          name: "ERC20_balances",
+          charIndex: { start: 2088, end: 2102 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [{ name: "account", type: "felt" }],
@@ -1180,7 +1240,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "storage_var",
-        functionName: "ERC20_allowances",
+        functionName: {
+          name: "ERC20_allowances",
+          charIndex: { start: 2389, end: 2405 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [
@@ -1227,7 +1290,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "namespace ERC20",
-        functionName: "constructor",
+        functionName: {
+          name: "constructor",
+          charIndex: { start: 2852, end: 2863 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -1297,7 +1363,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "namespace ERC20",
-        functionName: "name",
+        functionName: {
+          name: "name",
+          charIndex: { start: 3691, end: 3695 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -1356,7 +1425,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "namespace ERC20",
-        functionName: "transfer_from",
+        functionName: {
+          name: "transfer_from",
+          charIndex: { start: 4109, end: 4122 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -1426,7 +1498,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "namespace internal",
-        functionName: "_mint",
+        functionName: {
+          name: "_mint",
+          charIndex: { start: 4948, end: 4953 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },
@@ -1489,7 +1564,10 @@ suite("getFileParsingResult", () => {
       },
       {
         attributeName: "namespace internal",
-        functionName: "_burn",
+        functionName: {
+          name: "_burn",
+          charIndex: { start: 6347, end: 6352 },
+        },
         functionSignature: {
           implicitArgs: [
             { name: "syscall_ptr", type: "felt*" },

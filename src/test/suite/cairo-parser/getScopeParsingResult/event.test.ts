@@ -2,12 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import CairoParser from "../../../../lib/CairoParser";
-import FunctionCommentDescParser from "../../../../lib/parser/function-comment/desc";
 import FunctionSignatureRegexParser from "../../../../lib/parser/function-signature/regex";
-import FunctionCommentImplicitArgsParser from "../../../../lib/parser/function-comment/implicit-args";
-import FunctionCommentExplicitArgsParser from "../../../../lib/parser/function-comment/explicit-args";
-import FunctionCommentReturnsParser from "../../../../lib/parser/function-comment/returns";
-import FunctionCommentRaisesParser from "../../../../lib/parser/function-comment/raises";
 import {
   yieldFunctionCommentPartsFromCharIndex,
   yieldWholeFunctionCommentStringFromCharIndex,
@@ -35,10 +30,6 @@ suite("getScopeParsingResult: event", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     // parse whole scope
     const functionScopes = CairoParser.parseFunctionScope(text, "event");
-    // Function signature parsing
-    const functionSignatureParser = new FunctionSignatureRegexParser();
-    // Comment parsing
-    // parse comment lines
 
     const scopeNumber = 0;
     const functionCommentScope = CairoParser.parseCommentLines(
@@ -48,7 +39,10 @@ suite("getScopeParsingResult: event", () => {
     const parsingTarget = [
       {
         attributeName: "event",
-        functionName: "Transfer",
+        functionName: {
+          name: "Transfer",
+          charIndex: { start: 640, end: 648 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [
@@ -149,7 +143,10 @@ suite("getScopeParsingResult: event", () => {
     const parsingTarget = [
       {
         attributeName: "event",
-        functionName: "Approval",
+        functionName: {
+          name: "Approval",
+          charIndex: { start: 937, end: 945 },
+        },
         functionSignature: {
           implicitArgs: null,
           explicitArgs: [

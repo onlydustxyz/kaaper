@@ -6,10 +6,10 @@ export abstract class BaseCommentParser {
   public endScope: boolean;
   public startEndScopeRegexp: RegExp;
   public name: string;
-  public functionCommentText: string;
+  public functionCommentText: string | null;
   public regex: RegExp;
 
-  constructor(functionCommentText: string) {
+  constructor(functionCommentText: string | null) {
     this.startLine = "";
     this.runningScope = false;
     this.endScope = false;
@@ -72,11 +72,15 @@ export abstract class BaseCommentParser {
     */
 
   isInsideScope(line: string, regexp: RegExp): RegExpMatchArray | null {
-    const isNone = line.match(/#\s*None$/)
+    const isNone = line.match(/#\s*None$/);
     if (isNone) {
       return null;
     }
-    if (this.runningScope === true && this.startLine !== line) {
+    if (
+      this.functionCommentText &&
+      this.runningScope === true &&
+      this.startLine !== line
+    ) {
       const functionComments = [...this.functionCommentText.matchAll(regexp)];
       for (var functionComment of functionComments) {
         // without # or anything else, just pure content
@@ -99,7 +103,7 @@ export abstract class BaseCommentParser {
     lines: RegExpMatchArray | null
   ): Array<FunctionComment> | null {
     var result: Array<FunctionComment> = [];
-    if (lines) {
+    if (lines && this.functionCommentText) {
       for (const line of lines) {
         this.setStartScope(line);
         this.setEndScope(line);

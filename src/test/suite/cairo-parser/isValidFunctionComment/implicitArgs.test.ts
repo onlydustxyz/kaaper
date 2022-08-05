@@ -5,7 +5,10 @@ suite("isValidFunctionComment: implicit args", () => {
   test("valid (both are not null)", () => {
     const scopeLines = {
       attributeName: "view",
-      functionName: "totalSupply",
+      functionName: {
+        name: "name",
+        charIndex: { start: 0, end: 0 },
+      },
       functionSignature: {
         implicitArgs: [
           { name: "syscall_ptr", type: "felt*" },
@@ -65,7 +68,10 @@ suite("isValidFunctionComment: implicit args", () => {
   test("commentFunction has less element", () => {
     const scopeLines = {
       attributeName: "view",
-      functionName: "totalSupply",
+      functionName: {
+        name: "totalSupply",
+        charIndex: { start: 0, end: 0 },
+      },
       functionSignature: {
         implicitArgs: [
           { name: "syscall_ptr", type: "felt*" },
@@ -119,7 +125,10 @@ suite("isValidFunctionComment: implicit args", () => {
   test("commentFunction has more element", () => {
     const scopeLines = {
       attributeName: "view",
-      functionName: "totalSupply",
+      functionName: {
+        name: "totalSupply",
+        charIndex: { start: 0, end: 0 },
+      },
       functionSignature: {
         implicitArgs: [
           { name: "syscall_ptr", type: "felt*" },
@@ -178,7 +187,10 @@ suite("isValidFunctionComment: implicit args", () => {
   test("functionSignature is null", () => {
     const scopeLines = {
       attributeName: "view",
-      functionName: "totalSupply",
+      functionName: {
+        name: "totalSupply",
+        charIndex: { start: 0, end: 0 },
+      },
       functionSignature: {
         implicitArgs: null,
         explicitArgs: null,
@@ -228,7 +240,10 @@ suite("isValidFunctionComment: implicit args", () => {
   test("functionComment is null", () => {
     const scopeLines = {
       attributeName: "view",
-      functionName: "totalSupply",
+      functionName: {
+        name: "totalSupply",
+        charIndex: { start: 0, end: 0 },
+      },
       functionSignature: {
         implicitArgs: [{ name: "syscall_ptr", type: "felt*", desc: "" }],
         explicitArgs: null,
@@ -265,7 +280,10 @@ suite("isValidFunctionComment: implicit args", () => {
   test("both are null", () => {
     const scopeLines = {
       attributeName: "view",
-      functionName: "totalSupply",
+      functionName: {
+        name: "totalSupply",
+        charIndex: { start: 0, end: 0 },
+      },
       functionSignature: {
         implicitArgs: null,
         explicitArgs: null,

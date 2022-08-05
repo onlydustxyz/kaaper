@@ -192,9 +192,10 @@ export default class CairoParser {
             ? CairoParser.parseCommentLines(functionScope, true)
             : CairoParser.parseCommentLines(functionScope, false);
 
-        const functionCommentScope =
-          CairoParser.parseCommentLines(functionScope)!.text;
-        const functionCommentText = functionCommentScope!.join("");
+        const functionCommentText = commentLines
+          ? commentLines.text.join("")
+          : null;
+
         const functionCommentDescParser = new FunctionCommentDescParser(
           functionCommentText
         );
@@ -209,13 +210,25 @@ export default class CairoParser {
           functionCommentText
         );
 
+        const functionCommentScope = commentLines ? commentLines.text : null;
+        const functionCommentCharIndexStart = commentLines
+          ? commentLines.start
+          : 0;
+        const functionCommentCharIndexEnd = commentLines ? commentLines.end : 0;
+
+        const isNamespaceScope = name === "namespace" ? true : false;
+
         const parsingOutput = {
           attributeName: functionSignatureParser.getAttributeName(
             functionScope!.text
           ),
-          functionName: functionSignatureParser.getFunctionName(
-            functionScope!.text
-          ),
+          functionName: {
+            name: functionSignatureParser.getFunctionName(functionScope!.text),
+            charIndex: functionSignatureParser.getFunctionNameCharIndex(
+              functionScope,
+              isNamespaceScope
+            ),
+          },
           functionSignature: {
             implicitArgs: functionSignatureParser.getImplicitArgs(
               functionScope!.text
@@ -227,23 +240,27 @@ export default class CairoParser {
           },
           functionComment: {
             desc: functionCommentDescParser.parseCommentLines(
-              commentLines!.text
+              functionCommentScope
             ),
-            implicitArgs: functionCommentImplicitArgsParser.parseCommentLines(
-              commentLines!.text
-            ),
-            explicitArgs: functionCommentExplicitArgsParser.parseCommentLines(
-              commentLines!.text
-            ),
-            returns: functionCommentReturnsParser.parseCommentLines(
-              commentLines!.text
-            ),
-            raises: functionCommentRaisesParser.parseCommentLines(
-              commentLines!.text
-            ),
+            implicitArgs:
+              functionCommentImplicitArgsParser.parseCommentLines(
+                functionCommentScope
+              ),
+            explicitArgs:
+              functionCommentExplicitArgsParser.parseCommentLines(
+                functionCommentScope
+              ),
+            returns:
+              functionCommentReturnsParser.parseCommentLines(
+                functionCommentScope
+              ),
+            raises:
+              functionCommentRaisesParser.parseCommentLines(
+                functionCommentScope
+              ),
             charIndex: {
-              start: commentLines!.start,
-              end: commentLines!.end,
+              start: functionCommentCharIndexStart,
+              end: functionCommentCharIndexEnd,
             },
           },
         };
@@ -393,15 +410,20 @@ export default class CairoParser {
     outPath: string,
     dumpCommentOnly: boolean = false
   ): void {
+    // if outPath contains .cairo extension, remove it
+    const outFile = outPath.endsWith(".cairo")
+      ? (outPath = outPath.slice(0, -6))
+      : outPath;
+
     if (dumpCommentOnly === true) {
       const commentOnlyParsingResult = parsingResult?.map((obj) => ({
         attributeName: obj.attributeName,
         functionName: obj.functionName,
         functionComment: obj.functionComment,
       }));
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(commentOnlyParsingResult));
+      fs.writeFileSync(`${outFile}.yaml`, yaml.dump(commentOnlyParsingResult));
     } else {
-      fs.writeFileSync(`${outPath}.yaml`, yaml.dump(parsingResult));
+      fs.writeFileSync(`${outFile}.yaml`, yaml.dump(parsingResult));
     }
   }
 }

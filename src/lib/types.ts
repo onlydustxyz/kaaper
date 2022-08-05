@@ -29,7 +29,10 @@ export interface FunctionCommentScope {
 
 export interface ParsingResult {
   attributeName: string;
-  functionName: string;
+  functionName: {
+    name: string;
+    charIndex: CharIndex;
+  };
   functionSignature: {
     implicitArgs: FunctionSignature[] | null;
     explicitArgs: FunctionSignature[] | null;
@@ -53,7 +56,10 @@ export interface FunctionCommentValidity {
 export interface CommentComplicance {
   filePath: string | null;
   attributeName: string | null;
-  functionName: string | null;
+  functionName: {
+    name: string | null;
+    charIndex: CharIndex | null;
+  };
   errorSource: string | string[] | null;
 }
 
