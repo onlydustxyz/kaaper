@@ -1,0 +1,162 @@
+- attributeName: event
+  functionName:
+    name: Transfer
+    charIndex:
+      start: 640
+      end: 648
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: event
+  functionName:
+    name: Approval
+    charIndex:
+      start: 710
+      end: 718
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: storage_var
+  functionName:
+    name: ERC20_name
+    charIndex:
+      start: 805
+      end: 815
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: storage_var
+  functionName:
+    name: ERC20_symbol
+    charIndex:
+      start: 859
+      end: 871
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: storage_var
+  functionName:
+    name: ERC20_total_supply
+    charIndex:
+      start: 918
+      end: 936
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns total amount of tokens in existence
+        charIndex:
+          start: 22
+          end: 65
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: total_supply
+        type: Uint256
+        desc: The total amount of tokens in existence
+        charIndex:
+          start: 89
+          end: 151
+    raises: null
+    charIndex:
+      start: 967
+      end: 1118
+- attributeName: namespace ERC20
+  functionName:
+    name: constructor
+    charIndex:
+      start: 1182
+      end: 1193
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: namespace ERC20
+  functionName:
+    name: name
+    charIndex:
+      start: 1624
+      end: 1628
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: namespace ERC20
+  functionName:
+    name: transfer_from
+    charIndex:
+      start: 1796
+      end: 1809
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: namespace internal
+  functionName:
+    name: _mint
+    charIndex:
+      start: 2236
+      end: 2241
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
+- attributeName: namespace internal
+  functionName:
+    name: _burn
+    charIndex:
+      start: 3274
+      end: 3279
+  functionComment:
+    desc: null
+    implicitArgs: null
+    explicitArgs: null
+    returns: null
+    raises: null
+    charIndex:
+      start: 0
+      end: 0
