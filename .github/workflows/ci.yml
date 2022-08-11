@@ -18,16 +18,15 @@ jobs:
         with:
           node-version: 16.x
       - name: installing yarn
-        run: npm install -g yarn
+        run: cd cli && npm install -g yarn
       - name: compiling and checking lint
         run: |
-          yarn
-          yarn run compile && yarn run lint
+          cd cli && yarn && yarn run compile && yarn run lint
       - run: ls -al
         if: runner.os == 'Linux'
       - name: test with yarn (LINUX ONLY)
-        run: xvfb-run -a yarn test
+        run: cd cli && xvfb-run -a yarn test
         if: runner.os == 'Linux'
       - name: test with yarn (NON-LINUX)
-        run: yarn test
+        run: cd cli && yarn test
         if: runner.os != 'Linux'
