@@ -1,0 +1,10 @@
+vscode-extension/node_modules/
+vscode-extension/server/node_modules/
+vscode-extension/server/out/
+vscode-extension/client/out/
+vscode-extension/client/node_modules/
+vscode-extension/client/tsconfig.tsbuildinfo
+**tsbuildinfo
+cli/.vscode-test/
+cli/node_modules/
+cli/out/
