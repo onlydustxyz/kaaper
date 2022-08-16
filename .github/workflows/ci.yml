@@ -6,7 +6,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        shell: bash
+        working-directory: cli
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -18,15 +21,15 @@ jobs:
         with:
           node-version: 16.x
       - name: installing yarn
-        run: cd cli && npm install -g yarn
+        run: npm install -g yarn
       - name: compiling and checking lint
         run: |
-          cd cli && yarn && yarn run compile && yarn run lint
+          yarn && yarn run compile && yarn run lint
       - run: ls -al
         if: runner.os == 'Linux'
       - name: test with yarn (LINUX ONLY)
-        run: cd cli && xvfb-run -a yarn test
+        run: xvfb-run -a yarn test
         if: runner.os == 'Linux'
       - name: test with yarn (NON-LINUX)
-        run: cd cli && yarn test
+        run: yarn test
         if: runner.os != 'Linux'
