@@ -26,7 +26,7 @@ suite("function-comment: view: desc", () => {
     );
 
     assert.equal(
-      "# Desc:",
+      "// Desc:",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -73,7 +73,7 @@ suite("function-comment: view: desc", () => {
     const commentLineParsing = descParser.parseCommentLine(functionCommentLine);
 
     assert.equal(
-      "#   Returns the name of the token",
+      "//   Returns the name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -95,8 +95,8 @@ suite("function-comment: view: desc", () => {
       type: "",
       desc: "Returns the name of the token",
       charIndex: {
-        start: 21,
-        end: 50,
+        start: 22,
+        end: 51,
       },
     };
 
@@ -150,12 +150,12 @@ suite("function-comment: view: desc", () => {
     descParser.setStartScope(functionCommentScope!.text[0]);
 
     assert.equal(
-      "# Implicit args:",
+      "// Implicit args:",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
 
-    assert.equal("\n    # Desc:", descParser.startLine);
+    assert.equal("\n    // Desc:", descParser.startLine);
     assert.notEqual(lineNumber, descParser.startLine);
     const isEndScope = descParser.isEndScope(functionCommentLine);
     assert.equal(
@@ -205,8 +205,8 @@ suite("function-comment: view: desc", () => {
         type: "",
         desc: "Returns the name of the token",
         charIndex: {
-          start: 21,
-          end: 50,
+          start: 22,
+          end: 51,
         },
       },
     ];

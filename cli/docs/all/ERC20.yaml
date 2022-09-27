@@ -2,8 +2,8 @@
   functionName:
     name: constructor
     charIndex:
-      start: 349
-      end: 360
+      start: 351
+      end: 362
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -30,93 +30,93 @@
         type: ''
         desc: Initialize the contract
         charIndex:
-          start: 21
-          end: 44
+          start: 22
+          end: 45
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 74
-          end: 92
+          start: 78
+          end: 96
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 101
-          end: 127
+          start: 106
+          end: 132
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 136
-          end: 151
+          start: 142
+          end: 157
     explicitArgs:
       - name: name
         type: felt
         desc: name of the token
         charIndex:
-          start: 181
-          end: 210
+          start: 189
+          end: 218
       - name: symbol
         type: felt
         desc: symbol of the token
         charIndex:
-          start: 219
-          end: 252
+          start: 228
+          end: 261
       - name: decimals
         type: Uint256
         desc: floating point of the token
         charIndex:
-          start: 261
-          end: 307
+          start: 271
+          end: 317
       - name: initial_supply
         type: Uint256
         desc: amount of initial supply of the token
         charIndex:
-          start: 316
-          end: 378
+          start: 327
+          end: 389
       - name: recipient
         type: felt
         desc: the address of recipient of the initial supply
         charIndex:
-          start: 387
-          end: 450
+          start: 399
+          end: 462
     returns: null
     raises:
       - name: decimals
         type: ''
         desc: decimals exceed 2^8
         charIndex:
-          start: 501
-          end: 530
+          start: 517
+          end: 546
       - name: recipient
         type: ''
         desc: cannot mint to the zero address
         charIndex:
-          start: 539
-          end: 581
+          start: 556
+          end: 598
       - name: initial_supply
         type: ''
         desc: not valid Uint256
         charIndex:
-          start: 590
-          end: 623
+          start: 608
+          end: 641
       - name: initial_supply
         type: ''
         desc: mint overflow
         charIndex:
-          start: 632
-          end: 661
+          start: 651
+          end: 680
     charIndex:
-      start: 526
-      end: 1187
+      start: 522
+      end: 1202
 - attributeName: view
   functionName:
     name: name
     charIndex:
-      start: 1322
-      end: 1326
+      start: 1341
+      end: 1345
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -135,45 +135,45 @@
         type: ''
         desc: Returns the name of the token
         charIndex:
-          start: 21
-          end: 50
+          start: 22
+          end: 51
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 80
-          end: 98
+          start: 84
+          end: 102
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 107
-          end: 133
+          start: 112
+          end: 138
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 142
-          end: 157
+          start: 148
+          end: 163
     explicitArgs: null
     returns:
       - name: name
         type: felt
         desc: name of the token
         charIndex:
-          start: 181
-          end: 210
+          start: 189
+          end: 218
     raises: null
     charIndex:
-      start: 1413
-      end: 1623
+      start: 1430
+      end: 1648
 - attributeName: view
   functionName:
     name: symbol
     charIndex:
-      start: 1688
-      end: 1694
+      start: 1714
+      end: 1720
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -192,45 +192,45 @@
         type: ''
         desc: Returns the symbol of the token
         charIndex:
-          start: 21
-          end: 52
+          start: 22
+          end: 53
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 82
-          end: 100
+          start: 86
+          end: 104
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 109
-          end: 135
+          start: 114
+          end: 140
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 144
-          end: 159
+          start: 150
+          end: 165
     explicitArgs: null
     returns:
       - name: symbol
         type: felt
         desc: symbol of the token
         charIndex:
-          start: 183
-          end: 216
+          start: 191
+          end: 224
     raises: null
     charIndex:
-      start: 1783
-      end: 1999
+      start: 1807
+      end: 2031
 - attributeName: view
   functionName:
     name: totalSupply
     charIndex:
-      start: 2070
-      end: 2081
+      start: 2103
+      end: 2114
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -249,45 +249,45 @@
         type: ''
         desc: Returns the total supply of the token
         charIndex:
-          start: 21
-          end: 58
+          start: 22
+          end: 59
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 88
-          end: 106
+          start: 92
+          end: 110
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 115
-          end: 141
+          start: 120
+          end: 146
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 150
-          end: 165
+          start: 156
+          end: 171
     explicitArgs: null
     returns:
       - name: totalSupply
         type: Uint256
         desc: total supply of the token
         charIndex:
-          start: 189
-          end: 236
+          start: 197
+          end: 244
     raises: null
     charIndex:
-      start: 2184
-      end: 2420
+      start: 2215
+      end: 2459
 - attributeName: view
   functionName:
     name: decimals
     charIndex:
-      start: 2517
-      end: 2525
+      start: 2556
+      end: 2564
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -306,45 +306,45 @@
         type: ''
         desc: Returns the decimals of the token
         charIndex:
-          start: 21
-          end: 54
+          start: 22
+          end: 55
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 84
-          end: 102
+          start: 88
+          end: 106
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 111
-          end: 137
+          start: 116
+          end: 142
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 146
-          end: 161
+          start: 152
+          end: 167
     explicitArgs: null
     returns:
       - name: decimals
         type: felt
         desc: decimals of the token
         charIndex:
-          start: 185
-          end: 222
+          start: 193
+          end: 230
     raises: null
     charIndex:
-      start: 2622
-      end: 2844
+      start: 2659
+      end: 2889
 - attributeName: view
   functionName:
     name: balanceOf
     charIndex:
-      start: 2922
-      end: 2931
+      start: 2968
+      end: 2977
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -365,51 +365,51 @@
         type: ''
         desc: Returns the balance of the account
         charIndex:
-          start: 21
-          end: 55
+          start: 22
+          end: 56
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 85
-          end: 103
+          start: 89
+          end: 107
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 112
-          end: 138
+          start: 117
+          end: 143
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 147
-          end: 162
+          start: 153
+          end: 168
     explicitArgs:
       - name: account
         type: felt
         desc: account to query balance for
         charIndex:
-          start: 192
-          end: 235
+          start: 200
+          end: 243
     returns:
       - name: balance
         type: Uint256
         desc: the balance of the account
         charIndex:
-          start: 259
-          end: 303
+          start: 269
+          end: 313
     raises: null
     charIndex:
-      start: 3044
-      end: 3347
+      start: 3087
+      end: 3400
 - attributeName: view
   functionName:
     name: allowance
     charIndex:
-      start: 3441
-      end: 3450
+      start: 3494
+      end: 3503
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -434,57 +434,57 @@
           Returns the amount of remaining tokens allowed to be spent by the
           spender
         charIndex:
-          start: 21
-          end: 94
+          start: 22
+          end: 95
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 124
-          end: 142
+          start: 128
+          end: 146
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 151
-          end: 177
+          start: 156
+          end: 182
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 186
-          end: 201
+          start: 192
+          end: 207
     explicitArgs:
       - name: owner
         type: felt
         desc: the address of owner of the tokens
         charIndex:
-          start: 231
-          end: 278
+          start: 239
+          end: 286
       - name: spender
         type: felt
         desc: the address of spender (delegated account) of the tokens
         charIndex:
-          start: 287
-          end: 358
+          start: 296
+          end: 367
     returns:
       - name: remaining
         type: Uint256
         desc: the amount of remaining tokens allowed to be spent by the spender
         charIndex:
-          start: 382
-          end: 467
+          start: 393
+          end: 478
     raises: null
     charIndex:
-      start: 3579
-      end: 4046
+      start: 3628
+      end: 4106
 - attributeName: external
   functionName:
     name: transfer
     charIndex:
-      start: 4171
-      end: 4179
+      start: 4234
+      end: 4242
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -507,75 +507,75 @@
         type: ''
         desc: Perform transfer to recipient
         charIndex:
-          start: 21
-          end: 50
+          start: 22
+          end: 51
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 80
-          end: 98
+          start: 84
+          end: 102
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 107
-          end: 133
+          start: 112
+          end: 138
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 142
-          end: 157
+          start: 148
+          end: 163
     explicitArgs:
       - name: recipient
         type: felt
         desc: the address of ERC20 recipient
         charIndex:
-          start: 187
-          end: 234
+          start: 195
+          end: 242
       - name: amount
         type: Uint256
         desc: the amount of ERC20 transfer
         charIndex:
-          start: 243
-          end: 288
+          start: 252
+          end: 297
     returns:
       - name: success
         type: felt
         desc: 1 if transfer was successful, 0 otherwise
         charIndex:
-          start: 312
-          end: 368
+          start: 323
+          end: 379
     raises:
       - name: amount
         type: ''
         desc: amount is not a valid Uint256
         charIndex:
-          start: 391
-          end: 428
+          start: 404
+          end: 441
       - name: recipient
         type: ''
         desc: cannot transfer to the zero address
         charIndex:
-          start: 437
-          end: 483
+          start: 451
+          end: 497
       - name: amount
         type: ''
         desc: transfer amount exceeds balance
         charIndex:
-          start: 492
-          end: 531
+          start: 507
+          end: 546
     charIndex:
-      start: 4309
-      end: 4840
+      start: 4368
+      end: 4914
 - attributeName: external
   functionName:
     name: transferFrom
     charIndex:
-      start: 4917
-      end: 4929
+      start: 4992
+      end: 5004
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -600,81 +600,81 @@
         type: ''
         desc: Perform transfer from sender to recipient with allowance
         charIndex:
-          start: 21
-          end: 77
+          start: 22
+          end: 78
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 107
-          end: 125
+          start: 111
+          end: 129
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 134
-          end: 160
+          start: 139
+          end: 165
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 169
-          end: 184
+          start: 175
+          end: 190
     explicitArgs:
       - name: sender
         type: felt
         desc: the address of ERC20 sender
         charIndex:
-          start: 214
-          end: 255
+          start: 222
+          end: 263
       - name: recipient
         type: felt
         desc: the address of ERC20 recipient
         charIndex:
-          start: 264
-          end: 311
+          start: 273
+          end: 320
       - name: amount
         type: Uint256
         desc: the amount of ERC20 transfer
         charIndex:
-          start: 320
-          end: 365
+          start: 330
+          end: 375
     returns:
       - name: success
         type: felt
         desc: 1 if transfer was successful, 0 otherwise
         charIndex:
-          start: 389
-          end: 445
+          start: 401
+          end: 457
     raises:
       - name: amount
         type: ''
         desc: amount is not a valid Uint256
         charIndex:
-          start: 468
-          end: 505
+          start: 482
+          end: 519
       - name: sender
         type: ''
         desc: cannot transfer from the zero address
         charIndex:
-          start: 514
-          end: 559
+          start: 529
+          end: 574
       - name: amount
         type: ''
         desc: transfer amount exceeds balance
         charIndex:
-          start: 568
-          end: 607
+          start: 584
+          end: 623
     charIndex:
-      start: 5074
-      end: 5681
+      start: 5144
+      end: 5767
 - attributeName: external
   functionName:
     name: approve
     charIndex:
-      start: 5771
-      end: 5778
+      start: 5858
+      end: 5865
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -697,69 +697,69 @@
         type: ''
         desc: Approve spender to spend amount of tokens
         charIndex:
-          start: 21
-          end: 62
+          start: 22
+          end: 63
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 92
-          end: 110
+          start: 96
+          end: 114
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 119
-          end: 145
+          start: 124
+          end: 150
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 154
-          end: 169
+          start: 160
+          end: 175
     explicitArgs:
       - name: spender
         type: felt
         desc: the address of ERC20 spender
         charIndex:
-          start: 199
-          end: 242
+          start: 207
+          end: 250
       - name: amount
         type: Uint256
         desc: the amount of ERC20 token to approve
         charIndex:
-          start: 251
-          end: 304
+          start: 260
+          end: 313
     returns:
       - name: success
         type: felt
         desc: 1 if approve was successful, 0 otherwise
         charIndex:
-          start: 328
-          end: 383
+          start: 339
+          end: 394
     raises:
       - name: amount
         type: ''
         desc: amount is not a valid Uint256
         charIndex:
-          start: 406
-          end: 443
+          start: 419
+          end: 456
       - name: spender
         type: ''
         desc: cannot approve to the zero address
         charIndex:
-          start: 452
-          end: 495
+          start: 466
+          end: 509
     charIndex:
-      start: 5906
-      end: 6401
+      start: 5989
+      end: 6498
 - attributeName: external
   functionName:
     name: increaseAllowance
     charIndex:
-      start: 6477
-      end: 6494
+      start: 6574
+      end: 6591
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -782,69 +782,69 @@
         type: ''
         desc: Increase allowance of spender by added_value
         charIndex:
-          start: 21
-          end: 65
+          start: 22
+          end: 66
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 95
-          end: 113
+          start: 99
+          end: 117
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 122
-          end: 148
+          start: 127
+          end: 153
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 157
-          end: 172
+          start: 163
+          end: 178
     explicitArgs:
       - name: spender
         type: felt
         desc: the address of ERC20 spender
         charIndex:
-          start: 202
-          end: 245
+          start: 210
+          end: 253
       - name: added_value
         type: Uint256
         desc: the amount of ERC20 token to increase allowance
         charIndex:
-          start: 254
-          end: 323
+          start: 263
+          end: 332
     returns:
       - name: success
         type: felt
         desc: 1 if increase allowance was successful, 0 otherwise
         charIndex:
-          start: 347
-          end: 413
+          start: 358
+          end: 424
     raises:
       - name: added_value
         type: ''
         desc: added_value is not a valid Uint256
         charIndex:
-          start: 436
-          end: 483
+          start: 449
+          end: 496
       - name: spender
         type: ''
         desc: cannot increase allowance to the zero address
         charIndex:
-          start: 492
-          end: 546
+          start: 506
+          end: 560
     charIndex:
-      start: 6627
-      end: 7173
+      start: 6720
+      end: 7280
 - attributeName: external
   functionName:
     name: decreaseAllowance
     charIndex:
-      start: 7264
-      end: 7281
+      start: 7372
+      end: 7389
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -867,60 +867,60 @@
         type: ''
         desc: Decrease allowance of spender by subtracted_value
         charIndex:
-          start: 21
-          end: 70
+          start: 22
+          end: 71
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 100
-          end: 118
+          start: 104
+          end: 122
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 127
-          end: 153
+          start: 132
+          end: 158
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 162
-          end: 177
+          start: 168
+          end: 183
     explicitArgs:
       - name: spender
         type: felt
         desc: the address of ERC20 spender
         charIndex:
-          start: 207
-          end: 250
+          start: 215
+          end: 258
       - name: subtracted_value
         type: Uint256
         desc: the amount of ERC20 token to decrease allowance
         charIndex:
-          start: 259
-          end: 333
+          start: 268
+          end: 342
     returns:
       - name: success
         type: felt
         desc: 1 if decrease allowance was successful, 0 otherwise
         charIndex:
-          start: 357
-          end: 423
+          start: 368
+          end: 434
     raises:
       - name: subtracted_value
         type: ''
         desc: subtracted_value is not a valid Uint256
         charIndex:
-          start: 446
-          end: 503
+          start: 459
+          end: 516
       - name: spender
         type: ''
         desc: cannot decrease allowance to the zero address
         charIndex:
-          start: 512
-          end: 566
+          start: 526
+          end: 580
     charIndex:
-      start: 7419
-      end: 7985
+      start: 7523
+      end: 8103

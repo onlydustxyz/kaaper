@@ -23,7 +23,7 @@ suite("function-comment: constructor: explicit-args", () => {
 
     const line = 6;
     assert.equal(
-      "# Explicit args:",
+      "// Explicit args:",
       functionCommentScope![line].trim(),
       `check line ${line}`
     );
@@ -70,7 +70,7 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 7;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   name(felt): name of the token",
+      "//   name(felt): name of the token",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -91,8 +91,8 @@ suite("function-comment: constructor: explicit-args", () => {
       type: "felt",
       desc: "name of the token",
       charIndex: {
-        start: 181,
-        end: 210,
+        start: 189,
+        end: 218,
       },
     };
     assert.deepEqual(
@@ -139,7 +139,7 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 8;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   symbol(felt): symbol of the token",
+      "//   symbol(felt): symbol of the token",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -160,8 +160,8 @@ suite("function-comment: constructor: explicit-args", () => {
       type: "felt",
       desc: "symbol of the token",
       charIndex: {
-        start: 219,
-        end: 252,
+        start: 228,
+        end: 261,
       },
     };
     assert.deepEqual(
@@ -208,7 +208,7 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 9;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   decimals(Uint256): floating point of the token",
+      "//   decimals(Uint256): floating point of the token",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -229,8 +229,8 @@ suite("function-comment: constructor: explicit-args", () => {
       type: "Uint256",
       desc: "floating point of the token",
       charIndex: {
-        start: 261,
-        end: 307,
+        start: 271,
+        end: 317,
       },
     };
     assert.deepEqual(
@@ -280,7 +280,7 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 10;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   initial_supply(Uint256): amount of initial supply of the token",
+      "//   initial_supply(Uint256): amount of initial supply of the token",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -301,8 +301,8 @@ suite("function-comment: constructor: explicit-args", () => {
       type: "Uint256",
       desc: "amount of initial supply of the token",
       charIndex: {
-        start: 316,
-        end: 378,
+        start: 327,
+        end: 389,
       },
     };
     assert.deepEqual(
@@ -352,7 +352,7 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 11;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   recipient(felt): the address of recipient of the initial supply",
+      "//   recipient(felt): the address of recipient of the initial supply",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -373,8 +373,8 @@ suite("function-comment: constructor: explicit-args", () => {
       type: "felt",
       desc: "the address of recipient of the initial supply",
       charIndex: {
-        start: 387,
-        end: 450,
+        start: 399,
+        end: 462,
       },
     };
     assert.deepEqual(
@@ -424,7 +424,7 @@ suite("function-comment: constructor: explicit-args", () => {
 
     const line = 12;
     assert.equal(
-      "# Returns:",
+      "// Returns:",
       functionCommentScope![line].trim(),
       `check line ${line}`
     );
@@ -472,31 +472,31 @@ suite("function-comment: constructor: explicit-args", () => {
         name: "name",
         type: "felt",
         desc: "name of the token",
-        charIndex: { start: 181, end: 210 },
+        charIndex: { start: 189, end: 218 },
       },
       {
         name: "symbol",
         type: "felt",
         desc: "symbol of the token",
-        charIndex: { start: 219, end: 252 },
+        charIndex: { start: 228, end: 261 },
       },
       {
         name: "decimals",
         type: "Uint256",
         desc: "floating point of the token",
-        charIndex: { start: 261, end: 307 },
+        charIndex: { start: 271, end: 317 },
       },
       {
         name: "initial_supply",
         type: "Uint256",
         desc: "amount of initial supply of the token",
-        charIndex: { start: 316, end: 378 },
+        charIndex: { start: 327, end: 389 },
       },
       {
         name: "recipient",
         type: "felt",
         desc: "the address of recipient of the initial supply",
-        charIndex: { start: 387, end: 450 },
+        charIndex: { start: 399, end: 462 },
       },
     ];
     const resultLineParsing = explicitArgsParser.parseCommentLines(

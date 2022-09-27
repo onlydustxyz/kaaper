@@ -26,7 +26,7 @@ suite("function-comment: constructor: desc", () => {
     );
 
     assert.equal(
-      "# Desc:",
+      "// Desc:",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -71,7 +71,7 @@ suite("function-comment: constructor: desc", () => {
     descParser.setStartScope(functionCommentScope!.text[0]);
 
     assert.equal(
-      "#   Initialize the contract",
+      "//   Initialize the contract",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -95,8 +95,8 @@ suite("function-comment: constructor: desc", () => {
       type: "",
       desc: "Initialize the contract",
       charIndex: {
-        start: 21,
-        end: 44,
+        start: 22,
+        end: 45,
       },
     };
     assert.deepEqual(
@@ -123,12 +123,12 @@ suite("function-comment: constructor: desc", () => {
     descParser.setStartScope(functionCommentScope!.text[0]);
 
     assert.equal(
-      "# Implicit args:",
+      "// Implicit args:",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
 
-    assert.equal("\n    # Desc:", descParser.startLine);
+    assert.equal("\n    // Desc:", descParser.startLine);
     assert.notEqual(lineNumber, descParser.startLine);
     const isEndScope = descParser.isEndScope(functionCommentLine);
     assert.equal(
@@ -178,7 +178,7 @@ suite("function-comment: constructor: desc", () => {
         name: "",
         type: "",
         desc: "Initialize the contract",
-        charIndex: { start: 21, end: 44 },
+        charIndex: { start: 22, end: 45 },
       },
     ];
 

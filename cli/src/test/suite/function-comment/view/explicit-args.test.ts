@@ -123,7 +123,7 @@ suite("function-comment: view: balanceOf", () => {
     const lineNumber = 6;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "# Explicit args:",
+      "// Explicit args:",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -170,7 +170,7 @@ suite("function-comment: view: balanceOf", () => {
     const lineNumber = 7;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "#   account(felt): account to query balance for",
+      "//   account(felt): account to query balance for",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -195,8 +195,8 @@ suite("function-comment: view: balanceOf", () => {
       type: "felt",
       desc: "account to query balance for",
       charIndex: {
-        start: 192,
-        end: 235,
+        start: 200,
+        end: 243,
       },
     };
     assert.deepEqual(
@@ -247,7 +247,7 @@ suite("function-comment: view: balanceOf", () => {
     const lineNumber = 8;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "# Returns:",
+      "// Returns:",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -302,8 +302,8 @@ suite("function-comment: view: balanceOf", () => {
         type: "felt",
         desc: "account to query balance for",
         charIndex: {
-          start: 192,
-          end: 235,
+          start: 200,
+          end: 243,
         },
       },
     ];
@@ -336,7 +336,7 @@ suite("function-comment: view: allowance", () => {
     const lineNumber = 6;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "# Explicit args:",
+      "// Explicit args:",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -383,7 +383,7 @@ suite("function-comment: view: allowance", () => {
     const lineNumber = 7;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "#   owner(felt): the address of owner of the tokens",
+      "//   owner(felt): the address of owner of the tokens",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -408,8 +408,8 @@ suite("function-comment: view: allowance", () => {
       type: "felt",
       desc: "the address of owner of the tokens",
       charIndex: {
-        start: 231,
-        end: 278,
+        start: 239,
+        end: 286,
       },
     };
     assert.deepEqual(
@@ -460,7 +460,7 @@ suite("function-comment: view: allowance", () => {
     const lineNumber = 8;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "#   spender(felt): the address of spender (delegated account) of the tokens",
+      "//   spender(felt): the address of spender (delegated account) of the tokens",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -485,8 +485,8 @@ suite("function-comment: view: allowance", () => {
       type: "felt",
       desc: "the address of spender (delegated account) of the tokens",
       charIndex: {
-        start: 287,
-        end: 358,
+        start: 296,
+        end: 367,
       },
     };
     assert.deepEqual(
@@ -537,7 +537,7 @@ suite("function-comment: view: allowance", () => {
     const lineNumber = 9;
     const functionCommentLine = functionCommentScope!.text[lineNumber];
     assert.equal(
-      "# Returns:",
+      "// Returns:",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -592,8 +592,8 @@ suite("function-comment: view: allowance", () => {
         type: "felt",
         desc: "the address of owner of the tokens",
         charIndex: {
-          start: 231,
-          end: 278,
+          start: 239,
+          end: 286,
         },
       },
       {
@@ -601,8 +601,8 @@ suite("function-comment: view: allowance", () => {
         type: "felt",
         desc: "the address of spender (delegated account) of the tokens",
         charIndex: {
-          start: 287,
-          end: 358,
+          start: 296,
+          end: 367,
         },
       },
     ];
