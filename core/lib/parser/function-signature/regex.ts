@@ -33,7 +33,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
           .slice(1, functionScope.text.split("\n").length)
           .join("\n")
         : functionScope.text;
-    const regexp = /func(\s*)(\w+)/gm;
+    const regexp = /func(\s+)(\w+)/gm;
     const matchAgainstScope = [...functionScopeText.matchAll(regexp)];
     const scopeStartIndex = matchAgainstScope[0].index!;
     const spaceLength = matchAgainstScope[0][1].length;

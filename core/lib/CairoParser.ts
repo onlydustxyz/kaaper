@@ -66,7 +66,7 @@ export default class CairoParser {
         runningScope = true;
         texts += line + "\n";
       }
-      if (line === "end" && runningScope === true) {
+      if (line === "}" && runningScope === true) {
         const namespace = {
           namespace: attributeName,
           start: namespaceScopes[namespaceCount].index!,
