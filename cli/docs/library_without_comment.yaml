@@ -70,8 +70,8 @@
         type: ''
         desc: Returns total amount of tokens in existence
         charIndex:
-          start: 22
-          end: 65
+          start: 23
+          end: 66
     implicitArgs: null
     explicitArgs: null
     returns:

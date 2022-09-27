@@ -185,8 +185,8 @@
           Store the amount of tokens that an owner is allowed to delegate to a
           spender
         charIndex:
-          start: 22
-          end: 98
+          start: 23
+          end: 99
     implicitArgs: null
     explicitArgs:
       - name: owner
@@ -240,8 +240,8 @@
         type: ''
         desc: Initializes the contract with the given name, symbol, and decimals
         charIndex:
-          start: 30
-          end: 96
+          start: 31
+          end: 97
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -309,8 +309,8 @@
         type: ''
         desc: Returns the name of the token
         charIndex:
-          start: 30
-          end: 59
+          start: 31
+          end: 60
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -370,8 +370,8 @@
         type: ''
         desc: Transfers tokens from one account to another
         charIndex:
-          start: 30
-          end: 74
+          start: 31
+          end: 75
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -441,8 +441,8 @@
         type: ''
         desc: Mints tokens to an account
         charIndex:
-          start: 30
-          end: 56
+          start: 31
+          end: 57
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -506,8 +506,8 @@
         type: ''
         desc: Burns tokens from an account
         charIndex:
-          start: 30
-          end: 58
+          start: 31
+          end: 59
     implicitArgs:
       - name: syscall_ptr
         type: felt*
