@@ -29,9 +29,9 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
     const functionScopeText =
       isNamespace === true
         ? functionScope.text
-            .split("\n")
-            .slice(1, functionScope.text.split("\n").length)
-            .join("\n")
+          .split("\n")
+          .slice(1, functionScope.text.split("\n").length)
+          .join("\n")
         : functionScope.text;
     const regexp = /func(\s*)(\w+)/gm;
     const matchAgainstScope = [...functionScopeText.matchAll(regexp)];
@@ -49,7 +49,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
   }
 
   getImplicitArgs(line: string): Array<FunctionSignature> | null {
-    const matchResult = line.match(/{([\w\s\:\*\,]+)}/);
+    const matchResult = line.match(/{([\w\s\:\,\*]+)}/);
 
     if (matchResult) {
       const result = this.getMappingResult(matchResult[1]);
@@ -60,7 +60,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
 
   getExplicitArgs(line: string): Array<FunctionSignature> | null {
     const matchResult = line.match(
-      /\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/
+      /\(([\w\s\:\,\*]*)\)\s*-?>?\s\(?([\w\s\:\,\*]*)/
     );
 
     const result = this.getMappingResult(matchResult![1]);
@@ -69,7 +69,7 @@ export default class FunctionSignatureRegexParser extends BaseFunctionSignatureP
 
   getReturns(line: string): Array<FunctionSignature> | null {
     const matchResult = line.match(
-      /\(([\w\s\:\,]*)\):?\s*-?>?\s\(?([\w\s\:,]*)/
+      /\(([\w\s\:\,\*]*)\)\s*-?>?\s\(?([\w\s\:\,\*]*)/
     );
 
     if (matchResult) {

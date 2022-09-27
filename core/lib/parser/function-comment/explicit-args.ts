@@ -5,7 +5,7 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
   constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "Explicit args";
-    this.regex = /(\w+)(\((\w+)\)):(.*)/gm;
+    this.regex = /(\w+)(\((\w+\*?)\)):(.*)/gm;
   }
   parseCommentLine(line: string): FunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
