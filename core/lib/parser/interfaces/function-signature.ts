@@ -1,7 +1,7 @@
 import { FunctionSignature } from "../../types";
 
 export abstract class BaseFunctionSignatureParser {
-  constructor() {}
+  constructor() { }
 
   getFunctionSignatureLines(wholeScope: string): string {
     // iterate wholeScope and for each iteration, check if it is a function signature
@@ -9,7 +9,7 @@ export abstract class BaseFunctionSignatureParser {
     var functionSignatureLines = [];
     const lines = wholeScope.split("\n");
     for (var line of lines) {
-      if (line.trim().startsWith("#")) {
+      if (line.trim().startsWith("//")) {
         break;
       }
       functionSignatureLines.push(line);

@@ -21,11 +21,11 @@ const yaml = require("js-yaml");
 
 // TODO: refactor this
 let map = new Map();
-map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
-map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
-map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
-map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
-map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\send/gm);
+map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\/\/\->\/\/\^]+\s/gm);
+map.set("view", /@view\s[\w\s\{\}\:\*\,\(\)\/\/\->\/\/\^]+\s/gm);
+map.set("external", /@external\s[\w\s\{\}\:\*\,\(\)\/\/\->\/\/\^]+\s/gm);
+map.set("event", /@event\s[\w\s\{\}\:\*\,\(\)\/\/\->\/\/\^]+\send/gm);
+map.set("storage_var", /@storage_var\s[\w\s\{\}\:\*\,\(\)\/\/\->\/\/\^]+\send/gm);
 map.set("namespace", /namespace\s+(\w+):/gm);
 map.set(
   "function",
@@ -34,7 +34,7 @@ map.set(
 map.set("comment", /\s*#\s*(.+)/gm);
 
 export default class CairoParser {
-  constructor() {}
+  constructor() { }
 
   static getRegex(name: string): RegExp {
     return map.get(name);
@@ -148,9 +148,9 @@ export default class CairoParser {
       const scopeText =
         isNamespace === true
           ? scope.text
-              .split("\n")
-              .slice(1, scope.text.split("\n").length)
-              .join("\n")
+            .split("\n")
+            .slice(1, scope.text.split("\n").length)
+            .join("\n")
           : scope.text;
       const commentLines = [...scopeText.matchAll(regexp)];
       const commentLineStart = scopeLineStart! + commentLines[0].index!;
@@ -410,7 +410,7 @@ export default class CairoParser {
     outPath: string,
     dumpCommentOnly: boolean = false
   ): void {
-    
+
     // if outPath contains .cairo extension, remove it
     const outFile = outPath.endsWith(".cairo") ? outPath = outPath.slice(0, -6) : outPath;
 
