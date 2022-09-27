@@ -5,7 +5,7 @@ export default class FunctionCommentRaisesParser extends BaseCommentParser {
   constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "Raises";
-    this.regex = /(\w+):\s*([\w\s\^]+)$/gm;
+    this.regex = /(\w+):\s*([\w\s^]+)$/gm;
   }
 
   parseCommentLine(line: string): FunctionComment | null {
