@@ -95,8 +95,8 @@ suite("function-comment: view: desc", () => {
       type: "",
       desc: "Returns the name of the token",
       charIndex: {
-        start: 22,
-        end: 51,
+        start: 23,
+        end: 52,
       },
     };
 
@@ -205,8 +205,8 @@ suite("function-comment: view: desc", () => {
         type: "",
         desc: "Returns the name of the token",
         charIndex: {
-          start: 22,
-          end: 51,
+          start: 23,
+          end: 52,
         },
       },
     ];

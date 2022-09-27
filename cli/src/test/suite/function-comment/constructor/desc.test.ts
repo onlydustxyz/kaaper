@@ -95,8 +95,8 @@ suite("function-comment: constructor: desc", () => {
       type: "",
       desc: "Initialize the contract",
       charIndex: {
-        start: 22,
-        end: 45,
+        start: 23,
+        end: 46,
       },
     };
     assert.deepEqual(
@@ -178,7 +178,7 @@ suite("function-comment: constructor: desc", () => {
         name: "",
         type: "",
         desc: "Initialize the contract",
-        charIndex: { start: 22, end: 45 },
+        charIndex: { start: 23, end: 46 },
       },
     ];
 

@@ -11,9 +11,9 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
     if (lineCommentInsideScope) {
       const startLineIndex = lineCommentInsideScope.index!;
-      // startLineIndex + 1 because the startline would be the the space after the \/\/(1 character)
+      // startLineIndex + 2 because the startline would be the the space after the // (2 character)
       const startDescIndex =
-        startLineIndex + 1 + lineCommentInsideScope[1].length;
+        startLineIndex + 2 + lineCommentInsideScope[1].length;
       const desc = lineCommentInsideScope[2];
       const matchInterface = {
         name: "",
