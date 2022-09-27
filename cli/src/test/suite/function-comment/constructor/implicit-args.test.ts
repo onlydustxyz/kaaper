@@ -22,7 +22,7 @@ suite("function-comment: constructor: implicit-args", () => {
 
     const line = 2;
     assert.equal(
-      "# Implicit args:",
+      "// Implicit args:",
       functionCommentScope![line].trim(),
       `check line ${line}`
     );
@@ -69,7 +69,7 @@ suite("function-comment: constructor: implicit-args", () => {
     const line = 3;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   syscall_ptr(felt*)",
+      "//   syscall_ptr(felt*)",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -87,7 +87,7 @@ suite("function-comment: constructor: implicit-args", () => {
       name: "syscall_ptr",
       type: "felt*",
       desc: "",
-      charIndex: { start: 74, end: 92 },
+      charIndex: { start: 78, end: 96 },
     };
     assert.deepEqual(
       targetLineParsing,
@@ -139,7 +139,7 @@ suite("function-comment: constructor: implicit-args", () => {
     const line = 4;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   pedersen_ptr(HashBuiltin*)",
+      "//   pedersen_ptr(HashBuiltin*)",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -157,7 +157,7 @@ suite("function-comment: constructor: implicit-args", () => {
       name: "pedersen_ptr",
       type: "HashBuiltin*",
       desc: "",
-      charIndex: { start: 101, end: 127 },
+      charIndex: { start: 106, end: 132 },
     };
     assert.deepEqual(
       targetLineParsing,
@@ -209,7 +209,7 @@ suite("function-comment: constructor: implicit-args", () => {
     const line = 5;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   range_check_ptr",
+      "//   range_check_ptr",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -227,7 +227,7 @@ suite("function-comment: constructor: implicit-args", () => {
       name: "range_check_ptr",
       type: "",
       desc: "",
-      charIndex: { start: 136, end: 151 },
+      charIndex: { start: 142, end: 157 },
     };
     assert.deepEqual(
       targetLineParsing,
@@ -290,7 +290,7 @@ suite("function-comment: constructor: implicit-args", () => {
     );
 
     assert.equal(
-      "# Explicit args:",
+      "// Explicit args:",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -332,19 +332,19 @@ suite("function-comment: constructor: implicit-args", () => {
         name: "syscall_ptr",
         type: "felt*",
         desc: "",
-        charIndex: { start: 74, end: 92 },
+        charIndex: { start: 78, end: 96 },
       },
       {
         name: "pedersen_ptr",
         type: "HashBuiltin*",
         desc: "",
-        charIndex: { start: 101, end: 127 },
+        charIndex: { start: 106, end: 132 },
       },
       {
         name: "range_check_ptr",
         type: "",
         desc: "",
-        charIndex: { start: 136, end: 151 },
+        charIndex: { start: 142, end: 157 },
       },
     ];
 

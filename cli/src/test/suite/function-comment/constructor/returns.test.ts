@@ -21,7 +21,7 @@ suite("function-comment: constructor: returns", () => {
     const functionCommentLine = functionCommentScope!.text[line];
 
     assert.equal(
-      "# Returns:",
+      "// Returns:",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -65,7 +65,7 @@ suite("function-comment: constructor: returns", () => {
 
     const line = 13;
     const functionCommentLine = functionCommentScope!.text[line];
-    assert.equal("#   None", functionCommentLine.trim(), `check line ${line}`);
+    assert.equal("//   None", functionCommentLine.trim(), `check line ${line}`);
     assert.notEqual(functionCommentLine, returnsParser.startLine);
     const isEndScope = returnsParser.isEndScope(functionCommentLine);
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
@@ -102,7 +102,7 @@ suite("function-comment: constructor: returns", () => {
 
     const line = 14;
     const functionCommentLine = functionCommentScope!.text[line];
-    assert.equal("# Raises:", functionCommentLine.trim(), `check line ${line}`);
+    assert.equal("// Raises:", functionCommentLine.trim(), `check line ${line}`);
     assert.notEqual(functionCommentLine, returnsParser.startLine);
     assert.equal(
       true,

@@ -22,7 +22,7 @@ suite("function-comment: constructor: raises", () => {
     const line = 14;
     const functionCommentLine = functionCommentScope!.text[line];
 
-    assert.equal("# Raises:", functionCommentLine.trim(), `check line ${line}`);
+    assert.equal("// Raises:", functionCommentLine.trim(), `check line ${line}`);
     raisesParser.setStartScope(functionCommentLine);
 
     assert.equal(functionCommentLine, raisesParser.startLine);
@@ -63,7 +63,7 @@ suite("function-comment: constructor: raises", () => {
     const line = 15;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   decimals: decimals exceed 2^8",
+      "//   decimals: decimals exceed 2^8",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -84,8 +84,8 @@ suite("function-comment: constructor: raises", () => {
       type: "",
       desc: "decimals exceed 2^8",
       charIndex: {
-        start: 501,
-        end: 530,
+        start: 517,
+        end: 546,
       },
     };
     assert.deepEqual(
@@ -129,7 +129,7 @@ suite("function-comment: constructor: raises", () => {
     const line = 16;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   recipient: cannot mint to the zero address",
+      "//   recipient: cannot mint to the zero address",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -150,8 +150,8 @@ suite("function-comment: constructor: raises", () => {
       type: "",
       desc: "cannot mint to the zero address",
       charIndex: {
-        start: 539,
-        end: 581,
+        start: 556,
+        end: 598,
       },
     };
     assert.deepEqual(
@@ -195,7 +195,7 @@ suite("function-comment: constructor: raises", () => {
     const line = 17;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   initial_supply: not valid Uint256",
+      "//   initial_supply: not valid Uint256",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -216,8 +216,8 @@ suite("function-comment: constructor: raises", () => {
       type: "",
       desc: "not valid Uint256",
       charIndex: {
-        start: 590,
-        end: 623,
+        start: 608,
+        end: 641,
       },
     };
     assert.deepEqual(
@@ -261,7 +261,7 @@ suite("function-comment: constructor: raises", () => {
     const line = 18;
     const functionCommentLine = functionCommentScope!.text[line];
     assert.equal(
-      "#   initial_supply: mint overflow",
+      "//   initial_supply: mint overflow",
       functionCommentLine.trim(),
       `check line ${line}`
     );
@@ -282,8 +282,8 @@ suite("function-comment: constructor: raises", () => {
       type: "",
       desc: "mint overflow",
       charIndex: {
-        start: 632,
-        end: 661,
+        start: 651,
+        end: 680,
       },
     };
     assert.deepEqual(
@@ -329,25 +329,25 @@ suite("function-comment: constructor: raises", () => {
         name: "decimals",
         type: "",
         desc: "decimals exceed 2^8",
-        charIndex: { start: 501, end: 530 },
+        charIndex: { start: 517, end: 546 },
       },
       {
         name: "recipient",
         type: "",
         desc: "cannot mint to the zero address",
-        charIndex: { start: 539, end: 581 },
+        charIndex: { start: 556, end: 598 },
       },
       {
         name: "initial_supply",
         type: "",
         desc: "not valid Uint256",
-        charIndex: { start: 590, end: 623 },
+        charIndex: { start: 608, end: 641 },
       },
       {
         name: "initial_supply",
         type: "",
         desc: "mint overflow",
-        charIndex: { start: 632, end: 661 },
+        charIndex: { start: 651, end: 680 },
       },
     ];
     const resultLineParsing = raisesParser.parseCommentLines(
