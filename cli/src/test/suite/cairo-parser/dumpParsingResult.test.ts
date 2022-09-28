@@ -48,8 +48,8 @@ suite("dumpParsingResult", () => {
     // parse whole scope
     const parsingOutput = CairoParser.getFileParsingResult(pathFile);
 
-    CairoParser.dumpParsingResult(parsingOutput, "docs/library");
-    const generatedYAMLFile = fs.readFileSync(path.resolve(__dirname, "../../../../../../docs/library.yaml"), "utf8");
+    CairoParser.dumpParsingResult(parsingOutput, "docs/library-test");
+    const generatedYAMLFile = fs.readFileSync(path.resolve(__dirname, "../../../../../../docs/library-test.yaml"), "utf8");
     const targetYAMLFile = fs.readFileSync(path.resolve(__dirname, "../../../../../../testGeneratedDocs/library.yaml"), "utf8");
     assert.equal(generatedYAMLFile, targetYAMLFile);
   });

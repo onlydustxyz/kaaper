@@ -5,7 +5,9 @@
       start: 645
       end: 653
   functionSignature:
-    implicitArgs: null
+    implicitArgs:
+      - name: ''
+        type: ''
     explicitArgs:
       - name: from_
         type: felt
@@ -30,7 +32,9 @@
       start: 710
       end: 718
   functionSignature:
-    implicitArgs: null
+    implicitArgs:
+      - name: ''
+        type: ''
     explicitArgs:
       - name: owner
         type: felt
@@ -55,7 +59,9 @@
       start: 804
       end: 814
   functionSignature:
-    implicitArgs: null
+    implicitArgs:
+      - name: ''
+        type: ''
     explicitArgs: null
     returns:
       - name: name
@@ -76,7 +82,9 @@
       start: 856
       end: 868
   functionSignature:
-    implicitArgs: null
+    implicitArgs:
+      - name: ''
+        type: ''
     explicitArgs: null
     returns:
       - name: symbol
@@ -97,13 +105,7 @@
       start: 912
       end: 930
   functionSignature:
-    implicitArgs:
-      - name: syscall_ptr
-        type: felt*
-      - name: pedersen_ptr
-        type: HashBuiltin*
-      - name: range_check_ptr
-        type: ''
+    implicitArgs: null
     explicitArgs: null
     returns:
       - name: total_supply
@@ -128,7 +130,7 @@
     raises: null
     charIndex:
       start: 961
-      end: 1256
+      end: 1115
 - attributeName: namespace ERC20
   functionName:
     name: constructor

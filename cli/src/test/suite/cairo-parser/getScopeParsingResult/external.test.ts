@@ -44,7 +44,7 @@ suite("getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "transfer",
-          charIndex: { start: 4171, end: 4179 },
+          charIndex: { start: 4234, end: 4242 },
         },
         functionSignature: {
           implicitArgs: [
@@ -64,7 +64,7 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Perform transfer to recipient",
-              charIndex: { start: 21, end: 50 },
+              charIndex: { start: 23, end: 52 },
             },
           ],
           implicitArgs: [
@@ -72,19 +72,19 @@ suite("getScopeParsingResult: external", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 80, end: 98 },
+              charIndex: { start: 84, end: 102 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 107, end: 133 },
+              charIndex: { start: 112, end: 138 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 142, end: 157 },
+              charIndex: { start: 148, end: 163 },
             },
           ],
           explicitArgs: [
@@ -92,13 +92,13 @@ suite("getScopeParsingResult: external", () => {
               name: "recipient",
               type: "felt",
               desc: "the address of ERC20 recipient",
-              charIndex: { start: 187, end: 234 },
+              charIndex: { start: 195, end: 242 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "the amount of ERC20 transfer",
-              charIndex: { start: 243, end: 288 },
+              charIndex: { start: 252, end: 297 },
             },
           ],
           returns: [
@@ -106,7 +106,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if transfer was successful, 0 otherwise",
-              charIndex: { start: 312, end: 368 },
+              charIndex: { start: 323, end: 379 },
             },
           ],
           raises: [
@@ -114,22 +114,22 @@ suite("getScopeParsingResult: external", () => {
               name: "amount",
               type: "",
               desc: "amount is not a valid Uint256",
-              charIndex: { start: 391, end: 428 },
+              charIndex: { start: 404, end: 441 },
             },
             {
               name: "recipient",
               type: "",
               desc: "cannot transfer to the zero address",
-              charIndex: { start: 437, end: 483 },
+              charIndex: { start: 451, end: 497 },
             },
             {
               name: "amount",
               type: "",
               desc: "transfer amount exceeds balance",
-              charIndex: { start: 492, end: 531 },
+              charIndex: { start: 507, end: 546 },
             },
           ],
-          charIndex: { start: 4309, end: 4840 },
+          charIndex: { start: 4368, end: 4914 },
         },
       },
     ];
@@ -164,21 +164,21 @@ suite("getScopeParsingResult: external", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Perform transfer to recipient
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   recipient(felt): the address of ERC20 recipient
-    #   amount(Uint256): the amount of ERC20 transfer
-    # Returns:
-    #   success(felt): 1 if transfer was successful, 0 otherwise
-    # Raises:
-    #   amount: amount is not a valid Uint256
-    #   recipient: cannot transfer to the zero address
-    #   amount: transfer amount exceeds balance`;
+    // Desc:
+    //   Perform transfer to recipient
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   recipient(felt): the address of ERC20 recipient
+    //   amount(Uint256): the amount of ERC20 transfer
+    // Returns:
+    //   success(felt): 1 if transfer was successful, 0 otherwise
+    // Raises:
+    //   amount: amount is not a valid Uint256
+    //   recipient: cannot transfer to the zero address
+    //   amount: transfer amount exceeds balance`;
 
     assert.equal(
       functionCommentTarget,
@@ -209,7 +209,7 @@ suite("getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "transferFrom",
-          charIndex: { start: 4917, end: 4929 },
+          charIndex: { start: 4992, end: 5004 },
         },
         functionSignature: {
           implicitArgs: [
@@ -230,7 +230,7 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Perform transfer from sender to recipient with allowance",
-              charIndex: { start: 21, end: 77 },
+              charIndex: { start: 23, end: 79 },
             },
           ],
           implicitArgs: [
@@ -238,19 +238,19 @@ suite("getScopeParsingResult: external", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 107, end: 125 },
+              charIndex: { start: 111, end: 129 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 134, end: 160 },
+              charIndex: { start: 139, end: 165 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 169, end: 184 },
+              charIndex: { start: 175, end: 190 },
             },
           ],
           explicitArgs: [
@@ -258,19 +258,19 @@ suite("getScopeParsingResult: external", () => {
               name: "sender",
               type: "felt",
               desc: "the address of ERC20 sender",
-              charIndex: { start: 214, end: 255 },
+              charIndex: { start: 222, end: 263 },
             },
             {
               name: "recipient",
               type: "felt",
               desc: "the address of ERC20 recipient",
-              charIndex: { start: 264, end: 311 },
+              charIndex: { start: 273, end: 320 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "the amount of ERC20 transfer",
-              charIndex: { start: 320, end: 365 },
+              charIndex: { start: 330, end: 375 },
             },
           ],
           returns: [
@@ -278,7 +278,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if transfer was successful, 0 otherwise",
-              charIndex: { start: 389, end: 445 },
+              charIndex: { start: 401, end: 457 },
             },
           ],
           raises: [
@@ -286,22 +286,22 @@ suite("getScopeParsingResult: external", () => {
               name: "amount",
               type: "",
               desc: "amount is not a valid Uint256",
-              charIndex: { start: 468, end: 505 },
+              charIndex: { start: 482, end: 519 },
             },
             {
               name: "sender",
               type: "",
               desc: "cannot transfer from the zero address",
-              charIndex: { start: 514, end: 559 },
+              charIndex: { start: 529, end: 574 },
             },
             {
               name: "amount",
               type: "",
               desc: "transfer amount exceeds balance",
-              charIndex: { start: 568, end: 607 },
+              charIndex: { start: 584, end: 623 },
             },
           ],
-          charIndex: { start: 5074, end: 5681 },
+          charIndex: { start: 5144, end: 5767 },
         },
       },
     ];
@@ -337,22 +337,22 @@ suite("getScopeParsingResult: external", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Perform transfer from sender to recipient with allowance
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   sender(felt): the address of ERC20 sender
-    #   recipient(felt): the address of ERC20 recipient
-    #   amount(Uint256): the amount of ERC20 transfer
-    # Returns:
-    #   success(felt): 1 if transfer was successful, 0 otherwise
-    # Raises:
-    #   amount: amount is not a valid Uint256
-    #   sender: cannot transfer from the zero address
-    #   amount: transfer amount exceeds balance`;
+    // Desc:
+    //   Perform transfer from sender to recipient with allowance
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   sender(felt): the address of ERC20 sender
+    //   recipient(felt): the address of ERC20 recipient
+    //   amount(Uint256): the amount of ERC20 transfer
+    // Returns:
+    //   success(felt): 1 if transfer was successful, 0 otherwise
+    // Raises:
+    //   amount: amount is not a valid Uint256
+    //   sender: cannot transfer from the zero address
+    //   amount: transfer amount exceeds balance`;
 
     assert.equal(
       functionCommentTarget,
@@ -383,7 +383,7 @@ suite("getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "approve",
-          charIndex: { start: 5771, end: 5778 },
+          charIndex: { start: 5858, end: 5865 },
         },
         functionSignature: {
           implicitArgs: [
@@ -403,7 +403,7 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Approve spender to spend amount of tokens",
-              charIndex: { start: 21, end: 62 },
+              charIndex: { start: 23, end: 64 },
             },
           ],
           implicitArgs: [
@@ -411,19 +411,19 @@ suite("getScopeParsingResult: external", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 92, end: 110 },
+              charIndex: { start: 96, end: 114 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 119, end: 145 },
+              charIndex: { start: 124, end: 150 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 154, end: 169 },
+              charIndex: { start: 160, end: 175 },
             },
           ],
           explicitArgs: [
@@ -431,13 +431,13 @@ suite("getScopeParsingResult: external", () => {
               name: "spender",
               type: "felt",
               desc: "the address of ERC20 spender",
-              charIndex: { start: 199, end: 242 },
+              charIndex: { start: 207, end: 250 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "the amount of ERC20 token to approve",
-              charIndex: { start: 251, end: 304 },
+              charIndex: { start: 260, end: 313 },
             },
           ],
           returns: [
@@ -445,7 +445,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if approve was successful, 0 otherwise",
-              charIndex: { start: 328, end: 383 },
+              charIndex: { start: 339, end: 394 },
             },
           ],
           raises: [
@@ -453,16 +453,16 @@ suite("getScopeParsingResult: external", () => {
               name: "amount",
               type: "",
               desc: "amount is not a valid Uint256",
-              charIndex: { start: 406, end: 443 },
+              charIndex: { start: 419, end: 456 },
             },
             {
               name: "spender",
               type: "",
               desc: "cannot approve to the zero address",
-              charIndex: { start: 452, end: 495 },
+              charIndex: { start: 466, end: 509 },
             },
           ],
-          charIndex: { start: 5906, end: 6401 },
+          charIndex: { start: 5989, end: 6498 },
         },
       },
     ];
@@ -495,20 +495,20 @@ suite("getScopeParsingResult: external", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Approve spender to spend amount of tokens
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   spender(felt): the address of ERC20 spender
-    #   amount(Uint256): the amount of ERC20 token to approve
-    # Returns:
-    #   success(felt): 1 if approve was successful, 0 otherwise
-    # Raises:
-    #   amount: amount is not a valid Uint256
-    #   spender: cannot approve to the zero address`;
+    // Desc:
+    //   Approve spender to spend amount of tokens
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   spender(felt): the address of ERC20 spender
+    //   amount(Uint256): the amount of ERC20 token to approve
+    // Returns:
+    //   success(felt): 1 if approve was successful, 0 otherwise
+    // Raises:
+    //   amount: amount is not a valid Uint256
+    //   spender: cannot approve to the zero address`;
 
     assert.equal(
       functionCommentTarget,
@@ -539,7 +539,7 @@ suite("getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "increaseAllowance",
-          charIndex: { start: 6477, end: 6494 },
+          charIndex: { start: 6574, end: 6591 },
         },
         functionSignature: {
           implicitArgs: [
@@ -559,7 +559,7 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Increase allowance of spender by added_value",
-              charIndex: { start: 21, end: 65 },
+              charIndex: { start: 23, end: 67 },
             },
           ],
           implicitArgs: [
@@ -567,19 +567,19 @@ suite("getScopeParsingResult: external", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 95, end: 113 },
+              charIndex: { start: 99, end: 117 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 122, end: 148 },
+              charIndex: { start: 127, end: 153 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 157, end: 172 },
+              charIndex: { start: 163, end: 178 },
             },
           ],
           explicitArgs: [
@@ -587,13 +587,13 @@ suite("getScopeParsingResult: external", () => {
               name: "spender",
               type: "felt",
               desc: "the address of ERC20 spender",
-              charIndex: { start: 202, end: 245 },
+              charIndex: { start: 210, end: 253 },
             },
             {
               name: "added_value",
               type: "Uint256",
               desc: "the amount of ERC20 token to increase allowance",
-              charIndex: { start: 254, end: 323 },
+              charIndex: { start: 263, end: 332 },
             },
           ],
           returns: [
@@ -601,7 +601,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if increase allowance was successful, 0 otherwise",
-              charIndex: { start: 347, end: 413 },
+              charIndex: { start: 358, end: 424 },
             },
           ],
           raises: [
@@ -609,16 +609,16 @@ suite("getScopeParsingResult: external", () => {
               name: "added_value",
               type: "",
               desc: "added_value is not a valid Uint256",
-              charIndex: { start: 436, end: 483 },
+              charIndex: { start: 449, end: 496 },
             },
             {
               name: "spender",
               type: "",
               desc: "cannot increase allowance to the zero address",
-              charIndex: { start: 492, end: 546 },
+              charIndex: { start: 506, end: 560 },
             },
           ],
-          charIndex: { start: 6627, end: 7173 },
+          charIndex: { start: 6720, end: 7280 },
         },
       },
     ];
@@ -657,20 +657,20 @@ suite("getScopeParsingResult: external", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Increase allowance of spender by added_value
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   spender(felt): the address of ERC20 spender
-    #   added_value(Uint256): the amount of ERC20 token to increase allowance
-    # Returns:
-    #   success(felt): 1 if increase allowance was successful, 0 otherwise
-    # Raises:
-    #   added_value: added_value is not a valid Uint256
-    #   spender: cannot increase allowance to the zero address`;
+    // Desc:
+    //   Increase allowance of spender by added_value
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   spender(felt): the address of ERC20 spender
+    //   added_value(Uint256): the amount of ERC20 token to increase allowance
+    // Returns:
+    //   success(felt): 1 if increase allowance was successful, 0 otherwise
+    // Raises:
+    //   added_value: added_value is not a valid Uint256
+    //   spender: cannot increase allowance to the zero address`;
 
     assert.equal(
       functionCommentTarget,
@@ -701,7 +701,7 @@ suite("getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "decreaseAllowance",
-          charIndex: { start: 7264, end: 7281 },
+          charIndex: { start: 7372, end: 7389 },
         },
         functionSignature: {
           implicitArgs: [
@@ -721,7 +721,7 @@ suite("getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "Decrease allowance of spender by subtracted_value",
-              charIndex: { start: 21, end: 70 },
+              charIndex: { start: 23, end: 72 },
             },
           ],
           implicitArgs: [
@@ -729,19 +729,19 @@ suite("getScopeParsingResult: external", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 100, end: 118 },
+              charIndex: { start: 104, end: 122 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 127, end: 153 },
+              charIndex: { start: 132, end: 158 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 162, end: 177 },
+              charIndex: { start: 168, end: 183 },
             },
           ],
           explicitArgs: [
@@ -749,13 +749,13 @@ suite("getScopeParsingResult: external", () => {
               name: "spender",
               type: "felt",
               desc: "the address of ERC20 spender",
-              charIndex: { start: 207, end: 250 },
+              charIndex: { start: 215, end: 258 },
             },
             {
               name: "subtracted_value",
               type: "Uint256",
               desc: "the amount of ERC20 token to decrease allowance",
-              charIndex: { start: 259, end: 333 },
+              charIndex: { start: 268, end: 342 },
             },
           ],
           returns: [
@@ -763,7 +763,7 @@ suite("getScopeParsingResult: external", () => {
               name: "success",
               type: "felt",
               desc: "1 if decrease allowance was successful, 0 otherwise",
-              charIndex: { start: 357, end: 423 },
+              charIndex: { start: 368, end: 434 },
             },
           ],
           raises: [
@@ -771,16 +771,16 @@ suite("getScopeParsingResult: external", () => {
               name: "subtracted_value",
               type: "",
               desc: "subtracted_value is not a valid Uint256",
-              charIndex: { start: 446, end: 503 },
+              charIndex: { start: 459, end: 516 },
             },
             {
               name: "spender",
               type: "",
               desc: "cannot decrease allowance to the zero address",
-              charIndex: { start: 512, end: 566 },
+              charIndex: { start: 526, end: 580 },
             },
           ],
-          charIndex: { start: 7419, end: 7985 },
+          charIndex: { start: 7523, end: 8103 },
         },
       },
     ];
@@ -819,20 +819,20 @@ suite("getScopeParsingResult: external", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Decrease allowance of spender by subtracted_value
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   spender(felt): the address of ERC20 spender
-    #   subtracted_value(Uint256): the amount of ERC20 token to decrease allowance
-    # Returns:
-    #   success(felt): 1 if decrease allowance was successful, 0 otherwise
-    # Raises:
-    #   subtracted_value: subtracted_value is not a valid Uint256
-    #   spender: cannot decrease allowance to the zero address`;
+    // Desc:
+    //   Decrease allowance of spender by subtracted_value
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   spender(felt): the address of ERC20 spender
+    //   subtracted_value(Uint256): the amount of ERC20 token to decrease allowance
+    // Returns:
+    //   success(felt): 1 if decrease allowance was successful, 0 otherwise
+    // Raises:
+    //   subtracted_value: subtracted_value is not a valid Uint256
+    //   spender: cannot decrease allowance to the zero address`;
 
     assert.equal(
       functionCommentTarget,

@@ -5,14 +5,38 @@
       start: 645
       end: 653
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Emit event when a transfer is made
+        charIndex:
+          start: 23
+          end: 57
     implicitArgs: null
-    explicitArgs: null
+    explicitArgs:
+      - name: from_
+        type: felt
+        desc: The address of the sender
+        charIndex:
+          start: 89
+          end: 127
+      - name: to
+        type: felt
+        desc: The address of the receiver
+        charIndex:
+          start: 137
+          end: 174
+      - name: value
+        type: Uint256
+        desc: The amount of tokens transferred
+        charIndex:
+          start: 184
+          end: 232
     returns: null
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 694
+      end: 926
 - attributeName: event
   functionName:
     name: Approval
@@ -20,14 +44,38 @@
       start: 942
       end: 950
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Emit event when a delegation is made
+        charIndex:
+          start: 22
+          end: 58
     implicitArgs: null
-    explicitArgs: null
+    explicitArgs:
+      - name: owner
+        type: felt
+        desc: the address of the owner
+        charIndex:
+          start: 90
+          end: 127
+      - name: spender
+        type: felt
+        desc: the address of the spender
+        charIndex:
+          start: 137
+          end: 178
+      - name: value
+        type: Uint256
+        desc: the amount of tokens approved for the spender
+        charIndex:
+          start: 188
+          end: 249
     returns: null
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 996
+      end: 1245
 - attributeName: storage_var
   functionName:
     name: ERC20_name
@@ -35,14 +83,26 @@
       start: 1285
       end: 1295
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the name of the token
+        charIndex:
+          start: 23
+          end: 52
     implicitArgs: null
     explicitArgs: null
-    returns: null
+    returns:
+      - name: name
+        type: felt
+        desc: The name of the token
+        charIndex:
+          start: 78
+          end: 111
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 1315
+      end: 1426
 - attributeName: storage_var
   functionName:
     name: ERC20_symbol
@@ -50,14 +110,26 @@
       start: 1448
       end: 1460
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the symbol of the token
+        charIndex:
+          start: 23
+          end: 54
     implicitArgs: null
     explicitArgs: null
-    returns: null
+    returns:
+      - name: symbol
+        type: felt
+        desc: The symbol of the token
+        charIndex:
+          start: 80
+          end: 117
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 1482
+      end: 1599
 - attributeName: storage_var
   functionName:
     name: ERC20_decimals
@@ -65,14 +137,26 @@
       start: 1621
       end: 1635
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the number of decimals of the token
+        charIndex:
+          start: 23
+          end: 66
     implicitArgs: null
     explicitArgs: null
-    returns: null
+    returns:
+      - name: decimals
+        type: Uint256
+        desc: The number of decimals of the token
+        charIndex:
+          start: 92
+          end: 146
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 1662
+      end: 1808
 - attributeName: storage_var
   functionName:
     name: ERC20_total_supply
@@ -80,14 +164,26 @@
       start: 1830
       end: 1848
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns total amount of tokens in existence
+        charIndex:
+          start: 23
+          end: 66
     implicitArgs: null
     explicitArgs: null
-    returns: null
+    returns:
+      - name: total_supply
+        type: Uint256
+        desc: The total amount of tokens in existence
+        charIndex:
+          start: 92
+          end: 154
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 1879
+      end: 2033
 - attributeName: storage_var
   functionName:
     name: ERC20_balances
@@ -95,14 +191,32 @@
       start: 2055
       end: 2069
   functionComment:
-    desc: null
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the amount of tokens owned by an account
+        charIndex:
+          start: 23
+          end: 71
     implicitArgs: null
-    explicitArgs: null
-    returns: null
+    explicitArgs:
+      - name: account
+        type: felt
+        desc: The address of the account
+        charIndex:
+          start: 103
+          end: 144
+    returns:
+      - name: balance
+        type: Uint256
+        desc: The amount of tokens owned by an account
+        charIndex:
+          start: 170
+          end: 228
     raises: null
     charIndex:
-      start: 0
-      end: 0
+      start: 2108
+      end: 2336
 - attributeName: storage_var
   functionName:
     name: ERC20_allowances
@@ -143,7 +257,7 @@
     raises: null
     charIndex:
       start: 2428
-      end: 2904
+      end: 2763
 - attributeName: namespace ERC20
   functionName:
     name: constructor

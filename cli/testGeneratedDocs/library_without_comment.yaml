@@ -2,8 +2,8 @@
   functionName:
     name: Transfer
     charIndex:
-      start: 640
-      end: 648
+      start: 645
+      end: 653
   functionComment:
     desc: null
     implicitArgs: null
@@ -32,8 +32,8 @@
   functionName:
     name: ERC20_name
     charIndex:
-      start: 805
-      end: 815
+      start: 804
+      end: 814
   functionComment:
     desc: null
     implicitArgs: null
@@ -47,8 +47,8 @@
   functionName:
     name: ERC20_symbol
     charIndex:
-      start: 859
-      end: 871
+      start: 856
+      end: 868
   functionComment:
     desc: null
     implicitArgs: null
@@ -62,16 +62,16 @@
   functionName:
     name: ERC20_total_supply
     charIndex:
-      start: 918
-      end: 936
+      start: 912
+      end: 930
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns total amount of tokens in existence
         charIndex:
-          start: 22
-          end: 65
+          start: 23
+          end: 66
     implicitArgs: null
     explicitArgs: null
     returns:
@@ -79,18 +79,18 @@
         type: Uint256
         desc: The total amount of tokens in existence
         charIndex:
-          start: 89
-          end: 151
+          start: 92
+          end: 154
     raises: null
     charIndex:
-      start: 967
-      end: 1118
+      start: 961
+      end: 1115
 - attributeName: namespace ERC20
   functionName:
     name: constructor
     charIndex:
-      start: 1182
-      end: 1193
+      start: 1179
+      end: 1190
   functionComment:
     desc: null
     implicitArgs: null
@@ -104,8 +104,8 @@
   functionName:
     name: name
     charIndex:
-      start: 1624
-      end: 1628
+      start: 1622
+      end: 1626
   functionComment:
     desc: null
     implicitArgs: null
@@ -119,8 +119,8 @@
   functionName:
     name: transfer_from
     charIndex:
-      start: 1796
-      end: 1809
+      start: 1792
+      end: 1805
   functionComment:
     desc: null
     implicitArgs: null
@@ -134,8 +134,8 @@
   functionName:
     name: _mint
     charIndex:
-      start: 2236
-      end: 2241
+      start: 2220
+      end: 2225
   functionComment:
     desc: null
     implicitArgs: null
@@ -149,8 +149,8 @@
   functionName:
     name: _burn
     charIndex:
-      start: 3274
-      end: 3279
+      start: 3258
+      end: 3263
   functionComment:
     desc: null
     implicitArgs: null

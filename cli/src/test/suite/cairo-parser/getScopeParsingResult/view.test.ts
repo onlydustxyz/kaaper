@@ -45,7 +45,7 @@ suite("getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "name",
-          charIndex: { start: 1322, end: 1326 },
+          charIndex: { start: 1341, end: 1345 },
         },
         functionSignature: {
           implicitArgs: [
@@ -62,7 +62,7 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the name of the token",
-              charIndex: { start: 21, end: 50 },
+              charIndex: { start: 23, end: 52 },
             },
           ],
           implicitArgs: [
@@ -70,19 +70,19 @@ suite("getScopeParsingResult: view", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 80, end: 98 },
+              charIndex: { start: 84, end: 102 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 107, end: 133 },
+              charIndex: { start: 112, end: 138 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 142, end: 157 },
+              charIndex: { start: 148, end: 163 },
             },
           ],
           explicitArgs: null,
@@ -91,11 +91,11 @@ suite("getScopeParsingResult: view", () => {
               name: "name",
               type: "felt",
               desc: "name of the token",
-              charIndex: { start: 181, end: 210 },
+              charIndex: { start: 189, end: 218 },
             },
           ],
           raises: null,
-          charIndex: { start: 1413, end: 1623 },
+          charIndex: { start: 1430, end: 1648 },
         },
       },
     ];
@@ -123,14 +123,14 @@ suite("getScopeParsingResult: view", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Returns the name of the token
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Returns:
-    #   name(felt): name of the token`;
+    // Desc:
+    //   Returns the name of the token
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Returns:
+    //   name(felt): name of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -160,7 +160,7 @@ suite("getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "symbol",
-          charIndex: { start: 1688, end: 1694 },
+          charIndex: { start: 1714, end: 1720 },
         },
         functionSignature: {
           implicitArgs: [
@@ -177,7 +177,7 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the symbol of the token",
-              charIndex: { start: 21, end: 52 },
+              charIndex: { start: 23, end: 54 },
             },
           ],
           implicitArgs: [
@@ -185,19 +185,19 @@ suite("getScopeParsingResult: view", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 82, end: 100 },
+              charIndex: { start: 86, end: 104 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 109, end: 135 },
+              charIndex: { start: 114, end: 140 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 144, end: 159 },
+              charIndex: { start: 150, end: 165 },
             },
           ],
           explicitArgs: null,
@@ -206,11 +206,11 @@ suite("getScopeParsingResult: view", () => {
               name: "symbol",
               type: "felt",
               desc: "symbol of the token",
-              charIndex: { start: 183, end: 216 },
+              charIndex: { start: 191, end: 224 },
             },
           ],
           raises: null,
-          charIndex: { start: 1783, end: 1999 },
+          charIndex: { start: 1807, end: 2031 },
         },
       },
     ];
@@ -239,14 +239,14 @@ suite("getScopeParsingResult: view", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Returns the symbol of the token
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Returns:
-    #   symbol(felt): symbol of the token`;
+    // Desc:
+    //   Returns the symbol of the token
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Returns:
+    //   symbol(felt): symbol of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -277,7 +277,7 @@ suite("getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "totalSupply",
-          charIndex: { start: 2070, end: 2081 },
+          charIndex: { start: 2103, end: 2114 },
         },
         functionSignature: {
           implicitArgs: [
@@ -294,7 +294,7 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the total supply of the token",
-              charIndex: { start: 21, end: 58 },
+              charIndex: { start: 23, end: 60 },
             },
           ],
           implicitArgs: [
@@ -302,19 +302,19 @@ suite("getScopeParsingResult: view", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 88, end: 106 },
+              charIndex: { start: 92, end: 110 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 115, end: 141 },
+              charIndex: { start: 120, end: 146 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 150, end: 165 },
+              charIndex: { start: 156, end: 171 },
             },
           ],
           explicitArgs: null,
@@ -323,11 +323,11 @@ suite("getScopeParsingResult: view", () => {
               name: "totalSupply",
               type: "Uint256",
               desc: "total supply of the token",
-              charIndex: { start: 189, end: 236 },
+              charIndex: { start: 197, end: 244 },
             },
           ],
           raises: null,
-          charIndex: { start: 2184, end: 2420 },
+          charIndex: { start: 2215, end: 2459 },
         },
       },
     ];
@@ -356,14 +356,14 @@ suite("getScopeParsingResult: view", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Returns the total supply of the token
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Returns:
-    #   totalSupply(Uint256): total supply of the token`;
+    // Desc:
+    //   Returns the total supply of the token
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Returns:
+    //   totalSupply(Uint256): total supply of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -394,7 +394,7 @@ suite("getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "decimals",
-          charIndex: { start: 2517, end: 2525 },
+          charIndex: { start: 2556, end: 2564 },
         },
         functionSignature: {
           implicitArgs: [
@@ -411,7 +411,7 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the decimals of the token",
-              charIndex: { start: 21, end: 54 },
+              charIndex: { start: 23, end: 56 },
             },
           ],
           implicitArgs: [
@@ -419,19 +419,19 @@ suite("getScopeParsingResult: view", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 84, end: 102 },
+              charIndex: { start: 88, end: 106 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 111, end: 137 },
+              charIndex: { start: 116, end: 142 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 146, end: 161 },
+              charIndex: { start: 152, end: 167 },
             },
           ],
           explicitArgs: null,
@@ -440,11 +440,11 @@ suite("getScopeParsingResult: view", () => {
               name: "decimals",
               type: "felt",
               desc: "decimals of the token",
-              charIndex: { start: 185, end: 222 },
+              charIndex: { start: 193, end: 230 },
             },
           ],
           raises: null,
-          charIndex: { start: 2622, end: 2844 },
+          charIndex: { start: 2659, end: 2889 },
         },
       },
     ];
@@ -473,14 +473,14 @@ suite("getScopeParsingResult: view", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Returns the decimals of the token
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Returns:
-    #   decimals(felt): decimals of the token`;
+    // Desc:
+    //   Returns the decimals of the token
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Returns:
+    //   decimals(felt): decimals of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -511,7 +511,7 @@ suite("getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "balanceOf",
-          charIndex: { start: 2922, end: 2931 },
+          charIndex: { start: 2968, end: 2977 },
         },
         functionSignature: {
           implicitArgs: [
@@ -528,7 +528,7 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the balance of the account",
-              charIndex: { start: 21, end: 55 },
+              charIndex: { start: 23, end: 57 },
             },
           ],
           implicitArgs: [
@@ -536,19 +536,19 @@ suite("getScopeParsingResult: view", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 85, end: 103 },
+              charIndex: { start: 89, end: 107 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 112, end: 138 },
+              charIndex: { start: 117, end: 143 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 147, end: 162 },
+              charIndex: { start: 153, end: 168 },
             },
           ],
           explicitArgs: [
@@ -556,7 +556,7 @@ suite("getScopeParsingResult: view", () => {
               name: "account",
               type: "felt",
               desc: "account to query balance for",
-              charIndex: { start: 192, end: 235 },
+              charIndex: { start: 200, end: 243 },
             },
           ],
           returns: [
@@ -564,11 +564,11 @@ suite("getScopeParsingResult: view", () => {
               name: "balance",
               type: "Uint256",
               desc: "the balance of the account",
-              charIndex: { start: 259, end: 303 },
+              charIndex: { start: 269, end: 313 },
             },
           ],
           raises: null,
-          charIndex: { start: 3044, end: 3347 },
+          charIndex: { start: 3087, end: 3400 },
         },
       },
     ];
@@ -598,16 +598,16 @@ suite("getScopeParsingResult: view", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Returns the balance of the account
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   account(felt): account to query balance for
-    # Returns:
-    #   balance(Uint256): the balance of the account`;
+    // Desc:
+    //   Returns the balance of the account
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   account(felt): account to query balance for
+    // Returns:
+    //   balance(Uint256): the balance of the account`;
 
     assert.equal(
       functionCommentTarget,
@@ -638,7 +638,7 @@ suite("getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "allowance",
-          charIndex: { start: 3441, end: 3450 },
+          charIndex: { start: 3494, end: 3503 },
         },
         functionSignature: {
           implicitArgs: [
@@ -658,7 +658,7 @@ suite("getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the amount of remaining tokens allowed to be spent by the spender",
-              charIndex: { start: 21, end: 94 },
+              charIndex: { start: 23, end: 96 },
             },
           ],
           implicitArgs: [
@@ -666,19 +666,19 @@ suite("getScopeParsingResult: view", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 124, end: 142 },
+              charIndex: { start: 128, end: 146 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 151, end: 177 },
+              charIndex: { start: 156, end: 182 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 186, end: 201 },
+              charIndex: { start: 192, end: 207 },
             },
           ],
           explicitArgs: [
@@ -686,13 +686,13 @@ suite("getScopeParsingResult: view", () => {
               name: "owner",
               type: "felt",
               desc: "the address of owner of the tokens",
-              charIndex: { start: 231, end: 278 },
+              charIndex: { start: 239, end: 286 },
             },
             {
               name: "spender",
               type: "felt",
               desc: "the address of spender (delegated account) of the tokens",
-              charIndex: { start: 287, end: 358 },
+              charIndex: { start: 296, end: 367 },
             },
           ],
           returns: [
@@ -700,11 +700,11 @@ suite("getScopeParsingResult: view", () => {
               name: "remaining",
               type: "Uint256",
               desc: "the amount of remaining tokens allowed to be spent by the spender",
-              charIndex: { start: 382, end: 467 },
+              charIndex: { start: 393, end: 478 },
             },
           ],
           raises: null,
-          charIndex: { start: 3579, end: 4046 },
+          charIndex: { start: 3628, end: 4106 },
         },
       },
     ];
@@ -743,17 +743,17 @@ suite("getScopeParsingResult: view", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Returns the amount of remaining tokens allowed to be spent by the spender
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   owner(felt): the address of owner of the tokens
-    #   spender(felt): the address of spender (delegated account) of the tokens
-    # Returns:
-    #   remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender`;
+    // Desc:
+    //   Returns the amount of remaining tokens allowed to be spent by the spender
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   owner(felt): the address of owner of the tokens
+    //   spender(felt): the address of spender (delegated account) of the tokens
+    // Returns:
+    //   remaining(Uint256): the amount of remaining tokens allowed to be spent by the spender`;
 
     assert.equal(
       functionCommentTarget,
