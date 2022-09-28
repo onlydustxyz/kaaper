@@ -41,7 +41,7 @@ suite("getScopeParsingResult: event", () => {
         attributeName: "event",
         functionName: {
           name: "Transfer",
-          charIndex: { start: 640, end: 648 },
+          charIndex: { start: 645, end: 653 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -58,7 +58,7 @@ suite("getScopeParsingResult: event", () => {
               name: "",
               type: "",
               desc: "Emit event when a transfer is made",
-              charIndex: { start: 22, end: 56 },
+              charIndex: { start: 23, end: 57 },
             },
           ],
           implicitArgs: null,
@@ -67,24 +67,24 @@ suite("getScopeParsingResult: event", () => {
               name: "from_",
               type: "felt",
               desc: "The address of the sender",
-              charIndex: { start: 86, end: 124 },
+              charIndex: { start: 89, end: 127 },
             },
             {
               name: "to",
               type: "felt",
               desc: "The address of the receiver",
-              charIndex: { start: 133, end: 170 },
+              charIndex: { start: 137, end: 174 },
             },
             {
               name: "value",
               type: "Uint256",
               desc: "The amount of tokens transferred",
-              charIndex: { start: 179, end: 227 },
+              charIndex: { start: 184, end: 232 },
             },
           ],
           returns: null,
           raises: null,
-          charIndex: { start: 691, end: 918 },
+          charIndex: { start: 694, end: 926 },
         },
       },
     ];
@@ -112,12 +112,12 @@ suite("getScopeParsingResult: event", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Emit event when a transfer is made
-    # Explicit args:
-    #   from_(felt): The address of the sender
-    #   to(felt): The address of the receiver
-    #   value(Uint256): The amount of tokens transferred`;
+    // Desc:
+    //   Emit event when a transfer is made
+    // Explicit args:
+    //   from_(felt): The address of the sender
+    //   to(felt): The address of the receiver
+    //   value(Uint256): The amount of tokens transferred`;
 
     assert.equal(
       functionCommentTarget,
@@ -145,7 +145,7 @@ suite("getScopeParsingResult: event", () => {
         attributeName: "event",
         functionName: {
           name: "Approval",
-          charIndex: { start: 937, end: 945 },
+          charIndex: { start: 942, end: 950 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -162,7 +162,7 @@ suite("getScopeParsingResult: event", () => {
               name: "",
               type: "",
               desc: "Emit event when a delegation is made",
-              charIndex: { start: 21, end: 57 },
+              charIndex: { start: 22, end: 58 },
             },
           ],
           implicitArgs: null,
@@ -171,24 +171,24 @@ suite("getScopeParsingResult: event", () => {
               name: "owner",
               type: "felt",
               desc: "the address of the owner",
-              charIndex: { start: 87, end: 124 },
+              charIndex: { start: 90, end: 127 },
             },
             {
               name: "spender",
               type: "felt",
               desc: "the address of the spender",
-              charIndex: { start: 133, end: 174 },
+              charIndex: { start: 137, end: 178 },
             },
             {
               name: "value",
               type: "Uint256",
               desc: "the amount of tokens approved for the spender",
-              charIndex: { start: 183, end: 244 },
+              charIndex: { start: 188, end: 249 },
             },
           ],
           returns: null,
           raises: null,
-          charIndex: { start: 993, end: 1237 },
+          charIndex: { start: 996, end: 1245 },
         },
       },
     ];
@@ -219,12 +219,12 @@ suite("getScopeParsingResult: event", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #  Emit event when a delegation is made
-    # Explicit args:
-    #   owner(felt): the address of the owner
-    #   spender(felt): the address of the spender
-    #   value(Uint256): the amount of tokens approved for the spender`;
+    // Desc:
+    //  Emit event when a delegation is made
+    // Explicit args:
+    //   owner(felt): the address of the owner
+    //   spender(felt): the address of the spender
+    //   value(Uint256): the amount of tokens approved for the spender`;
 
     assert.equal(
       functionCommentTarget,

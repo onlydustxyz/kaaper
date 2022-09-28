@@ -30,8 +30,8 @@
         type: ''
         desc: Initialize the contract
         charIndex:
-          start: 22
-          end: 45
+          start: 23
+          end: 46
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -135,8 +135,8 @@
         type: ''
         desc: Returns the name of the token
         charIndex:
-          start: 22
-          end: 51
+          start: 23
+          end: 52
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -192,8 +192,8 @@
         type: ''
         desc: Returns the symbol of the token
         charIndex:
-          start: 22
-          end: 53
+          start: 23
+          end: 54
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -249,8 +249,8 @@
         type: ''
         desc: Returns the total supply of the token
         charIndex:
-          start: 22
-          end: 59
+          start: 23
+          end: 60
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -306,8 +306,8 @@
         type: ''
         desc: Returns the decimals of the token
         charIndex:
-          start: 22
-          end: 55
+          start: 23
+          end: 56
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -365,8 +365,8 @@
         type: ''
         desc: Returns the balance of the account
         charIndex:
-          start: 22
-          end: 56
+          start: 23
+          end: 57
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -434,8 +434,8 @@
           Returns the amount of remaining tokens allowed to be spent by the
           spender
         charIndex:
-          start: 22
-          end: 95
+          start: 23
+          end: 96
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -507,8 +507,8 @@
         type: ''
         desc: Perform transfer to recipient
         charIndex:
-          start: 22
-          end: 51
+          start: 23
+          end: 52
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -600,8 +600,8 @@
         type: ''
         desc: Perform transfer from sender to recipient with allowance
         charIndex:
-          start: 22
-          end: 78
+          start: 23
+          end: 79
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -697,8 +697,8 @@
         type: ''
         desc: Approve spender to spend amount of tokens
         charIndex:
-          start: 22
-          end: 63
+          start: 23
+          end: 64
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -782,8 +782,8 @@
         type: ''
         desc: Increase allowance of spender by added_value
         charIndex:
-          start: 22
-          end: 66
+          start: 23
+          end: 67
     implicitArgs:
       - name: syscall_ptr
         type: felt*
@@ -867,8 +867,8 @@
         type: ''
         desc: Decrease allowance of spender by subtracted_value
         charIndex:
-          start: 22
-          end: 71
+          start: 23
+          end: 72
     implicitArgs:
       - name: syscall_ptr
         type: felt*

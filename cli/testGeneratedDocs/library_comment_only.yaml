@@ -2,94 +2,94 @@
   functionName:
     name: Transfer
     charIndex:
-      start: 640
-      end: 648
+      start: 645
+      end: 653
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Emit event when a transfer is made
         charIndex:
-          start: 22
-          end: 56
+          start: 23
+          end: 57
     implicitArgs: null
     explicitArgs:
       - name: from_
         type: felt
         desc: The address of the sender
         charIndex:
-          start: 86
-          end: 124
+          start: 89
+          end: 127
       - name: to
         type: felt
         desc: The address of the receiver
         charIndex:
-          start: 133
-          end: 170
+          start: 137
+          end: 174
       - name: value
         type: Uint256
         desc: The amount of tokens transferred
         charIndex:
-          start: 179
-          end: 227
+          start: 184
+          end: 232
     returns: null
     raises: null
     charIndex:
-      start: 691
-      end: 918
+      start: 694
+      end: 926
 - attributeName: event
   functionName:
     name: Approval
     charIndex:
-      start: 937
-      end: 945
+      start: 942
+      end: 950
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Emit event when a delegation is made
         charIndex:
-          start: 21
-          end: 57
+          start: 22
+          end: 58
     implicitArgs: null
     explicitArgs:
       - name: owner
         type: felt
         desc: the address of the owner
         charIndex:
-          start: 87
-          end: 124
+          start: 90
+          end: 127
       - name: spender
         type: felt
         desc: the address of the spender
         charIndex:
-          start: 133
-          end: 174
+          start: 137
+          end: 178
       - name: value
         type: Uint256
         desc: the amount of tokens approved for the spender
         charIndex:
-          start: 183
-          end: 244
+          start: 188
+          end: 249
     returns: null
     raises: null
     charIndex:
-      start: 993
-      end: 1237
+      start: 996
+      end: 1245
 - attributeName: storage_var
   functionName:
     name: ERC20_name
     charIndex:
-      start: 1276
-      end: 1286
+      start: 1285
+      end: 1295
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns the name of the token
         charIndex:
-          start: 22
-          end: 51
+          start: 23
+          end: 52
     implicitArgs: null
     explicitArgs: null
     returns:
@@ -97,26 +97,26 @@
         type: felt
         desc: The name of the token
         charIndex:
-          start: 75
-          end: 108
+          start: 78
+          end: 111
     raises: null
     charIndex:
-      start: 1306
-      end: 1414
+      start: 1315
+      end: 1426
 - attributeName: storage_var
   functionName:
     name: ERC20_symbol
     charIndex:
-      start: 1438
-      end: 1450
+      start: 1448
+      end: 1460
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns the symbol of the token
         charIndex:
-          start: 22
-          end: 53
+          start: 23
+          end: 54
     implicitArgs: null
     explicitArgs: null
     returns:
@@ -124,26 +124,26 @@
         type: felt
         desc: The symbol of the token
         charIndex:
-          start: 77
-          end: 114
+          start: 80
+          end: 117
     raises: null
     charIndex:
-      start: 1472
-      end: 1586
+      start: 1482
+      end: 1599
 - attributeName: storage_var
   functionName:
     name: ERC20_decimals
     charIndex:
-      start: 1610
-      end: 1624
+      start: 1621
+      end: 1635
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns the number of decimals of the token
         charIndex:
-          start: 22
-          end: 65
+          start: 23
+          end: 66
     implicitArgs: null
     explicitArgs: null
     returns:
@@ -151,26 +151,26 @@
         type: Uint256
         desc: The number of decimals of the token
         charIndex:
-          start: 89
-          end: 143
+          start: 92
+          end: 146
     raises: null
     charIndex:
-      start: 1651
-      end: 1794
+      start: 1662
+      end: 1808
 - attributeName: storage_var
   functionName:
     name: ERC20_total_supply
     charIndex:
-      start: 1864
-      end: 1882
+      start: 1830
+      end: 1848
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns total amount of tokens in existence
         charIndex:
-          start: 22
-          end: 65
+          start: 23
+          end: 66
     implicitArgs: null
     explicitArgs: null
     returns:
@@ -178,51 +178,51 @@
         type: Uint256
         desc: The total amount of tokens in existence
         charIndex:
-          start: 89
-          end: 151
+          start: 92
+          end: 154
     raises: null
     charIndex:
-      start: 1913
-      end: 2064
+      start: 1879
+      end: 2033
 - attributeName: storage_var
   functionName:
     name: ERC20_balances
     charIndex:
-      start: 2088
-      end: 2102
+      start: 2055
+      end: 2069
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns the amount of tokens owned by an account
         charIndex:
-          start: 22
-          end: 70
+          start: 23
+          end: 71
     implicitArgs: null
     explicitArgs:
       - name: account
         type: felt
         desc: The address of the account
         charIndex:
-          start: 100
-          end: 141
+          start: 103
+          end: 144
     returns:
       - name: balance
         type: Uint256
         desc: The amount of tokens owned by an account
         charIndex:
-          start: 165
-          end: 223
+          start: 170
+          end: 228
     raises: null
     charIndex:
-      start: 2142
-      end: 2365
+      start: 2108
+      end: 2336
 - attributeName: storage_var
   functionName:
     name: ERC20_allowances
     charIndex:
-      start: 2389
-      end: 2405
+      start: 2358
+      end: 2374
   functionComment:
     desc:
       - name: ''
@@ -231,291 +231,291 @@
           Store the amount of tokens that an owner is allowed to delegate to a
           spender
         charIndex:
-          start: 22
-          end: 98
+          start: 23
+          end: 99
     implicitArgs: null
     explicitArgs:
       - name: owner
         type: felt
         desc: The address of the owner
         charIndex:
-          start: 128
-          end: 165
+          start: 131
+          end: 168
       - name: spender
         type: felt
         desc: The address of the spender
         charIndex:
-          start: 174
-          end: 215
+          start: 178
+          end: 219
     returns:
       - name: allowance
         type: Uint256
         desc: The amount of tokens that an owner is allowed to delegate to a spender
         charIndex:
-          start: 239
-          end: 329
+          start: 245
+          end: 335
     raises: null
     charIndex:
-      start: 2461
-      end: 2790
+      start: 2428
+      end: 2763
 - attributeName: namespace ERC20
   functionName:
     name: constructor
     charIndex:
-      start: 2852
-      end: 2863
+      start: 2827
+      end: 2838
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Initializes the contract with the given name, symbol, and decimals
         charIndex:
-          start: 29
-          end: 95
+          start: 31
+          end: 97
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 133
-          end: 151
+          start: 137
+          end: 155
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 164
-          end: 190
+          start: 169
+          end: 195
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 203
-          end: 218
+          start: 209
+          end: 224
     explicitArgs:
       - name: name
         type: felt
         desc: The name of the token
         charIndex:
-          start: 256
-          end: 289
+          start: 264
+          end: 297
       - name: symbol
         type: felt
         desc: The symbol of the token
         charIndex:
-          start: 302
-          end: 339
+          start: 311
+          end: 348
       - name: multiplier
         type: felt
         desc: The multiplier of the token
         charIndex:
-          start: 352
-          end: 397
+          start: 362
+          end: 407
     returns: null
     raises: null
     charIndex:
-      start: 2992
-      end: 3389
+      start: 2963
+      end: 3370
 - attributeName: namespace ERC20
   functionName:
     name: name
     charIndex:
-      start: 3691
-      end: 3695
+      start: 3677
+      end: 3681
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Returns the name of the token
         charIndex:
-          start: 29
-          end: 58
+          start: 31
+          end: 60
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 96
-          end: 114
+          start: 100
+          end: 118
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 127
-          end: 153
+          start: 132
+          end: 158
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 166
-          end: 181
+          start: 172
+          end: 187
     explicitArgs: null
     returns:
       - name: name
         type: felt
         desc: The name of the token
         charIndex:
-          start: 213
-          end: 246
+          start: 221
+          end: 254
     raises: null
     charIndex:
-      start: 3782
-      end: 4028
+      start: 3766
+      end: 4020
 - attributeName: namespace ERC20
   functionName:
     name: transfer_from
     charIndex:
-      start: 4109
-      end: 4122
+      start: 4101
+      end: 4114
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Transfers tokens from one account to another
         charIndex:
-          start: 29
-          end: 73
+          start: 31
+          end: 75
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 111
-          end: 129
+          start: 115
+          end: 133
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 142
-          end: 168
+          start: 147
+          end: 173
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 181
-          end: 196
+          start: 187
+          end: 202
     explicitArgs:
       - name: sender
         type: felt
         desc: The address of the sender
         charIndex:
-          start: 234
-          end: 273
+          start: 242
+          end: 281
       - name: recipient
         type: felt
         desc: The address of the recipient
         charIndex:
-          start: 286
-          end: 331
+          start: 295
+          end: 340
       - name: amount
         type: Uint256
         desc: The amount of tokens to be transferred
         charIndex:
-          start: 344
-          end: 399
+          start: 354
+          end: 409
     returns: null
     raises: null
     charIndex:
-      start: 4261
-      end: 4660
+      start: 4249
+      end: 4658
 - attributeName: namespace internal
   functionName:
     name: _mint
     charIndex:
-      start: 4948
-      end: 4953
+      start: 4938
+      end: 4943
   functionComment:
     desc:
       - name: ''
         type: ''
         desc: Mints tokens to an account
         charIndex:
-          start: 29
-          end: 55
-    implicitArgs:
-      - name: syscall_ptr
-        type: felt*
-        desc: ''
-        charIndex:
-          start: 93
-          end: 111
-      - name: pedersen_ptr
-        type: HashBuiltin*
-        desc: ''
-        charIndex:
-          start: 124
-          end: 150
-      - name: range_check_ptr
-        type: ''
-        desc: ''
-        charIndex:
-          start: 163
-          end: 178
-    explicitArgs:
-      - name: recipient
-        type: felt
-        desc: The address of the recipient
-        charIndex:
-          start: 216
-          end: 261
-      - name: amount
-        type: Uint256
-        desc: The amount of tokens to be minted
-        charIndex:
-          start: 274
-          end: 324
-    returns: null
-    raises: null
-    charIndex:
-      start: 5071
-      end: 5431
-- attributeName: namespace internal
-  functionName:
-    name: _burn
-    charIndex:
-      start: 6347
-      end: 6352
-  functionComment:
-    desc:
-      - name: ''
-        type: ''
-        desc: Burns tokens from an account
-        charIndex:
-          start: 29
+          start: 31
           end: 57
     implicitArgs:
       - name: syscall_ptr
         type: felt*
         desc: ''
         charIndex:
-          start: 95
-          end: 113
+          start: 97
+          end: 115
       - name: pedersen_ptr
         type: HashBuiltin*
         desc: ''
         charIndex:
-          start: 126
-          end: 152
+          start: 129
+          end: 155
       - name: range_check_ptr
         type: ''
         desc: ''
         charIndex:
-          start: 165
-          end: 180
+          start: 169
+          end: 184
+    explicitArgs:
+      - name: recipient
+        type: felt
+        desc: The address of the recipient
+        charIndex:
+          start: 224
+          end: 269
+      - name: amount
+        type: Uint256
+        desc: The amount of tokens to be minted
+        charIndex:
+          start: 283
+          end: 333
+    returns: null
+    raises: null
+    charIndex:
+      start: 5058
+      end: 5429
+- attributeName: namespace internal
+  functionName:
+    name: _burn
+    charIndex:
+      start: 6348
+      end: 6353
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Burns tokens from an account
+        charIndex:
+          start: 31
+          end: 59
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+        desc: ''
+        charIndex:
+          start: 99
+          end: 117
+      - name: pedersen_ptr
+        type: HashBuiltin*
+        desc: ''
+        charIndex:
+          start: 131
+          end: 157
+      - name: range_check_ptr
+        type: ''
+        desc: ''
+        charIndex:
+          start: 171
+          end: 186
     explicitArgs:
       - name: account
         type: felt
         desc: The address of the recipient
         charIndex:
-          start: 218
-          end: 261
+          start: 226
+          end: 269
       - name: amount
         type: Uint256
         desc: The amount of tokens to be burned
         charIndex:
-          start: 274
-          end: 324
+          start: 283
+          end: 333
     returns: null
     raises: null
     charIndex:
-      start: 6474
-      end: 6798
+      start: 6472
+      end: 6805

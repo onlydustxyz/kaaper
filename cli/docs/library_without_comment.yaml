@@ -84,7 +84,7 @@
     raises: null
     charIndex:
       start: 961
-      end: 1256
+      end: 1115
 - attributeName: namespace ERC20
   functionName:
     name: constructor

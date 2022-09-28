@@ -41,8 +41,8 @@ suite("getScopeParsingResult: constructor", () => {
         functionName: {
           name: "constructor",
           charIndex: {
-            start: 349,
-            end: 360,
+            start: 351,
+            end: 362,
           },
         },
         functionSignature: {
@@ -66,7 +66,7 @@ suite("getScopeParsingResult: constructor", () => {
               name: "",
               type: "",
               desc: "Initialize the contract",
-              charIndex: { start: 21, end: 44 },
+              charIndex: { start: 23, end: 46 },
             },
           ],
           implicitArgs: [
@@ -74,19 +74,19 @@ suite("getScopeParsingResult: constructor", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 74, end: 92 },
+              charIndex: { start: 78, end: 96 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 101, end: 127 },
+              charIndex: { start: 106, end: 132 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 136, end: 151 },
+              charIndex: { start: 142, end: 157 },
             },
           ],
           explicitArgs: [
@@ -94,31 +94,31 @@ suite("getScopeParsingResult: constructor", () => {
               name: "name",
               type: "felt",
               desc: "name of the token",
-              charIndex: { start: 181, end: 210 },
+              charIndex: { start: 189, end: 218 },
             },
             {
               name: "symbol",
               type: "felt",
               desc: "symbol of the token",
-              charIndex: { start: 219, end: 252 },
+              charIndex: { start: 228, end: 261 },
             },
             {
               name: "decimals",
               type: "Uint256",
               desc: "floating point of the token",
-              charIndex: { start: 261, end: 307 },
+              charIndex: { start: 271, end: 317 },
             },
             {
               name: "initial_supply",
               type: "Uint256",
               desc: "amount of initial supply of the token",
-              charIndex: { start: 316, end: 378 },
+              charIndex: { start: 327, end: 389 },
             },
             {
               name: "recipient",
               type: "felt",
               desc: "the address of recipient of the initial supply",
-              charIndex: { start: 387, end: 450 },
+              charIndex: { start: 399, end: 462 },
             },
           ],
           returns: null,
@@ -127,28 +127,28 @@ suite("getScopeParsingResult: constructor", () => {
               name: "decimals",
               type: "",
               desc: "decimals exceed 2^8",
-              charIndex: { start: 501, end: 530 },
+              charIndex: { start: 517, end: 546 },
             },
             {
               name: "recipient",
               type: "",
               desc: "cannot mint to the zero address",
-              charIndex: { start: 539, end: 581 },
+              charIndex: { start: 556, end: 598 },
             },
             {
               name: "initial_supply",
               type: "",
               desc: "not valid Uint256",
-              charIndex: { start: 590, end: 623 },
+              charIndex: { start: 608, end: 641 },
             },
             {
               name: "initial_supply",
               type: "",
               desc: "mint overflow",
-              charIndex: { start: 632, end: 661 },
+              charIndex: { start: 651, end: 680 },
             },
           ],
-          charIndex: { start: 526, end: 1187 },
+          charIndex: { start: 522, end: 1202 },
         },
       },
     ];
@@ -193,25 +193,25 @@ suite("getScopeParsingResult: constructor", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc:
-    #   Initialize the contract
-    # Implicit args:
-    #   syscall_ptr(felt*)
-    #   pedersen_ptr(HashBuiltin*)
-    #   range_check_ptr
-    # Explicit args:
-    #   name(felt): name of the token
-    #   symbol(felt): symbol of the token
-    #   decimals(Uint256): floating point of the token
-    #   initial_supply(Uint256): amount of initial supply of the token
-    #   recipient(felt): the address of recipient of the initial supply
-    # Returns:
-    #   None
-    # Raises:
-    #   decimals: decimals exceed 2^8
-    #   recipient: cannot mint to the zero address
-    #   initial_supply: not valid Uint256
-    #   initial_supply: mint overflow`;
+    // Desc:
+    //   Initialize the contract
+    // Implicit args:
+    //   syscall_ptr(felt*)
+    //   pedersen_ptr(HashBuiltin*)
+    //   range_check_ptr
+    // Explicit args:
+    //   name(felt): name of the token
+    //   symbol(felt): symbol of the token
+    //   decimals(Uint256): floating point of the token
+    //   initial_supply(Uint256): amount of initial supply of the token
+    //   recipient(felt): the address of recipient of the initial supply
+    // Returns:
+    //   None
+    // Raises:
+    //   decimals: decimals exceed 2^8
+    //   recipient: cannot mint to the zero address
+    //   initial_supply: not valid Uint256
+    //   initial_supply: mint overflow`;
 
     assert.equal(
       functionCommentTarget,
@@ -238,8 +238,8 @@ suite("getScopeParsingResult: constructor", () => {
         functionName: {
           name: "constructor",
           charIndex: {
-            start: 349,
-            end: 360,
+            start: 351,
+            end: 362,
           },
         },
         functionSignature: {
@@ -263,7 +263,7 @@ suite("getScopeParsingResult: constructor", () => {
               name: "",
               type: "",
               desc: "Initialize the contract",
-              charIndex: { start: 21, end: 44 },
+              charIndex: { start: 23, end: 46 },
             },
           ],
           implicitArgs: [
@@ -271,19 +271,19 @@ suite("getScopeParsingResult: constructor", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 74, end: 92 },
+              charIndex: { start: 78, end: 96 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 101, end: 127 },
+              charIndex: { start: 106, end: 132 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 136, end: 151 },
+              charIndex: { start: 142, end: 157 },
             },
           ],
           explicitArgs: [
@@ -291,31 +291,31 @@ suite("getScopeParsingResult: constructor", () => {
               name: "name",
               type: "felt",
               desc: "name of the token",
-              charIndex: { start: 181, end: 210 },
+              charIndex: { start: 189, end: 218 },
             },
             {
               name: "symbol",
               type: "felt",
               desc: "symbol of the token",
-              charIndex: { start: 219, end: 252 },
+              charIndex: { start: 228, end: 261 },
             },
             {
               name: "decimals",
               type: "Uint256",
               desc: "floating point of the token",
-              charIndex: { start: 261, end: 307 },
+              charIndex: { start: 271, end: 317 },
             },
             {
               name: "initial_supply",
               type: "Uint256",
               desc: "amount of initial supply of the token",
-              charIndex: { start: 316, end: 378 },
+              charIndex: { start: 327, end: 389 },
             },
             {
               name: "recipient",
               type: "felt",
               desc: "the address of recipient of the initial supply",
-              charIndex: { start: 387, end: 450 },
+              charIndex: { start: 399, end: 462 },
             },
           ],
           returns: null,
@@ -324,32 +324,32 @@ suite("getScopeParsingResult: constructor", () => {
               name: "decimals",
               type: "",
               desc: "decimals exceed 2^8",
-              charIndex: { start: 501, end: 530 },
+              charIndex: { start: 517, end: 546 },
             },
             {
               name: "recipient",
               type: "",
               desc: "cannot mint to the zero address",
-              charIndex: { start: 539, end: 581 },
+              charIndex: { start: 556, end: 598 },
             },
             {
               name: "initial_supply",
               type: "",
               desc: "not valid Uint256",
-              charIndex: { start: 590, end: 623 },
+              charIndex: { start: 608, end: 641 },
             },
             {
               name: "initial_supply",
               type: "",
               desc: "mint overflow",
-              charIndex: { start: 632, end: 661 },
+              charIndex: { start: 651, end: 680 },
             },
           ],
-          charIndex: { start: 526, end: 1187 },
+          charIndex: { start: 522, end: 1202 },
         },
       },
     ];
 
-    assert.deepEqual(parsingTarget, parsingOutput, "failed to parse");
+    assert.deepEqual(parsingOutput, parsingTarget, "failed to parse");
   });
 });

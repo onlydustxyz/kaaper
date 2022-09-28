@@ -33,8 +33,8 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "constructor",
           charIndex: {
-            start: 349,
-            end: 360,
+            start: 351,
+            end: 362,
           },
         },
         errorSource: ["implicitArgs", "explicitArgs"],
@@ -45,8 +45,8 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "name",
           charIndex: {
-            start: 1251,
-            end: 1255,
+            start: 1267,
+            end: 1271,
           },
         },
         errorSource: "returns",
@@ -57,8 +57,8 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "decreaseAllowance",
           charIndex: {
-            start: 7250,
-            end: 7267,
+            start: 7295,
+            end: 7312,
           },
         },
         errorSource: "returns",
@@ -69,8 +69,8 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "Transfer",
           charIndex: {
-            start: 640,
-            end: 648,
+            start: 645,
+            end: 653,
           },
         },
         errorSource: "explicitArgs",
@@ -81,8 +81,8 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "ERC20_symbol",
           charIndex: {
-            start: 1391,
-            end: 1403,
+            start: 1400,
+            end: 1412,
           },
         },
         errorSource: "explicitArgs",
@@ -93,8 +93,8 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "constructor",
           charIndex: {
-            start: 2872,
-            end: 2883,
+            start: 2848,
+            end: 2859,
           },
         },
         errorSource: ["implicitArgs", "explicitArgs"],
@@ -105,13 +105,13 @@ suite("getNonCompliantCommentFunction", () => {
         functionName: {
           name: "_mint",
           charIndex: {
-            start: 4968,
-            end: 4973,
+            start: 4959,
+            end: 4964,
           },
         },
         errorSource: "explicitArgs",
       },
     ];
-    assert.deepEqual(target, result);
+    assert.deepEqual(result, target);
   });
 });

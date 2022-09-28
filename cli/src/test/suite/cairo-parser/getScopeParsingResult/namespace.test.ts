@@ -46,7 +46,7 @@ suite("getScopeParsingResult: namespace", () => {
         attributeName: "namespace ERC20",
         functionName: {
           name: "constructor",
-          charIndex: { start: 2852, end: 2863 },
+          charIndex: { start: 2827, end: 2838 },
         },
         functionSignature: {
           implicitArgs: [
@@ -67,7 +67,7 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Initializes the contract with the given name, symbol, and decimals",
-              charIndex: { start: 29, end: 95 },
+              charIndex: { start: 31, end: 97 },
             },
           ],
           implicitArgs: [
@@ -75,19 +75,19 @@ suite("getScopeParsingResult: namespace", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 133, end: 151 },
+              charIndex: { start: 137, end: 155 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 164, end: 190 },
+              charIndex: { start: 169, end: 195 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 203, end: 218 },
+              charIndex: { start: 209, end: 224 },
             },
           ],
           explicitArgs: [
@@ -95,24 +95,24 @@ suite("getScopeParsingResult: namespace", () => {
               name: "name",
               type: "felt",
               desc: "The name of the token",
-              charIndex: { start: 256, end: 289 },
+              charIndex: { start: 264, end: 297 },
             },
             {
               name: "symbol",
               type: "felt",
               desc: "The symbol of the token",
-              charIndex: { start: 302, end: 339 },
+              charIndex: { start: 311, end: 348 },
             },
             {
               name: "multiplier",
               type: "felt",
               desc: "The multiplier of the token",
-              charIndex: { start: 352, end: 397 },
+              charIndex: { start: 362, end: 407 },
             },
           ],
           returns: null,
           raises: null,
-          charIndex: { start: 2992, end: 3389 },
+          charIndex: { start: 2963, end: 3370 },
         },
       },
     ];
@@ -149,16 +149,16 @@ suite("getScopeParsingResult: namespace", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-        # Desc:
-        #   Initializes the contract with the given name, symbol, and decimals
-        # Implicit args:
-        #   syscall_ptr(felt*)
-        #   pedersen_ptr(HashBuiltin*)
-        #   range_check_ptr
-        # Explicit args:
-        #   name(felt): The name of the token
-        #   symbol(felt): The symbol of the token
-        #   multiplier(felt): The multiplier of the token`;
+        // Desc:
+        //   Initializes the contract with the given name, symbol, and decimals
+        // Implicit args:
+        //   syscall_ptr(felt*)
+        //   pedersen_ptr(HashBuiltin*)
+        //   range_check_ptr
+        // Explicit args:
+        //   name(felt): The name of the token
+        //   symbol(felt): The symbol of the token
+        //   multiplier(felt): The multiplier of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -189,7 +189,7 @@ suite("getScopeParsingResult: namespace", () => {
         attributeName: "namespace ERC20",
         functionName: {
           name: "name",
-          charIndex: { start: 3691, end: 3695 },
+          charIndex: { start: 3677, end: 3681 },
         },
         functionSignature: {
           implicitArgs: [
@@ -211,7 +211,7 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Returns the name of the token",
-              charIndex: { start: 29, end: 58 },
+              charIndex: { start: 31, end: 60 },
             },
           ],
           implicitArgs: [
@@ -219,19 +219,19 @@ suite("getScopeParsingResult: namespace", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 96, end: 114 },
+              charIndex: { start: 100, end: 118 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 127, end: 153 },
+              charIndex: { start: 132, end: 158 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 166, end: 181 },
+              charIndex: { start: 172, end: 187 },
             },
           ],
           explicitArgs: null,
@@ -240,11 +240,11 @@ suite("getScopeParsingResult: namespace", () => {
               name: "name",
               type: "felt",
               desc: "The name of the token",
-              charIndex: { start: 213, end: 246 },
+              charIndex: { start: 221, end: 254 },
             },
           ],
           raises: null,
-          charIndex: { start: 3782, end: 4028 },
+          charIndex: { start: 3766, end: 4020 },
         },
       },
     ];
@@ -275,14 +275,14 @@ suite("getScopeParsingResult: namespace", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-        # Desc:
-        #   Returns the name of the token
-        # Implicit args:
-        #   syscall_ptr(felt*)
-        #   pedersen_ptr(HashBuiltin*)
-        #   range_check_ptr
-        # Returns:
-        #   name(felt): The name of the token`;
+        // Desc:
+        //   Returns the name of the token
+        // Implicit args:
+        //   syscall_ptr(felt*)
+        //   pedersen_ptr(HashBuiltin*)
+        //   range_check_ptr
+        // Returns:
+        //   name(felt): The name of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -313,7 +313,7 @@ suite("getScopeParsingResult: namespace", () => {
         attributeName: "namespace ERC20",
         functionName: {
           name: "transfer_from",
-          charIndex: { start: 4109, end: 4122 },
+          charIndex: { start: 4101, end: 4114 },
         },
         functionSignature: {
           implicitArgs: [
@@ -334,7 +334,7 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Transfers tokens from one account to another",
-              charIndex: { start: 29, end: 73 },
+              charIndex: { start: 31, end: 75 },
             },
           ],
           implicitArgs: [
@@ -342,19 +342,19 @@ suite("getScopeParsingResult: namespace", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 111, end: 129 },
+              charIndex: { start: 115, end: 133 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 142, end: 168 },
+              charIndex: { start: 147, end: 173 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 181, end: 196 },
+              charIndex: { start: 187, end: 202 },
             },
           ],
           explicitArgs: [
@@ -362,24 +362,24 @@ suite("getScopeParsingResult: namespace", () => {
               name: "sender",
               type: "felt",
               desc: "The address of the sender",
-              charIndex: { start: 234, end: 273 },
+              charIndex: { start: 242, end: 281 },
             },
             {
               name: "recipient",
               type: "felt",
               desc: "The address of the recipient",
-              charIndex: { start: 286, end: 331 },
+              charIndex: { start: 295, end: 340 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "The amount of tokens to be transferred",
-              charIndex: { start: 344, end: 399 },
+              charIndex: { start: 354, end: 409 },
             },
           ],
           returns: null,
           raises: null,
-          charIndex: { start: 4261, end: 4660 },
+          charIndex: { start: 4249, end: 4658 },
         },
       },
     ];
@@ -412,16 +412,16 @@ suite("getScopeParsingResult: namespace", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-        # Desc:
-        #   Transfers tokens from one account to another
-        # Implicit args:
-        #   syscall_ptr(felt*)
-        #   pedersen_ptr(HashBuiltin*)
-        #   range_check_ptr
-        # Explicit args:
-        #   sender(felt): The address of the sender
-        #   recipient(felt): The address of the recipient
-        #   amount(Uint256): The amount of tokens to be transferred`;
+        // Desc:
+        //   Transfers tokens from one account to another
+        // Implicit args:
+        //   syscall_ptr(felt*)
+        //   pedersen_ptr(HashBuiltin*)
+        //   range_check_ptr
+        // Explicit args:
+        //   sender(felt): The address of the sender
+        //   recipient(felt): The address of the recipient
+        //   amount(Uint256): The amount of tokens to be transferred`;
 
     assert.equal(
       functionCommentTarget,
@@ -452,7 +452,7 @@ suite("getScopeParsingResult: namespace", () => {
         attributeName: "namespace internal",
         functionName: {
           name: "_mint",
-          charIndex: { start: 4948, end: 4953 },
+          charIndex: { start: 4938, end: 4943 },
         },
         functionSignature: {
           implicitArgs: [
@@ -472,7 +472,7 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Mints tokens to an account",
-              charIndex: { start: 29, end: 55 },
+              charIndex: { start: 31, end: 57 },
             },
           ],
           implicitArgs: [
@@ -480,19 +480,19 @@ suite("getScopeParsingResult: namespace", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 93, end: 111 },
+              charIndex: { start: 97, end: 115 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 124, end: 150 },
+              charIndex: { start: 129, end: 155 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 163, end: 178 },
+              charIndex: { start: 169, end: 184 },
             },
           ],
           explicitArgs: [
@@ -500,18 +500,18 @@ suite("getScopeParsingResult: namespace", () => {
               name: "recipient",
               type: "felt",
               desc: "The address of the recipient",
-              charIndex: { start: 216, end: 261 },
+              charIndex: { start: 224, end: 269 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "The amount of tokens to be minted",
-              charIndex: { start: 274, end: 324 },
+              charIndex: { start: 283, end: 333 },
             },
           ],
           returns: null,
           raises: null,
-          charIndex: { start: 5071, end: 5431 },
+          charIndex: { start: 5058, end: 5429 },
         },
       },
     ];
@@ -541,17 +541,17 @@ suite("getScopeParsingResult: namespace", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-        # Desc:
-        #   Mints tokens to an account
-        # Implicit args:
-        #   syscall_ptr(felt*)
-        #   pedersen_ptr(HashBuiltin*)
-        #   range_check_ptr
-        # Explicit args:
-        #   recipient(felt): The address of the recipient
-        #   amount(Uint256): The amount of tokens to be minted
-        # Returns:
-        #   None`;
+        // Desc:
+        //   Mints tokens to an account
+        // Implicit args:
+        //   syscall_ptr(felt*)
+        //   pedersen_ptr(HashBuiltin*)
+        //   range_check_ptr
+        // Explicit args:
+        //   recipient(felt): The address of the recipient
+        //   amount(Uint256): The amount of tokens to be minted
+        // Returns:
+        //   None`;
 
     assert.equal(
       functionCommentTarget,
@@ -581,7 +581,7 @@ suite("getScopeParsingResult: namespace", () => {
         attributeName: "namespace internal",
         functionName: {
           name: "_burn",
-          charIndex: { start: 6347, end: 6352 },
+          charIndex: { start: 6348, end: 6353 },
         },
         functionSignature: {
           implicitArgs: [
@@ -601,7 +601,7 @@ suite("getScopeParsingResult: namespace", () => {
               name: "",
               type: "",
               desc: "Burns tokens from an account",
-              charIndex: { start: 29, end: 57 },
+              charIndex: { start: 31, end: 59 },
             },
           ],
           implicitArgs: [
@@ -609,19 +609,19 @@ suite("getScopeParsingResult: namespace", () => {
               name: "syscall_ptr",
               type: "felt*",
               desc: "",
-              charIndex: { start: 95, end: 113 },
+              charIndex: { start: 99, end: 117 },
             },
             {
               name: "pedersen_ptr",
               type: "HashBuiltin*",
               desc: "",
-              charIndex: { start: 126, end: 152 },
+              charIndex: { start: 131, end: 157 },
             },
             {
               name: "range_check_ptr",
               type: "",
               desc: "",
-              charIndex: { start: 165, end: 180 },
+              charIndex: { start: 171, end: 186 },
             },
           ],
           explicitArgs: [
@@ -629,18 +629,18 @@ suite("getScopeParsingResult: namespace", () => {
               name: "account",
               type: "felt",
               desc: "The address of the recipient",
-              charIndex: { start: 218, end: 261 },
+              charIndex: { start: 226, end: 269 },
             },
             {
               name: "amount",
               type: "Uint256",
               desc: "The amount of tokens to be burned",
-              charIndex: { start: 274, end: 324 },
+              charIndex: { start: 283, end: 333 },
             },
           ],
           returns: null,
           raises: null,
-          charIndex: { start: 6474, end: 6798 },
+          charIndex: { start: 6472, end: 6805 },
         },
       },
     ];
@@ -670,15 +670,15 @@ suite("getScopeParsingResult: namespace", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-        # Desc:
-        #   Burns tokens from an account
-        # Implicit args:
-        #   syscall_ptr(felt*)
-        #   pedersen_ptr(HashBuiltin*)
-        #   range_check_ptr
-        # Explicit args:
-        #   account(felt): The address of the recipient
-        #   amount(Uint256): The amount of tokens to be burned`;
+        // Desc:
+        //   Burns tokens from an account
+        // Implicit args:
+        //   syscall_ptr(felt*)
+        //   pedersen_ptr(HashBuiltin*)
+        //   range_check_ptr
+        // Explicit args:
+        //   account(felt): The address of the recipient
+        //   amount(Uint256): The amount of tokens to be burned`;
 
     assert.equal(
       functionCommentTarget,

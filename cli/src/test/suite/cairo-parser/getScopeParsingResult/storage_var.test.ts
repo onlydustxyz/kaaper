@@ -42,7 +42,7 @@ suite("getScopeParsingResult: storage_var", () => {
         attributeName: "storage_var",
         functionName: {
           name: "ERC20_name",
-          charIndex: { start: 1276, end: 1286 },
+          charIndex: { start: 1285, end: 1295 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -55,7 +55,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns the name of the token",
-              charIndex: { start: 22, end: 51 },
+              charIndex: { start: 23, end: 52 },
             },
           ],
           implicitArgs: null,
@@ -65,11 +65,11 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "name",
               type: "felt",
               desc: "The name of the token",
-              charIndex: { start: 75, end: 108 },
+              charIndex: { start: 78, end: 111 },
             },
           ],
           raises: null,
-          charIndex: { start: 1306, end: 1414 },
+          charIndex: { start: 1315, end: 1426 },
         },
       },
     ];
@@ -96,10 +96,10 @@ suite("getScopeParsingResult: storage_var", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Returns the name of the token
-    # Returns:
-    #   name(felt): The name of the token`;
+    // Desc:
+    //   Returns the name of the token
+    // Returns:
+    //   name(felt): The name of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -130,7 +130,7 @@ suite("getScopeParsingResult: storage_var", () => {
         attributeName: "storage_var",
         functionName: {
           name: "ERC20_symbol",
-          charIndex: { start: 1438, end: 1450 },
+          charIndex: { start: 1448, end: 1460 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -143,7 +143,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns the symbol of the token",
-              charIndex: { start: 22, end: 53 },
+              charIndex: { start: 23, end: 54 },
             },
           ],
           implicitArgs: null,
@@ -153,11 +153,11 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "symbol",
               type: "felt",
               desc: "The symbol of the token",
-              charIndex: { start: 77, end: 114 },
+              charIndex: { start: 80, end: 117 },
             },
           ],
           raises: null,
-          charIndex: { start: 1472, end: 1586 },
+          charIndex: { start: 1482, end: 1599 },
         },
       },
     ];
@@ -187,10 +187,10 @@ suite("getScopeParsingResult: storage_var", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Returns the symbol of the token
-    # Returns:
-    #   symbol(felt): The symbol of the token`;
+    // Desc:
+    //   Returns the symbol of the token
+    // Returns:
+    //   symbol(felt): The symbol of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -221,7 +221,7 @@ suite("getScopeParsingResult: storage_var", () => {
         attributeName: "storage_var",
         functionName: {
           name: "ERC20_decimals",
-          charIndex: { start: 1610, end: 1624 },
+          charIndex: { start: 1621, end: 1635 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -234,7 +234,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns the number of decimals of the token",
-              charIndex: { start: 22, end: 65 },
+              charIndex: { start: 23, end: 66 },
             },
           ],
           implicitArgs: null,
@@ -244,11 +244,11 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "decimals",
               type: "Uint256",
               desc: "The number of decimals of the token",
-              charIndex: { start: 89, end: 143 },
+              charIndex: { start: 92, end: 146 },
             },
           ],
           raises: null,
-          charIndex: { start: 1651, end: 1794 },
+          charIndex: { start: 1662, end: 1808 },
         },
       },
     ];
@@ -275,10 +275,10 @@ suite("getScopeParsingResult: storage_var", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Returns the number of decimals of the token
-    # Returns:
-    #   decimals(Uint256): The number of decimals of the token`;
+    // Desc:
+    //   Returns the number of decimals of the token
+    // Returns:
+    //   decimals(Uint256): The number of decimals of the token`;
 
     assert.equal(
       functionCommentTarget,
@@ -309,7 +309,7 @@ suite("getScopeParsingResult: storage_var", () => {
         attributeName: "storage_var",
         functionName: {
           name: "ERC20_total_supply",
-          charIndex: { start: 1864, end: 1882 },
+          charIndex: { start: 1830, end: 1848 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -322,7 +322,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns total amount of tokens in existence",
-              charIndex: { start: 22, end: 65 },
+              charIndex: { start: 23, end: 66 },
             },
           ],
           implicitArgs: null,
@@ -332,11 +332,11 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "total_supply",
               type: "Uint256",
               desc: "The total amount of tokens in existence",
-              charIndex: { start: 89, end: 151 },
+              charIndex: { start: 92, end: 154 },
             },
           ],
           raises: null,
-          charIndex: { start: 1913, end: 2064 },
+          charIndex: { start: 1879, end: 2033 },
         },
       },
     ];
@@ -366,10 +366,10 @@ suite("getScopeParsingResult: storage_var", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Returns total amount of tokens in existence
-    # Returns:
-    #   total_supply(Uint256): The total amount of tokens in existence`;
+    // Desc:
+    //   Returns total amount of tokens in existence
+    // Returns:
+    //   total_supply(Uint256): The total amount of tokens in existence`;
 
     assert.equal(
       functionCommentTarget,
@@ -400,7 +400,7 @@ suite("getScopeParsingResult: storage_var", () => {
         attributeName: "storage_var",
         functionName: {
           name: "ERC20_balances",
-          charIndex: { start: 2088, end: 2102 },
+          charIndex: { start: 2055, end: 2069 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -413,7 +413,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Returns the amount of tokens owned by an account",
-              charIndex: { start: 22, end: 70 },
+              charIndex: { start: 23, end: 71 },
             },
           ],
           implicitArgs: null,
@@ -422,7 +422,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "account",
               type: "felt",
               desc: "The address of the account",
-              charIndex: { start: 100, end: 141 },
+              charIndex: { start: 103, end: 144 },
             },
           ],
           returns: [
@@ -430,11 +430,11 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "balance",
               type: "Uint256",
               desc: "The amount of tokens owned by an account",
-              charIndex: { start: 165, end: 223 },
+              charIndex: { start: 170, end: 228 },
             },
           ],
           raises: null,
-          charIndex: { start: 2142, end: 2365 },
+          charIndex: { start: 2108, end: 2336 },
         },
       },
     ];
@@ -462,12 +462,12 @@ suite("getScopeParsingResult: storage_var", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Returns the amount of tokens owned by an account
-    # Explicit args:
-    #   account(felt): The address of the account
-    # Returns:
-    #   balance(Uint256): The amount of tokens owned by an account`;
+    // Desc:
+    //   Returns the amount of tokens owned by an account
+    // Explicit args:
+    //   account(felt): The address of the account
+    // Returns:
+    //   balance(Uint256): The amount of tokens owned by an account`;
 
     assert.equal(
       functionCommentTarget,
@@ -498,7 +498,7 @@ suite("getScopeParsingResult: storage_var", () => {
         attributeName: "storage_var",
         functionName: {
           name: "ERC20_allowances",
-          charIndex: { start: 2389, end: 2405 },
+          charIndex: { start: 2358, end: 2374 },
         },
         functionSignature: {
           implicitArgs: null,
@@ -514,7 +514,7 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "",
               type: "",
               desc: "Store the amount of tokens that an owner is allowed to delegate to a spender",
-              charIndex: { start: 22, end: 98 },
+              charIndex: { start: 23, end: 99 },
             },
           ],
           implicitArgs: null,
@@ -523,13 +523,13 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "owner",
               type: "felt",
               desc: "The address of the owner",
-              charIndex: { start: 128, end: 165 },
+              charIndex: { start: 131, end: 168 },
             },
             {
               name: "spender",
               type: "felt",
               desc: "The address of the spender",
-              charIndex: { start: 174, end: 215 },
+              charIndex: { start: 178, end: 219 },
             },
           ],
           returns: [
@@ -537,11 +537,11 @@ suite("getScopeParsingResult: storage_var", () => {
               name: "allowance",
               type: "Uint256",
               desc: "The amount of tokens that an owner is allowed to delegate to a spender",
-              charIndex: { start: 239, end: 329 },
+              charIndex: { start: 245, end: 335 },
             },
           ],
           raises: null,
-          charIndex: { start: 2461, end: 2790 },
+          charIndex: { start: 2428, end: 2763 },
         },
       },
     ];
@@ -575,15 +575,15 @@ suite("getScopeParsingResult: storage_var", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget = `
-    # Desc: 
-    #   Store the amount of tokens that an owner is allowed to delegate to a spender
-    # Explicit args:
-    #   owner(felt): The address of the owner
-    #   spender(felt): The address of the spender
-    # Returns:
-    #   allowance(Uint256): The amount of tokens that an owner is allowed to delegate to a spender`;
+    // Desc:
+    //   Store the amount of tokens that an owner is allowed to delegate to a spender
+    // Explicit args:
+    //   owner(felt): The address of the owner
+    //   spender(felt): The address of the spender
+    // Returns:
+    //   allowance(Uint256): The amount of tokens that an owner is allowed to delegate to a spender`;
 
-    assert.equal(
+    assert.deepEqual(
       functionCommentTarget,
       functionCommentParsingResult,
       "failed to parse"
