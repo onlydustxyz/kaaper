@@ -12,9 +12,9 @@
 	"activationEvents": [
 		"onCommand:kaaper.helloWorld"
 	],
-	"main": "./out/index.js",
+	"main": "./out/cli/src/index.js",
 	"bin": {
-		"kaaper": "./out/index.js"
+		"kaaper": "./out/cli/src/index.js"
 	},
 	"contributes": {
 		"commands": [
