@@ -10,7 +10,7 @@
 		"rootDirs": ["./core"],
 		"strict": true,  /* enable all strict type-checking options */
 		// "declaration": true,
-		"types": ["node"]
+		"types": ["mocha", "node"]
 		// "esModuleInterop": true,
 		// "resolveJsonModule": true
 		/* Additional Checks */
@@ -19,5 +19,5 @@
 		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
 	},
 	"include": ["src", "../core/**/*.ts"],
-	"exclude": ["node_modules", ".vscode-test"]
+	"exclude": ["node_modules", ".vscode-test"],
 }

@@ -8,3 +8,4 @@ vscode-extension/client/tsconfig.tsbuildinfo
 cli/.vscode-test/
 cli/node_modules/
 cli/out/
+.idea/

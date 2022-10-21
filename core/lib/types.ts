@@ -1,6 +1,7 @@
 export interface FunctionScope {
   text: string;
   start: number;
+  startLine: number;
   end: number;
 }
 
@@ -45,6 +46,23 @@ export interface ParsingResult {
     returns: FunctionComment[] | null;
     raises: FunctionComment[] | null;
     charIndex: CharIndex | null;
+  };
+}
+
+export interface NatSpec {
+  title?: string;
+  notice?: string;
+  dev?: string;
+  params?: {
+    name: string;
+    description: string;
+  }[];
+  returns?: {
+    name?: string;
+    description: string;
+  }[];
+  custom?: {
+    [tag: string]: string;
   };
 }
 

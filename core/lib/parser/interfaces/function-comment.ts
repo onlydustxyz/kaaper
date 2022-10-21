@@ -123,3 +123,70 @@ export abstract class BaseCommentParser {
     return null;
   }
 }
+
+export class NatspecCommentParser extends BaseCommentParser{
+  constructor(functionCommentText: string | null) {
+    super(functionCommentText);
+    this.startEndScopeRegexp = /\/\/\s?(@\w+)/;
+  }
+
+  isInsideScope(line: string, regexp: RegExp): RegExpMatchArray | null {
+    const isNone = line.match(/\/\/\s*None$/);
+    if (isNone) {
+      return null;
+    }
+    if (
+      this.functionCommentText &&
+      this.runningScope === true
+    ) {
+      const functionComments = [...this.functionCommentText.matchAll(regexp)];
+      for (var functionComment of functionComments) {
+        /* without // or anything else, just pure content
+        e.g name(felt): The name of the token instead of
+        // name(felt): The name of the token */
+        const commentLine = [...line.matchAll(regexp)];
+        if (functionComment[0] === commentLine![0][0]) {
+          return functionComment;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Modified version that takes into account multi-line documentation for a single tag.
+   * @param lines
+   */
+  parseCommentLines(
+    lines: RegExpMatchArray | null
+  ): Array<FunctionComment> | null {
+    var result: Array<FunctionComment> = [];
+    if (lines && this.functionCommentText) {
+      for (const line of lines) {
+        this.setStartScope(line);
+        this.setEndScope(line);
+        const functionComment = this.parseCommentLine(
+          line,
+          this.functionCommentText
+        );
+        if (functionComment) {
+          result.push(functionComment);
+        }
+      }
+      if (result.length > 0) {
+        return [{
+          name: result[0].name,
+          type: result[0].type,
+          desc: result.map((r) => r.desc).join('\n'),
+          charIndex:{
+            start: result[0].charIndex.start,
+            end: result[result.length - 1].charIndex.end
+          }
+
+        }];
+      }
+      return null;
+    }
+    return null;
+  }
+}
