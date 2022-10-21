@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import FunctionCommentExplicitArgsParser from "../../../../../../core/lib/parser//function-comment/explicit-args";
+import FunctionCommentExplicitArgsParser from "../../../../../../core/lib/parser/function-comment/explicit-args";
 import CairoParser from "../../../../../../core/lib/CairoParser";
 
 suite("function-comment: constructor: explicit-args", () => {
