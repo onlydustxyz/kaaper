@@ -16,6 +16,7 @@ import {
   NamespaceScope,
 } from "./types";
 import NatspecCommentNoticeParser from "./parser/function-comment/natspec/notice";
+import NatspecCommentParamsParser from "./parser/function-comment/natspec/params";
 
 const lodash = require("lodash");
 const yaml = require("js-yaml");
@@ -105,7 +106,6 @@ export default class CairoParser {
               startLine: text.substring(0, namespace.start! + match.start).split("\n").length,
               end: namespace.start! + match.end,
             };
-            // console.log(functionScope)
             namespaceScopes.push(functionScope);
           }
         }
@@ -130,7 +130,6 @@ export default class CairoParser {
         startLine: text.substring(0, startIndex).split("\n").length,
         end: startIndex + match[0].length,
       };
-      // console.log(functionScope)
       functionScopes.push(functionScope);
     }
 
@@ -232,10 +231,6 @@ export default class CairoParser {
 
     var parsingOutputs = [];
 
-    if (name === 'namespace') {
-      // console.log(functionScopes)
-    }
-
     // parse comment lines
     if (functionScopes) {
       for (var functionScope of functionScopes) {
@@ -331,11 +326,15 @@ export default class CairoParser {
       ? natspecCommentLines.text.join("")
       : null;
 
-    const nastpecFunctionCommentDescParser = new NatspecCommentNoticeParser(
+    const nastpecFunctionCommentNoticeParser = new NatspecCommentNoticeParser(
+      natspecFunctionCommentText
+    );
+    const nastpecFunctionCommentParamsParser = new NatspecCommentParamsParser(
       natspecFunctionCommentText
     );
     const functionCommentScopeNatspec = natspecCommentLines ? natspecCommentLines.text : null;
-    const natspecDesc = nastpecFunctionCommentDescParser.parseCommentLines(functionCommentScopeNatspec)
+    const natspecNotice = nastpecFunctionCommentNoticeParser.parseCommentLines(functionCommentScopeNatspec)
+    const natspecParams = nastpecFunctionCommentParamsParser.parseCommentLines(functionCommentScopeNatspec)
 
 
   }

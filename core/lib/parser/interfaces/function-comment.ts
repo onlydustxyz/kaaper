@@ -1,4 +1,4 @@
-import { FunctionComment } from "../../types";
+import {FunctionComment, MultiLineFunctionComment} from "../../types";
 
 export abstract class BaseCommentParser {
   public startLine: string;
@@ -39,6 +39,8 @@ export abstract class BaseCommentParser {
   isEndScope(line: string): boolean {
     const result = line.match(this.startEndScopeRegexp);
     if (result) {
+      // const result = line.match(this.endScopeRegexp);
+      // if (result && !this.runningScope) {
       if (result[1] !== this.name) {
         return true;
       }
@@ -95,6 +97,7 @@ export abstract class BaseCommentParser {
     return null;
   }
 
+
   parseCommentLine(line: string, text: string): FunctionComment | null {
     throw new Error("NOT IMPLEMENTED!");
   }
@@ -124,14 +127,41 @@ export abstract class BaseCommentParser {
   }
 }
 
-export class NatspecCommentParser extends BaseCommentParser{
+export abstract class NatspecCommentParser {
+  public startLine: string;
+  public runningScope: boolean;
+  public endScope: boolean;
+  public name: string;
+  public functionCommentText: string | null;
+  public regex: RegExp;
+  public startScopeRegexp: RegExp;
+  public endScopeRegexp: RegExp;
+  public currentScope: string;
+
   constructor(functionCommentText: string | null) {
-    super(functionCommentText);
-    this.startEndScopeRegexp = /\/\/\s?(@\w+)/;
+    this.startLine = "";
+    this.runningScope = false;
+    this.endScope = false;
+    this.startScopeRegexp = /""/; // Child class should override this
+    this.endScopeRegexp = /""/;
+    this.currentScope = "";
+    this.name = "";
+    this.regex = /""/;
+    this.functionCommentText = functionCommentText;
   }
 
-  isInsideScope(line: string, regexp: RegExp): RegExpMatchArray | null {
-    const isNone = line.match(/\/\/\s*None$/);
+  isStartScope(line: string): boolean {
+    const result = line.match(this.startScopeRegexp);
+    if (result) {
+      if (result[1] === this.name && this.name !== this.currentScope) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isInsideScope(line: string | undefined, regexp: RegExp): RegExpMatchArray | null {
+    const isNone = line?.match(/\/\/\s*None$/) || !line;
     if (isNone) {
       return null;
     }
@@ -153,6 +183,37 @@ export class NatspecCommentParser extends BaseCommentParser{
     return null;
   }
 
+
+  setStartScope(line: string) {
+    if (this.isStartScope(line) === true) {
+      this.runningScope = true;
+      this.currentScope = this.name;
+      this.startLine = line;
+    }
+  }
+
+  isEndScope(line: string | undefined): boolean {
+    if (!line) return true;
+    const result = line.match(this.endScopeRegexp);
+    if (result) {
+      if (result[1] !== this.name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  setEndScope(line: string) {
+    if (this.isEndScope(line)) {
+      this.runningScope = false;
+      this.endScope = true;
+    }
+  }
+
+  parseCommentLine(line: string, text: string): MultiLineFunctionComment | null {
+    throw new Error("NOT IMPLEMENTED!");
+  }
+
   /**
    * Modified version that takes into account multi-line documentation for a single tag.
    * @param lines
@@ -160,7 +221,8 @@ export class NatspecCommentParser extends BaseCommentParser{
   parseCommentLines(
     lines: RegExpMatchArray | null
   ): Array<FunctionComment> | null {
-    var result: Array<FunctionComment> = [];
+    const commentLines: Array<MultiLineFunctionComment> = [];
+    const result: Array<FunctionComment> = [];
     if (lines && this.functionCommentText) {
       for (const line of lines) {
         this.setStartScope(line);
@@ -170,20 +232,24 @@ export class NatspecCommentParser extends BaseCommentParser{
           this.functionCommentText
         );
         if (functionComment) {
-          result.push(functionComment);
+          commentLines.push(functionComment);
         }
       }
-      if (result.length > 0) {
-        return [{
-          name: result[0].name,
-          type: result[0].type,
-          desc: result.map((r) => r.desc).join('\n'),
-          charIndex:{
-            start: result[0].charIndex.start,
-            end: result[result.length - 1].charIndex.end
+      if (commentLines.length > 0) {
+        commentLines.forEach((documentationLine) => {
+          const functionComment = documentationLine.functionComment;
+          // If the current comment is multiline, we need to merge it with the last element of the array.
+          // Otherwise, we push the new element to the array.
+          if (documentationLine.isMultiLine) {
+            const lastComment = result[result.length - 1];
+            lastComment.desc += `${functionComment.desc}`;
+            lastComment.charIndex.end = functionComment.charIndex.end;
+            result.push(lastComment);
+          } else {
+            result.push(functionComment);
           }
-
-        }];
+        });
+        return result;
       }
       return null;
     }

@@ -29,7 +29,7 @@ suite("function-comment: constructor: notice", () => {
     noticeParser.setStartScope(functionCommentLine);
 
     const functionCommentParsing =
-      noticeParser.parseCommentLine(functionCommentLine);
+      noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
 
 
     const isEndScope = noticeParser.isEndScope(functionCommentLine);
@@ -93,7 +93,7 @@ suite("function-comment: constructor: notice", () => {
     );
 
     const functionCommentParsing =
-      noticeParser.parseCommentLine(functionCommentLine);
+      noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
     const targetLineParsing = {
       name: "",
       type: "",
@@ -123,7 +123,7 @@ suite("function-comment: constructor: notice", () => {
     noticeParser.setStartScope(functionCommentScope!.text[0]);
 
     assert.equal(
-      "// @param name the name",
+      "// @param name name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
