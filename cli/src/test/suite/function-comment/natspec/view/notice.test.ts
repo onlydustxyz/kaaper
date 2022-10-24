@@ -30,7 +30,7 @@ suite("function-comment: view: notice", () => {
     );
 
     noticeParser.setStartScope(functionCommentLine);
-    const commentLineParsing = noticeParser.parseCommentLine(functionCommentLine);
+    const commentLineParsing = noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
     const isEndScope = noticeParser.isEndScope(functionCommentLine);
 
     assert.equal(
@@ -103,7 +103,7 @@ suite("function-comment: view: notice", () => {
 
 
     assert.equal(
-      "// @returns the name of the token",
+      "// @returns name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );

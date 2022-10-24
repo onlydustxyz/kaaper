@@ -22,6 +22,11 @@ export interface FunctionComment {
   charIndex: CharIndex;
 }
 
+export interface MultiLineFunctionComment{
+  isMultiLine: boolean;
+  functionComment:FunctionComment;
+}
+
 export interface FunctionCommentScope {
   text: RegExpMatchArray;
   start: number;
