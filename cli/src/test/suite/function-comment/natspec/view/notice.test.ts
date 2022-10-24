@@ -49,8 +49,8 @@ suite("function-comment: view: notice", () => {
       type: "",
       desc: "Returns the name of the token",
       charIndex: {
-        start: 11,
-        end: 41,
+        start: 10,
+        end: 40,
       },
     };
 
@@ -142,8 +142,8 @@ suite("function-comment: view: notice", () => {
         type: "",
         desc: "Returns the name of the token",
         charIndex: {
-          start: 11,
-          end: 41,
+          start: 10,
+          end: 40,
         },
       },
     ];
