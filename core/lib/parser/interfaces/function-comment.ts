@@ -242,9 +242,8 @@ export abstract class NatspecCommentParser {
           // Otherwise, we push the new element to the array.
           if (documentationLine.isMultiLine) {
             const lastComment = result[result.length - 1];
-            lastComment.desc += `${functionComment.desc}`;
+            lastComment.desc += `\n${functionComment.desc}`;
             lastComment.charIndex.end = functionComment.charIndex.end;
-            result.push(lastComment);
           } else {
             result.push(functionComment);
           }

@@ -6,7 +6,7 @@ export default class NatspecCommentParamsParser extends NatspecCommentParser {
     super(functionCommentText);
     this.name = "@param";
     this.startScopeRegexp = /\/\/\s+(@param)(.*)/;
-    this.endScopeRegexp = /\/\/\s+(?!@param)(.*)/;
+    this.endScopeRegexp = /\/\/\s+@(?!param)(.*)/g;
     this.regex = /\/\/(\s+)(@param)(\s\w*\s?)(.*)/gm
   }
   parseCommentLine(line: string): MultiLineFunctionComment | null {

@@ -50,8 +50,8 @@ suite("function-comment: constructor: notice", () => {
       type: "",
       desc: "The constructor of the ERC20",
       charIndex: {
-        start: 11,
-        end: 40,
+        start: 10,
+        end: 39,
       },
     };
 
@@ -165,7 +165,7 @@ suite("function-comment: constructor: notice", () => {
         name: "",
         type: "",
         desc: "The constructor of the ERC20\nThis is the following line of the notice.",
-        charIndex: { start: 11, end: 84 },
+        charIndex: { start: 10, end: 84 },
       },
     ];
 

@@ -5,31 +5,24 @@ export default class NatspecCommentNoticeParser extends NatspecCommentParser {
   constructor(functionCommentText: string | null) {
     super(functionCommentText);
     this.name = "@notice";
-    this.startScopeRegexp = /\/\/\s+(@notice)(.*)/m;
-    this.endScopeRegexp = /\/\/\s+(?!@notice)(.*)/m;
-    this.regex = /\/\/(\s+)(.+)/gm;
+    this.startScopeRegexp = /\/\/\s+(@notice)(.*)/;
+    this.endScopeRegexp = /\/\/\s+@(?!notice)(.*)/g; //Only a single notice tag - the scope ends at the next tag.
+    this.regex = /\/\/(\s+)(@notice)?(.*)/g
   }
 
   parseCommentLine(line: string): MultiLineFunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
     if (lineCommentInsideScope) {
-
-      const comment = lineCommentInsideScope[2];
-      const isTagInComment = comment.includes(this.name);
+      const isTagInComment = lineCommentInsideScope[2] === (this.name);
       const startLineIndex = lineCommentInsideScope.index!;
-      const offset = 2 + lineCommentInsideScope[1].length + (isTagInComment ? this.name.length+1 : 0);
-      // startLineIndex + 2 because the startline would be the the space after the // (2 character)
-      const startDescIndex =
-        startLineIndex + offset
-
-      const desc = comment.includes(this.name) ? comment.split(this.name)[1] : comment;
+      const startDescIndex = startLineIndex + 2 + lineCommentInsideScope.slice(1,3).join("").length
       const matchInterface = {
         name: "",
         type: "",
-        desc: desc.trim(),
+        desc: lineCommentInsideScope[3].trim(),
         charIndex: {
           start: startDescIndex,
-          end: startDescIndex + desc.length,
+          end: startDescIndex + lineCommentInsideScope[3].length,
         },
       };
       return {isMultiLine:!isTagInComment, functionComment: matchInterface};
