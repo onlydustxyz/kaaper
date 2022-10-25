@@ -7,7 +7,7 @@ export default class NatspecCommentNoticeParser extends NatspecCommentParser {
     this.name = "@notice";
     this.startScopeRegexp = /\/\/\s+(@notice)(.*)/;
     this.endScopeRegexp = /\/\/\s+@(?!notice)(.*)/g; //Only a single notice tag - the scope ends at the next tag.
-    this.regex = /\/\/(\s+)(@notice)?(.*)/g
+    this.regex = /\/\/(\s+)(@notice)?(\s?)(.*)/g
   }
 
   parseCommentLine(line: string): MultiLineFunctionComment | null {
@@ -15,14 +15,14 @@ export default class NatspecCommentNoticeParser extends NatspecCommentParser {
     if (lineCommentInsideScope) {
       const isTagInComment = lineCommentInsideScope[2] === (this.name);
       const startLineIndex = lineCommentInsideScope.index!;
-      const startDescIndex = startLineIndex + 2 + lineCommentInsideScope.slice(1,3).join("").length
+      const startDescIndex = startLineIndex + 2 + lineCommentInsideScope.slice(1,4).join("").length
       const matchInterface = {
         name: "",
         type: "",
-        desc: lineCommentInsideScope[3].trim(),
+        desc: lineCommentInsideScope[4].trim(),
         charIndex: {
           start: startDescIndex,
-          end: startDescIndex + lineCommentInsideScope[3].length,
+          end: startDescIndex + lineCommentInsideScope[4].length,
         },
       };
       return {isMultiLine:!isTagInComment, functionComment: matchInterface};

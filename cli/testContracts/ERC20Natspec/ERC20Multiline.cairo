@@ -8,7 +8,8 @@ from starkware.cairo.common.uint256 import Uint256
 
 from openzeppelin.token.erc20.library import ERC20
 
-// @notice Initialize the contract
+// @notice The constructor of the ERC20
+// This is the following line of the notice.
 // @param name name of the token
 // @param symbol symbol of the token
 // @param decimals floating point of the token
