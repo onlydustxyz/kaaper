@@ -1,18 +1,17 @@
 import {BaseCommentParser, NatspecCommentParser} from "../../interfaces/function-comment";
 import {FunctionComment, MultiLineFunctionComment} from "../../../types";
 
-export default class NatspecCommentReturnsParser extends NatspecCommentParser {
+export default class NatspecCommentDevParser extends NatspecCommentParser {
   constructor(functionCommentText: string | null) {
     super(functionCommentText);
-    this.name = "@returns";
-    this.startScopeRegexp = /\/\/\s+(@returns)(.*)/;
-    this.endScopeRegexp = /\/\/\s+@(?!returns)(.*)/g;
-    this.regex = /\/\/(\s+)(@returns)?(\s?)(.*)/g
+    this.name = "@dev";
+    this.startScopeRegexp = /\/\/\s+(@dev)(.*)/;
+    this.endScopeRegexp = /\/\/\s+@(?!dev)(.*)/g; //Only a single notice tag - the scope ends at the next tag.
+    this.regex = /\/\/(\s+)(@dev)?(\s?)(.*)/g
   }
 
   parseCommentLine(line: string): MultiLineFunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
-    console.log(line)
     if (lineCommentInsideScope) {
       const isTagInComment = lineCommentInsideScope[2] === (this.name);
       const startLineIndex = lineCommentInsideScope.index!;

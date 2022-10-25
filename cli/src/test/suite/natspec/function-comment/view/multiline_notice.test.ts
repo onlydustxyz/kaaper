@@ -5,13 +5,12 @@ import * as fs from "fs";
 import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentNoticeParser from "../../../../../../../core/lib/parser/function-comment/natspec/notice";
 
-suite("function-comment: view: notice", () => {
+suite("Natspec - function-comment: constructor: multiline_notice", () => {
   const pathFile = path.resolve(
     __dirname,
-    "../../../../../../../../testContracts/ERC20Natspec/ERC20.cairo"
+    "../../../../../../../../testContracts/ERC20Natspec/ERC20Custom.cairo"
   );
   test("parse line 0", () => {
-
     const lineNumber = 0;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
@@ -22,15 +21,16 @@ suite("function-comment: view: notice", () => {
     const functionCommentText: string = functionCommentScope!.text.join("");
     const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
 
-
     assert.equal(
       "// @notice Returns the name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
-
     noticeParser.setStartScope(functionCommentLine);
-    const commentLineParsing = noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
+
+    const functionCommentParsing =
+      noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
+
     const isEndScope = noticeParser.isEndScope(functionCommentLine);
 
     assert.equal(
@@ -56,76 +56,103 @@ suite("function-comment: view: notice", () => {
 
     assert.deepEqual(
       targetLineParsing,
-      commentLineParsing,
-      `failed to get resultLineParsing line ${lineNumber}`
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
     );
-
-    const descCommentStart = commentLineParsing!.charIndex.start;
-    const descCommentEnd = commentLineParsing!.charIndex.end;
-
-    var functionCommentReference = "";
-    for (let i = descCommentStart; i < descCommentEnd; i++) {
-      functionCommentReference += functionCommentText.at(i);
-    }
-
-    var wholeFileReference = "";
-    const functionCommentStart = functionCommentScope!.start;
-    for (
-      let i = functionCommentStart + descCommentStart;
-      i < functionCommentStart + descCommentEnd;
-      i++
-    ) {
-      wholeFileReference += text.at(i);
-    }
-
-
-    assert.equal(
-      functionCommentReference,
-      wholeFileReference,
-      "failed to get whole file reference"
-    );
-
-    assert.equal(
-      "Returns the name of the token",
-      functionCommentReference
-    );
-
   });
 
-  test("parse line 1", () => {
 
+  test("parse line 1", () => {
+    const lineNumber = 1;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![0];
     const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
-    const lineNumber = 1;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
-
     const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
+
     noticeParser.setStartScope(functionCommentScope!.text[0]);
 
-
     assert.equal(
-      "// @returns name of the token",
+      "// The notice continues on a second line.",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
+
+    const functionCommentParsing =
+      noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
+
+    assert.equal("// @notice Returns the name of the token", noticeParser.startLine);
+    assert.notEqual(lineNumber, noticeParser.startLine);
     const isEndScope = noticeParser.isEndScope(functionCommentLine);
+    assert.equal(
+      false,
+      isEndScope,
+      `failed to get end scope line ${lineNumber}`
+    );
 
     assert.equal(
       true,
       noticeParser.runningScope,
       `failed to get running scope line ${lineNumber}`
     );
+
+    const targetLineParsing = {
+      name: "",
+      type: "",
+      desc: "The notice continues on a second line.",
+      charIndex: {
+        start: 44,
+        end: 82,
+      },
+    };
+
+    assert.deepEqual(
+      targetLineParsing,
+      functionCommentParsing,
+      `failed to get functionCommentParsing line ${lineNumber}`
+    );
+  });
+
+  test("parse line 2", () => {
+    const lineNumber = 2;
+    const text = fs.readFileSync(pathFile, "utf8");
+    const functionScopes = CairoParser.parseFunctionScope(text, "view");
+    const functionScope = functionScopes![0];
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+
+    const functionCommentLine: string = functionCommentScope!.text[lineNumber];
+    const functionCommentText: string = functionCommentScope!.text.join("");
+    const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
+
+    noticeParser.setStartScope(functionCommentScope!.text[0]);
+
+    assert.equal(
+      "// @dev a custom dev tag",
+      functionCommentLine.trim(),
+      `check line ${lineNumber}`
+    );
+
+    assert.equal("// @notice Returns the name of the token", noticeParser.startLine);
+    assert.notEqual(lineNumber, noticeParser.startLine);
+    const isEndScope = noticeParser.isEndScope(functionCommentLine);
     assert.equal(
       true,
       isEndScope,
       `failed to get end scope line ${lineNumber}`
     );
 
+    noticeParser.setEndScope(functionCommentLine);
+
+    assert.equal(
+      false,
+      noticeParser.runningScope,
+      `failed to get running scope line ${lineNumber}`
+    );
   });
+
 
   test("parse whole comment", () => {
     const scopeNumber = 0;
@@ -137,7 +164,7 @@ suite("function-comment: view: notice", () => {
     const functionCommentText: string = functionCommentScope!.text.join("");
     const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
 
-    const commentLineParsing = noticeParser.parseCommentLines(
+    const functionCommentParsing = noticeParser.parseCommentLines(
       functionCommentScope!.text
     );
 
@@ -145,18 +172,15 @@ suite("function-comment: view: notice", () => {
       {
         name: "",
         type: "",
-        desc: "Returns the name of the token",
-        charIndex: {
-          start: 11,
-          end: 40,
-        },
+        desc: "Returns the name of the token\nThe notice continues on a second line.",
+        charIndex: { start: 11, end: 82 },
       },
     ];
 
     assert.deepEqual(
       targetLineParsing,
-      commentLineParsing,
-      "failed to get resultLineParsing"
+      functionCommentParsing,
+      "failed to get functionCommentParsing"
     );
   });
 });

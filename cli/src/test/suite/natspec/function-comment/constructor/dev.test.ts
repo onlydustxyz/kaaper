@@ -4,14 +4,15 @@ import * as fs from "fs";
 
 import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentNoticeParser from "../../../../../../../core/lib/parser/function-comment/natspec/notice";
+import NatspecCommentDevParser from "../../../../../../../core/lib/parser/function-comment/natspec/dev";
 
-suite("function-comment: constructor: notice", () => {
+suite("Natspec - function-comment: constructor: dev", () => {
   const pathFile = path.resolve(
     __dirname,
-    "../../../../../../../../testContracts/ERC20Natspec/ERC20.cairo"
+    "../../../../../../../../testContracts/ERC20Natspec/ERC20Custom.cairo"
   );
-  test("parse line 0", () => {
-    const lineNumber = 0;
+  test("parse line 1", () => {
+    const lineNumber = 1;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -19,24 +20,23 @@ suite("function-comment: constructor: notice", () => {
 
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
-    const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
+    const devParser = new NatspecCommentDevParser(functionCommentText);
 
     assert.equal(
-      "// @notice Initialize the contract",
+      "// @dev a custom dev tag",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
-    noticeParser.setStartScope(functionCommentLine);
+    devParser.setStartScope(functionCommentLine);
 
     const functionCommentParsing =
-      noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
+      devParser.parseCommentLine(functionCommentLine)!.functionComment;
 
-
-    const isEndScope = noticeParser.isEndScope(functionCommentLine);
+    const isEndScope = devParser.isEndScope(functionCommentLine);
 
     assert.equal(
       true,
-      noticeParser.runningScope,
+      devParser.runningScope,
       `failed to get running scope line ${lineNumber}`
     );
     assert.equal(
@@ -48,10 +48,10 @@ suite("function-comment: constructor: notice", () => {
     const targetLineParsing = {
       name: "",
       type: "",
-      desc: "Initialize the contract",
+      desc: "a custom dev tag",
       charIndex: {
-        start: 11,
-        end: 34,
+        start: 43,
+        end: 59,
       },
     };
 
@@ -63,17 +63,18 @@ suite("function-comment: constructor: notice", () => {
   });
 
 
-  test("parse line 1", () => {
+  test("parse line 2", () => {
+    const lineNumber = 2;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
     const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
-    const lineNumber = 1;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
-    const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
-    noticeParser.setStartScope(functionCommentScope!.text[0]);
+    const devParser = new NatspecCommentDevParser(functionCommentText);
+
+    devParser.setStartScope(functionCommentScope!.text[1]);
 
     assert.equal(
       "// @param name name of the token",
@@ -81,20 +82,20 @@ suite("function-comment: constructor: notice", () => {
       `check line ${lineNumber}`
     );
 
-    assert.equal("// @notice Initialize the contract", noticeParser.startLine);
-    assert.notEqual(lineNumber, noticeParser.startLine);
-    const isEndScope = noticeParser.isEndScope(functionCommentLine);
+    assert.equal("\n// @dev a custom dev tag", devParser.startLine);
+    assert.notEqual(lineNumber, devParser.startLine);
+    const isEndScope = devParser.isEndScope(functionCommentLine);
     assert.equal(
       true,
       isEndScope,
       `failed to get end scope line ${lineNumber}`
     );
 
-    noticeParser.setEndScope(functionCommentLine);
+    devParser.setEndScope(functionCommentLine);
 
     assert.equal(
       false,
-      noticeParser.runningScope,
+      devParser.runningScope,
       `failed to get running scope line ${lineNumber}`
     );
   });
@@ -107,9 +108,9 @@ suite("function-comment: constructor: notice", () => {
     const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
-    const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
+    const devParser = new NatspecCommentDevParser(functionCommentText);
 
-    const functionCommentParsing = noticeParser.parseCommentLines(
+    const functionCommentParsing = devParser.parseCommentLines(
       functionCommentScope!.text
     );
 
@@ -117,8 +118,8 @@ suite("function-comment: constructor: notice", () => {
       {
         name: "",
         type: "",
-        desc: "Initialize the contract",
-        charIndex: { start: 11, end: 34 },
+        desc: "a custom dev tag",
+        charIndex: { start: 43, end: 59 },
       },
     ];
 

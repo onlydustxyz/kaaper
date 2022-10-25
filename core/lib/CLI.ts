@@ -1,29 +1,37 @@
 import * as fs from "fs";
 import * as path from "path";
-import CairoParser from "./CairoParser";
+import CairoParser, {CairoNatspecParser} from "./CairoParser";
+
 var glob = require("glob");
 
-import { CommentComplicance } from "./types";
+import {CommentComplicance} from "./types";
 
 export default class CLI {
   public contractRootDir: string;
+
   constructor(contractRootDir: string) {
     this.contractRootDir = contractRootDir;
   }
 
   generateContractsDocs(
     outDir: string,
-    dumpCommentOnly: boolean = false
+    dumpCommentOnly: boolean = false,
+    standard: string = "kaaper"
   ): void {
     glob(`${this.contractRootDir}/**/*.cairo`, (_: any, files: string) => {
       for (const file of files) {
-        const parsingResult = CairoParser.getFileParsingResult(file);
+        let parsingResult;
+        if (standard === "kaaper") {
+          parsingResult = CairoParser.getFileParsingResult(file);
+        } else if (standard === "natspec") {
+          parsingResult = CairoNatspecParser.getFileParsingResult(file);
+        }
         if (parsingResult) {
           const relativePath = path.relative(this.contractRootDir, file);
           const outPath = path.join(outDir, relativePath);
           const outDirPath = path.dirname(outPath);
           if (!fs.existsSync(outDirPath)) {
-            fs.mkdirSync(outDirPath, { recursive: true });
+            fs.mkdirSync(outDirPath, {recursive: true});
           }
           CairoParser.dumpParsingResult(
             parsingResult,

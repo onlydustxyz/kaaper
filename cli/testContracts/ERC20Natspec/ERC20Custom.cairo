@@ -8,8 +8,8 @@ from starkware.cairo.common.uint256 import Uint256
 
 from openzeppelin.token.erc20.library import ERC20
 
-// @notice The constructor of the ERC20
-// This is the following line of the notice.
+// @notice Initialize the contract
+// @dev a custom dev tag
 // @param name name of the token
 // @param symbol symbol of the token
 // @param decimals floating point of the token
@@ -29,6 +29,9 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 //
 
 // @notice Returns the name of the token
+// The notice continues on a second line.
+// @dev a custom dev tag
+// that is also written in two lines.
 // @returns name of the token
 @view
 func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
@@ -44,32 +47,33 @@ func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -
     return (symbol,);
 }
 
-// @notice Returns the total supply of the token
-// @returns total supply of the token
-@view
-func totalSupply{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
-    totalSupply: Uint256
-) {
-    let (totalSupply: Uint256) = ERC20.total_supply();
-    return (totalSupply,);
+//
+// Externals
+//
+
+// @notice Perform transfer to recipient
+// @param recipient the address of ERC20
+// recipient
+// @param amount the amount of ERC20 transfer
+// @returns 1 if transfer was successful,
+// 0 otherwise
+@external
+func transfer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    recipient: felt, amount: Uint256
+) -> (success: felt) {
+    ERC20.transfer(recipient, amount);
+    return (TRUE,);
 }
 
-// @notice Returns the decimals of the token
-// @returns decimals of the token
-@view
-func decimals{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
-    decimals: felt
-) {
-    let (decimals) = ERC20.decimals();
-    return (decimals,);
+// @notice Perform transfer from sender to recipient with allowance
+// @param sender the address of ERC20 sender
+// @param recipient the address of ERC20 recipient
+// @param amount the amount of ERC20 transfer
+// @returns 1 if transfer was successful, 0 otherwise
+@external
+func transferFrom{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    sender: felt, recipient: felt, amount: Uint256
+) -> (success: felt) {
+    ERC20.transfer_from(sender, recipient, amount);
+    return (TRUE,);
 }
-
-// @notice Returns the balance of the account
-// @param account account to query balance for
-// @returns the balance of the account
-@view
-func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(account: felt) -> (
-    balance: Uint256
-) {
-    let (balance: Uint256) = ERC20.balance_of(account);
-    return (balance,);

@@ -1,0 +1,276 @@
+- attributeName: constructor
+  functionName:
+    name: constructor
+    charIndex:
+      start: 642
+      end: 653
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: name
+        type: felt
+      - name: symbol
+        type: felt
+      - name: decimals
+        type: felt
+      - name: initial_supply
+        type: Uint256
+      - name: recipient
+        type: felt
+    returns: null
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: |-
+          The constructor of the ERC20
+          This is the following line of the notice.
+        charIndex:
+          start: 11
+          end: 84
+    implicitArgs: null
+    explicitArgs:
+      - name: name
+        type: ''
+        desc: name of the token
+        charIndex:
+          start: 100
+          end: 117
+      - name: symbol
+        type: ''
+        desc: symbol of the token
+        charIndex:
+          start: 135
+          end: 154
+      - name: decimals
+        type: ''
+        desc: floating point of the token
+        charIndex:
+          start: 174
+          end: 201
+      - name: initial_supply
+        type: ''
+        desc: amount of initial supply of the token
+        charIndex:
+          start: 227
+          end: 264
+      - name: recipient
+        type: ''
+        desc: the address of recipient of the initial supply
+        charIndex:
+          start: 285
+          end: 331
+    returns: null
+    raises: null
+    charIndex:
+      start: 292
+      end: 623
+- attributeName: view
+  functionName:
+    name: name
+    charIndex:
+      start: 1020
+      end: 1024
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: name
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the name of the token
+        charIndex:
+          start: 11
+          end: 40
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: name of the token
+        charIndex:
+          start: 53
+          end: 70
+    raises: null
+    charIndex:
+      start: 938
+      end: 1008
+- attributeName: view
+  functionName:
+    name: symbol
+    charIndex:
+      start: 1250
+      end: 1256
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: symbol
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the symbol of the token
+        charIndex:
+          start: 11
+          end: 42
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: symbol of the token
+        charIndex:
+          start: 55
+          end: 74
+    raises: null
+    charIndex:
+      start: 1164
+      end: 1238
+- attributeName: view
+  functionName:
+    name: totalSupply
+    charIndex:
+      start: 1502
+      end: 1513
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: totalSupply
+        type: Uint256
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the total supply of the token
+        charIndex:
+          start: 11
+          end: 48
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: total supply of the token
+        charIndex:
+          start: 61
+          end: 86
+    raises: null
+    charIndex:
+      start: 1404
+      end: 1490
+- attributeName: view
+  functionName:
+    name: decimals
+    charIndex:
+      start: 1790
+      end: 1798
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: decimals
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the decimals of the token
+        charIndex:
+          start: 11
+          end: 44
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: decimals of the token
+        charIndex:
+          start: 57
+          end: 78
+    raises: null
+    charIndex:
+      start: 1700
+      end: 1778
+- attributeName: view
+  functionName:
+    name: balanceOf
+    charIndex:
+      start: 2103
+      end: 2112
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: account
+        type: felt
+    returns:
+      - name: balance
+        type: Uint256
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the balance of the account
+        charIndex:
+          start: 11
+          end: 45
+    implicitArgs: null
+    explicitArgs:
+      - name: account
+        type: ''
+        desc: account to query balance for
+        charIndex:
+          start: 64
+          end: 92
+    returns:
+      - name: ''
+        type: ''
+        desc: the balance of the account
+        charIndex:
+          start: 105
+          end: 131
+    raises: null
+    charIndex:
+      start: 1960
+      end: 2091

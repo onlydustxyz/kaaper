@@ -18,6 +18,7 @@ import {
 import NatspecCommentNoticeParser from "./parser/function-comment/natspec/notice";
 import NatspecCommentParamsParser from "./parser/function-comment/natspec/params";
 import NatspecCommentReturnsParser from "./parser/function-comment/natspec/returns";
+import NatspecCommentDevParser from "./parser/function-comment/natspec/dev";
 
 const lodash = require("lodash");
 const yaml = require("js-yaml");
@@ -503,12 +504,21 @@ export class CairoNatspecParser extends CairoParser {
         const nastpecFunctionCommentNoticeParser = new NatspecCommentNoticeParser(
           natspecFunctionCommentText
         );
+
+        // TODO @dev tag
+
+        const natspecFunctionCommentDevParser = new NatspecCommentDevParser(
+          natspecFunctionCommentText
+        );
+
         const nastpecFunctionCommentParamsParser = new NatspecCommentParamsParser(
           natspecFunctionCommentText
         );
         const natspecFunctionCommentReturnsParser = new NatspecCommentReturnsParser(
           natspecFunctionCommentText
         );
+
+        // TODO @custom tag
 
         const functionCommentScope = commentLines ? commentLines.text : null;
 
@@ -562,5 +572,64 @@ export class CairoNatspecParser extends CairoParser {
     return null;
   }
 
+  static getFileParsingResult(
+    filePathOrBuffer: string,
+    isFilePath: boolean = true
+  ): ParsingResult[] | null {
+    const text =
+      isFilePath === true
+        ? fs.readFileSync(filePathOrBuffer, "utf8")
+        : filePathOrBuffer;
+    const constructorParsingResult = CairoNatspecParser.getScopeParsingResult(
+      text,
+      "constructor"
+    );
+    const viewParsingResult = CairoNatspecParser.getScopeParsingResult(text, "view");
+    const externalParsingResult = CairoNatspecParser.getScopeParsingResult(
+      text,
+      "external"
+    );
+
+    const eventParsingResult = CairoNatspecParser.getScopeParsingResult(text, "event");
+
+    const storageVarParsingResult = CairoNatspecParser.getScopeParsingResult(
+      text,
+      "storage_var"
+    );
+
+    const namespaceParsingResult = CairoNatspecParser.getScopeParsingResult(
+      text,
+      "namespace"
+    );
+
+    var allParsingResult: ParsingResult[] = [];
+    // combine all scopes
+    // TODO: refactor this
+    if (constructorParsingResult) {
+      allParsingResult = allParsingResult.concat(constructorParsingResult);
+    }
+    if (viewParsingResult) {
+      allParsingResult = allParsingResult.concat(viewParsingResult);
+    }
+    if (externalParsingResult) {
+      allParsingResult = allParsingResult.concat(externalParsingResult);
+    }
+    if (eventParsingResult) {
+      allParsingResult = allParsingResult.concat(eventParsingResult);
+    }
+    if (storageVarParsingResult) {
+      allParsingResult = allParsingResult.concat(storageVarParsingResult);
+    }
+
+    if (namespaceParsingResult) {
+      allParsingResult = allParsingResult.concat(namespaceParsingResult);
+    }
+
+    if (allParsingResult.length > 0) {
+      return allParsingResult;
+    }
+
+    return null;
+  }
 
 }
