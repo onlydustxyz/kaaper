@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser from "../../../../../../../core/lib/CairoParser";
+import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentParamsParser from "../../../../../../../core/lib/parser/function-comment/natspec/params";
 import NatspecCommentReturnsParser from "../../../../../../../core/lib/parser/function-comment/natspec/returns";
 
@@ -20,7 +20,7 @@ suite("function-comment: view - name returns", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const lineNumber = 1;
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -134,7 +134,7 @@ suite("function-comment: view - symbol returns", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const lineNumber = 1;
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -222,7 +222,7 @@ suite("function-comment: view - totalSupply returns", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const lineNumber = 1;
     const functionCommentText: string = functionCommentScope!.text.join("");

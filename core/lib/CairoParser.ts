@@ -17,6 +17,7 @@ import {
 } from "./types";
 import NatspecCommentNoticeParser from "./parser/function-comment/natspec/notice";
 import NatspecCommentParamsParser from "./parser/function-comment/natspec/params";
+import NatspecCommentReturnsParser from "./parser/function-comment/natspec/returns";
 
 const lodash = require("lodash");
 const yaml = require("js-yaml");
@@ -143,7 +144,8 @@ export default class CairoParser {
   // run this after parsing the whole scope using parseFunctionScope
   static parseCommentLines(
     scope: FunctionScope,
-    isNamespace: boolean = false
+    isNamespace: boolean = false,
+    text?: string
   ): FunctionCommentScope | null {
     const regexp = this.getRegex("comment");
     const commentLinesText = scope.text.match(regexp);
@@ -176,46 +178,6 @@ export default class CairoParser {
     return null;
   }
 
-  // parse only commented lines on top of a function declaration
-  // run this after parsing the whole scope using parseFunctionScope
-  static parseNatspecDocumentation(
-    scope: FunctionScope,
-    fileText: string
-  ): FunctionCommentScope | null {
-    const regexp = this.getRegex("comment");
-
-    const lines = fileText.split("\n");
-
-    const natspecDocLines = []
-    for (let i = scope.startLine - 1; i >= 0; i--) {
-      if (lines[i].startsWith("@")) {
-        // Natspec documentation comes one line above the function decorator, if there's one.
-        i--;
-      }
-      const line = lines[i];
-      if (line.match(regexp)) {
-        natspecDocLines.push(line);
-      } else {
-        break;
-      }
-    }
-    const commentLines = natspecDocLines.reverse().join("\n");
-    const commentLinesText = commentLines.match(regexp);
-    const commentLinesEnd = scope.start - 1;
-    const commentLinesStart = commentLinesEnd - commentLines.length;
-
-
-    if (scope && commentLinesText) {
-      const commentLineRange = {
-        text: commentLinesText,
-        start: commentLinesStart,
-        end: commentLinesEnd,
-      }
-
-      return commentLineRange;
-    }
-    return null;
-  }
 
   static getScopeParsingResult(
     text: string,
@@ -234,7 +196,6 @@ export default class CairoParser {
     // parse comment lines
     if (functionScopes) {
       for (var functionScope of functionScopes) {
-        this.parseNatspecComments(functionScope, text);
         const commentLines =
           name === "namespace"
             ? CairoParser.parseCommentLines(functionScope, true)
@@ -318,25 +279,6 @@ export default class CairoParser {
       return parsingOutputs;
     }
     return null;
-  }
-
-  static parseNatspecComments(functionScope:FunctionScope, text: string) {
-    const natspecCommentLines = CairoParser.parseNatspecDocumentation(functionScope, text)
-    const natspecFunctionCommentText = natspecCommentLines
-      ? natspecCommentLines.text.join("")
-      : null;
-
-    const nastpecFunctionCommentNoticeParser = new NatspecCommentNoticeParser(
-      natspecFunctionCommentText
-    );
-    const nastpecFunctionCommentParamsParser = new NatspecCommentParamsParser(
-      natspecFunctionCommentText
-    );
-    const functionCommentScopeNatspec = natspecCommentLines ? natspecCommentLines.text : null;
-    const natspecNotice = nastpecFunctionCommentNoticeParser.parseCommentLines(functionCommentScopeNatspec)
-    const natspecParams = nastpecFunctionCommentParamsParser.parseCommentLines(functionCommentScopeNatspec)
-
-
   }
 
   static getFileParsingResult(
@@ -491,4 +433,134 @@ export default class CairoParser {
       fs.writeFileSync(`${outFile}.yaml`, yaml.dump(parsingResult));
     }
   }
+}
+
+export class CairoNatspecParser extends CairoParser {
+  // parse only commented lines on top of a function declaration
+  // run this after parsing the whole scope using parseFunctionScope
+  static parseCommentLines(
+    scope: FunctionScope,
+    isNamespace: boolean = false,
+    text: string
+  ): FunctionCommentScope | null {
+    const regexp = this.getRegex("comment");
+
+    const lines = text.split("\n");
+
+    const natspecDocLines = []
+    for (let i = scope.startLine - 1; i >= 0; i--) {
+      if (lines[i].startsWith("@")) {
+        // Natspec documentation comes one line above the function decorator, if there's one.
+        i--;
+      }
+      const line = lines[i];
+      if (line.match(regexp)) {
+        natspecDocLines.push(line);
+      } else {
+        break;
+      }
+    }
+    const commentLines = natspecDocLines.reverse().join("\n");
+    const commentLinesText = commentLines.match(regexp);
+    const commentLinesEnd = scope.start - 1;
+    const commentLinesStart = commentLinesEnd - commentLines.length;
+
+
+    if (scope && commentLinesText) {
+      const commentLineRange = {
+        text: commentLinesText,
+        start: commentLinesStart,
+        end: commentLinesEnd,
+      }
+
+      return commentLineRange;
+    }
+    return null;
+  }
+
+  static getScopeParsingResult(
+    text: string,
+    name: string
+  ): ParsingResult[] | null {
+    const functionScopes =
+      name === "namespace"
+        ? CairoParser.parseNamespaceScopes(text)
+        : CairoParser.parseFunctionScope(text, name);
+
+    // Function signature parsing
+    const functionSignatureParser = new FunctionSignatureRegexParser();
+
+    var parsingOutputs = [];
+
+    // parse comment lines
+    if (functionScopes) {
+      for (var functionScope of functionScopes) {
+        const commentLines = CairoNatspecParser.parseCommentLines(functionScope, false, text)
+        const natspecFunctionCommentText = commentLines
+          ? commentLines.text.join("")
+          : null;
+
+        const nastpecFunctionCommentNoticeParser = new NatspecCommentNoticeParser(
+          natspecFunctionCommentText
+        );
+        const nastpecFunctionCommentParamsParser = new NatspecCommentParamsParser(
+          natspecFunctionCommentText
+        );
+        const natspecFunctionCommentReturnsParser = new NatspecCommentReturnsParser(
+          natspecFunctionCommentText
+        );
+
+        const functionCommentScope = commentLines ? commentLines.text : null;
+
+        const functionCommentCharIndexStart = commentLines
+          ? commentLines.start
+          : 0;
+        const functionCommentCharIndexEnd = commentLines ? commentLines.end : 0;
+
+        const isNamespaceScope = name === "namespace" ? true : false;
+
+        const parsingOutput = {
+          attributeName: functionSignatureParser.getAttributeName(
+            functionScope!.text
+          ),
+          functionName: {
+            name: functionSignatureParser.getFunctionName(functionScope!.text),
+            charIndex: functionSignatureParser.getFunctionNameCharIndex(
+              functionScope,
+              isNamespaceScope
+            ),
+          },
+          functionSignature: {
+            implicitArgs: functionSignatureParser.getImplicitArgs(
+              functionScope!.text
+            ),
+            explicitArgs: functionSignatureParser.getExplicitArgs(
+              functionScope!.text
+            ),
+            returns: functionSignatureParser.getReturns(functionScope!.text),
+          },
+          functionComment: {
+            desc: nastpecFunctionCommentNoticeParser.parseCommentLines(functionCommentScope),
+            implicitArgs:null,
+            explicitArgs:
+              nastpecFunctionCommentParamsParser.parseCommentLines(functionCommentScope),
+            returns:
+              natspecFunctionCommentReturnsParser.parseCommentLines(functionCommentScope),
+            raises: null,
+            charIndex: {
+              start: functionCommentCharIndexStart,
+              end: functionCommentCharIndexEnd,
+            },
+          },
+        };
+
+        parsingOutputs.push(parsingOutput);
+      }
+
+      return parsingOutputs;
+    }
+    return null;
+  }
+
+
 }
