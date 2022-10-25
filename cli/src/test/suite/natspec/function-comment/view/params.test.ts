@@ -2,7 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 import FunctionCommentExplicitArgsParser from "../../../../../../../core/lib/parser/function-comment/explicit-args";
-import CairoParser from "../../../../../../../core/lib/CairoParser";
+import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentNoticeParser from "../../../../../../../core/lib/parser/function-comment/natspec/notice";
 import NatspecCommentParamsParser from "../../../../../../../core/lib/parser/function-comment/natspec/params";
 
@@ -20,7 +20,7 @@ suite("function-comment: view - name", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
@@ -44,7 +44,7 @@ suite("function-comment: view - symbol", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
@@ -66,7 +66,7 @@ suite("function-comment: view - totalSupply", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
@@ -88,7 +88,7 @@ suite("function-comment: view - decimals", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
@@ -111,7 +111,7 @@ suite("function-comment: view: balanceOf", () => {
   const text = fs.readFileSync(pathFile, "utf8");
   const functionScopes = CairoParser.parseFunctionScope(text, "view");
   const functionScope = functionScopes![scopeLine];
-  const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+  const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
 
   test("should start with account on line 1", () => {
 

@@ -2,7 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 
-import CairoParser from "../../../../../../../core/lib/CairoParser";
+import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentNoticeParser from "../../../../../../../core/lib/parser/function-comment/natspec/notice";
 
 suite.skip("function-comment: constructor: notice", () => {
@@ -15,7 +15,7 @@ suite.skip("function-comment: constructor: notice", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope, text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
     const lineNumber = 1;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
