@@ -134,7 +134,6 @@ suite("function-comment: view: balanceOf", () => {
       isEndScope,
       `failed to get end scope lineNumber ${lineNumber}`
     );
-    console.log(paramsParser)
     assert.equal(
       true,
       paramsParser.runningScope,

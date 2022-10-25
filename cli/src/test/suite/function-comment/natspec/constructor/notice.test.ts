@@ -22,7 +22,7 @@ suite("function-comment: constructor: notice", () => {
     const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
 
     assert.equal(
-      "// @notice The constructor of the ERC20",
+      "// @notice Initialize the contract",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -48,10 +48,10 @@ suite("function-comment: constructor: notice", () => {
     const targetLineParsing = {
       name: "",
       type: "",
-      desc: "The constructor of the ERC20",
+      desc: "Initialize the contract",
       charIndex: {
-        start: 10,
-        end: 39,
+        start: 11,
+        end: 34,
       },
     };
 
@@ -61,62 +61,15 @@ suite("function-comment: constructor: notice", () => {
       `failed to get functionCommentParsing line ${lineNumber}`
     );
   });
+
 
   test("parse line 1", () => {
-
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
     const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
+
     const lineNumber = 1;
-    const functionCommentLine: string = functionCommentScope!.text[lineNumber];
-    const functionCommentText: string = functionCommentScope!.text.join("");
-    const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
-    noticeParser.setStartScope(functionCommentScope!.text[0]);
-
-    assert.equal(
-      "// This is the following line of the notice.",
-      functionCommentLine.trim(),
-      `check line ${lineNumber}`
-    );
-    const isEndScope = noticeParser.isEndScope(functionCommentLine);
-
-    assert.equal(
-      true,
-      noticeParser.runningScope,
-      `failed to get running scope line ${lineNumber}`
-    );
-    assert.equal(
-      false,
-      isEndScope,
-      `failed to get end scope line ${lineNumber}`
-    );
-
-    const functionCommentParsing =
-      noticeParser.parseCommentLine(functionCommentLine)!.functionComment;
-    const targetLineParsing = {
-      name: "",
-      type: "",
-      desc: "This is the following line of the notice.",
-      charIndex: {
-        start: 43,
-        end: 84,
-      },
-    };
-    assert.deepEqual(
-      targetLineParsing,
-      functionCommentParsing,
-      `failed to get functionCommentParsing line ${lineNumber}`
-    );
-  });
-
-  test("parse line 2", () => {
-    const text = fs.readFileSync(pathFile, "utf8");
-    const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
-    const functionScope = functionScopes![0];
-    const functionCommentScope = CairoParser.parseNatspecDocumentation(functionScope,text)!;
-
-    const lineNumber = 2;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const noticeParser = new NatspecCommentNoticeParser(functionCommentText);
@@ -128,7 +81,7 @@ suite("function-comment: constructor: notice", () => {
       `check line ${lineNumber}`
     );
 
-    assert.equal("// @notice The constructor of the ERC20", noticeParser.startLine);
+    assert.equal("// @notice Initialize the contract", noticeParser.startLine);
     assert.notEqual(lineNumber, noticeParser.startLine);
     const isEndScope = noticeParser.isEndScope(functionCommentLine);
     assert.equal(
@@ -164,8 +117,8 @@ suite("function-comment: constructor: notice", () => {
       {
         name: "",
         type: "",
-        desc: "The constructor of the ERC20\nThis is the following line of the notice.",
-        charIndex: { start: 10, end: 84 },
+        desc: "Initialize the contract",
+        charIndex: { start: 11, end: 34 },
       },
     ];
 

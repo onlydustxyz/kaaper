@@ -49,7 +49,7 @@ suite("function-comment: view: notice", () => {
       type: "",
       desc: "Returns the name of the token",
       charIndex: {
-        start: 10,
+        start: 11,
         end: 40,
       },
     };
@@ -83,6 +83,11 @@ suite("function-comment: view: notice", () => {
       functionCommentReference,
       wholeFileReference,
       "failed to get whole file reference"
+    );
+
+    assert.equal(
+      "Returns the name of the token",
+      functionCommentReference
     );
 
   });
@@ -142,7 +147,7 @@ suite("function-comment: view: notice", () => {
         type: "",
         desc: "Returns the name of the token",
         charIndex: {
-          start: 10,
+          start: 11,
           end: 40,
         },
       },

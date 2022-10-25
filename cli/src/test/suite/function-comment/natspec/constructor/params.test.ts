@@ -10,9 +10,9 @@ suite("function-comment: constructor: params", () => {
     __dirname,
     "../../../../../../../../testContracts/ERC20Natspec/ERC20.cairo"
   );
-  test("parse line 2", () => {
+  test("parse line 1", () => {
 
-    const lineNumber = 2;
+    const lineNumber = 1;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -51,8 +51,8 @@ suite("function-comment: constructor: params", () => {
       type: "",
       desc: "name of the token",
       charIndex: {
-        start: 100,
-        end: 117,
+        start: 50,
+        end: 67,
       },
     };
     assert.deepEqual(
@@ -67,8 +67,6 @@ suite("function-comment: constructor: params", () => {
     for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
       functionCommentReference += functionCommentText[i];
     }
-    console.log("functionCommentText", functionCommentText);
-    console.log(functionCommentReference)
     var wholeFileReference = "";
     const functionCommentStart = functionCommentScope!.start;
     for (
@@ -83,8 +81,8 @@ suite("function-comment: constructor: params", () => {
 
   });
 
-  test("parse line 3", () => {
-    const lineNumber = 3;
+  test("parse line 2", () => {
+    const lineNumber = 2;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -93,7 +91,7 @@ suite("function-comment: constructor: params", () => {
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
-    paramsParser.setStartScope(functionCommentScope!.text[2]);
+    paramsParser.setStartScope(functionCommentScope!.text[1]);
 
     assert.equal(
       "// @param symbol symbol of the token",
@@ -118,8 +116,8 @@ suite("function-comment: constructor: params", () => {
       type: "",
       desc: "symbol of the token",
       charIndex: {
-        start: 135,
-        end: 154,
+        start: 85,
+        end: 104,
       },
     };
     assert.deepEqual(
@@ -134,7 +132,6 @@ suite("function-comment: constructor: params", () => {
     for (var i = explicitArgsCommentStart; i < explicitArgsCommentEnd; i++) {
       functionCommentReference += functionCommentText[i];
     }
-    console.log("functionCommentText", functionCommentText);
     var wholeFileReference = "";
     const functionCommentStart = functionCommentScope!.start;
     for (
@@ -148,8 +145,8 @@ suite("function-comment: constructor: params", () => {
     assert.equal("symbol of the token", functionCommentReference);
   });
 
-  test("parse line 4", () => {
-    const lineNumber = 4;
+  test("parse line 3", () => {
+    const lineNumber = 3;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -158,7 +155,7 @@ suite("function-comment: constructor: params", () => {
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
-    paramsParser.setStartScope(functionCommentScope!.text[2]);
+    paramsParser.setStartScope(functionCommentScope!.text[1]);
 
     assert.equal(
       "// @param decimals floating point of the token",
@@ -183,8 +180,8 @@ suite("function-comment: constructor: params", () => {
       type: "",
       desc: "floating point of the token",
       charIndex: {
-        start: 174,
-        end: 201,
+        start: 124,
+        end: 151,
       },
     };
     assert.deepEqual(
@@ -216,8 +213,8 @@ suite("function-comment: constructor: params", () => {
     );
   });
 
-  test("parse line 5", () => {
-    const lineNumber = 5;
+  test("parse line 4", () => {
+    const lineNumber = 4;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -226,7 +223,7 @@ suite("function-comment: constructor: params", () => {
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
-    paramsParser.setStartScope(functionCommentScope!.text[2]);
+    paramsParser.setStartScope(functionCommentScope!.text[1]);
 
     assert.equal(
       "// @param initial_supply amount of initial supply of the token",
@@ -251,8 +248,8 @@ suite("function-comment: constructor: params", () => {
       type: "",
       desc: "amount of initial supply of the token",
       charIndex: {
-        start: 227,
-        end: 264,
+        start: 177,
+        end: 214,
       },
     };
     assert.deepEqual(
@@ -284,8 +281,8 @@ suite("function-comment: constructor: params", () => {
     );
   });
 
-  test("parse line 6", () => {
-    const lineNumber = 6;
+  test("parse line 5", () => {
+    const lineNumber = 5;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -294,7 +291,7 @@ suite("function-comment: constructor: params", () => {
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
-    paramsParser.setStartScope(functionCommentScope!.text[2]);
+    paramsParser.setStartScope(functionCommentScope!.text[1]);
 
     assert.equal(
       "// @param recipient the address of recipient of the initial supply",
@@ -319,8 +316,8 @@ suite("function-comment: constructor: params", () => {
       type: "",
       desc: "the address of recipient of the initial supply",
       charIndex: {
-        start: 285,
-        end: 331,
+        start: 235,
+        end: 281,
       },
     };
     assert.deepEqual(
@@ -352,8 +349,8 @@ suite("function-comment: constructor: params", () => {
     );
   });
 
-  test("parse line 7", () => {
-    const lineNumber = 7;
+  test("parse line 6", () => {
+    const lineNumber = 6;
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "constructor");
     const functionScope = functionScopes![0];
@@ -362,13 +359,12 @@ suite("function-comment: constructor: params", () => {
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const paramsParser = new NatspecCommentParamsParser(functionCommentText);
-    paramsParser.setStartScope(functionCommentScope!.text[2]);
+    paramsParser.setStartScope(functionCommentScope!.text[1]);
 
     const resultLineParsing = paramsParser.parseCommentLine(
       functionCommentLine
     );
 
-    console.log(functionCommentLine);
     assert(!functionCommentLine);
     assert.notEqual(functionCommentLine, paramsParser.startLine);
     assert.equal(
@@ -405,31 +401,31 @@ suite("function-comment: constructor: params", () => {
         name: "name",
         type: "",
         desc: "name of the token",
-        charIndex: { start: 100, end: 117 },
+        charIndex: { start: 50, end: 67 },
       },
       {
         name: "symbol",
         type: "",
         desc: "symbol of the token",
-        charIndex: { start: 135, end: 154 },
+        charIndex: { start: 85, end: 104 },
       },
       {
         name: "decimals",
         type: "",
         desc: "floating point of the token",
-        charIndex: { start: 174, end: 201 },
+        charIndex: { start: 124, end: 151 },
       },
       {
         name: "initial_supply",
         type: "",
         desc: "amount of initial supply of the token",
-        charIndex: { start: 227, end: 264 },
+        charIndex: { start: 177, end: 214 },
       },
       {
         name: "recipient",
         type: "",
         desc: "the address of recipient of the initial supply",
-        charIndex: { start: 285, end: 331 },
+        charIndex: { start: 235, end: 281 },
       },
     ];
 

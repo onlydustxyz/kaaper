@@ -1,27 +1,31 @@
-import { BaseCommentParser } from "../../interfaces/function-comment";
-import { FunctionComment } from "../../../types";
+import {BaseCommentParser, NatspecCommentParser} from "../../interfaces/function-comment";
+import {FunctionComment, MultiLineFunctionComment} from "../../../types";
 
-export default class FunctionCommentReturnsParser extends BaseCommentParser {
+export default class NatspecCommentReturnsParser extends NatspecCommentParser {
   constructor(functionCommentText: string | null) {
     super(functionCommentText);
-    this.name = "Returns";
-    this.regex = /(\w+)(\((\w+\*?)\)):(.*)/gm;
+    this.name = "@returns";
+    this.startScopeRegexp = /\/\/\s+(@returns)(.*)/;
+    this.endScopeRegexp = /\/\/\s+@(?!returns)(.*)/g;
+    this.regex = /\/\/(\s+)(@returns)?(\s?)(.*)/g
   }
 
-  parseCommentLine(line: string): FunctionComment | null {
+  parseCommentLine(line: string): MultiLineFunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
     if (lineCommentInsideScope) {
-      const start = lineCommentInsideScope.index!;
+      const isTagInComment = lineCommentInsideScope[2] === (this.name);
+      const startLineIndex = lineCommentInsideScope.index!;
+      const startDescIndex = startLineIndex + 2 + lineCommentInsideScope.slice(1,4).join("").length
       const matchInterface = {
-        name: lineCommentInsideScope[1].trim(),
-        type: lineCommentInsideScope[3].trim(),
+        name: "",
+        type: "",
         desc: lineCommentInsideScope[4].trim(),
         charIndex: {
-          start: start,
-          end: start + lineCommentInsideScope[0].length,
+          start: startDescIndex,
+          end: startDescIndex + lineCommentInsideScope[4].length,
         },
       };
-      return matchInterface;
+      return {isMultiLine:!isTagInComment, functionComment: matchInterface};
     }
     return null;
   }
