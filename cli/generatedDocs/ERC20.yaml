@@ -1,0 +1,614 @@
+- attributeName: constructor
+  functionName:
+    name: constructor
+    charIndex:
+      start: 592
+      end: 603
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: name
+        type: felt
+      - name: symbol
+        type: felt
+      - name: decimals
+        type: felt
+      - name: initial_supply
+        type: Uint256
+      - name: recipient
+        type: felt
+    returns: null
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Initialize the contract
+        charIndex:
+          start: 11
+          end: 34
+    implicitArgs: null
+    explicitArgs:
+      - name: name
+        type: ''
+        desc: name of the token
+        charIndex:
+          start: 50
+          end: 67
+      - name: symbol
+        type: ''
+        desc: symbol of the token
+        charIndex:
+          start: 85
+          end: 104
+      - name: decimals
+        type: ''
+        desc: floating point of the token
+        charIndex:
+          start: 124
+          end: 151
+      - name: initial_supply
+        type: ''
+        desc: amount of initial supply of the token
+        charIndex:
+          start: 177
+          end: 214
+      - name: recipient
+        type: ''
+        desc: the address of recipient of the initial supply
+        charIndex:
+          start: 235
+          end: 281
+    returns: null
+    raises: null
+    charIndex:
+      start: 292
+      end: 573
+- attributeName: view
+  functionName:
+    name: name
+    charIndex:
+      start: 970
+      end: 974
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: name
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the name of the token
+        charIndex:
+          start: 11
+          end: 40
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: name of the token
+        charIndex:
+          start: 53
+          end: 70
+    raises: null
+    charIndex:
+      start: 888
+      end: 958
+- attributeName: view
+  functionName:
+    name: symbol
+    charIndex:
+      start: 1200
+      end: 1206
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: symbol
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the symbol of the token
+        charIndex:
+          start: 11
+          end: 42
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: symbol of the token
+        charIndex:
+          start: 55
+          end: 74
+    raises: null
+    charIndex:
+      start: 1114
+      end: 1188
+- attributeName: view
+  functionName:
+    name: totalSupply
+    charIndex:
+      start: 1452
+      end: 1463
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: totalSupply
+        type: Uint256
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the total supply of the token
+        charIndex:
+          start: 11
+          end: 48
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: total supply of the token
+        charIndex:
+          start: 61
+          end: 86
+    raises: null
+    charIndex:
+      start: 1354
+      end: 1440
+- attributeName: view
+  functionName:
+    name: decimals
+    charIndex:
+      start: 1740
+      end: 1748
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs: null
+    returns:
+      - name: decimals
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the decimals of the token
+        charIndex:
+          start: 11
+          end: 44
+    implicitArgs: null
+    explicitArgs: null
+    returns:
+      - name: ''
+        type: ''
+        desc: decimals of the token
+        charIndex:
+          start: 57
+          end: 78
+    raises: null
+    charIndex:
+      start: 1650
+      end: 1728
+- attributeName: view
+  functionName:
+    name: balanceOf
+    charIndex:
+      start: 2053
+      end: 2062
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: account
+        type: felt
+    returns:
+      - name: balance
+        type: Uint256
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Returns the balance of the account
+        charIndex:
+          start: 11
+          end: 45
+    implicitArgs: null
+    explicitArgs:
+      - name: account
+        type: ''
+        desc: account to query balance for
+        charIndex:
+          start: 64
+          end: 92
+    returns:
+      - name: ''
+        type: ''
+        desc: the balance of the account
+        charIndex:
+          start: 105
+          end: 131
+    raises: null
+    charIndex:
+      start: 1910
+      end: 2041
+- attributeName: view
+  functionName:
+    name: allowance
+    charIndex:
+      start: 2555
+      end: 2564
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: owner
+        type: felt
+      - name: spender
+        type: felt
+    returns:
+      - name: remaining
+        type: Uint256
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: >-
+          Returns the amount of remaining tokens allowed to be spent by the
+          spender
+        charIndex:
+          start: 11
+          end: 84
+    implicitArgs: null
+    explicitArgs:
+      - name: owner
+        type: ''
+        desc: the address of owner of the tokens
+        charIndex:
+          start: 101
+          end: 135
+      - name: spender
+        type: ''
+        desc: the address of spender (delegated account) of the tokens
+        charIndex:
+          start: 154
+          end: 210
+    returns:
+      - name: ''
+        type: ''
+        desc: the amount of remaining tokens allowed to be spent by the spender
+        charIndex:
+          start: 223
+          end: 288
+    raises: null
+    charIndex:
+      start: 2255
+      end: 2543
+- attributeName: external
+  functionName:
+    name: transfer
+    charIndex:
+      start: 3009
+      end: 3017
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: recipient
+        type: felt
+      - name: amount
+        type: Uint256
+    returns:
+      - name: success
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Perform transfer to recipient
+        charIndex:
+          start: 11
+          end: 40
+    implicitArgs: null
+    explicitArgs:
+      - name: recipient
+        type: ''
+        desc: the address of ERC20 recipient
+        charIndex:
+          start: 61
+          end: 91
+      - name: amount
+        type: ''
+        desc: the amount of ERC20 transfer
+        charIndex:
+          start: 109
+          end: 137
+    returns:
+      - name: ''
+        type: ''
+        desc: 1 if transfer was successful, 0 otherwise
+        charIndex:
+          start: 150
+          end: 191
+    raises: null
+    charIndex:
+      start: 2802
+      end: 2993
+- attributeName: external
+  functionName:
+    name: transferFrom
+    charIndex:
+      start: 3485
+      end: 3497
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: sender
+        type: felt
+      - name: recipient
+        type: felt
+      - name: amount
+        type: Uint256
+    returns:
+      - name: success
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Perform transfer from sender to recipient with allowance
+        charIndex:
+          start: 11
+          end: 67
+    implicitArgs: null
+    explicitArgs:
+      - name: sender
+        type: ''
+        desc: the address of ERC20 sender
+        charIndex:
+          start: 85
+          end: 112
+      - name: recipient
+        type: ''
+        desc: the address of ERC20 recipient
+        charIndex:
+          start: 133
+          end: 163
+      - name: amount
+        type: ''
+        desc: the amount of ERC20 transfer
+        charIndex:
+          start: 181
+          end: 209
+    returns:
+      - name: ''
+        type: ''
+        desc: 1 if transfer was successful, 0 otherwise
+        charIndex:
+          start: 222
+          end: 263
+    raises: null
+    charIndex:
+      start: 3206
+      end: 3469
+- attributeName: external
+  functionName:
+    name: approve
+    charIndex:
+      start: 3937
+      end: 3944
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: spender
+        type: felt
+      - name: amount
+        type: Uint256
+    returns:
+      - name: success
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Approve spender to spend amount of tokens
+        charIndex:
+          start: 11
+          end: 52
+    implicitArgs: null
+    explicitArgs:
+      - name: spender
+        type: ''
+        desc: the address of ERC20 spender
+        charIndex:
+          start: 71
+          end: 99
+      - name: amount
+        type: ''
+        desc: the amount of ERC20 token to approve
+        charIndex:
+          start: 117
+          end: 153
+    returns:
+      - name: ''
+        type: ''
+        desc: 1 if allowance was successful, 0 otherwise
+        charIndex:
+          start: 166
+          end: 208
+    raises: null
+    charIndex:
+      start: 3713
+      end: 3921
+- attributeName: external
+  functionName:
+    name: increaseAllowance
+    charIndex:
+      start: 4366
+      end: 4383
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: spender
+        type: felt
+      - name: added_value
+        type: Uint256
+    returns:
+      - name: success
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Increase allowance of spender by added_value
+        charIndex:
+          start: 11
+          end: 55
+    implicitArgs: null
+    explicitArgs:
+      - name: spender
+        type: ''
+        desc: the address of ERC20 spender
+        charIndex:
+          start: 74
+          end: 102
+      - name: amount
+        type: ''
+        desc: the amount of ERC20 token to increase allowance
+        charIndex:
+          start: 120
+          end: 167
+    returns:
+      - name: ''
+        type: ''
+        desc: 1 if allowance was successful, 0 otherwise
+        charIndex:
+          start: 180
+          end: 222
+    raises: null
+    charIndex:
+      start: 4128
+      end: 4350
+- attributeName: external
+  functionName:
+    name: decreaseAllowance
+    charIndex:
+      start: 4840
+      end: 4857
+  functionSignature:
+    implicitArgs:
+      - name: syscall_ptr
+        type: felt*
+      - name: pedersen_ptr
+        type: HashBuiltin*
+      - name: range_check_ptr
+        type: ''
+    explicitArgs:
+      - name: spender
+        type: felt
+      - name: subtracted_value
+        type: Uint256
+    returns:
+      - name: success
+        type: felt
+  functionComment:
+    desc:
+      - name: ''
+        type: ''
+        desc: Decrease allowance of spender by subtracted_value
+        charIndex:
+          start: 11
+          end: 60
+    implicitArgs: null
+    explicitArgs:
+      - name: spender
+        type: ''
+        desc: the address of ERC20 spender
+        charIndex:
+          start: 79
+          end: 107
+      - name: amount
+        type: ''
+        desc: the amount of ERC20 token to decrease allowance
+        charIndex:
+          start: 125
+          end: 172
+    returns:
+      - name: ''
+        type: ''
+        desc: 1 if decrease allowance was successful, 0 otherwise
+        charIndex:
+          start: 185
+          end: 236
+    raises: null
+    charIndex:
+      start: 4588
+      end: 4824

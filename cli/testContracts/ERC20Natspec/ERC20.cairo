@@ -102,94 +102,51 @@ func transfer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     return (TRUE,);
 }
 
+// @notice Perform transfer from sender to recipient with allowance
+// @param sender the address of ERC20 sender
+// @param recipient the address of ERC20 recipient
+// @param amount the amount of ERC20 transfer
+// @returns 1 if transfer was successful, 0 otherwise
 @external
 func transferFrom{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     sender: felt, recipient: felt, amount: Uint256
 ) -> (success: felt) {
-    // Desc:
-    //   Perform transfer from sender to recipient with allowance
-    // Implicit args:
-    //   syscall_ptr(felt*)
-    //   pedersen_ptr(HashBuiltin*)
-    //   range_check_ptr
-    // Explicit args:
-    //   sender(felt): the address of ERC20 sender
-    //   recipient(felt): the address of ERC20 recipient
-    //   amount(Uint256): the amount of ERC20 transfer
-    // Returns:
-    //   success(felt): 1 if transfer was successful, 0 otherwise
-    // Raises:
-    //   amount: amount is not a valid Uint256
-    //   sender: cannot transfer from the zero address
-    //   amount: transfer amount exceeds balance
     ERC20.transfer_from(sender, recipient, amount);
     return (TRUE,);
 }
 
+// @notice Approve spender to spend amount of tokens
+// @param spender the address of ERC20 spender
+// @param amount the amount of ERC20 token to approve
+// @returns 1 if allowance was successful, 0 otherwise
 @external
 func approve{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     spender: felt, amount: Uint256
 ) -> (success: felt) {
-    // Desc:
-    //   Approve spender to spend amount of tokens
-    // Implicit args:
-    //   syscall_ptr(felt*)
-    //   pedersen_ptr(HashBuiltin*)
-    //   range_check_ptr
-    // Explicit args:
-    //   spender(felt): the address of ERC20 spender
-    //   amount(Uint256): the amount of ERC20 token to approve
-    // Returns:
-    //   success(felt): 1 if approve was successful, 0 otherwise
-    // Raises:
-    //   amount: amount is not a valid Uint256
-    //   spender: cannot approve to the zero address
-
     ERC20.approve(spender, amount);
     return (TRUE,);
 }
 
+// @notice Increase allowance of spender by added_value
+// @param spender the address of ERC20 spender
+// @param amount the amount of ERC20 token to increase allowance
+// @returns 1 if allowance was successful, 0 otherwise
 @external
 func increaseAllowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     spender: felt, added_value: Uint256
 ) -> (success: felt) {
-    // Desc:
-    //   Increase allowance of spender by added_value
-    // Implicit args:
-    //   syscall_ptr(felt*)
-    //   pedersen_ptr(HashBuiltin*)
-    //   range_check_ptr
-    // Explicit args:
-    //   spender(felt): the address of ERC20 spender
-    //   added_value(Uint256): the amount of ERC20 token to increase allowance
-    // Returns:
-    //   success(felt): 1 if increase allowance was successful, 0 otherwise
-    // Raises:
-    //   added_value: added_value is not a valid Uint256
-    //   spender: cannot increase allowance to the zero address
-
     ERC20.increase_allowance(spender, added_value);
     return (TRUE,);
 }
 
+// @notice Decrease allowance of spender by subtracted_value
+// @param spender the address of ERC20 spender
+// @param amount the amount of ERC20 token to decrease allowance
+// @returns 1 if decrease allowance was successful, 0 otherwise
 @external
 func decreaseAllowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     spender: felt, subtracted_value: Uint256
 ) -> (success: felt) {
-    // Desc:
-    //   Decrease allowance of spender by subtracted_value
-    // Implicit args:
-    //   syscall_ptr(felt*)
-    //   pedersen_ptr(HashBuiltin*)
-    //   range_check_ptr
-    // Explicit args:
-    //   spender(felt): the address of ERC20 spender
-    //   subtracted_value(Uint256): the amount of ERC20 token to decrease allowance
-    // Returns:
-    //   success(felt): 1 if decrease allowance was successful, 0 otherwise
-    // Raises:
-    //   subtracted_value: subtracted_value is not a valid Uint256
-    //   spender: cannot decrease allowance to the zero address
     ERC20.decrease_allowance(spender, subtracted_value);
     return (TRUE,);
 }

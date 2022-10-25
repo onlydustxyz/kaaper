@@ -7,7 +7,7 @@ export default class NatspecCommentParamsParser extends NatspecCommentParser {
     this.name = "@param";
     this.startScopeRegexp = /\/\/\s+(@param)(.*)/;
     this.endScopeRegexp = /\/\/\s+@(?!param)(.*)/g;
-    this.regex = /\/\/(\s+)(@param)(\s\w*\s?)(\s?)(.*)/gm
+    this.regex = /\/\/(\s+)(@param)?(\s\w*\s?)?(\s?)(.*)/gm
   }
   parseCommentLine(line: string): MultiLineFunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
@@ -16,7 +16,7 @@ export default class NatspecCommentParamsParser extends NatspecCommentParser {
       // startLineIndex + 2 because the startline would be the the space after the // (2 character)
       const startDescIndex = startLineIndex + 2 + lineCommentInsideScope.slice(1,5).join("").length
       const matchInterface = {
-        name: lineCommentInsideScope[3].trim(),
+        name: lineCommentInsideScope[3]?.trim() || '',
         type: '',
         desc: lineCommentInsideScope[5].trim(),
         charIndex: {

@@ -22,11 +22,18 @@ program
   .description("Generate contract docs")
   .argument("<rootdir>", "root directory of contracts")
   .argument(["outdir"], "output directory")
+  .option("--standard [standard]", "documentation standard")
   .option("--comment", "dump comment only")
   .action((rootdir: string, outdir: string, options: any) => {
     const cli = new CLI(rootdir);
     const commentOnly = options.comment ? true : false;
-    cli.generateContractsDocs(outdir, commentOnly);
+    const validStandards = ["kaaper","natspec"]
+    const standard = options.standard ? options.standard : "kaaper";
+    if (!validStandards.includes(standard)) {
+      console.log(chalk.red(`Invalid standard: ${standard}`));
+      exit(1);
+    }
+    cli.generateContractsDocs(outdir, commentOnly,standard);
     console.log("documents generated at:", outdir);
   });
 
