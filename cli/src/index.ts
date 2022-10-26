@@ -10,7 +10,8 @@ import { exit } from "process";
 import CLI from "../../core/lib/CLI";
 
 clear();
-console.log(chalk.red(figlet.textSync("kaaper", { horizontalLayout: "full" })));
+console.log(chalk.red(figlet.textSync("kaaper", {horizontalLayout: "full"})));
+const validStandards = ["kaaper", "natspec"]
 
 program
   .name("kaaper")
@@ -25,15 +26,15 @@ program
   .option("--standard [standard]", "documentation standard")
   .option("--comment", "dump comment only")
   .action((rootdir: string, outdir: string, options: any) => {
-    const cli = new CLI(rootdir);
-    const commentOnly = options.comment ? true : false;
-    const validStandards = ["kaaper","natspec"]
     const standard = options.standard ? options.standard : "kaaper";
     if (!validStandards.includes(standard)) {
       console.log(chalk.red(`Invalid standard: ${standard}`));
       exit(1);
     }
-    cli.generateContractsDocs(outdir, commentOnly,standard);
+    const cli = new CLI(rootdir,standard);
+    const commentOnly = options.comment ? true : false;
+
+    cli.generateContractsDocs(outdir, commentOnly);
     console.log("documents generated at:", outdir);
   });
 
@@ -41,8 +42,14 @@ program
   .command("check-compliance")
   .description("Check comment compliance of contracts")
   .argument("<rootdir>", "root directory of contracts")
-  .action((rootdir: string) => {
-    const cli = new CLI(rootdir);
+  .option("--standard [standard]", "documentation standard")
+  .action((rootdir: string, options: any) => {
+    const standard = options.standard ? options.standard : "kaaper";
+    if (!validStandards.includes(standard)) {
+      console.log(chalk.red(`Invalid standard: ${standard}`));
+      exit(1);
+    }
+    const cli = new CLI(rootdir,standard);
     const result = cli.getNonCompliantCommentFunction();
     if (result !== null) {
       console.log("comment not compliant, check the following functions:");

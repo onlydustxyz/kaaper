@@ -12,7 +12,6 @@ export default class NatspecCommentReturnsParser extends NatspecCommentParser {
 
   parseCommentLine(line: string): MultiLineFunctionComment | null {
     const lineCommentInsideScope = this.isInsideScope(line, this.regex);
-    console.log(line)
     if (lineCommentInsideScope) {
       const isTagInComment = lineCommentInsideScope[2] === (this.name);
       const startLineIndex = lineCommentInsideScope.index!;

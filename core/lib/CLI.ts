@@ -8,24 +8,29 @@ import {CommentComplicance} from "./types";
 
 export default class CLI {
   public contractRootDir: string;
+  public parser:typeof CairoParser;
 
-  constructor(contractRootDir: string) {
+  constructor(contractRootDir: string, standard:string="kaaper") {
     this.contractRootDir = contractRootDir;
+    this.parser = this.getParserForStandard(standard)
+  }
+
+  getParserForStandard(standard:string){
+    switch (standard){
+      case "natspec":
+        return CairoNatspecParser;
+      default:
+        return CairoParser;
+    }
   }
 
   generateContractsDocs(
     outDir: string,
     dumpCommentOnly: boolean = false,
-    standard: string = "kaaper"
   ): void {
     glob(`${this.contractRootDir}/**/*.cairo`, (_: any, files: string) => {
       for (const file of files) {
-        let parsingResult;
-        if (standard === "kaaper") {
-          parsingResult = CairoParser.getFileParsingResult(file);
-        } else if (standard === "natspec") {
-          parsingResult = CairoNatspecParser.getFileParsingResult(file);
-        }
+        const parsingResult = this.parser.getFileParsingResult(file);
         if (parsingResult) {
           const relativePath = path.relative(this.contractRootDir, file);
           const outPath = path.join(outDir, relativePath);
@@ -33,7 +38,7 @@ export default class CLI {
           if (!fs.existsSync(outDirPath)) {
             fs.mkdirSync(outDirPath, {recursive: true});
           }
-          CairoParser.dumpParsingResult(
+          this.parser.dumpParsingResult(
             parsingResult,
             outPath,
             dumpCommentOnly
@@ -48,10 +53,10 @@ export default class CLI {
     var files = glob.sync(`${this.contractRootDir}/**/*.cairo`);
 
     for (var file of files) {
-      const parsingResult = CairoParser.getFileParsingResult(file);
+      const parsingResult = this.parser.getFileParsingResult(file);
       if (parsingResult) {
         for (const scopeParsingResult of parsingResult) {
-          const result = CairoParser.isValidFunctionComment(scopeParsingResult);
+          const result = this.parser.isValidFunctionComment(scopeParsingResult);
           if (result.isValid === false) {
             const commentComplicance = {
               filePath: file,

@@ -18,7 +18,6 @@ import {
 import NatspecCommentNoticeParser from "./parser/function-comment/natspec/notice";
 import NatspecCommentParamsParser from "./parser/function-comment/natspec/params";
 import NatspecCommentReturnsParser from "./parser/function-comment/natspec/returns";
-import NatspecCommentDevParser from "./parser/function-comment/natspec/dev";
 
 const lodash = require("lodash");
 const yaml = require("js-yaml");
@@ -342,26 +341,22 @@ export default class CairoParser {
     return null;
   }
 
-  private static _isValidFunctionComment(
+  protected static _isValidFunctionComment(
     functionSignature: FunctionSignature[] | null,
     functionComment: FunctionComment[] | null
   ): boolean {
     if (functionSignature === null || functionComment === null) {
-      const isImplicitArgsEqual = lodash.isEqual(
+      const isCommentValid = lodash.isEqual(
         functionSignature,
         functionComment
       );
-      if (isImplicitArgsEqual === false) {
-        return false;
-      }
+      return isCommentValid;
     } else {
-      const isImplicitArgsEqual = lodash.isEqual(
+      const isCommentValid = lodash.isEqual(
         functionSignature,
         functionComment?.map((obj) => ({name: obj.name, type: obj.type}))
       );
-      if (isImplicitArgsEqual === false) {
-        return false;
-      }
+      return isCommentValid;
     }
 
     return true;
@@ -505,12 +500,6 @@ export class CairoNatspecParser extends CairoParser {
           natspecFunctionCommentText
         );
 
-        // TODO @dev tag
-
-        const natspecFunctionCommentDevParser = new NatspecCommentDevParser(
-          natspecFunctionCommentText
-        );
-
         const nastpecFunctionCommentParamsParser = new NatspecCommentParamsParser(
           natspecFunctionCommentText
         );
@@ -632,4 +621,74 @@ export class CairoNatspecParser extends CairoParser {
     return null;
   }
 
+  /**
+   * Here, we don't check for implicit arguments
+   * @param parsingResult
+   */
+  static isValidFunctionComment(
+    parsingResult: ParsingResult
+  ): FunctionCommentValidity {
+    const functionSignature = parsingResult.functionSignature;
+    const functionComment = parsingResult.functionComment;
+
+    var errorSource: string[] = [];
+
+    const isExplicitArgsEqual = this._isValidFunctionComment(
+      functionSignature.explicitArgs,
+      functionComment.explicitArgs
+    );
+    if (isExplicitArgsEqual === false) {
+      errorSource.push("explicitArgs");
+    }
+
+    const isReturnsEqual = this._isValidFunctionComment(
+      functionSignature.returns,
+      functionComment.returns
+    );
+    if (isReturnsEqual === false) {
+      errorSource.push("returns");
+    }
+    if (errorSource.length === 0) {
+      return {
+        isValid: true,
+        errorSource: null,
+      };
+    }
+
+    if (errorSource.length === 1) {
+      return {
+        isValid: false,
+        errorSource: errorSource[0],
+      };
+    }
+
+    return {isValid: false, errorSource: errorSource};
+  }
+
+  /**
+   * We don't check comment type.
+   * @param functionSignature
+   * @param functionComment
+   * @protected
+   */
+  protected static _isValidFunctionComment(
+    functionSignature: FunctionSignature[] | null,
+    functionComment: FunctionComment[] | null
+  ): boolean {
+    if (functionSignature === null || functionComment === null) {
+      const isCommentValid = lodash.isEqual(
+        functionSignature,
+        functionComment
+      );
+      return isCommentValid;
+    } else {
+      const isCommentValid = lodash.isEqual(
+        functionSignature?.map((obj) => ({name: obj.name})),
+        functionComment?.map((obj) => ({name: obj.name}))
+      );
+      return isCommentValid;
+    }
+
+    return true;
+  }
 }
