@@ -11,7 +11,7 @@ import CLI from "../../core/lib/CLI";
 
 clear();
 console.log(chalk.red(figlet.textSync("kaaper", {horizontalLayout: "full"})));
-const validStandards = ["kaaper", "natspec"]
+const validStandards = ["google", "natspec"]
 
 program
   .name("kaaper")
@@ -26,7 +26,7 @@ program
   .option("--standard [standard]", "documentation standard")
   .option("--comment", "dump comment only")
   .action((rootdir: string, outdir: string, options: any) => {
-    const standard = options.standard ? options.standard : "kaaper";
+    const standard = options.standard ? options.standard : "google";
     if (!validStandards.includes(standard)) {
       console.log(chalk.red(`Invalid standard: ${standard}`));
       exit(1);
@@ -44,7 +44,7 @@ program
   .argument("<rootdir>", "root directory of contracts")
   .option("--standard [standard]", "documentation standard")
   .action((rootdir: string, options: any) => {
-    const standard = options.standard ? options.standard : "kaaper";
+    const standard = options.standard ? options.standard : "google";
     if (!validStandards.includes(standard)) {
       console.log(chalk.red(`Invalid standard: ${standard}`));
       exit(1);

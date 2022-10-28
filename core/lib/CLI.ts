@@ -4,18 +4,19 @@ import CairoParser, {CairoNatspecParser} from "./CairoParser";
 
 var glob = require("glob");
 
-import {CommentComplicance} from "./types";
+import {CommentComplicance, DocumentationType} from "./types";
 
 export default class CLI {
   public contractRootDir: string;
   public parser:typeof CairoParser;
 
-  constructor(contractRootDir: string, standard:string="kaaper") {
+  constructor(contractRootDir: string, standard:DocumentationType="google") {
+
     this.contractRootDir = contractRootDir;
     this.parser = this.getParserForStandard(standard)
   }
 
-  getParserForStandard(standard:string){
+  getParserForStandard(standard:DocumentationType){
     switch (standard){
       case "natspec":
         return CairoNatspecParser;
