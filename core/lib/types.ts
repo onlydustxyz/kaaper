@@ -93,4 +93,4 @@ export interface NamespaceScope {
   text: string | null;
 }
 
-export type DocumentationType = "natspec" | "kaaper";
+export type DocumentationType = "natspec" | "google";
