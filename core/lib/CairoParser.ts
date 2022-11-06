@@ -104,7 +104,7 @@ export default class CairoParser {
             const functionScope = {
               text: `@${namespaceName}\n${match.text}`,
               start: namespace.start! + match.start,
-              startLine: text.substring(0, namespace.start! + match.start).split("\n").length,
+              startLine: text.substring(0, namespace.start! + match.start).split("\n").length - 1,
               end: namespace.start! + match.end,
             };
             namespaceScopes.push(functionScope);
@@ -458,9 +458,9 @@ export class CairoNatspecParser extends CairoParser {
     }
     const commentLines = natspecDocLines.reverse().join("\n");
     const commentLinesText = commentLines.match(regexp);
-    const commentLinesEnd = scope.start - 1;
-    const commentLinesStart = commentLinesEnd - commentLines.length;
 
+    const commentLinesEnd = scope.start - 1 - (isNamespace ? 4 : 0);
+    const commentLinesStart = commentLinesEnd - commentLines.length;
 
     if (scope && commentLinesText) {
       const commentLineRange = {
@@ -491,7 +491,10 @@ export class CairoNatspecParser extends CairoParser {
     // parse comment lines
     if (functionScopes) {
       for (var functionScope of functionScopes) {
-        const commentLines = CairoNatspecParser.parseCommentLines(functionScope, false, text)
+        const commentLines =
+          name === "namespace"
+            ? CairoNatspecParser.parseCommentLines(functionScope, true, text)
+            : CairoNatspecParser.parseCommentLines(functionScope, false, text);
         const natspecFunctionCommentText = commentLines
           ? commentLines.text.join("")
           : null;
@@ -540,7 +543,7 @@ export class CairoNatspecParser extends CairoParser {
           },
           functionComment: {
             desc: nastpecFunctionCommentNoticeParser.parseCommentLines(functionCommentScope),
-            implicitArgs:null,
+            implicitArgs: null,
             explicitArgs:
               nastpecFunctionCommentParamsParser.parseCommentLines(functionCommentScope),
             returns:
