@@ -1,6 +1,5 @@
 {
   "name": "kaaper",
-  "private": "false",
   "displayName": "kaaper",
   "description": "Documentation Generator for Starknet",
   "version": "0.0.1",
