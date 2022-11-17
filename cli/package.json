@@ -55,7 +55,6 @@
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.16.0",
-    "glob": "^8.0.3",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "ts-node": "^10.9.1",
@@ -73,6 +72,8 @@
     "commander": "^9.3.0",
     "figlet": "^1.5.2",
     "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "glob": "^8.0.3",
     "string.prototype.matchall": "^4.0.7"
   }
 }
