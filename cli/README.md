@@ -26,24 +26,40 @@
 ## 🎟️ Description
 
 Kaaper is a tool to generate documentation for Cairo projects.
+It allows you to extract code documentation from your project and generate yaml files that can be used to generate documentation.
+Kaaper supports both Natspec and Google documentation standards.
 
 ## 🎗️ Prerequisites
 [Node JS](https://nodejs.org/), preferably 16.xx  
 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
 
 
-## 📦 Installation
+## 📦 CLI Installation
+Kaaper is now available as an [NPM package](https://www.npmjs.com/package/@onlydust/kaaper).
 ```
-yarn
-yarn install
+npm install -g @onlydust/kaaper
+yarn global add @onlydust/kaaper
 ```
 
-## 🔬 Usage
-Install CLI Locally
+Or install locally : Navigate to CLI directory
+```
+cd cli
+```
+
+Install the required dependencies
+```
+yarn
+npm install
+```
+
+Install CLI locally
 ```
 npm run create
 npm run local
 ```
+
+## 🔬 Usage
+
 
 To see available commands
 ```
@@ -58,12 +74,20 @@ kaaper generate <rootdir> <outdir>
 Generate docs (comment only)
 ```
 kaaper generate --comment <rootdir> <outdir>
+
+```
+The command generates documentation for google-compliant contracts by default.
+To Generate docs for natspec-compliant contracts, use
+```
+kaaper generate --standard natspec <rootdir> <outdir>
 ```
 
 ## Check comment compliancy
 ```
-kaaper check-compliance <rootdir>
+kaaper check-compliance <rootdir> [--standard natspec|google]
 ```
+
+
 
 ## 🌡️ Testing
 ```
