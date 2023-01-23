@@ -36,6 +36,7 @@ Kaaper supports both Natspec and Google documentation standards.
 
 ## 📦 CLI Installation
 Kaaper is now available as an [NPM package](https://www.npmjs.com/package/@onlydust/kaaper).
+The installation instructions show how to install kaaper using either `yarn` or `npm`.
 ```
 npm install -g @onlydust/kaaper
 yarn global add @onlydust/kaaper
@@ -53,6 +54,11 @@ npm install
 ```
 
 Install CLI locally
+```
+yarn create
+yarn local
+```
+or
 ```
 npm run create
 npm run local
