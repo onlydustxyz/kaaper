@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
+import CairoParser, { CairoNatspecParser } from "../../../../../../../core/lib/CairoParser";
 
 import {
   yieldFunctionCommentPartsFromCharIndex,
@@ -34,7 +34,7 @@ suite("Natspec - getScopeParsingResult: external", () => {
 
     // Comment parsing
     // parse comment lines
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
     const parsingTarget = [
       {
         attributeName: "external",
@@ -93,7 +93,7 @@ suite("Natspec - getScopeParsingResult: external", () => {
     ];
     const parsingResult = CairoNatspecParser.getScopeParsingResult(text, "external")![
       scopeNumber
-      ];
+    ];
     assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
@@ -116,10 +116,10 @@ suite("Natspec - getScopeParsingResult: external", () => {
       yieldWholeFunctionCommentStringFromCharIndex(text, parsingResult);
 
     const functionCommentTarget =
-`// @notice Perform transfer to recipient
+      `// @notice Perform transfer to recipient
 // @param recipient the address of ERC20 recipient
 // @param amount the amount of ERC20 transfer
-// @returns 1 if transfer was successful, 0 otherwise`;
+// @return 1 if transfer was successful, 0 otherwise`;
 
     assert.equal(
       functionCommentTarget,

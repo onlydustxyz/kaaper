@@ -2,7 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 
-import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
+import CairoParser, { CairoNatspecParser } from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentReturnsParser from "../../../../../../../core/lib/parser/function-comment/natspec/returns";
 
 suite("Natspec - function-comment: constructor: multiline_params", () => {
@@ -22,7 +22,7 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
     const returnsParser = new NatspecCommentReturnsParser(functionCommentText);
 
     assert.equal(
-      "// @returns 1 if transfer was successful,",
+      "// @return 1 if transfer was successful,",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -83,7 +83,7 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
     const functionCommentParsing =
       returnsParser.parseCommentLine(functionCommentLine)!.functionComment;
 
-    assert.equal("\n// @returns 1 if transfer was successful,", returnsParser.startLine);
+    assert.equal("\n// @return 1 if transfer was successful,", returnsParser.startLine);
     assert.notEqual(lineNumber, returnsParser.startLine);
     const isEndScope = returnsParser.isEndScope(functionCommentLine);
     assert.equal(
@@ -134,7 +134,7 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
         name: "",
         type: "",
         desc: "1 if transfer was successful,\n0 otherwise",
-        charIndex: {start: 153, end: 197},
+        charIndex: { start: 153, end: 197 },
       },
     ];
 

@@ -2,7 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 
-import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
+import CairoParser, { CairoNatspecParser } from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentDevParser from "../../../../../../../core/lib/parser/function-comment/natspec/dev";
 
 suite("Natspec - function-comment: constructor: multiline_dev", () => {
@@ -15,7 +15,7 @@ suite("Natspec - function-comment: constructor: multiline_dev", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![0];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -67,7 +67,7 @@ suite("Natspec - function-comment: constructor: multiline_dev", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![0];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
     const devParser = new NatspecCommentDevParser(functionCommentText);
@@ -120,7 +120,7 @@ suite("Natspec - function-comment: constructor: multiline_dev", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![0];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -129,7 +129,7 @@ suite("Natspec - function-comment: constructor: multiline_dev", () => {
     devParser.setStartScope(functionCommentScope!.text[2]);
 
     assert.equal(
-      "// @returns name of the token",
+      "// @return name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -158,7 +158,7 @@ suite("Natspec - function-comment: constructor: multiline_dev", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeNumber];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const devParser = new NatspecCommentDevParser(functionCommentText);
