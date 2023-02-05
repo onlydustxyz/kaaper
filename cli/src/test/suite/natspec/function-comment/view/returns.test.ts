@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
+import CairoParser, { CairoNatspecParser } from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentParamsParser from "../../../../../../../core/lib/parser/function-comment/natspec/params";
 import NatspecCommentReturnsParser from "../../../../../../../core/lib/parser/function-comment/natspec/returns";
 
@@ -20,7 +20,7 @@ suite("function-comment: view - name returns", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const lineNumber = 1;
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -34,7 +34,7 @@ suite("function-comment: view - name returns", () => {
     returnsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @returns name of the token",
+      "// @return name of the token",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -134,7 +134,7 @@ suite("function-comment: view - symbol returns", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const lineNumber = 1;
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -148,7 +148,7 @@ suite("function-comment: view - symbol returns", () => {
     returnsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @returns symbol of the token",
+      "// @return symbol of the token",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -222,7 +222,7 @@ suite("function-comment: view - totalSupply returns", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeLine];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const lineNumber = 1;
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -236,7 +236,7 @@ suite("function-comment: view - totalSupply returns", () => {
     returnsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @returns total supply of the token",
+      "// @return total supply of the token",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );

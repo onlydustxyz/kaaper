@@ -2,7 +2,7 @@ import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
 
-import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
+import CairoParser, { CairoNatspecParser } from "../../../../../../../core/lib/CairoParser";
 import NatspecCommentNoticeParser from "../../../../../../../core/lib/parser/function-comment/natspec/notice";
 
 suite("function-comment: view: notice", () => {
@@ -16,7 +16,7 @@ suite("function-comment: view: notice", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![0];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
     const functionCommentText: string = functionCommentScope!.text.join("");
@@ -97,7 +97,7 @@ suite("function-comment: view: notice", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![0];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const lineNumber = 1;
     const functionCommentLine: string = functionCommentScope!.text[lineNumber];
@@ -108,7 +108,7 @@ suite("function-comment: view: notice", () => {
 
 
     assert.equal(
-      "// @returns name of the token",
+      "// @return name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -132,7 +132,7 @@ suite("function-comment: view: notice", () => {
     const text = fs.readFileSync(pathFile, "utf8");
     const functionScopes = CairoParser.parseFunctionScope(text, "view");
     const functionScope = functionScopes![scopeNumber];
-    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope,false,text)!;
+    const functionCommentScope = CairoNatspecParser.parseCommentLines(functionScope, false, text)!;
 
     const functionCommentText: string = functionCommentScope!.text.join("");
     const noticeParser = new NatspecCommentNoticeParser(functionCommentText);

@@ -37,13 +37,13 @@ func Approval(owner: felt, spender: felt, value: Uint256) {
 //
 
 // @notice Returns the name of the token
-// @returns The name of the token
+// @return The name of the token
 @storage_var
 func ERC20_name() -> (name: felt) {
 }
 
 // @notice Returns the symbol of the token
-// @returns The symbol of the token
+// @return The symbol of the token
 @storage_var
 func ERC20_symbol() -> (symbol: felt) {
     // Desc:
@@ -53,20 +53,20 @@ func ERC20_symbol() -> (symbol: felt) {
 }
 
 // @notice Returns the number of decimals the token uses
-// @returns The number of decimals of the token
+// @return The number of decimals of the token
 @storage_var
 func ERC20_decimals() -> (decimals: Uint256) {
 }
 
 // @notice Returns total amount of tokens in existence
-// @returns The total amount of tokens in existence
+// @return The total amount of tokens in existence
 @storage_var
 func ERC20_total_supply() -> (total_supply: Uint256) {
 }
 
 // @notice Returns the amount of tokens owned by an account
 // @param account The address of the account
-// @returns The amount of tokens owned by an account
+// @return The amount of tokens owned by an account
 @storage_var
 func ERC20_balances(account: felt) -> (balance: Uint256) {
 }
@@ -74,7 +74,7 @@ func ERC20_balances(account: felt) -> (balance: Uint256) {
 // @notice Store the amount of tokens that an owner is allowed to delegate to a spender
 // @param owner The address of the owner
 // @param spender The address of the spender
-// @returns The amount of tokens that an owner is allowed to delegate to a spender
+// @return The amount of tokens that an owner is allowed to delegate to a spender
 @storage_var
 func ERC20_allowances(owner: felt, spender: felt) -> (allowance: Uint256) {
 }
@@ -105,7 +105,7 @@ namespace ERC20 {
     //
 
     // @notice Returns the name of the token
-    // @returns The name of the token
+    // @return The name of the token
     func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
         let (name) = ERC20_name.read();
         return (name,);

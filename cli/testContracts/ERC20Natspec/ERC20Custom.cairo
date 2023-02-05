@@ -32,7 +32,7 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 // The notice continues on a second line.
 // @dev a custom dev tag
 // that is also written in two lines.
-// @returns name of the token
+// @return name of the token
 @view
 func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
     let (name) = ERC20.name();
@@ -40,7 +40,7 @@ func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> 
 }
 
 // @notice Returns the symbol of the token
-// @returns symbol of the token
+// @return symbol of the token
 @view
 func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (symbol: felt) {
     let (symbol) = ERC20.symbol();
@@ -55,7 +55,7 @@ func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -
 // @param recipient the address of ERC20
 // recipient
 // @param amount the amount of ERC20 transfer
-// @returns 1 if transfer was successful,
+// @return 1 if transfer was successful,
 // 0 otherwise
 @external
 func transfer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -69,7 +69,7 @@ func transfer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
 // @param sender the address of ERC20 sender
 // @param recipient the address of ERC20 recipient
 // @param amount the amount of ERC20 transfer
-// @returns 1 if transfer was successful, 0 otherwise
+// @return 1 if transfer was successful, 0 otherwise
 @external
 func transferFrom{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     sender: felt, recipient: felt, amount: Uint256

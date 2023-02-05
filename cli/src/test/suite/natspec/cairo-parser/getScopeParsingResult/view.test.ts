@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as path from "path";
 import * as fs from "fs";
-import CairoParser, {CairoNatspecParser} from "../../../../../../../core/lib/CairoParser";
+import CairoParser, { CairoNatspecParser } from "../../../../../../../core/lib/CairoParser";
 
 import {
   yieldFunctionCommentPartsFromCharIndex,
@@ -41,16 +41,16 @@ suite("Natspec - getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "name",
-          charIndex: {start: 970, end: 974},
+          charIndex: { start: 970, end: 974 },
         },
         functionSignature: {
           implicitArgs: [
-            {name: "syscall_ptr", type: "felt*"},
-            {name: "pedersen_ptr", type: "HashBuiltin*"},
-            {name: "range_check_ptr", type: ""},
+            { name: "syscall_ptr", type: "felt*" },
+            { name: "pedersen_ptr", type: "HashBuiltin*" },
+            { name: "range_check_ptr", type: "" },
           ],
           explicitArgs: null,
-          returns: [{name: "name", type: "felt"}],
+          returns: [{ name: "name", type: "felt" }],
         },
         functionComment: {
           desc: [
@@ -58,7 +58,7 @@ suite("Natspec - getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "Returns the name of the token",
-              charIndex: {start: 11, end: 40},
+              charIndex: { start: 11, end: 40 },
             },
           ],
           implicitArgs: null,
@@ -68,17 +68,17 @@ suite("Natspec - getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "name of the token",
-              charIndex: {start: 53, end: 70},
+              charIndex: { start: 53, end: 70 },
             },
           ],
           raises: null,
-          charIndex: {start: 888, end: 958},
+          charIndex: { start: 888, end: 958 },
         },
       },
     ];
     const parsingResult = CairoNatspecParser.getScopeParsingResult(text, "view")![
       scopeNumber
-      ];
+    ];
     assert.deepEqual(parsingResult, parsingTarget[0], "failed to parse");
 
     const commentParsingResult = yieldFunctionCommentPartsFromCharIndex(
@@ -88,8 +88,8 @@ suite("Natspec - getScopeParsingResult: view", () => {
     );
 
     const textTarget = [
-      {desc: "Returns the name of the token"},
-      {returns: "name of the token"},
+      { desc: "Returns the name of the token" },
+      { returns: "name of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
@@ -98,7 +98,7 @@ suite("Natspec - getScopeParsingResult: view", () => {
 
     const functionCommentTarget =
       `// @notice Returns the name of the token
-// @returns name of the token`;
+// @return name of the token`;
 
     assert.equal(
       functionCommentTarget,
