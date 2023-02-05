@@ -58,8 +58,8 @@ suite("function-comment: view - name returns", () => {
       type: "",
       desc: "name of the token",
       charIndex: {
-        start: 53,
-        end: 70,
+        start: 52,
+        end: 69,
       },
     };
     assert.deepEqual(
@@ -172,8 +172,8 @@ suite("function-comment: view - symbol returns", () => {
       type: "",
       desc: "symbol of the token",
       charIndex: {
-        start: 55,
-        end: 74,
+        start: 54,
+        end: 73,
       },
     };
     assert.deepEqual(
@@ -260,8 +260,8 @@ suite("function-comment: view - totalSupply returns", () => {
       type: "",
       desc: "total supply of the token",
       charIndex: {
-        start: 61,
-        end: 86,
+        start: 60,
+        end: 85,
       },
     };
     assert.deepEqual(

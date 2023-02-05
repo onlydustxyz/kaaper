@@ -49,8 +49,8 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
       type: "",
       desc: "1 if transfer was successful,",
       charIndex: {
-        start: 153,
-        end: 182,
+        start: 152,
+        end: 181,
       },
     };
 
@@ -103,8 +103,8 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
       type: "",
       desc: "0 otherwise",
       charIndex: {
-        start: 186,
-        end: 197,
+        start: 185,
+        end: 196,
       },
     };
 
@@ -134,7 +134,7 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
         name: "",
         type: "",
         desc: "1 if transfer was successful,\n0 otherwise",
-        charIndex: { start: 153, end: 197 },
+        charIndex: { start: 152, end: 196 },
       },
     ];
 
