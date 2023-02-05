@@ -41,7 +41,7 @@ suite("Natspec - getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "name",
-          charIndex: { start: 970, end: 974 },
+          charIndex: { start: 969, end: 973 },
         },
         functionSignature: {
           implicitArgs: [
@@ -68,11 +68,11 @@ suite("Natspec - getScopeParsingResult: view", () => {
               name: "",
               type: "",
               desc: "name of the token",
-              charIndex: { start: 53, end: 70 },
+              charIndex: { start: 52, end: 69 },
             },
           ],
           raises: null,
-          charIndex: { start: 888, end: 958 },
+          charIndex: { start: 888, end: 957 },
         },
       },
     ];

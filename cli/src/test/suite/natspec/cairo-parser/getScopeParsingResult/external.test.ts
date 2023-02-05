@@ -40,7 +40,7 @@ suite("Natspec - getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "transfer",
-          charIndex: { start: 3009, end: 3017 },
+          charIndex: { start: 3002, end: 3010 },
         },
         functionSignature: {
           implicitArgs: [
@@ -83,11 +83,11 @@ suite("Natspec - getScopeParsingResult: external", () => {
               name: "",
               type: "",
               desc: "1 if transfer was successful, 0 otherwise",
-              charIndex: { start: 150, end: 191 },
+              charIndex: { start: 149, end: 190 },
             },
           ],
           raises: null,
-          charIndex: { start: 2802, end: 2993 },
+          charIndex: { start: 2796, end: 2986 },
         },
       },
     ];

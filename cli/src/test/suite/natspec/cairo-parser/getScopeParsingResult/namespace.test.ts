@@ -43,7 +43,7 @@ suite("Natspec - getScopeParsingResult: namespace", () => {
         attributeName: "namespace ERC20",
         functionName: {
           name: "constructor",
-          charIndex: {start: 2748, end: 2759},
+          charIndex: {start: 2742, end: 2753},
         },
         functionSignature: {
           implicitArgs: [
@@ -90,7 +90,7 @@ suite("Natspec - getScopeParsingResult: namespace", () => {
           ],
           returns: null,
           raises: null,
-          charIndex: {start: 2518, end: 2738},
+          charIndex: {start: 2512, end: 2732},
         },
       },
     ];
@@ -155,7 +155,7 @@ suite("Natspec - getScopeParsingResult: namespace", () => {
         attributeName: "namespace internal",
         functionName: {
           name: "_mint",
-          charIndex: {start: 4242, end: 4247},
+          charIndex: {start: 4235, end: 4240},
         },
         functionSignature: {
           implicitArgs: [
@@ -195,7 +195,7 @@ suite("Natspec - getScopeParsingResult: namespace", () => {
           ],
           returns: null,
           raises: null,
-          charIndex: {start: 4083, end: 4232},
+          charIndex: {start: 4076, end: 4225},
         },
       },
     ];
