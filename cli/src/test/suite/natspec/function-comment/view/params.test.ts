@@ -189,7 +189,7 @@ suite("function-comment: view: balanceOf", () => {
     paramsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @return the balance of the account",
+      "// @return balance The balance of the account",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );

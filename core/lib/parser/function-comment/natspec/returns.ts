@@ -7,7 +7,7 @@ export default class NatspecCommentReturnsParser extends NatspecCommentParser {
     this.name = "@return";
     this.startScopeRegexp = /\/\/\s+(@return)(.*)/;
     this.endScopeRegexp = /\/\/\s+@(?!return)(.*)/g;
-    this.regex = /\/\/(\s+)(@return)?(\s?)(.*)/g
+    this.regex = /\/\/(\s+)(@return)?(\s\w*\s?)?(\s?)(.*)/gm
   }
 
   parseCommentLine(line: string): MultiLineFunctionComment | null {
@@ -17,12 +17,12 @@ export default class NatspecCommentReturnsParser extends NatspecCommentParser {
       const startLineIndex = lineCommentInsideScope.index!;
       const startDescIndex = startLineIndex + 2 + lineCommentInsideScope.slice(1, 4).join("").length
       const matchInterface = {
-        name: "",
+        name: lineCommentInsideScope[3]?.trim() || '',
         type: "",
-        desc: lineCommentInsideScope[4].trim(),
+        desc: lineCommentInsideScope[5].trim(),
         charIndex: {
           start: startDescIndex,
-          end: startDescIndex + lineCommentInsideScope[4].length,
+          end: startDescIndex + lineCommentInsideScope[5].length,
         },
       };
       return { isMultiLine: !isTagInComment, functionComment: matchInterface };

@@ -22,7 +22,7 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
     const returnsParser = new NatspecCommentReturnsParser(functionCommentText);
 
     assert.equal(
-      "// @return 1 if transfer was successful,",
+      "// @return success 1 if transfer was successful,",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );
@@ -45,12 +45,12 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
     );
 
     const targetLineParsing = {
-      name: "",
+      name: "success",
       type: "",
       desc: "1 if transfer was successful,",
       charIndex: {
-        start: 152,
-        end: 181,
+        start: 160,
+        end: 189,
       },
     };
 
@@ -83,7 +83,7 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
     const functionCommentParsing =
       returnsParser.parseCommentLine(functionCommentLine)!.functionComment;
 
-    assert.equal("\n// @return 1 if transfer was successful,", returnsParser.startLine);
+    assert.equal("\n// @return success 1 if transfer was successful,", returnsParser.startLine);
     assert.notEqual(lineNumber, returnsParser.startLine);
     const isEndScope = returnsParser.isEndScope(functionCommentLine);
     assert.equal(
@@ -103,8 +103,8 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
       type: "",
       desc: "0 otherwise",
       charIndex: {
-        start: 185,
-        end: 196,
+        start: 193,
+        end: 204,
       },
     };
 
@@ -131,10 +131,10 @@ suite("Natspec - function-comment: constructor: multiline_params", () => {
 
     const targetLineParsing = [
       {
-        name: "",
+        name: "success",
         type: "",
         desc: "1 if transfer was successful,\n0 otherwise",
-        charIndex: { start: 152, end: 196 },
+        charIndex: { start: 160, end: 204 },
       },
     ];
 

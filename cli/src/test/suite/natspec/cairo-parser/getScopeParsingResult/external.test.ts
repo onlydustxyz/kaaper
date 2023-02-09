@@ -40,7 +40,7 @@ suite("Natspec - getScopeParsingResult: external", () => {
         attributeName: "external",
         functionName: {
           name: "transfer",
-          charIndex: { start: 3002, end: 3010 },
+          charIndex: { start: 3061, end: 3069 },
         },
         functionSignature: {
           implicitArgs: [
@@ -80,14 +80,14 @@ suite("Natspec - getScopeParsingResult: external", () => {
           ],
           returns: [
             {
-              name: "",
+              name: "success",
               type: "",
               desc: "1 if transfer was successful, 0 otherwise",
-              charIndex: { start: 149, end: 190 },
+              charIndex: { start: 157, end: 198 },
             },
           ],
           raises: null,
-          charIndex: { start: 2796, end: 2986 },
+          charIndex: { start: 2847, end: 3045 },
         },
       },
     ];
@@ -119,7 +119,7 @@ suite("Natspec - getScopeParsingResult: external", () => {
       `// @notice Perform transfer to recipient
 // @param recipient the address of ERC20 recipient
 // @param amount the amount of ERC20 transfer
-// @return 1 if transfer was successful, 0 otherwise`;
+// @return success 1 if transfer was successful, 0 otherwise`;
 
     assert.equal(
       functionCommentTarget,

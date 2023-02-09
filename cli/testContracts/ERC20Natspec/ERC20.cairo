@@ -28,7 +28,7 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 //
 
 // @notice Returns the name of the token
-// @return name of the token
+// @return name Name of the token
 @view
 func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
     let (name) = ERC20.name();
@@ -36,7 +36,7 @@ func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> 
 }
 
 // @notice Returns the symbol of the token
-// @return symbol of the token
+// @return symbol Symbol of the token
 @view
 func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (symbol: felt) {
     let (symbol) = ERC20.symbol();
@@ -44,7 +44,7 @@ func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -
 }
 
 // @notice Returns the total supply of the token
-// @return total supply of the token
+// @return totalSupply Total supply of the token
 @view
 func totalSupply{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
     totalSupply: Uint256
@@ -54,7 +54,7 @@ func totalSupply{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 // @notice Returns the decimals of the token
-// @return decimals of the token
+// @return decimals Decimals of the token
 @view
 func decimals{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
     decimals: felt
@@ -65,7 +65,7 @@ func decimals{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}()
 
 // @notice Returns the balance of the account
 // @param account account to query balance for
-// @return the balance of the account
+// @return balance The balance of the account
 @view
 func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(account: felt) -> (
     balance: Uint256
@@ -77,7 +77,7 @@ func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
 // @notice Returns the amount of remaining tokens allowed to be spent by the spender
 // @param owner the address of owner of the tokens
 // @param spender the address of spender (delegated account) of the tokens
-// @return the amount of remaining tokens allowed to be spent by the spender
+// @return remaining The amount of remaining tokens allowed to be spent by the spender
 @view
 func allowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     owner: felt, spender: felt
@@ -93,7 +93,7 @@ func allowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
 // @notice Perform transfer to recipient
 // @param recipient the address of ERC20 recipient
 // @param amount the amount of ERC20 transfer
-// @return 1 if transfer was successful, 0 otherwise
+// @return success 1 if transfer was successful, 0 otherwise
 @external
 func transfer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     recipient: felt, amount: Uint256
@@ -106,7 +106,7 @@ func transfer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
 // @param sender the address of ERC20 sender
 // @param recipient the address of ERC20 recipient
 // @param amount the amount of ERC20 transfer
-// @return 1 if transfer was successful, 0 otherwise
+// @return success 1 if transfer was successful, 0 otherwise
 @external
 func transferFrom{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     sender: felt, recipient: felt, amount: Uint256
@@ -118,7 +118,7 @@ func transferFrom{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
 // @notice Approve spender to spend amount of tokens
 // @param spender the address of ERC20 spender
 // @param amount the amount of ERC20 token to approve
-// @return 1 if allowance was successful, 0 otherwise
+// @return success 1 if allowance was successful, 0 otherwise
 @external
 func approve{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     spender: felt, amount: Uint256
@@ -130,7 +130,7 @@ func approve{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
 // @notice Increase allowance of spender by added_value
 // @param spender the address of ERC20 spender
 // @param amount the amount of ERC20 token to increase allowance
-// @return 1 if allowance was successful, 0 otherwise
+// @return success 1 if allowance was successful, 0 otherwise
 @external
 func increaseAllowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     spender: felt, added_value: Uint256
@@ -142,7 +142,7 @@ func increaseAllowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_che
 // @notice Decrease allowance of spender by subtracted_value
 // @param spender the address of ERC20 spender
 // @param amount the amount of ERC20 token to decrease allowance
-// @return 1 if decrease allowance was successful, 0 otherwise
+// @return success 1 if decrease allowance was successful, 0 otherwise
 @external
 func decreaseAllowance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     spender: felt, subtracted_value: Uint256

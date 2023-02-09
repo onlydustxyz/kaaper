@@ -34,7 +34,7 @@ suite("function-comment: view - name returns", () => {
     returnsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @return name of the token",
+      "// @return name Name of the token",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -54,12 +54,12 @@ suite("function-comment: view - name returns", () => {
       returnsParser.parseCommentLine(functionCommentLine)!.functionComment;
 
     const targetLineParsing = {
-      name: "",
+      name: "name",
       type: "",
-      desc: "name of the token",
+      desc: "Name of the token",
       charIndex: {
-        start: 52,
-        end: 69,
+        start: 57,
+        end: 74,
       },
     };
     assert.deepEqual(
@@ -86,7 +86,7 @@ suite("function-comment: view - name returns", () => {
     }
     assert.equal(functionCommentReference, wholeFileReference);
     assert.equal(
-      "name of the token",
+      "Name of the token",
       functionCommentReference
     );
 
@@ -148,7 +148,7 @@ suite("function-comment: view - symbol returns", () => {
     returnsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @return symbol of the token",
+      "// @return symbol Symbol of the token",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -168,12 +168,12 @@ suite("function-comment: view - symbol returns", () => {
       returnsParser.parseCommentLine(functionCommentLine)!.functionComment;
 
     const targetLineParsing = {
-      name: "",
+      name: "symbol",
       type: "",
-      desc: "symbol of the token",
+      desc: "Symbol of the token",
       charIndex: {
-        start: 54,
-        end: 73,
+        start: 61,
+        end: 80,
       },
     };
     assert.deepEqual(
@@ -200,7 +200,7 @@ suite("function-comment: view - symbol returns", () => {
     }
     assert.equal(functionCommentReference, wholeFileReference);
     assert.equal(
-      "symbol of the token",
+      "Symbol of the token",
       functionCommentReference
     );
 
@@ -236,7 +236,7 @@ suite("function-comment: view - totalSupply returns", () => {
     returnsParser.setStartScope(functionCommentLine);
 
     assert.equal(
-      "// @return total supply of the token",
+      "// @return totalSupply Total supply of the token",
       functionCommentLine.trim(),
       `check lineNumber ${lineNumber}`
     );
@@ -256,12 +256,12 @@ suite("function-comment: view - totalSupply returns", () => {
       returnsParser.parseCommentLine(functionCommentLine)!.functionComment;
 
     const targetLineParsing = {
-      name: "",
+      name: "totalSupply",
       type: "",
-      desc: "total supply of the token",
+      desc: "Total supply of the token",
       charIndex: {
-        start: 60,
-        end: 85,
+        start: 72,
+        end: 97,
       },
     };
     assert.deepEqual(
@@ -288,7 +288,7 @@ suite("function-comment: view - totalSupply returns", () => {
     }
     assert.equal(functionCommentReference, wholeFileReference);
     assert.equal(
-      "total supply of the token",
+      "Total supply of the token",
       functionCommentReference
     );
 

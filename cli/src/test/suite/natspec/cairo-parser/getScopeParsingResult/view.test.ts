@@ -41,7 +41,7 @@ suite("Natspec - getScopeParsingResult: view", () => {
         attributeName: "view",
         functionName: {
           name: "name",
-          charIndex: { start: 969, end: 973 },
+          charIndex: { start: 974, end: 978 },
         },
         functionSignature: {
           implicitArgs: [
@@ -65,14 +65,14 @@ suite("Natspec - getScopeParsingResult: view", () => {
           explicitArgs: null,
           returns: [
             {
-              name: "",
+              name: "name",
               type: "",
-              desc: "name of the token",
-              charIndex: { start: 52, end: 69 },
+              desc: "Name of the token",
+              charIndex: { start: 57, end: 74 },
             },
           ],
           raises: null,
-          charIndex: { start: 888, end: 957 },
+          charIndex: { start: 888, end: 962 },
         },
       },
     ];
@@ -89,7 +89,7 @@ suite("Natspec - getScopeParsingResult: view", () => {
 
     const textTarget = [
       { desc: "Returns the name of the token" },
-      { returns: "name of the token" },
+      { returns: "Name of the token" },
     ];
     assert.deepEqual(textTarget, commentParsingResult, "failed to parse");
 
@@ -98,7 +98,7 @@ suite("Natspec - getScopeParsingResult: view", () => {
 
     const functionCommentTarget =
       `// @notice Returns the name of the token
-// @return name of the token`;
+// @return name Name of the token`;
 
     assert.equal(
       functionCommentTarget,
