@@ -108,7 +108,7 @@ suite("function-comment: view: notice", () => {
 
 
     assert.equal(
-      "// @return name of the token",
+      "// @return name Name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );

@@ -129,7 +129,7 @@ suite("Natspec - function-comment: constructor: multiline_dev", () => {
     devParser.setStartScope(functionCommentScope!.text[2]);
 
     assert.equal(
-      "// @return name of the token",
+      "// @return name Name of the token",
       functionCommentLine.trim(),
       `check line ${lineNumber}`
     );

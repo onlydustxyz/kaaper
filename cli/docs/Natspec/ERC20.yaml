@@ -73,8 +73,8 @@
   functionName:
     name: name
     charIndex:
-      start: 969
-      end: 973
+      start: 974
+      end: 978
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -98,22 +98,22 @@
     implicitArgs: null
     explicitArgs: null
     returns:
-      - name: ''
+      - name: name
         type: ''
-        desc: name of the token
+        desc: Name of the token
         charIndex:
-          start: 52
-          end: 69
+          start: 57
+          end: 74
     raises: null
     charIndex:
       start: 888
-      end: 957
+      end: 962
 - attributeName: view
   functionName:
     name: symbol
     charIndex:
-      start: 1198
-      end: 1204
+      start: 1210
+      end: 1216
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -137,22 +137,22 @@
     implicitArgs: null
     explicitArgs: null
     returns:
-      - name: ''
+      - name: symbol
         type: ''
-        desc: symbol of the token
+        desc: Symbol of the token
         charIndex:
-          start: 54
-          end: 73
+          start: 61
+          end: 80
     raises: null
     charIndex:
-      start: 1113
-      end: 1186
+      start: 1118
+      end: 1198
 - attributeName: view
   functionName:
     name: totalSupply
     charIndex:
-      start: 1449
-      end: 1460
+      start: 1473
+      end: 1484
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -176,22 +176,22 @@
     implicitArgs: null
     explicitArgs: null
     returns:
-      - name: ''
+      - name: totalSupply
         type: ''
-        desc: total supply of the token
+        desc: Total supply of the token
         charIndex:
-          start: 60
-          end: 85
+          start: 72
+          end: 97
     raises: null
     charIndex:
-      start: 1352
-      end: 1437
+      start: 1364
+      end: 1461
 - attributeName: view
   functionName:
     name: decimals
     charIndex:
-      start: 1736
-      end: 1744
+      start: 1769
+      end: 1777
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -215,22 +215,22 @@
     implicitArgs: null
     explicitArgs: null
     returns:
-      - name: ''
+      - name: decimals
         type: ''
-        desc: decimals of the token
+        desc: Decimals of the token
         charIndex:
-          start: 56
-          end: 77
+          start: 65
+          end: 86
     raises: null
     charIndex:
-      start: 1647
-      end: 1724
+      start: 1671
+      end: 1757
 - attributeName: view
   functionName:
     name: balanceOf
     charIndex:
-      start: 2048
-      end: 2057
+      start: 2089
+      end: 2098
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -262,22 +262,22 @@
           start: 64
           end: 92
     returns:
-      - name: ''
+      - name: balance
         type: ''
-        desc: the balance of the account
+        desc: The balance of the account
         charIndex:
-          start: 104
-          end: 130
+          start: 112
+          end: 138
     raises: null
     charIndex:
-      start: 1906
-      end: 2036
+      start: 1939
+      end: 2077
 - attributeName: view
   functionName:
     name: allowance
     charIndex:
-      start: 2549
-      end: 2558
+      start: 2600
+      end: 2609
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -319,22 +319,22 @@
           start: 154
           end: 210
     returns:
-      - name: ''
+      - name: remaining
         type: ''
-        desc: the amount of remaining tokens allowed to be spent by the spender
+        desc: The amount of remaining tokens allowed to be spent by the spender
         charIndex:
-          start: 222
-          end: 287
+          start: 232
+          end: 297
     raises: null
     charIndex:
-      start: 2250
-      end: 2537
+      start: 2291
+      end: 2588
 - attributeName: external
   functionName:
     name: transfer
     charIndex:
-      start: 3002
-      end: 3010
+      start: 3061
+      end: 3069
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -374,22 +374,22 @@
           start: 109
           end: 137
     returns:
-      - name: ''
+      - name: success
         type: ''
         desc: 1 if transfer was successful, 0 otherwise
         charIndex:
-          start: 149
-          end: 190
+          start: 157
+          end: 198
     raises: null
     charIndex:
-      start: 2796
-      end: 2986
+      start: 2847
+      end: 3045
 - attributeName: external
   functionName:
     name: transferFrom
     charIndex:
-      start: 3477
-      end: 3489
+      start: 3544
+      end: 3556
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -437,22 +437,22 @@
           start: 181
           end: 209
     returns:
-      - name: ''
+      - name: success
         type: ''
         desc: 1 if transfer was successful, 0 otherwise
         charIndex:
-          start: 221
-          end: 262
+          start: 229
+          end: 270
     raises: null
     charIndex:
-      start: 3199
-      end: 3461
+      start: 3258
+      end: 3528
 - attributeName: external
   functionName:
     name: approve
     charIndex:
-      start: 3928
-      end: 3935
+      start: 4003
+      end: 4010
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -492,22 +492,22 @@
           start: 117
           end: 153
     returns:
-      - name: ''
+      - name: success
         type: ''
         desc: 1 if allowance was successful, 0 otherwise
         charIndex:
-          start: 165
-          end: 207
+          start: 173
+          end: 215
     raises: null
     charIndex:
-      start: 3705
-      end: 3912
+      start: 3772
+      end: 3987
 - attributeName: external
   functionName:
     name: increaseAllowance
     charIndex:
-      start: 4356
-      end: 4373
+      start: 4439
+      end: 4456
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -547,22 +547,22 @@
           start: 120
           end: 167
     returns:
-      - name: ''
+      - name: success
         type: ''
         desc: 1 if allowance was successful, 0 otherwise
         charIndex:
-          start: 179
-          end: 221
+          start: 187
+          end: 229
     raises: null
     charIndex:
-      start: 4119
-      end: 4340
+      start: 4194
+      end: 4423
 - attributeName: external
   functionName:
     name: decreaseAllowance
     charIndex:
-      start: 4829
-      end: 4846
+      start: 4920
+      end: 4937
   functionSignature:
     implicitArgs:
       - name: syscall_ptr
@@ -602,13 +602,13 @@
           start: 125
           end: 172
     returns:
-      - name: ''
+      - name: success
         type: ''
         desc: 1 if decrease allowance was successful, 0 otherwise
         charIndex:
-          start: 184
-          end: 235
+          start: 192
+          end: 243
     raises: null
     charIndex:
-      start: 4578
-      end: 4813
+      start: 4661
+      end: 4904
